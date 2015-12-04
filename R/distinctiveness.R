@@ -1,32 +1,23 @@
 # Function to compute distinctiveness on various Databases
 #
-<<<<<<< HEAD
-# Authors: Pierre Denelle & Matthias Greni?
-=======
-# Authors: Pierre Denelle & Matthias Greni?
->>>>>>> d88284c6c3ad138ae9d9792b707ec7396b2e7aa1
+# Authors: Pierre Denelle & Matthias Grenié
 #
 #
 
-# Packages --------------------------------------------------------------------
-library(dplyr)
-
-# Compute distinctiveness for a single community
+# Compute distinctiveness for a single community ------------------------------
 #
-# Arguments:
-#   com_table, a tidy data.frame of community with column with species, and
-#   abundance
+# Arguments: com_table, a tidy data.frame of community with column with species
+# and abundance
 #
-#   species, a character vector indicating the name of species column
+# species, a character vector indicating the name of species column
 #
-#   abund, a character vector in the name of relative abundances column
+# abund, a character vector in the name of relative abundances column
 #
-#   dist_matrix, the whole distance matrix from region obtained with
-#   compute_dist_matrix function
+# dist_matrix, the whole distance matrix from region obtained with
+# compute_dist_matrix function
 #
 #
-# Output:
-#   A tidy data.frame with a new column containing species distinctiveness
+# Output: A tidy data.frame with a new column containing species distinctiveness
 
 single_com_dist = function(com_table, species, abund = NULL, dist_matrix) {
 
@@ -34,7 +25,7 @@ single_com_dist = function(com_table, species, abund = NULL, dist_matrix) {
   if (!is.matrix(dist_matrix) & !is.data.frame(dist_matrix)) {
     stop("Provided distance matrix should be a 'data.frame' or a 'matrix'")
   }
-  
+
   # Check if distance matrix has same row and column numbers
   if (nrow(dist_matrix) != ncol(dist_matrix)) {
     stop("Provided distance matrix doesn't have same number of rows and columns.")
@@ -64,7 +55,7 @@ single_com_dist = function(com_table, species, abund = NULL, dist_matrix) {
   return(com_table)
 }
 
-# Distinctiveness for several communities
+# Distinctiveness for several communities -------------------------------------
 #
 # Arguments:
 #
@@ -115,7 +106,7 @@ distinctiveness = function(com_table, species, com, abund = NULL, dist_matrix) {
   if (!is.matrix(dist_matrix) & !is.data.frame(dist_matrix)) {
     stop("Provided distance matrix should be a 'data.frame' or a 'matrix'")
   }
-  
+
   # Check if distance matrix has same row and column numbers
   if (nrow(dist_matrix) != ncol(dist_matrix)) {
     stop("Provided distance matrix doesn't have same number of rows and columns.")
@@ -130,7 +121,7 @@ distinctiveness = function(com_table, species, com, abund = NULL, dist_matrix) {
                         single_com_dist(one_com, species, abund, dist_matrix)
   )
 
-  com_distinctiveness <- bind_rows(com_split)
+  com_distinctiveness <- dplyr::bind_rows(com_split)
 
   return(com_distinctiveness)
 }
