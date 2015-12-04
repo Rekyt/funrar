@@ -1,4 +1,3 @@
-
 # Compute sparseness for a single community -----------------------------------
 #
 # Arguments:
@@ -22,25 +21,32 @@ single_com_spar = function(com_table, species, abund) {
   return(com_table)
 }
 
-# Sparseness for several communities ------------------------------------------
-#
-# Arguments:
-#
-#  com_table, a data frame a tidy version of species in occurences in com-
-#  -munities
-#
-#  species,  a character vector, indicating the column name of species of
-#  'com_table'
-#
-#  com, a character vector, indicating the column name of communities
-#
-#  abund, character vector indicating the column name of the relative
-#  abundances of species
-#
-# Output:
-#   a value of sparseness for each species/community association
-#
-#
+#' Sparseness
+#'
+#' Compute sparness values for several communities. Sparseness is computed per
+#' community. Sparseness corresponds to the rareness of a given species in
+#' terms of abundances, as such:
+#' \deqn{
+#'  S_i = \exp(-N\log{2}A_i),
+#' }
+#' with \eqn{S_i} the sparseness of species \eqn{i}, \eqn{N} the number of
+#' species present in the given community and \eqn{A_i} the relative abundance
+#' (in %%) of species \eqn{i}.
+#'
+#' @param com_table a data frame a tidy version of species in occurences in
+#'     communities.
+#'
+#' @param species a character vector indicating the column of species in
+#'     \code{com_table}
+#'
+#' @param com a character vector indicating the column name of communities ID
+#'
+#' @param abund a character vector indicating the column name of the relative
+#'     abundances of species
+#'
+#' @return The same table as \code{com_table} with an added \eqn{S_i} column
+#'     for Sparseness values.
+#' @export
 sparseness = function(com_table, species, com, abund) {
 
   # Test to be sure

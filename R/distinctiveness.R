@@ -55,29 +55,21 @@ single_com_dist = function(com_table, species, abund = NULL, dist_matrix) {
   return(com_table)
 }
 
-# Distinctiveness for several communities -------------------------------------
-#
-# Arguments:
-#
-#  com_table, a data frame a tidy version of species in occurences in com-
-#  -munities
-#
-#  species,  a character vector, indicating the column name of species of
-#  'com_table'
-#
-#  com, a character vector, indicating the column name of communities
-#
-#  abund, optional character vector indicating the column name of the relative
-#  abundances of species, if provided, weight distinctiveness by relative
-#  abundances.
-#
-#  dist_matrix, matrix of all the functional distances between species which
-#  can be obtained with compute_dist_matrix()
-#
-# Output:
-#   a value of distinctiveness for each species/community association
-#
-#
+#' Distinctiveness
+#'
+#' Compute distinctiveness for several communities.
+#'
+#' @inheritParams uniqueness
+#'
+#' @param com a character vector, indicating the column name of communities
+#'     names.
+#'
+#' @param abund optional character vector indicating the column name of the
+#'     relative abundances of species, if provided, weight distinctiveness by
+#'     relative abundances.
+#'
+#' @return a table similar to \code{com_table} with an added column \eqn{D_i}
+#' @export
 distinctiveness = function(com_table, species, com, abund = NULL, dist_matrix) {
 
   # Test to be sure

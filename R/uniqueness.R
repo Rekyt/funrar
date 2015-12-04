@@ -1,9 +1,44 @@
-# Function to compute uniqueness on various Databases Authors: Pierre Denelle & Matthias Grenié
-
-# Uniqueness function --------------------------------------------------------- Arguments: com_table, a data frame of community
-# with the species present in the commu- -nity sp_col, a character vector indicating the name of the species column in
-# 'com_table' dist_matrix, a matrix of functional distance between species, rows and cols should be named as species Outputs: The
-# same table as 'com_table' with an 'Ui' column added for uniqueness
+#' Uniqueness
+#'
+#' Computes Uniqueness values over a given regional pool.
+#' The uniqueness value of a single species is equal to the
+#' minimum functional distance with all other species in the regional pool. The
+#' formula is as such:
+#' \deqn{
+#'  U_i = \text{min}(d_{ij}),
+#' }
+#' with \eqn{d_{ij}} the functional distance between species \eqn{i} and
+#' \eqn{j}.
+#'
+#' @param com_table a data frame of the species in the regional pool.
+#'
+#' @param sp_col a character vector indicating the name of the species column
+#'     in the \code{com_table} data frame
+#'
+#' @inheritParams compute_dist_matrix
+#'
+#'
+#' @return the same table as \code{com_table} with an added column called
+#'     \eqn{U_i} for the uniqueness.
+#'
+#'
+#' @examples
+#' set.seed(1)
+#' trait = data.frame(sp = paste("sp", 1:5), trait_1 = runif(5),
+#'     trait_2 = as.factor("A", "A", "A", "B", "B"))
+#'
+#' rownames(trait) = trait$sp
+#'
+#' dist_mat = compute_distance_matrix(trait[, -1])
+#'
+#' com_table = data.frame(com = c(rep("com1", 3), rep("com2", 4)),
+#'  sp = c("sp1", "sp2", "sp3", "sp2", "sp3", "sp4", "sp5"))
+#'
+#' com_ui = uniqueness(com_table, "sp", dist_mat)
+#'
+#'
+#' @importFrom dplyr %>%
+#' @export
 uniqueness = function(com_table, sp_col, dist_matrix) {
 
     if (!(sp_col %in% colnames(com_table))) {

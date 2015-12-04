@@ -1,24 +1,27 @@
-# Function to compute uniqueness on various Databases
-#
-# Authors: Pierre Denelle & Matthias Grenié
-#
-# Compute Traits Distance Matrix
-# This function computes a Gower's Distance matrix of trait between each pair
-# of species present in given 'traits_table', each row represents a species
-# and each column a trait.
-#
-# Arguments:
-#   traits_table, a table of traits with species in row and traits in cols
-#
-# Output:
-#   a distance matrix, columns and rows get the same names as 'traits_table'
-#   row names.
-#
-# /!\ WARNING /!\
-#   All traits must be present in matrix otherwise computation will crash.
-#   Because computed distance is Gower's, traits must be either 'numeric' or
-#   'factor' or 'ordered', 'character' will be coerced to 'factor'
-#
+#' Functional Distance Matrix
+#'
+#' This function computes a Gower's Distance matrix of trait between each pair
+#' of species present in given 'traits_table', each row represents a species
+#' and each column a trait.
+#'
+#' @param traits_table A data frame of traits with species in row and traits in
+#'     columns, row names should be species names.
+#'
+#' @return A Gower's distance matrix (Gower's 1961), columns and rows get same
+#'     names as \code{trait_table} row names. Be sure to give them consistent
+#'     row names.
+#'
+#' @examples
+#' set.seed(1)  # For reproducibility
+#' trait = data.frame(sp = paste("sp", 1:5), trait_1 = runif(5),
+#'    trait_2 = as.factor("A", "A", "A", "B", "B"))
+#' rownames(trait) = trait$sp
+#'
+#' dist_mat = compute_distance_matrix(trait[, -1])
+#'
+#' @aliases distance_matrix
+#' @importFrom dplyr %>%
+#' @export
 compute_dist_matrix = function(traits_table) {
   # Use Gower's distance to compute traits distance
   dist_matrix = cluster::daisy(traits_table, metric = "gower") %>%
