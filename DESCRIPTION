@@ -10,13 +10,16 @@ Description: Computes functional rarity indices as proposed by Violle et al.
     Various indices can be computed using both regional and local information.
     Most function need a table of sites and species present, plus traits table
     for all the present species. It can also abundance weighted metrics.
-Depends:
+Depends: 
     R (>= 3.2.2)
 License: What license is it under?
 LazyData: true
-Imports:
+Imports: 
     cluster,
     dplyr (>= 0.4.3)
 URL: https://github.com/Rekyt/outlieR
 BugReports: https://github.com/Rekyt/outlieR/issues
 RoxygenNote: 5.0.1
+Suggests: knitr,
+    rmarkdown
+VignetteBuilder: knitr
