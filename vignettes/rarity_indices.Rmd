@@ -4,55 +4,116 @@ author: "Matthias Grenié"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteIndexEntry{Use `outlieR` to compute Functional Rarity Indices}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
 
-Vignettes are long form documentation commonly included in packages. Because they are part of the distribution of the package, they need to be as compact as possible. The `html_vignette` output type provides a custom style sheet (and tweaks some options) to ensure that the resulting html is as small as possible. The `html_vignette` format:
+The idea of Functional Rarity is to measure two components of the rarity of a species (or an individual). Indeed, in community ecology, people are generally interested in the rarity of a species in terms of abundances. A species with a low abundance will be considered as rare. From a Functional Ecology perspective, this does not take into consideration the "role" that a given species plays in the ecosystem, its particular niche. A framework is being developed of various indices to characterize how this function could be rare locally or regionally.
 
-- Never uses retina figures
-- Has a smaller default figure size
-- Uses a custom CSS stylesheet instead of the default Twitter Bootstrap style
 
-## Vignette Info
+## Distance Matrix
 
-Note the various macros within the `vignette` section of the metadata block above. These are required in order to instruct R how to build the vignette. Note that you should change the `title` field and the `\VignetteIndexEntry` to match the title of your vignette.
+The indices rely on the computation of a distance matrix. It represents the functional distance between two species given a particular set of traits. From a species traits matrix you can easily compute a distance matrix using function `compute_dist_matrix()`:
 
-## Styles
+```{r distanceMatrix}
+library(outlieR)
+# Species X Traits table
+traits = data.frame(tr1 = 1:10, tr2 = rep(c(1, 0), each = 5), tr3 = rep(LETTERS[1:5], 2))
 
-The `html_vignette` template includes a basic CSS theme. To override this theme you can specify your own CSS in the document metadata as follows:
+rownames(traits) = paste0("sp", 1:10)
 
-    output: 
-      rmarkdown::html_vignette:
-        css: mystyles.css
+# Distance Matrix
+dist_mat = compute_dist_matrix(traits)
 
-## Figures
-
-The figure sizes have been customised so that you can easily put two images side-by-side. 
-
-```{r, fig.show='hold'}
-plot(1:10)
-plot(10:1)
+dist_mat[1:5, 1:5]
 ```
 
-You can enable figure captions by `fig_caption: yes` in YAML:
 
-    output:
-      rmarkdown::html_vignette:
-        fig_caption: yes
+In order to compute distance matrix, species names must be specified as **rownames** in the traits table. And they will be named similarly in the distance matrix. Species names must be characters and not factors.
 
-Then you can use the chunk option `fig.cap = "Your figure caption."` in **knitr**.
+The function relies on the `daisy()` function from package `cluster` and the default metric is Gower's distance to take into account ordinal, categorical and binary traits.
 
-## More Examples
 
-You can write math expressions, e.g. $Y = X\beta + \epsilon$, footnotes^[A footnote here.], and tables, e.g. using `knitr::kable()`.
 
-```{r, echo=FALSE, results='asis'}
-knitr::kable(head(mtcars, 10))
+## Distinctiveness
+
+### Formula
+
+The distinctiveness measure how a species is locally functionally rare. From given functional distances, it is computed as such:
+
+$$
+D_i = \frac{\sum{j = 1, i \neq j}{N} d_{ij}}{N-1},
+$$
+
+with $D_i$ distinctiveness of species $i$, $d_{ij}$ the functional distance between species $i$ and species $j$, $N$ the number of species present in considered community.
+
+When weighted by abundances the formula becomes:
+
+$$
+D_i = \frac{\sum{j = 1, i \neq j}{N} d_{ij}\times A_j}{\sum{j = 1, i \neq j}{N} A_j},
+$$
+with the same terms as above, and $A_j$ the relative abundance of species $j$ in percent, in the community.
+
+
+### Computation
+
+Using `outlieR` distinctiveness values can be computed using function `distinctiveness()`:
+
+```{r distinctivenessComputation}
+# Species X Site Table
+species_list = rownames(traits)
+
+site_species = data.frame(species = c(species_list[-1],
+                                      species_list[seq(1, 9, 2)],
+                                      species_list[seq(2, 10, 2)]),
+                          site = c(rep("com1", 9),
+                                   rep(c("com2", "com3"), each = 5)))
+
+# Species should be character
+site_species$species = as.character(site_species$species)
+
+# Compute distinctiveness for each species on each site
+site_dist = distinctiveness(com_table = site_species,  # The site x species table
+                            species = "species",  # Name of the species column
+                            com = "site",  # Name of the community column
+                            abund = NULL,  # Relative abundances column (facultative)
+                            dist_matrix = dist_mat)  # Functional Distance matrix
+
+head(site_dist)
 ```
 
-Also a quote using `>`:
+The syntax for `distinctiveness()` is first the table, then the name of the species column, then the name of the community column, then eventually the name of the relative abundance column and finally the distance matrix. The function add a `Di` column giving the species distinctiveness in each species per site combination.
 
-> "He who gives up [code] safety for [code] speed deserves neither."
-([via](https://twitter.com/hadleywickham/status/504368538874703872))
+
+
+## Sparseness
+
+### Formula
+
+$$
+S_i = \exp(-NA_i\log2),
+$$
+
+with $S_i$ the sparseness of species $i$, $N$ the number of species in the local community, $A_i$ the relative abundance (in percent) of species $i$ in the community.
+
+
+### Computation
+
+`sparseness()`
+
+
+
+## Uniqueness
+
+### Formula
+
+$$
+U_i = \text{min}(d_{ij}), \forall j \in [1, N_R], j \neq i,
+$$
+
+with $U_i$ the uniqueness of species $i$, $d_{ij}$ the functional distance between species $i$ and species $j$, $N_R$ the number of species in the regional pool.
+
+### Computation
+
+`uniqueness()`
