@@ -16,12 +16,13 @@ devtools::install_github("Rekyt/outlieR")
 
 ## Included functions
 
-For the moment only 4 functions are exported (all of them include a help file accessible using `?function_name` in R):
+For the moment only 5 functions are exported (all of them include a help file accessible using `?function_name` in R):
 
-- `compute_dist_matrix()`  it computes a Gower's distance matrix between species from a traits matrix, trait scaling is done automatically; **WARNING:** catogerical traits should be clearly defined as `ordered` or `factor` to compute the needed distance;
-- `distinctiveness()` computes the distinctiveness index (local functional rarity) over a range of species, index can be weighted by species abundances see help for syntax;
+- `compute_dist_matrix()`  it computes a Gower's distance matrix between species from a traits matrix, trait scaling is done automatically; **WARNING:** categorical traits should be clearly defined as `ordered` or `factor` to compute the needed distance;
+- `distinctiveness()` computes the distinctiveness index (local functional rarity) over a range of species, index can be weighted by species abundances, see help for syntax;
 - `sparseness()` computes the sparseness index (local abundance rarity), **needs abundances**;
-- `uniqueness()` computed uniqueness index (regional functional rarity) (minimum functional distance to other species).
+- `uniqueness()` computes uniqueness index (regional functional rarity) (minimum functional distance to other species).
+- `agg_ind()` computes moments (mean, variance and skewness) of functional rarity metrics per community or species.
 
 Restrictedness index is not included in the package because its computation is dataset-dependent (convex hulls, actual range, grid-based estimations, etc.).
 
