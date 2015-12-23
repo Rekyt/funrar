@@ -3,6 +3,8 @@
 export(agg_ind)
 export(compute_dist_matrix)
 export(distinctiveness)
+export(pres_distinctiveness)
 export(sparseness)
 export(uniqueness)
 importFrom(dplyr,"%>%")
+importFrom(dplyr,bind_rows)

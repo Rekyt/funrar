@@ -24,7 +24,7 @@ and each column a trait.
 \examples{
 set.seed(1)  # For reproducibility
 trait = data.frame(sp = paste("sp", 1:5), trait_1 = runif(5),
-   trait_2 = as.factor("A", "A", "A", "B", "B"))
+   trait_2 = as.factor(c("A", "A", "A", "B", "B")))
 rownames(trait) = trait$sp
 
 dist_mat = compute_distance_matrix(trait[, -1])

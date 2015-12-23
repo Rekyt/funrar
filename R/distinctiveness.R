@@ -32,11 +32,11 @@ single_com_dist = function(com_table, species, abund = NULL, dist_matrix) {
   }
 
   # Get functional distance matrix of species in communities
-  com_dist <- dist_matrix[com_table[, species], com_table[, species]]
+  com_dist <- dist_matrix[com_table[[species]], com_table[[species]]]
 
   if (is.null(abund)) {
     # Sum the distances by species
-    num <- apply(com_dist, 2, function(x) sum(x))
+    num <- colSums(com_dist)
 
     # Number of species minus the focal species
     denom <- nrow(com_table) - 1
@@ -46,7 +46,7 @@ single_com_dist = function(com_table, species, abund = NULL, dist_matrix) {
     # abundance to compute distinctiveness
     num <- apply(com_dist, 2, function(x) sum(x * com_table[, abund]))
     # Compute the sum of all abundances minus the one focal species
-    denom <- sum(com_table[, abund]) - com_table[, abund]
+    denom <- sum(com_table[[abund]]) - com_table[[abund]]
   }
 
   # Computes distinctiveness by species
@@ -81,7 +81,7 @@ distinctiveness = function(com_table, species, com, abund = NULL, dist_matrix) {
     stop("Community table does not have any species.")
   }
 
-  if (!is.character(com_table[, species])) {
+  if (!is.character(com_table[[species]])) {
     stop("Provided species are not character.")
   }
 
@@ -116,4 +116,41 @@ distinctiveness = function(com_table, species, com, abund = NULL, dist_matrix) {
   com_distinctiveness <- dplyr::bind_rows(com_split)
 
   return(com_distinctiveness)
+}
+
+#' Distinctiveness on presence/absence matrix
+#'
+#' Computes distinctiveness from a presence-absence matrix of species with a
+#' provided functional distance matrix.
+#'
+#' Experimental for the moment, should be merged with previous function
+#' 'distictinctiveness()'
+#'
+#' @param pres_matrix a presence-absence matrix, with species in rows and sites
+#'      in columns (not containing relative abundances for the moments)
+#'
+#' @param dist_matrix a functional distance matrix containing the species from
+#'      the provided presence-absence matrix
+#'
+#' @return a similar matrix to presence-absence with distinctiveness at sites?
+#'
+#' @importFrom dplyr %>% bind_rows
+#'
+#' @export
+pres_distinctiveness = function(pres_matrix, dist_mat) {
+
+  species_list = apply((pres_matrix == 1), 2,  function(x) {
+    rownames(pres_matrix)[x]
+    })
+
+  com_table = lapply(names(species_list), function(x) {
+    # Make a data frame for each site with sites and species
+    data.frame(site = rep(x, length(species_list[[x]])),
+               species = species_list[[x]])
+    }) %>% bind_rows()
+
+  com_table = distinctiveness(com_table, "species", "site", abund = NULL,
+                              dist_matrix = dist_mat)
+
+  return(com_table)
 }
