@@ -50,7 +50,12 @@ single_com_dist = function(com_table, species, abund = NULL, dist_matrix) {
   }
 
   # Computes distinctiveness by species
-  com_table[, "Di"] <- as.numeric(num / denom)
+  if (denom != 0) {
+    com_table[, "Di"] <- as.numeric(num / denom)
+  } else {
+    com_table[, "Di"] = NA
+  }
+
 
   return(com_table)
 }
