@@ -1,4 +1,5 @@
 # `outlieR` package
+[![Travis-CI Build Status](https://travis-ci.org/Rekyt/outlieR.svg?branch=master)](https://travis-ci.org/Rekyt/outlieR)
 
 Package project to describe Functional Rarity, may be added in the future to [package cati](http://github.com/adrientaudiere/cati/)
 
