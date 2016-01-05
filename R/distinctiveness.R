@@ -1,3 +1,4 @@
+
 # Function to compute distinctiveness on various Databases
 #
 # Authors: Pierre Denelle & Matthias Grenié
@@ -34,19 +35,23 @@ single_com_dist = function(com_table, species, abund = NULL, dist_matrix) {
   # Get functional distance matrix of species in communities
   com_dist <- dist_matrix[com_table[[species]], com_table[[species]]]
 
-  if (is.null(abund)) {
-    # Sum the distances by species
-    num <- colSums(com_dist)
+  if (!is.null(dim(com_dist))) {
+    if (is.null(abund)) {
+      # Sum the distances by species
+      num <- colSums(com_dist)
 
-    # Number of species minus the focal species
-    denom <- nrow(com_table) - 1
+      # Number of species minus the focal species
+      denom <- nrow(com_table) - 1
 
+    } else {
+      # For each species multiplies its functional distance with corresponding
+      # abundance to compute distinctiveness
+      num <- apply(com_dist, 2, function(x) sum(x * com_table[, abund]))
+      # Compute the sum of all abundances minus the one focal species
+      denom <- sum(com_table[[abund]]) - com_table[[abund]]
+    }
   } else {
-    # For each species multiplies its functional distance with corresponding
-    # abundance to compute distinctiveness
-    num <- apply(com_dist, 2, function(x) sum(x * com_table[, abund]))
-    # Compute the sum of all abundances minus the one focal species
-    denom <- sum(com_table[[abund]]) - com_table[[abund]]
+    denom = 0
   }
 
   # Computes distinctiveness by species

@@ -1,6 +1,9 @@
+library(dplyr)
+
 context("Functional Rarity Indices")
 
-# Objects needed for computations
+
+# Needed objects --------------------------------------------------------------
 
 # Empty Matrix
 empty_mat = matrix(rep(0, 4), ncol = 2)
@@ -34,6 +37,10 @@ rownames(trait_df) = letters[1:4]
 # Distance Matrix
 dist_mat = compute_dist_matrix(trait_df)
 
+
+
+# Tests -----------------------------------------------------------------------
+
 # Distinctiveness
 test_that("Invalid input types do not work", {
 
@@ -47,8 +54,9 @@ test_that("Invalid input types do not work", {
 #test_that("Distinctiveness correctly computed for a single commmunity",
 #          )
 
-test_that("Correct distinctiveness computation for several communities",{
+test_that("Correct Di computation with different comm. without abundance",{
 
+  # Final distinctiveness table for all communities
   correct_dist = structure(list(site = c("s1", "s1", "s2", "s2", "s2", "s3",
                                          "s3", "s4", "s4"),
                                 species = c("a", "b", "b", "c", "d","b", "c",
@@ -59,17 +67,17 @@ test_that("Correct distinctiveness computation for several communities",{
                            row.names = c(NA, -9L), class = c("tbl_df", "tbl",
                                                              "data.frame"))
 
-  expect_equivalent(pres_distinctiveness(valid_mat, dist_mat), correct_dist)
+  expect_equivalent(data.frame(pres_distinctiveness(valid_mat, dist_mat)),
+                    data.frame(correct_dist))
 
   expect_warning(distinctiveness(com_table, "species", "site", abund = NULL,
-                                    dist_mat),
-                 "No relative abundance provided, computing distinctiveness without
-            it.")
+                                    dist_mat))
 
   c_dist = distinctiveness(com_table, "species", "site", abund = NULL, dist_mat)
 
   expect_equivalent(as.data.frame(c_dist), as.data.frame(correct_dist))
-  })
+})
+
 
 test_that("Distinctiveness is undefined for a community with a single species", {
 
