@@ -1,6 +1,6 @@
 ---
 title: "Use `outlieR` to compute Functional Rarity indices"
-author: "Matthias Grenié"
+author: "Matthias Greni\u00e9"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
@@ -43,7 +43,9 @@ The function relies on the `daisy()` function from package `cluster` and the def
 The distinctiveness measure how a species is locally functionally rare. From given functional distances, it is computed as such:
 
 $$
-D_i = \frac{\sum{j = 1, i \neq j}{N} d_{ij}}{N-1},
+D_i = \frac{\sum_{\substack{j = 1, \\
+                            i \neq j
+                            }}^{N} d_{ij}}{N-1},
 $$
 
 with $D_i$ distinctiveness of species $i$, $d_{ij}$ the functional distance between species $i$ and species $j$, $N$ the number of species present in considered community.
@@ -51,7 +53,11 @@ with $D_i$ distinctiveness of species $i$, $d_{ij}$ the functional distance betw
 When weighted by abundances the formula becomes:
 
 $$
-D_i = \frac{\sum{j = 1, i \neq j}{N} d_{ij}\times A_j}{\sum{j = 1, i \neq j}{N} A_j},
+D_i = \frac{\sum_{\substack{j = 1, \\
+                            i \neq j
+                            }}^{N} d_{ij}\times A_j}{\sum_{\substack{j = 1, \\
+                            i \neq j
+                            }}^{N} A_j},
 $$
 with the same terms as above, and $A_j$ the relative abundance of species $j$ in percent, in the community.
 
@@ -75,7 +81,7 @@ site_species$species = as.character(site_species$species)
 
 # Compute distinctiveness for each species on each site
 site_dist = distinctiveness(com_table = site_species,  # The site x species table
-                            species = "species",  # Name of the species column
+                            sp_col = "species",  # Name of the species column
                             com = "site",  # Name of the community column
                             abund = NULL,  # Relative abundances column (facultative)
                             dist_matrix = dist_mat)  # Functional Distance matrix

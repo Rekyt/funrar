@@ -11,6 +11,8 @@ uniqueness(com_table, sp_col, dist_matrix)
 
 \item{sp_col}{a character vector indicating the name of the species column
 in the \code{com_table} data frame}
+
+\item{dist_matrix}{a functional distance matrix}
 }
 \value{
 the same table as \code{com_table} with an added column called
@@ -21,20 +23,18 @@ Computes Uniqueness values over a given regional pool.
 The uniqueness value of a single species is equal to the
 minimum functional distance with all other species in the regional pool. The
 formula is as such:
-\deqn{
- U_i = \text{min}(d_{ij}),
-}
+\deqn{U_i = \min(d_{ij}),}
 with \eqn{d_{ij}} the functional distance between species \eqn{i} and
 \eqn{j}.
 }
 \examples{
 set.seed(1)
-trait = data.frame(sp = paste("sp", 1:5), trait_1 = runif(5),
-    trait_2 = as.factor("A", "A", "A", "B", "B"))
+trait = data.frame(sp = paste0("sp", 1:5), trait_1 = runif(5),
+    trait_2 = as.factor(c("A", "A", "A", "B", "B")))
 
 rownames(trait) = trait$sp
 
-dist_mat = compute_distance_matrix(trait[, -1])
+dist_mat = compute_dist_matrix(trait[, -1])
 
 com_table = data.frame(com = c(rep("com1", 3), rep("com2", 4)),
  sp = c("sp1", "sp2", "sp3", "sp2", "sp3", "sp4", "sp5"))

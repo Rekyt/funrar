@@ -46,6 +46,7 @@ single_com_spar = function(com_table, species, abund) {
 #'
 #' @return The same table as \code{com_table} with an added \eqn{S_i} column
 #'     for Sparseness values.
+#'
 #' @export
 sparseness = function(com_table, species, com, abund) {
 

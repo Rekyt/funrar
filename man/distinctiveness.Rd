@@ -4,10 +4,13 @@
 \alias{distinctiveness}
 \title{Distinctiveness}
 \usage{
-distinctiveness(com_table, species, com, abund = NULL, dist_matrix)
+distinctiveness(com_table, sp_col, com, abund = NULL, dist_matrix)
 }
 \arguments{
 \item{com_table}{a data frame of the species in the regional pool.}
+
+\item{sp_col}{a character vector indicating the name of the species column
+in the \code{com_table} data frame}
 
 \item{com}{a character vector, indicating the column name of communities
 names.}
@@ -15,6 +18,8 @@ names.}
 \item{abund}{optional character vector indicating the column name of the
 relative abundances of species, if provided, weight distinctiveness by
 relative abundances.}
+
+\item{dist_matrix}{a functional distance matrix}
 }
 \value{
 a table similar to \code{com_table} with an added column \eqn{D_i}

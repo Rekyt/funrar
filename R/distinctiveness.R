@@ -80,18 +80,18 @@ single_com_dist = function(com_table, species, abund = NULL, dist_matrix) {
 #'
 #' @return a table similar to \code{com_table} with an added column \eqn{D_i}
 #' @export
-distinctiveness = function(com_table, species, com, abund = NULL, dist_matrix) {
+distinctiveness = function(com_table, sp_col, com, abund = NULL, dist_matrix) {
 
   # Test to be sure
   if ((com %in% colnames(com_table)) == FALSE) {
     stop("Community table does not have any communities.")
   }
 
-  if ((species %in% colnames(com_table)) == FALSE) {
+  if ((sp_col %in% colnames(com_table)) == FALSE) {
     stop("Community table does not have any species.")
   }
 
-  if (!is.character(com_table[[species]])) {
+  if (!is.character(com_table[[sp_col]])) {
     stop("Provided species are not character.")
   }
 
@@ -120,7 +120,7 @@ distinctiveness = function(com_table, species, com, abund = NULL, dist_matrix) {
 
   com_split <- lapply(com_split,
                       function(one_com)
-                        single_com_dist(one_com, species, abund, dist_matrix)
+                        single_com_dist(one_com, sp_col, abund, dist_matrix)
   )
 
   com_distinctiveness <- dplyr::bind_rows(com_split)
@@ -139,15 +139,14 @@ distinctiveness = function(com_table, species, com, abund = NULL, dist_matrix) {
 #' @param pres_matrix a presence-absence matrix, with species in rows and sites
 #'      in columns (not containing relative abundances for the moments)
 #'
-#' @param dist_matrix a functional distance matrix containing the species from
-#'      the provided presence-absence matrix
+#' @inheritParams uniqueness
 #'
 #' @return a similar matrix to presence-absence with distinctiveness at sites?
 #'
 #' @importFrom dplyr %>% bind_rows
 #'
 #' @export
-pres_distinctiveness = function(pres_matrix, dist_mat) {
+pres_distinctiveness = function(pres_matrix, dist_matrix) {
 
   species_list = apply((pres_matrix == 1), 2,  function(x) {
     rownames(pres_matrix)[x]
@@ -160,7 +159,7 @@ pres_distinctiveness = function(pres_matrix, dist_mat) {
     }) %>% bind_rows()
 
   com_table = distinctiveness(com_table, "species", "site", abund = NULL,
-                              dist_matrix = dist_mat)
+                              dist_matrix = dist_matrix)
 
   return(com_table)
 }

@@ -4,14 +4,13 @@
 \alias{pres_distinctiveness}
 \title{Distinctiveness on presence/absence matrix}
 \usage{
-pres_distinctiveness(pres_matrix, dist_mat)
+pres_distinctiveness(pres_matrix, dist_matrix)
 }
 \arguments{
 \item{pres_matrix}{a presence-absence matrix, with species in rows and sites
 in columns (not containing relative abundances for the moments)}
 
-\item{dist_matrix}{a functional distance matrix containing the species from
-the provided presence-absence matrix}
+\item{dist_matrix}{a functional distance matrix}
 }
 \value{
 a similar matrix to presence-absence with distinctiveness at sites?

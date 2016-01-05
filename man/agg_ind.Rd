@@ -2,15 +2,18 @@
 % Please edit documentation in R/aggregated_indices.R
 \name{agg_ind}
 \alias{agg_ind}
-\title{Function to obtain aggregated (mean and variance) distinctiveness or 
+\title{Function to obtain aggregated (mean and variance) distinctiveness or
 sparseness per species and community}
 \usage{
 agg_ind(species, com, ind)
 }
 \arguments{
-\item{species, }{a character vector counting all the species in each community}
+\item{species}{a character vector counting all the species in each community}
 
-\item{ind, }{a distinctiveness or sparseness vector of each species/community 
+\item{com}{a character vector giving a list of the communities of all
+combinations (see ind)}
+
+\item{ind}{a distinctiveness or sparseness vector of each species/community
 association, ind is obtained thanks to distinctiveness or sparseness function}
 }
 \value{
