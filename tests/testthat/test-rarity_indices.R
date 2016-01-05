@@ -1,4 +1,5 @@
 library(dplyr)
+library(outlieR)
 
 context("Functional Rarity Indices")
 
