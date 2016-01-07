@@ -37,9 +37,8 @@ dist_mat = compute_dist_matrix(trait_df)
 
 
 
-# Tests -----------------------------------------------------------------------
+# Test for Distinctiveness ----------------------------------------------------
 
-# Distinctiveness
 test_that("Invalid input types do not work", {
 
   expect_error(single_com_dist("a", "species", NULL, "d"))
@@ -49,8 +48,6 @@ test_that("Invalid input types do not work", {
                "Community table does not have any communities")
 })
 
-#test_that("Distinctiveness correctly computed for a single commmunity",
-#          )
 
 test_that("Correct Di computation with different comm. without abundance",{
 
@@ -87,4 +84,20 @@ test_that("Distinctiveness is undefined for a community with a single species", 
                           Di = rep(NA, 2))
 
   expect_equivalent(pres_distinctiveness(small_mat, dist_mat), undef_dist)
+})
+
+# Test for Uniqueness ---------------------------------------------------------
+
+test_that("Correct Uniqueness computation", {
+
+  valid_ui = data_frame(site = as.character(rep("s1", 2)),
+                        species = as.character(c("a", "b")), Ui = c(1/9, 1/9))
+
+  all_ui = bind_cols(com_table, data_frame(Ui = c(1/9, 1/9, 1/9, 4/9, 4/9, 1/9,
+                                                  4/9, 4/9, 4/9)))
+
+  expect_equivalent(uniqueness(com_table[1:2, ], "species", dist_mat), valid_ui)
+
+  expect_equivalent(as.data.frame(uniqueness(com_table, "species", dist_mat)),
+                    as.data.frame(all_ui))
 })
