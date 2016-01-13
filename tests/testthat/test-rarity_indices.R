@@ -65,7 +65,7 @@ test_that("Correct Di computation with different comm. without abundance",{
   expect_equivalent(data.frame(pres_distinctiveness(valid_mat, dist_mat)),
                     data.frame(correct_dist))
 
-  expect_warning(distinctiveness(com_table, "species", "site", abund = NULL,
+  expect_message(distinctiveness(com_table, "species", "site", abund = NULL,
                                     dist_mat))
 
   c_dist = distinctiveness(com_table, "species", "site", abund = NULL, dist_mat)
@@ -101,3 +101,6 @@ test_that("Correct Uniqueness computation", {
   expect_equivalent(as.data.frame(uniqueness(com_table, "species", dist_mat)),
                     as.data.frame(all_ui))
 })
+
+
+# Test for Sparseness ---------------------------------------------------------

@@ -100,7 +100,7 @@ distinctiveness = function(com_table, sp_col, com, abund = NULL, dist_matrix) {
   }
 
   if (is.null(abund)) {
-    warning("No relative abundance provided, computing distinctiveness without
+    message("No relative abundance provided, computing distinctiveness without
             it.")
   }
 
