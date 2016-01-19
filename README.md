@@ -29,17 +29,13 @@ Restrictedness index is not included in the package because its computation is d
 
 ## Example vignette
 
-In addition to code example included in help of functions, an example vignette can help you use the above functions.
-
-You can find it HERE (**FIX ME**).
+In addition to code example included in help of functions, an example vignette can help you use the above functions. [Click here](vignettes/rarity_indices.Rmd) to access the vignette
 
 
 ## TO DO
 
-- [ ] Make an example vignette,
-- [ ] Implement tests,
+- [X] Make an example vignette,
+- [X] Implement tests,
 - [ ] Provide example dataset,
 - [ ] Implement a general restrictedness computation,
 - [ ] Make species as factor compatible.
-
-`
