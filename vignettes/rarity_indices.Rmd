@@ -147,6 +147,6 @@ with $U_i$ the uniqueness of species $i$, $d_{ij}$ the functional distance betwe
 
 ```{r uniqComp}
 site_ui = uniqueness(site_species, "species", dist_mat)
-head(ui)
+head(site_ui)
 ```
 
