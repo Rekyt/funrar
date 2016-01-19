@@ -91,6 +91,22 @@ head(site_dist)
 
 The syntax for `distinctiveness()` is first the table, then the name of the species column, then the name of the community column, then eventually the name of the relative abundance column and finally the distance matrix. The function add a `Di` column giving the species distinctiveness in each species per site combination.
 
+For abundance weighted distinctiveness you need to have a column containing relative abundances in your data frame as such:
+
+```{r abundDist}
+set.seed(1)  # For reproducibility
+
+# Generates vector that sums up to 1
+com1 = runif(9)
+com2 = runif(5)
+com3 = runif(5)
+site_species$abund = c(com1/sum(com1), com2/sum(com2), com3/sum(com3)) 
+
+data_di = distinctiveness(site_species, "species", "site", "abund", dist_mat)
+head(data_di)
+```
+
+
 
 
 ## Sparseness
@@ -106,7 +122,12 @@ with $S_i$ the sparseness of species $i$, $N$ the number of species in the local
 
 ### Computation
 
-`sparseness()`
+With `outlieR` it can be computed with `sparseness()` function with a syntax analog to `distinctiveness()`
+
+```{r sparsenessComp}
+sparseness(site_species, "species", "site", "abund")
+```
+
 
 
 
@@ -122,4 +143,10 @@ with $U_i$ the uniqueness of species $i$, $d_{ij}$ the functional distance betwe
 
 ### Computation
 
-`uniqueness()`
+`uniqueness()` follows a similar syntax, but beware that given community table and distance matrix should be given out of **regional species pool**. And the syntax is also similar:
+
+```{r uniqComp}
+site_ui = uniqueness(site_species, "species", dist_mat)
+head(ui)
+```
+
