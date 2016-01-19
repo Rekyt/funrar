@@ -1,3 +1,4 @@
+library(dplyr)
 context("Functional Rarity Indices")
 
 
@@ -104,3 +105,27 @@ test_that("Correct Uniqueness computation", {
 
 
 # Test for Sparseness ---------------------------------------------------------
+
+
+test_that("Correct Sparseness computation", {
+  com_table_ex = bind_cols(com_table, data.frame(abund = c(0.3, 0.7, 0.2, 0.6,
+                                                           0.2, 0.5, 0.5, 0.2,
+                                                           0.8)))
+  com_sparseness = com_table_ex %>%
+    group_by(site) %>%
+    summarise(N_sp = n()) %>%
+    right_join(com_table_ex, by = "site") %>%
+    mutate(Si = exp(-N_sp*log(2)*abund)) %>%
+    select(-N_sp)
+
+  # Single community sparseness correct computation
+  expect_equal(filter(com_sparseness, site == "s1"),
+               single_com_spar(com_table_ex %>%
+                                 filter(site == "s1") %>%
+                                 as.data.frame(),
+                               "species", "abund"))
+
+  # Sparseness correct computation over many communities
+  expect_equal(com_sparseness, sparseness(as.data.frame(com_table_ex), "species",
+                                          "site", "abund"))
+})
