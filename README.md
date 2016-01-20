@@ -38,4 +38,5 @@ In addition to code example included in help of functions, an example vignette c
 - [X] Implement tests,
 - [ ] Provide example dataset,
 - [ ] Implement a general restrictedness computation,
-- [ ] Make species as factor compatible.
+- [ ] Make species as factor compatible,
+- [ ] Compute distinctiveness/sparseness functions directly from site-species matrices.
