@@ -63,10 +63,12 @@ test_that("Correct Di computation with different comm. without abundance",{
 
   correct_dist_mat = table(correct_dist$species, correct_dist$site)
 
+  correct_dist_mat[which(correct_dist_mat == 0)] = NA_real_
+
   correct_dist_mat[which(correct_dist_mat == 1)] = correct_dist$Di
 
-  expect_equivalent(pres_distinctiveness(valid_mat, dist_mat),
-                    correct_dist_mat)
+  expect_equivalent(correct_dist_mat,
+               as.table(pres_distinctiveness(valid_mat, dist_mat)))
 
   expect_message(distinctiveness(com_table, "species", "site", abund = NULL,
                                     dist_mat))
@@ -84,13 +86,16 @@ test_that("Distinctiveness is undefined for a community with a single species", 
   colnames(small_mat) = c("s1", "s2")
 
   undef_dist = data_frame(site = c("s1", "s2"), species = c("a", "b"),
-                          Di = rep(NA, 2))
+                          Di = rep(NaN, 2))
 
   undef_dist_mat = table(undef_dist$species, undef_dist$site)
 
+  undef_dist_mat[which(undef_dist_mat == 0)] = NA_real_
+
   undef_dist_mat[which(undef_dist_mat == 1)] = undef_dist$Di
 
-  expect_equivalent(pres_distinctiveness(small_mat, dist_mat), undef_dist_mat)
+  expect_equivalent(undef_dist_mat,
+                    as.table(pres_distinctiveness(small_mat, dist_mat)))
 })
 
 # Test for Uniqueness ---------------------------------------------------------
