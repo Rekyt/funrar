@@ -148,6 +148,11 @@ distinctiveness = function(com_table, sp_col, com, abund = NULL, dist_matrix) {
 #' @export
 pres_distinctiveness = function(pres_matrix, dist_matrix) {
 
+  if (nrow(dist_matrix) != nrow(pres_matrix)) {
+    message("Distance matrix > number of species\nTaking subset of distance matrix")
+    dist_matrix = dist_matrix[rownames(pres_matrix), rownames(pres_matrix)]
+  }
+
   # Matrix product of distance matrix and presence absence matrix
   index_matrix = dist_matrix %*% pres_matrix
 
