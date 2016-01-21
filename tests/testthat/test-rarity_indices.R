@@ -45,8 +45,6 @@ test_that("Invalid input types do not work", {
   expect_error(single_com_dist("a", "species", NULL, "d"))
   expect_error(single_com_dist(3, "species", NULL, "d"))
 
-  expect_error(pres_distinctiveness(empty_mat, dist_mat),
-               "Community table does not have any communities")
 })
 
 
@@ -63,8 +61,12 @@ test_that("Correct Di computation with different comm. without abundance",{
                            row.names = c(NA, -9L), class = c("tbl_df", "tbl",
                                                              "data.frame"))
 
-  expect_equivalent(data.frame(pres_distinctiveness(valid_mat, dist_mat)),
-                    data.frame(correct_dist))
+  correct_dist_mat = table(correct_dist$species, correct_dist$site)
+
+  correct_dist_mat[which(correct_dist_mat == 1)] = correct_dist$Di
+
+  expect_equivalent(pres_distinctiveness(valid_mat, dist_mat),
+                    correct_dist_mat)
 
   expect_message(distinctiveness(com_table, "species", "site", abund = NULL,
                                     dist_mat))
@@ -84,7 +86,11 @@ test_that("Distinctiveness is undefined for a community with a single species", 
   undef_dist = data_frame(site = c("s1", "s2"), species = c("a", "b"),
                           Di = rep(NA, 2))
 
-  expect_equivalent(pres_distinctiveness(small_mat, dist_mat), undef_dist)
+  undef_dist_mat = table(undef_dist$species, undef_dist$site)
+
+  undef_dist_mat[which(undef_dist_mat == 1)] = undef_dist$Di
+
+  expect_equivalent(pres_distinctiveness(small_mat, dist_mat), undef_dist_mat)
 })
 
 # Test for Uniqueness ---------------------------------------------------------
