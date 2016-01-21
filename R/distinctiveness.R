@@ -148,18 +148,18 @@ distinctiveness = function(com_table, sp_col, com, abund = NULL, dist_matrix) {
 #' @export
 pres_distinctiveness = function(pres_matrix, dist_matrix) {
 
-  species_list = apply((pres_matrix == 1), 2,  function(x) {
-    rownames(pres_matrix)[x]
-    })
+  # Matrix product of distance matrix and presence absence matrix
+  index_matrix = dist_matrix %*% pres_matrix
 
-  com_table = lapply(names(species_list), function(x) {
-    # Make a data frame for each site with sites and species
-    data.frame(site = rep(x, length(species_list[[x]])),
-               species = species_list[[x]])
-    }) %>% bind_rows()
+  # Replace species not present in communities
+  index_matrix[which(pres_matrix == 0)] = NA
 
-  com_table = distinctiveness(com_table, "species", "site", abund = NULL,
-                              dist_matrix = dist_matrix)
+  # Compute sum of relative abundances
+  denom_matrix = colSums(pres_matrix) %>%
+    rep(nrow(pres_matrix)) %>%
+    matrix(byrow = TRUE, ncol = ncol(pres_matrix)) - pres_matrix
 
-  return(com_table)
+  index_matrix = index_matrix / denom_matrix
+
+  return(index_matrix)
 }
