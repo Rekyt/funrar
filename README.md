@@ -39,4 +39,5 @@ In addition to code example included in help of functions, an example vignette c
 - [ ] Provide example dataset,
 - [ ] Implement a general restrictedness computation,
 - [ ] Make species as factor compatible,
-- [ ] Compute distinctiveness/sparseness functions directly from site-species matrices.
+- [X] Compute distinctiveness/sparseness functions directly from site-species matrices,
+- [ ] Add `tidy_to_matrix` and `matrix_to_tidy` functions to go from one to the other.
