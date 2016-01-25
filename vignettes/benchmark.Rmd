@@ -1,0 +1,90 @@
+---
+title: "Benchmark of Distinctiveness"
+author: "Matthias Greni\u00e9"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Vignette Title}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+# `outlieR` functions benchmark
+
+`outlieR` lets you use either "tidy" formatted community table for your indices or site-species matrix. The aim of this vignette is to test how are `outlieR`'s functions senstitive datasets size.
+
+
+## Generating datasets
+
+To compare speed of functions we have to generate different types of datasets: tidy table or site-species matrix, square (number of sites = number of species) or rectangular (higher number of sites vs. species or vice-versa), small vs. large, presence-absence vs. relative abundances, high number of zeros vs. not high.
+
+```{r functGenerateData}
+# Function to generate dataset
+gen_data = function(n_sites = 50, n_species = 50, prob) {
+  # Generate presence-absence matrix
+  mat = matrix(rbinom(n_species*n_sites, 1, prob), n_species, n_sites)
+  
+  # Discard empty rows and empty columns
+  col_sum = colSums(mat)
+  row_sum = rowSums(mat)
+  mat = mat[which(row_sum != 0), which(col_sum != 0)]
+  
+  # Assign names
+  colnames(mat) = paste0("com", 1:ncol(mat))
+  rownames(mat) = paste0("sp", 1:nrow(mat))
+  
+  # Make corresponding table
+  tab = reshape2::melt(mat)
+  colnames(tab) = c("species", "com", "pres")
+  tab = tab[which(tab$pres == 1),]
+  
+  # Generate distance matrix
+  dist_vec = runif((n_species*(n_species - 1))/2)
+  
+  dist_matrix = diag(0, ncol = n_species, nrow = n_species)
+  
+  dist_matrix[upper.tri(dist_matrix, diag = F)] = dist_vec
+  
+  dist_matrix = dist_matrix + t(dist_matrix)
+  
+  colnames(dist_matrix) = rownames(mat)
+  rownames(dist_matrix) = rownames(mat)
+  
+  return(list(mat, tab, dist_matrix))
+}
+```
+
+Now that we have our function to generate our dataset we can generate test on the whole variety of datasets and make benchmark.
+
+
+
+## Small datasets
+
+### Square Matrix
+
+
+```{r smallDataSquare}
+library(microbenchmark)
+library(outlieR)
+
+small_square_data = gen_data(1000, 1000, 0.5)
+
+small_square_data[[2]]$species = as.character(small_square_data[[2]]$species)
+
+small_square = microbenchmark(
+  table = distinctiveness(small_square_data[[2]], sp_col = "species",
+                          com = "com", abund = NULL,
+                          dist_matrix = small_square_data[[3]]),
+  matrix = pres_distinctiveness(small_square_data[[1]],
+                                small_square_data[[3]]), times = 20
+)
+```
+
+
+
+### Rectangular
+
+```{r smallDataRect}
+
+```
+
