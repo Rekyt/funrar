@@ -24,5 +24,6 @@ RoxygenNote: 5.0.1
 Suggests: knitr,
     rmarkdown,
     testthat,
-    microbenchmark
+    microbenchmark,
+    ggplot2
 VignetteBuilder: knitr
