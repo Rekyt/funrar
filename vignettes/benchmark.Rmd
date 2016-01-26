@@ -109,7 +109,7 @@ small_rect_sites = benchmark(gen_data(100, 10, 0.5))
 
 ### Square
 
-```{r largeDataSquare}
+```{r largeDataSquare, eval=FALSE}
 large_square = benchmark(gen_data(1000, 1000, 0.5))
 larger_square = benchmark(gen_data(3000, 3000, 0.5), 5)
 ```
@@ -117,7 +117,7 @@ larger_square = benchmark(gen_data(3000, 3000, 0.5), 5)
 
 ### Rectangular
 
-```{r largeDataRect}
+```{r largeDataRect, eval=FALSE}
 large_rect_sites = benchmark(gen_data(3000, 400, 0.5))
 large_rect_sp = benchmark(gen_data(400, 3000, 0.5))
 
@@ -129,7 +129,7 @@ larger_rect_sp = benchmark(gen_data(1000, 10000, 0.5), 5)
 
 ## Graph Comparing Speed
 
-```{r speedPlot}
+```{r speedPlot, eval=FALSE}
 library(ggplot2)
 
 make_microb_df = function(microbench, shape, size, type) {
@@ -158,7 +158,7 @@ large_rect_sites_df = make_microb_df(large_rect_sites, "rect", "large", "sites")
 large_rect_sp_df = make_microb_df(large_rect_sp, "rect", "large", "sites")
 ```
 
-```{r comparitivePlot}
+```{r comparitivePlot, eval=FALSE}
 total_runs = rbind(smallest_square_df,
                    small_square_df,
                    small_rect_sites_df,
