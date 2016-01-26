@@ -13,6 +13,14 @@ vignette: >
 
 `outlieR` lets you use either "tidy" formatted community table for your indices or site-species matrix. The aim of this vignette is to test how are `outlieR`'s functions senstitive datasets size.
 
+In this vignette we will use `outlieR` for its functions and `microbenchmark` packages to compare functions speed.
+
+```{r loadingPackages}
+library(microbenchmark)
+library(outlieR)
+```
+
+
 
 ## Generating datasets
 
@@ -54,7 +62,25 @@ gen_data = function(n_sites = 50, n_species = 50, prob) {
 }
 ```
 
-Now that we have our function to generate our dataset we can generate test on the whole variety of datasets and make benchmark.
+Now that we have our function to generate our dataset we can generate test on the whole variety of datasets and make benchmark. To easily compare between datasets we can design a function that benchmarks the two datasets:
+
+```{r benchmarkF}
+# 'dataset' variable results of function 'gen_data()'
+benchmark = function(dataset, times = 20) {
+
+  dataset[[2]]$species = as.character(dataset[[2]]$species)
+
+  bench = microbenchmark(
+    table = distinctiveness(dataset[[2]], sp_col = "species",
+                            com = "com", abund = NULL,
+                            dist_matrix = dataset[[3]]),
+    matrix = pres_distinctiveness(dataset[[1]],
+                                  dataset[[3]]), times = times
+  )
+  
+  return(bench)
+}
+```
 
 
 
@@ -62,29 +88,86 @@ Now that we have our function to generate our dataset we can generate test on th
 
 ### Square Matrix
 
-
 ```{r smallDataSquare}
-library(microbenchmark)
-library(outlieR)
+smallest_square = benchmark(gen_data(10, 10, 0.5), 100)
 
-small_square_data = gen_data(1000, 1000, 0.5)
-
-small_square_data[[2]]$species = as.character(small_square_data[[2]]$species)
-
-small_square = microbenchmark(
-  table = distinctiveness(small_square_data[[2]], sp_col = "species",
-                          com = "com", abund = NULL,
-                          dist_matrix = small_square_data[[3]]),
-  matrix = pres_distinctiveness(small_square_data[[1]],
-                                small_square_data[[3]]), times = 20
-)
+small_square = benchmark(gen_data(50, 50, 0.5), 100)
 ```
-
 
 
 ### Rectangular
 
 ```{r smallDataRect}
+small_rect_sp = benchmark(gen_data(10, 100, 0.5))
 
+small_rect_sites = benchmark(gen_data(100, 10, 0.5))
+```
+
+
+
+## Large datasets
+
+### Square
+
+```{r largeDataSquare}
+large_square = benchmark(gen_data(1000, 1000, 0.5))
+larger_square = benchmark(gen_data(3000, 3000, 0.5), 5)
+```
+
+
+### Rectangular
+
+```{r largeDataRect}
+large_rect_sites = benchmark(gen_data(3000, 400, 0.5))
+large_rect_sp = benchmark(gen_data(400, 3000, 0.5))
+
+larger_rect_sites = benchmark(gen_data(10000, 1000, 0.5), 5)
+larger_rect_sp = benchmark(gen_data(1000, 10000, 0.5), 5)
+```
+
+
+
+## Graph Comparing Speed
+
+```{r speedPlot}
+library(ggplot2)
+
+make_microb_df = function(microbench, shape, size, type) {
+  df = as.data.frame(microbench)
+  df[["shape"]] = shape
+  df[["size"]] = size
+  df[["type"]] = type
+  
+  return(df)
+}
+
+smallest_square_df = make_microb_df(smallest_square, "square", "smallest", NA)
+
+small_square_df = make_microb_df(small_square, "square", "small", NA)
+
+small_rect_sites_df = make_microb_df(small_rect_sites, "rect", "small", "sites")
+
+small_rect_sp_df = make_microb_df(small_rect_sp, "rect", "small", "species")
+
+large_square_df = make_microb_df(large_square, "square", "large", NA)
+
+larger_square_df = make_microb_df(larger_square, "square", "larger", NA)
+
+large_rect_sites_df = make_microb_df(large_rect_sites, "rect", "large", "sites")
+
+large_rect_sp_df = make_microb_df(large_rect_sp, "rect", "large", "sites")
+```
+
+```{r comparitivePlot}
+total_runs = rbind(smallest_square_df,
+                   small_square_df,
+                   small_rect_sites_df,
+                   small_rect_sp_df,
+                   large_square_df)
+
+p_comp = ggplot(total_runs, aes(x = expr, y = time)) +
+  geom_boxplot() +
+  facet_grid(shape ~ size) +
+  scale_y_log10()
 ```
 
