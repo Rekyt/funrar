@@ -23,5 +23,6 @@ BugReports: https://github.com/Rekyt/outlieR/issues
 RoxygenNote: 5.0.1
 Suggests: knitr,
     rmarkdown,
-    testthat
+    testthat,
+    microbenchmark
 VignetteBuilder: knitr
