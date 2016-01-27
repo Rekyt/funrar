@@ -9,6 +9,8 @@ pres_uniqueness(pres_matrix, dist_matrix)
 \arguments{
 \item{pres_matrix}{a presence-absence matrix, with species in rows and sites
 in columns (not containing relative abundances for the moments)}
+
+\item{dist_matrix}{a functional distance matrix}
 }
 \value{
 a similar matrix to presence-absence with uniqueness values

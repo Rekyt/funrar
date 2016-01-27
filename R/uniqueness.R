@@ -79,8 +79,7 @@ uniqueness = function(com_table, sp_col, dist_matrix) {
 #' Experimental for the moment, should be merged with previous function
 #' 'uniqueness()'
 #'
-#' @param pres_matrix a presence-absence matrix, with species in rows and sites
-#'      in columns (not containing relative abundances for the moments)
+#' @inheritParams pres_distinctiveness
 #'
 #'
 #' @return a similar matrix to presence-absence with uniqueness values
