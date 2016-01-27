@@ -161,7 +161,9 @@ pres_distinctiveness = function(pres_matrix, dist_matrix) {
 
   # Compute sum of relative abundances
   denom_matrix = colSums(pres_matrix) %>%
+    # Make a matrix with sum per column of relative abundances in each cell
     rep(nrow(pres_matrix)) %>%
+    # Remove focal species
     matrix(byrow = TRUE, ncol = ncol(pres_matrix)) - pres_matrix
 
   index_matrix = index_matrix / denom_matrix
