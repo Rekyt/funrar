@@ -85,3 +85,34 @@ sparseness = function(com_table, species, com, abund) {
   return(com_sparseness)
 }
 
+#' Distinctiveness on presence/absence matrix
+#'
+#' Computes distinctiveness from a presence-absence matrix of species with a
+#' provided functional distance matrix.
+#'
+#' Experimental for the moment, should be merged with previous function
+#' 'sparseness()'
+#'
+#' @param pres_matrix a presence-absence matrix, with species in rows and sites
+#'      in columns (not containing relative abundances for the moments)
+#'
+#'
+#' @return a similar matrix to presence-absence with sparseness values
+#'
+#' @export
+pres_sparseness = function(pres_matrix) {
+  sparseness_mat = pres_matrix
+
+  # Species with no relative abundance get a sparseness of 0
+  sparseness_mat[sparseness_mat == 0] = NA
+
+  # Compute total of nb of species per site (= per column)
+  total_sites = apply(sparseness_mat, 2, function(x) sum(x != 0, na.rm = T))
+
+  # Sparseness for each per row using total abundance vector
+  sparseness_mat = apply(sparseness_mat, 1, function(x) {
+    exp(-total_sites*log(2)*x)
+  })
+
+  return(sparseness_mat)
+}
