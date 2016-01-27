@@ -114,5 +114,5 @@ pres_sparseness = function(pres_matrix) {
     exp(-total_sites*log(2)*x)
   })
 
-  return(sparseness_mat)
+  return(t(sparseness_mat))
 }

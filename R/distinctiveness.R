@@ -163,7 +163,8 @@ pres_distinctiveness = function(pres_matrix, dist_matrix) {
   total_sites = colSums(pres_matrix)
 
   # Subtract focal species value to site total
-  denom_matrix = apply(pres_matrix, 1, function(x) total_sites - x)
+  # /!\ need to Transpose because applying function to row tranposes matrix
+  denom_matrix = t(apply(pres_matrix, 1, function(x) total_sites - x))
 
   index_matrix = index_matrix / denom_matrix
 
