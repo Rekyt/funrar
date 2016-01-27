@@ -70,3 +70,35 @@ uniqueness = function(com_table, sp_col, dist_matrix) {
 
     return(com_table)
 }
+
+#' Uniqueness for Presence/Absence matrix
+#'
+#' Computes uniqueness from a presence-absence matrix of species with a
+#' provided functional distance matrix.
+#'
+#' Experimental for the moment, should be merged with previous function
+#' 'uniqueness()'
+#'
+#' @param pres_matrix a presence-absence matrix, with species in rows and sites
+#'      in columns (not containing relative abundances for the moments)
+#'
+#'
+#' @return a similar matrix to presence-absence with uniqueness values
+#'
+#' @export
+pres_uniqueness = function(pres_matrix, dist_matrix) {
+
+  com_dist = dist_matrix[rownames(pres_matrix), rownames(pres_matrix)]
+
+  # Replace diagonal by 'NA' for computation reasons
+  diag(com_dist) = NA
+
+  # Get minimum distance for each species
+  u_index = apply(com_dist, 1, min, na.rm = T)
+
+  uniqueness_mat = apply(pres_matrix, 2, function(x) {
+    ifelse(x == 0, NA, u_index)
+  })
+
+  return(uniqueness_mat)
+}

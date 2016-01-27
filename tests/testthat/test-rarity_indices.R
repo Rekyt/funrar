@@ -109,11 +109,16 @@ test_that("Correct Uniqueness computation", {
 
   all_ui = bind_cols(com_table, data_frame(Ui = c(1/9, 1/9, 1/9, 4/9, 4/9, 1/9,
                                                   4/9, 4/9, 4/9)))
+  ui_mat = valid_mat
+  ui_mat[ui_mat == 1] = all_ui$Ui
+  ui_mat[ui_mat == 0] = NA
 
   expect_equivalent(uniqueness(com_table[1:2, ], "species", dist_mat), valid_ui)
 
   expect_equivalent(as.data.frame(uniqueness(com_table, "species", dist_mat)),
                     as.data.frame(all_ui))
+
+  expect_equal(ui_mat, pres_uniqueness(valid_mat, dist_mat))
 })
 
 
