@@ -87,8 +87,7 @@ sparseness = function(com_table, species, com, abund) {
 
 #' Distinctiveness on presence/absence matrix
 #'
-#' Computes distinctiveness from a presence-absence matrix of species with a
-#' provided functional distance matrix.
+#' Computes sparseness from a relative abundance matrix of species.
 #'
 #' Experimental for the moment, should be merged with previous function
 #' 'sparseness()'
