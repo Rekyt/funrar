@@ -160,11 +160,10 @@ pres_distinctiveness = function(pres_matrix, dist_matrix) {
   index_matrix[which(pres_matrix == 0)] = NA
 
   # Compute sum of relative abundances
-  denom_matrix = colSums(pres_matrix) %>%
-    # Make a matrix with sum per column of relative abundances in each cell
-    rep(nrow(pres_matrix)) %>%
-    # Remove focal species
-    matrix(byrow = TRUE, ncol = ncol(pres_matrix)) - pres_matrix
+  total_sites = colSums(pres_matrix)
+
+  # Subtract focal species value to site total
+  denom_matrix = apply(pres_matrix, 1, function(x) total_sites - x)
 
   index_matrix = index_matrix / denom_matrix
 
