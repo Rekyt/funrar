@@ -1,11 +1,10 @@
 Package: outlieR
 Title: Functional Rarity Indices Computations
 Version: 0.0.1
-Author:
-  Matthias Grenié <matthias.grenie@ens-lyon.fr> [aut, cre],
-  Pierre Denelle <pierre.denelle@cefe.cnrs.fr> [aut]
-Maintainer:
-  Matthias Grenié <matthias.grenie@ens-lyon.fr>
+Authors@R: c(
+  person("Matthias", "Grenié", email = "matthias.grenie@ens-lyon.fr", role = c("aut", "cre")),
+  person("Pierre", "Denelle", email = "pierre.denelle@cefe.cnrs.fr", role = "aut")
+  )
 Description: Computes functional rarity indices as proposed by Violle et al.
     Various indices can be computed using both regional and local information.
     Most function need a table of sites and species present, plus traits table
