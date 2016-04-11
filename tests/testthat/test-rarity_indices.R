@@ -116,8 +116,10 @@ test_that("Correct Uniqueness computation", {
   expect_equivalent(as.tbl(uniqueness(com_table[1:2, ], "species", dist_mat)),
                     valid_ui)
 
-  expect_equivalent(as.data.frame(uniqueness(com_table, "species", dist_mat)),
-                    as.data.frame(all_ui))
+  expect_equivalent(uniqueness(com_table, "species", dist_mat) %>%
+                      .[,c("site", "species", "Ui")] %>%
+                      arrange(site),
+                    all_ui)
 
   expect_equal(ui_mat, pres_uniqueness(valid_mat, dist_mat))
 })
