@@ -48,9 +48,7 @@ uniqueness = function(com_table, sp_col, dist_matrix) {
     }
 
     # Extract all species in community
-    com_species = com_table[[sp_col]] %>%
-        unique() %>%
-        as.character()
+    com_species = as.character(unique(com_table[[sp_col]]))
 
     # Submatrix containing distance of species in community
     com_dist = dist_matrix[com_species, com_species]
@@ -65,8 +63,7 @@ uniqueness = function(com_table, sp_col, dist_matrix) {
     u_df = data.frame(sp_name = names(u_index), Ui = u_index)
 
     # Add Uniqueness column by species
-    com_table = com_table %>%
-        dplyr:::left_join_impl(u_df, sp_col, "sp_name")
+    com_table = merge(com_table, u_df, by.x = sp_col, by.y = "sp_name")
 
     return(com_table)
 }
