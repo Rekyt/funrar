@@ -113,7 +113,8 @@ test_that("Correct Uniqueness computation", {
   ui_mat[ui_mat == 1] = all_ui$Ui
   ui_mat[ui_mat == 0] = NA
 
-  expect_equivalent(uniqueness(com_table[1:2, ], "species", dist_mat), valid_ui)
+  expect_equivalent(as.tbl(uniqueness(com_table[1:2, ], "species", dist_mat)),
+                    valid_ui)
 
   expect_equivalent(as.data.frame(uniqueness(com_table, "species", dist_mat)),
                     as.data.frame(all_ui))
