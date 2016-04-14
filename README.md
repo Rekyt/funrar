@@ -34,10 +34,10 @@ In addition to code example included in help of functions, an example vignette c
 
 ## TO DO
 
-- [X] Make an example vignette,
-- [X] Implement tests,
 - [ ] Provide example dataset,
 - [ ] Implement a general restrictedness computation,
 - [ ] Make species as factor compatible,
-- [X] Compute distinctiveness/scarcity functions directly from site-species matrices,
-- [ ] Add `tidy_to_matrix` and `matrix_to_tidy` functions to go from one to the other.
+- [ ] Add `tidy_to_matrix` and `matrix_to_tidy` functions to go from one to the other,
+- [ ] Submit to CRAN (seems valid),
+- [ ] Rethink about the package name,
+- [ ] Provide benchmark to test influence of type of data on speed of computation.
