@@ -128,35 +128,35 @@ test_that("Correct Uniqueness computation", {
 # Test for Sparseness ---------------------------------------------------------
 
 
-test_that("Correct Sparseness computation", {
+test_that("Correct Scarcity computation", {
   com_table_ex = bind_cols(com_table, data.frame(abund = c(0.3, 0.7, 0.2, 0.6,
                                                            0.2, 0.5, 0.5, 0.2,
                                                            0.8)))
   abund_mat = valid_mat
   abund_mat[abund_mat == 1] = com_table_ex$abund
 
-  sparseness_mat = apply(abund_mat, 2, function(x) {
+  scarcity_mat = apply(abund_mat, 2, function(x) {
     ifelse(x != 0, exp(-sum(x != 0)*log(2)*x), NA)
     })
 
-  com_sparseness = com_table_ex %>%
+  com_scarcity = com_table_ex %>%
     group_by(site) %>%
     summarise(N_sp = n()) %>%
     right_join(com_table_ex, by = "site") %>%
     mutate(Si = exp(-N_sp*log(2)*abund)) %>%
     select(-N_sp)
 
-  # Single community sparseness correct computation
-  expect_equal(filter(com_sparseness, site == "s1"),
-               single_com_spar(com_table_ex %>%
+  # Single community scarcity correct computation
+  expect_equal(filter(com_scarcity, site == "s1"),
+               single_com_scar(com_table_ex %>%
                                  filter(site == "s1") %>%
                                  as.data.frame(),
                                "species", "abund"))
 
-  # Sparseness correct computation over many communities
-  expect_equal(com_sparseness, sparseness(as.data.frame(com_table_ex), "species",
+  # Scarcity correct computation over many communities
+  expect_equal(com_scarcity, scarcity(as.data.frame(com_table_ex), "species",
                                           "site", "abund"))
 
   # Correct Sparseness computation for a site-species matrix
-  expect_equal(sparseness_mat, pres_sparseness(abund_mat))
+  expect_equal(scarcity_mat, pres_scarcity(abund_mat))
 })

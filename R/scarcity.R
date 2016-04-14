@@ -1,4 +1,4 @@
-# Compute sparseness for a single community -----------------------------------
+# Compute scarcity for a single community -----------------------------------
 #
 # Arguments:
 #   com_table, a tidy data.frame of community with column with species, and
@@ -10,26 +10,27 @@
 #
 #
 # Output:
-#   A tidy data.frame with a new column containing species sparseness
+#   A tidy data.frame with a new column containing species scarcity
 
-single_com_spar = function(com_table, species, abund) {
+single_com_scar = function(com_table, species, abund) {
 
-  # Computes sparseness by species
-  rich_sp <- nrow(com_table)
-  com_table[, "Si"] <- exp(-rich_sp * log(2) * com_table[, abund])
+  # Computes scarcity by species
+  N_sp = nrow(com_table)
+
+  com_table[, "Si"] = exp(-N_sp * log(2) * com_table[, abund])
 
   return(com_table)
 }
 
-#' Sparseness
+#' Scarcity
 #'
-#' Compute sparness values for several communities. Sparseness is computed per
-#' community. Sparseness corresponds to the rareness of a given species in
+#' Compute sparness values for several communities. Scarcity is computed per
+#' community. Scarcity corresponds to the rareness of a given species in
 #' terms of abundances, as such:
 #' \deqn{
 #'  S_i = \exp(-N\log{2}A_i),
 #' }
-#' with \eqn{S_i} the sparseness of species \eqn{i}, \eqn{N} the number of
+#' with \eqn{S_i} the scarcity of species \eqn{i}, \eqn{N} the number of
 #' species present in the given community and \eqn{A_i} the relative abundance
 #' (in %%) of species \eqn{i}.
 #'
@@ -45,10 +46,10 @@ single_com_spar = function(com_table, species, abund) {
 #'     abundances of species
 #'
 #' @return The same table as \code{com_table} with an added \eqn{S_i} column
-#'     for Sparseness values.
+#'     for Scarcity values.
 #'
 #' @export
-sparseness = function(com_table, species, com, abund) {
+scarcity = function(com_table, species, com, abund) {
 
   # Test to be sure
   if ((com %in% colnames(com_table)) == FALSE) {
@@ -71,47 +72,47 @@ sparseness = function(com_table, species, com, abund) {
     stop("Provided abundances are not numeric.")
   }
 
-  # Compute Sparseness
+  # Compute Scarcity
   # Split table by communities
-  com_split <- split(com_table, factor(com_table[[com]]))
+  com_split = split(com_table, factor(com_table[[com]]))
 
-  com_split <- lapply(com_split,
+  com_split = lapply(com_split,
                       function(one_com)
-                        single_com_spar(one_com, species, abund)
+                        single_com_scar(one_com, species, abund)
   )
 
-  com_sparseness <- dplyr::bind_rows(com_split)
+  com_scarcity = dplyr::bind_rows(com_split)
 
-  return(com_sparseness)
+  return(com_scarcity)
 }
 
 #' Distinctiveness on presence/absence matrix
 #'
-#' Computes sparseness from a relative abundance matrix of species.
+#' Computes scarcity from a relative abundance matrix of species.
 #'
 #' Experimental for the moment, should be merged with previous function
-#' 'sparseness()'
+#' 'scarcity()'
 #'
 #' @param pres_matrix a presence-absence matrix, with species in rows and sites
 #'      in columns (not containing relative abundances for the moments)
 #'
 #'
-#' @return a similar matrix to presence-absence with sparseness values
+#' @return a similar matrix to presence-absence with scarcity values
 #'
 #' @export
-pres_sparseness = function(pres_matrix) {
-  sparseness_mat = pres_matrix
+pres_scarcity = function(pres_matrix) {
+  scarcity_mat = pres_matrix
 
-  # Species with no relative abundance get a sparseness of 0
-  sparseness_mat[sparseness_mat == 0] = NA
+  # Species with no relative abundance get a scarcity of 0
+  scarcity_mat[scarcity_mat == 0] = NA
 
   # Compute total of nb of species per site (= per column)
-  total_sites = apply(sparseness_mat, 2, function(x) sum(x != 0, na.rm = T))
+  total_sites = apply(scarcity_mat, 2, function(x) sum(x != 0, na.rm = T))
 
-  # Sparseness for each per row using total abundance vector
-  sparseness_mat = apply(sparseness_mat, 1, function(x) {
+  # Scarcity for each per row using total abundance vector
+  scarcity_mat = apply(scarcity_mat, 1, function(x) {
     exp(-total_sites*log(2)*x)
   })
 
-  return(t(sparseness_mat))
+  return(t(scarcity_mat))
 }

@@ -109,7 +109,7 @@ head(data_di)
 
 
 
-## Sparseness
+## Scarcity
 
 ### Formula
 
@@ -117,15 +117,15 @@ $$
 S_i = \exp(-NA_i\log2),
 $$
 
-with $S_i$ the sparseness of species $i$, $N$ the number of species in the local community, $A_i$ the relative abundance (in percent) of species $i$ in the community.
+with $S_i$ the scarcity of species $i$, $N$ the number of species in the local community, $A_i$ the relative abundance (in percent) of species $i$ in the community.
 
 
 ### Computation
 
-With `outlieR` it can be computed with `sparseness()` function with a syntax analog to `distinctiveness()`
+With `outlieR` it can be computed with `scarcity()` function with a syntax analog to `distinctiveness()`
 
-```{r sparsenessComp}
-sparseness(site_species, "species", "site", "abund")
+```{r scarcityComp}
+scarcity(site_species, "species", "site", "abund")
 ```
 
 

@@ -3,7 +3,7 @@
 \name{agg_ind}
 \alias{agg_ind}
 \title{Function to obtain aggregated (mean and variance) distinctiveness or
-sparseness per species and community}
+scarcity per species and community}
 \usage{
 agg_ind(species, com, ind)
 }
@@ -13,8 +13,8 @@ agg_ind(species, com, ind)
 \item{com}{a character vector giving a list of the communities of all
 combinations (see ind)}
 
-\item{ind}{a distinctiveness or sparseness vector of each species/community
-association, ind is obtained thanks to distinctiveness or sparseness function}
+\item{ind}{a distinctiveness or scarcity vector of each species/community
+association, ind is obtained thanks to distinctiveness or scarcity function}
 }
 \value{
 Four vector with attributed names:

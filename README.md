@@ -21,7 +21,7 @@ For the moment only 5 functions are exported (all of them include a help file ac
 
 - `compute_dist_matrix()`  it computes a Gower's distance matrix between species from a traits matrix, trait scaling is done automatically; **WARNING:** categorical traits should be clearly defined as `ordered` or `factor` to compute the needed distance;
 - `distinctiveness()` computes the distinctiveness index (local functional rarity) over a range of species, index can be weighted by species abundances, see help for syntax;
-- `sparseness()` computes the sparseness index (local abundance rarity), **needs abundances**;
+- `scarcity()` computes the scarcity index (local abundance rarity), **needs abundances**;
 - `uniqueness()` computes uniqueness index (regional functional rarity) (minimum functional distance to other species).
 - `agg_ind()` computes moments (mean, variance and skewness) of functional rarity metrics per community or species.
 
@@ -39,5 +39,5 @@ In addition to code example included in help of functions, an example vignette c
 - [ ] Provide example dataset,
 - [ ] Implement a general restrictedness computation,
 - [ ] Make species as factor compatible,
-- [X] Compute distinctiveness/sparseness functions directly from site-species matrices,
+- [X] Compute distinctiveness/scarcity functions directly from site-species matrices,
 - [ ] Add `tidy_to_matrix` and `matrix_to_tidy` functions to go from one to the other.
