@@ -9,6 +9,11 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
+```{r preamble}
+knitr::opts_chunk$set(eval = FALSE)
+```
+
+
 # `outlieR` functions benchmark
 
 `outlieR` lets you use either "tidy" formatted community table for your indices or site-species matrix. The aim of this vignette is to test how are `outlieR`'s functions senstitive datasets size.
@@ -89,18 +94,18 @@ benchmark = function(dataset, times = 20) {
 ### Square Matrix
 
 ```{r smallDataSquare}
-smallest_square = benchmark(gen_data(10, 10, 0.5), 100)
+smallest_square = benchmark(gen_data(10, 10, 0.5), 2)
 
-small_square = benchmark(gen_data(50, 50, 0.5), 100)
+small_square = benchmark(gen_data(50, 50, 0.5), 2)
 ```
 
 
 ### Rectangular
 
 ```{r smallDataRect}
-small_rect_sp = benchmark(gen_data(10, 100, 0.5))
+small_rect_sp = benchmark(gen_data(10, 100, 0.5), 2)
 
-small_rect_sites = benchmark(gen_data(100, 10, 0.5))
+small_rect_sites = benchmark(gen_data(100, 10, 0.5), 2)
 ```
 
 
@@ -110,19 +115,19 @@ small_rect_sites = benchmark(gen_data(100, 10, 0.5))
 ### Square
 
 ```{r largeDataSquare, eval=FALSE}
-large_square = benchmark(gen_data(1000, 1000, 0.5))
-larger_square = benchmark(gen_data(3000, 3000, 0.5), 5)
+large_square = benchmark(gen_data(1000, 1000, 0.5), 2)
+larger_square = benchmark(gen_data(3000, 3000, 0.5), 2)
 ```
 
 
 ### Rectangular
 
 ```{r largeDataRect, eval=FALSE}
-large_rect_sites = benchmark(gen_data(3000, 400, 0.5))
-large_rect_sp = benchmark(gen_data(400, 3000, 0.5))
+large_rect_sites = benchmark(gen_data(3000, 400, 0.5), 2)
+large_rect_sp = benchmark(gen_data(400, 3000, 0.5), 2)
 
-larger_rect_sites = benchmark(gen_data(10000, 1000, 0.5), 5)
-larger_rect_sp = benchmark(gen_data(1000, 10000, 0.5), 5)
+larger_rect_sites = benchmark(gen_data(10000, 1000, 0.5), 2)
+larger_rect_sp = benchmark(gen_data(1000, 10000, 0.5), 2)
 ```
 
 
@@ -153,9 +158,9 @@ large_square_df = make_microb_df(large_square, "square", "large", NA)
 
 larger_square_df = make_microb_df(larger_square, "square", "larger", NA)
 
-large_rect_sites_df = make_microb_df(large_rect_sites, "rect", "large", "sites")
+#large_rect_sites_df = make_microb_df(large_rect_sites, "rect", "large", "sites")
 
-large_rect_sp_df = make_microb_df(large_rect_sp, "rect", "large", "sites")
+#large_rect_sp_df = make_microb_df(large_rect_sp, "rect", "large", "sites")
 ```
 
 ```{r comparitivePlot, eval=FALSE}
