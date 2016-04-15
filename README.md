@@ -40,5 +40,8 @@ In addition to code example included in help of functions, an example vignette c
 - [ ] Add `tidy_to_matrix` and `matrix_to_tidy` functions to go from one to the other,
 - [ ] Submit to CRAN (seems valid),
 - [ ] Rethink about the package name,
-- [ ] Provide benchmark to test influence of type of data on speed of computation.
-- [ ] Look into sparse matrix packages to optimize computation (`sparseM`, `Matrix`)
+- [ ] Provide benchmark to test influence of type of data on speed of computation,
+- [ ] Look into sparse matrix packages to optimize computation (`sparseM`, `Matrix`) make a `sparseMatrix` specific implementation,
+- [ ] Add corresponding tests,
+- [ ] Warn the user about the option of sparse matrices if matrix is sparse,
+- [ ] Benchmark those functions depending on presence-absence (or abundance) matrix density (non-zero elements).
