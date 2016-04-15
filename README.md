@@ -41,3 +41,4 @@ In addition to code example included in help of functions, an example vignette c
 - [ ] Submit to CRAN (seems valid),
 - [ ] Rethink about the package name,
 - [ ] Provide benchmark to test influence of type of data on speed of computation.
+- [ ] Look into sparse matrix packages to optimize computation (`sparseM`, `Matrix`)
