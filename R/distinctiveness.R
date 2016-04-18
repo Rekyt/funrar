@@ -156,13 +156,18 @@ pres_distinctiveness = function(pres_matrix, dist_matrix) {
   # Matrix product of distance matrix and presence absence matrix
   index_matrix = dist_matrix %*% pres_matrix
 
-  # Replace species not present in communities
-  index_matrix[which(pres_matrix == 0)] = NA
+
 
   # Compute sum of relative abundances
   if (requireNamespace("Matrix", quietly = TRUE) & is(pres_matrix, "sparseMatrix")) {
+    # Replace species not present in communities
+    index_matrix[Matrix::which(pres_matrix == 0)] = NA
     total_sites = Matrix::colSums(pres_matrix)
+
   } else {
+
+    # Replace species not present in communities
+    index_matrix[which(pres_matrix == 0)] = NA
     total_sites = colSums(pres_matrix)
   }
 
