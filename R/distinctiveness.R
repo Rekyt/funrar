@@ -160,7 +160,11 @@ pres_distinctiveness = function(pres_matrix, dist_matrix) {
   index_matrix[which(pres_matrix == 0)] = NA
 
   # Compute sum of relative abundances
-  total_sites = colSums(pres_matrix)
+  if (requireNamespace("Matrix", quietly = TRUE) & is(pres_matrix, "sparseMatrix")) {
+    total_sites = Matrix::colSums(pres_matrix)
+  } else {
+    total_sites = colSums(pres_matrix)
+  }
 
   # Subtract focal species value to site total
   # /!\ need to Transpose because applying function to row tranposes matrix
