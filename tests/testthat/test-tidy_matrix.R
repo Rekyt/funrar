@@ -23,9 +23,9 @@ com_table = lapply(colnames(log_mat), function(x) {
 
 
 # Abundance Matrix
-abund_mat = matrix(c(0.5, 0.5, 0, 0,
-                     0, rep(0.33, 3),
-                     0, 0.5, 0.5, 0,
+abund_mat = matrix(c(0.5, 0.5, NA, NA,
+                     NA, rep(0.33, 3),
+                     NA, 0.5, 0.5, NA,
                      0.25, 0.25, 0.25, 0.25),
                    ncol = 4)
 
@@ -55,5 +55,11 @@ test_that("Conversion from tidy data frame to matrix works", {
 
   expect_equivalent(tidy_to_matrix(com_table, "species", "site"), valid_mat)
   expect_equivalent(tidy_to_matrix(abund_df, "species", "site", "val"), abund_mat)
+
+  expect_error(tidy_to_matrix(com_table, "speies", "site"),
+               label = "Column 'speies' is not in data.frame")
+
+  expect_error(tidy_to_matrix(com_table, "speies", "seit"),
+               label = "Columns 'speies' and 'seit' are not in data.frame")
 
 })
