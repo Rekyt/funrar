@@ -3,6 +3,7 @@
 export(agg_ind)
 export(compute_dist_matrix)
 export(distinctiveness)
+export(matrix_to_tidy)
 export(pres_distinctiveness)
 export(pres_scarcity)
 export(pres_uniqueness)

@@ -21,6 +21,10 @@ com_table = lapply(colnames(log_mat), function(x) {
 }) %>%
   bind_rows()
 
+com_table$site = factor(com_table$site)
+
+com_table$species = factor(com_table$species)
+
 
 # Abundance Matrix
 abund_mat = matrix(c(0.5, 0.5, NA, NA,
@@ -40,6 +44,10 @@ abund_df = lapply(colnames(abund_mat), function(x) {
                                                   val = values))
   }) %>%
   bind_rows()
+
+abund_df$species = as.factor(abund_df$species)
+
+abund_df$site = as.factor(abund_df$site)
 
 
 # Object with an NA value
@@ -62,4 +70,13 @@ test_that("Conversion from tidy data frame to matrix works", {
   expect_error(tidy_to_matrix(com_table, "speies", "seit"),
                label = "Columns 'speies' and 'seit' are not in data.frame")
 
+})
+
+
+test_that("Conversion from matrix to tidy data.frame works", {
+
+  expect_equivalent(matrix_to_tidy(valid_mat, row_to_col = "species",
+                                   col_to_col = "site")[, -3], com_table)
+
+  expect_equivalent(matrix_to_tidy(abund_mat, value_col = "val"), abund_df)
 })

@@ -52,3 +52,48 @@ tidy_to_matrix = function(my_df, col_to_row, col_to_col, col_value = NULL) {
 
   return(my_mat)
 }
+
+#' Matrix to tidy data.frame
+#'
+#' From a matrix with values to a tidy data.frame
+#'
+#' @param my_mat matrix you want to transform in tidy data.frame
+#'
+#' @param value_col (optional) character vector to use for value column (default
+#' : 'value')
+#'
+#' @param row_to_col (optional) character vector used for name of column in
+#'     data.frame corresponding to rows in matrix (default: corresponding
+#'     dimension name)
+#'
+#' @param col_to_col (optional) character vector used for name of column in
+#'     data.frame corresponding to columns in matrix (default: corresponding
+#'     dimension name)
+#'
+#' @export
+matrix_to_tidy = function(my_mat, value_col = "value",
+                          row_to_col = names(dimnames(my_mat))[1],
+                          col_to_col = names(dimnames(my_mat))[2]) {
+
+
+  if (is.null(row_to_col)) {
+    row_to_col = "row"
+  }
+
+  if (is.null(col_to_col)) {
+    col_to_col = "col"
+  }
+
+  tidy_df = as.data.frame(as.table(my_mat))
+
+  tidy_df = na.exclude(tidy_df)
+
+  colnames(tidy_df) = c(row_to_col, col_to_col, value_col)
+
+
+  tidy_df = tidy_df[, c(col_to_col, row_to_col, value_col)]
+
+  row.names(tidy_df) = NULL
+
+  return(tidy_df)
+}
