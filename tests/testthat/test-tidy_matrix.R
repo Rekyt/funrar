@@ -5,16 +5,16 @@ context("Tidy Data Frame to Matrix Transformation")
 # Needed objects --------------------------------------------------------------
 
 # Valid Presence-Absence Matrix
-valid_mat = matrix(c(1, 1, 0, 0,
-                     0, rep(1, 3),
-                     0, 1, 1, 0,
-                     0, 0, 1, 1),
+valid_mat = matrix(c(1, 1, NA, NA,
+                     NA, rep(1, 3),
+                     NA, 1, 1, NA,
+                     NA, NA, 1, 1),
                    ncol = 4)
 
 colnames(valid_mat) = paste0("s", 1:4)
 rownames(valid_mat) = letters[1:4]
 
-log_mat = (valid_mat == 1)
+log_mat = (valid_mat == 1 & !is.na(valid_mat))
 com_table = lapply(colnames(log_mat), function(x) {
   species = rownames(valid_mat)[log_mat[, x]]
   data.frame(site = rep(x, length(species)), species = species)
@@ -52,6 +52,8 @@ na_mat["d", "s4"] = NA
 # Tests ------------------------------------------------------------------------
 
 test_that("Conversion from tidy data frame to matrix works", {
+
   expect_equivalent(tidy_to_matrix(com_table, "species", "site"), valid_mat)
   expect_equivalent(tidy_to_matrix(abund_df, "species", "site", "val"), abund_mat)
+
 })

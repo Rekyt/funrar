@@ -20,23 +20,13 @@
 #' @export
 tidy_to_matrix = function(my_df, col_to_row, col_to_col, value = NULL) {
 
-  # Common Formula
-  common = paste0("~", col_to_row, "+", col_to_col)
-
-  # Change formula depending on provided column value
   if (is.null(value)) {
-    form = common
+    my_mat = tapply(rep(1, nrow(com_table)), list(my_df[[col_to_row]],
+                                                  my_df[[col_to_col]]), sum)
   } else {
-    form = paste0(value, common)
+    my_mat = tapply(my_df[[value]], list(my_df[[col_to_row]],
+                                         my_df[[col_to_col]]), sum)
   }
-
-
-  # Transform to array
-  my_mat = xtabs(form, data = my_df, exclude = NULL)
-
-  # Change attributes to get a matrix
-  attr(my_mat, "call") = NULL
-  class(my_mat) = "matrix"
 
   return(my_mat)
 }
