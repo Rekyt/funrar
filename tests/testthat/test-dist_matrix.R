@@ -2,8 +2,11 @@ context("Compute Functional Distance Matrix")
 
 test_that("Returned object is a matrix", {
 
+  trait_df = data.frame(1:5, letters[1:5])
+  rownames(trait_df) = letters[1:5]
+
   # Object is matrix
-  expect_is(compute_dist_matrix(matrix(1:16, nrow = 4)), "matrix")
+  expect_is(compute_dist_matrix(trait_df), "matrix")
 
   # Error with string
   expect_error(compute_dist_matrix("j"))
@@ -15,14 +18,8 @@ test_that("Names in distance matrix named after rownames", {
                      trait_2 = as.factor(c("A", "A", "A", "B", "B")))
 
 
-  dist_mat = compute_dist_matrix(trait)
-
-
   # No rownames
   expect_warning(compute_dist_matrix(trait))
-
-  expect_identical(rownames(dist_mat), as.character(1:5))
-  expect_identical(colnames(dist_mat), as.character(1:5))
 
   # With defined rownames
   rownames(trait) = trait$sp
@@ -43,7 +40,7 @@ test_that("Distance matrix contains good values", {
 
   t_dist_mat = compute_dist_matrix(trait)
 
-  dist_mat = compute_dist_matrix(matrix(1:16, nrow = 4))
+  dist_mat = compute_dist_matrix(as.data.frame(matrix(1:16, nrow = 4)))
 
   # Null diagonal
   expect_equivalent(diag(dist_mat), rep(0, 4))
