@@ -69,13 +69,22 @@ test_that("Correct Di computation with different comm. without abundance",{
 
   correct_dist_mat[which(correct_dist_mat == 1)] = correct_dist$Di
 
-  expect_equivalent(correct_dist_mat,
-               as.table(pres_distinctiveness(valid_mat, dist_mat)))
+
+  # Good messages and warnings
 
   expect_message(distinctiveness(com_table, "species", "site", abund = NULL,
                                     dist_mat))
 
+  expect_message(pres_distinctiveness(valid_mat[-1, ], dist_mat))
+
+  expect_message(pres_distinctiveness(valid_mat, dist_mat[-1, -1]))
+
+
+  # Good Distinctiveness computations
   c_dist = distinctiveness(com_table, "species", "site", abund = NULL, dist_mat)
+
+  expect_equivalent(correct_dist_mat,
+                    as.table(pres_distinctiveness(valid_mat, dist_mat)))
 
   expect_equivalent(as.data.frame(c_dist), as.data.frame(correct_dist))
 })
