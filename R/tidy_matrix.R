@@ -41,7 +41,7 @@ tidy_to_matrix = function(my_df, col_to_row, col_to_col, col_value = NULL) {
   }
 
   if (is.null(col_value)) {
-    my_mat = tapply(rep(1, nrow(com_table)), list(my_df[[col_to_row]],
+    my_mat = tapply(rep(1, nrow(my_df)), list(my_df[[col_to_row]],
                                                   my_df[[col_to_col]]), sum)
   } else {
     my_mat = tapply(my_df[[col_value]], list(my_df[[col_to_row]],
