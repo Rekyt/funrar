@@ -19,6 +19,8 @@ test_that("Names in distance matrix named after rownames", {
 
 
   # No rownames
+  expect_warning(compute_dist_matrix(trait))
+
   expect_identical(rownames(dist_mat), as.character(1:5))
   expect_identical(colnames(dist_mat), as.character(1:5))
 
@@ -29,6 +31,8 @@ test_that("Names in distance matrix named after rownames", {
 
   expect_identical(rownames(dist_mat), rownames(trait))
   expect_identical(colnames(dist_mat), rownames(trait))
+
+
 })
 
 
