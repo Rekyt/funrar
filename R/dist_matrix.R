@@ -7,7 +7,11 @@
 #' names.
 #'
 #' @param traits_table A data frame of traits with species in row and traits in
-#'     columns, row names should be species names.
+#'     columns, row names should be species names,
+#'
+#' @param metric character vector in list \code{"c('gower', 'manhattan',
+#' euclidean')"} defining the type of distance to use
+#' (see\code{\link[cluster]{daisy}}).
 #'
 #' @return A Gower's distance matrix (Gower's 1961), columns and rows get same
 #'     names as \code{trait_table} row names. Be sure to give them consistent
@@ -25,7 +29,7 @@
 #' @aliases distance_matrix
 #' @importFrom dplyr %>%
 #' @export
-compute_dist_matrix = function(traits_table) {
+compute_dist_matrix = function(traits_table, metric = "gower") {
 
   if (is.null(rownames(traits_table)) ||
               rownames(traits_table) == as.character(1:nrow(traits_table))) {
@@ -35,7 +39,7 @@ compute_dist_matrix = function(traits_table) {
   }
 
   # Use Gower's distance to compute traits distance
-  dist_matrix = cluster::daisy(traits_table, metric = "gower") %>%
+  dist_matrix = cluster::daisy(traits_table, metric = metric) %>%
     as.matrix()
 
   return(dist_matrix)
