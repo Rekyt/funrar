@@ -37,6 +37,7 @@ test_that("Distance matrix contains good values", {
 
   trait = data.frame(sp = paste("sp", 1:5), trait_1 = 1:5,
                      trait_2 = as.factor(c("A", "A", "A", "B", "B")))
+  rownames(trait) = trait$sp
 
   t_dist_mat = compute_dist_matrix(trait)
 
