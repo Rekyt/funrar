@@ -5,11 +5,15 @@
 \alias{distance_matrix}
 \title{Functional Distance Matrix}
 \usage{
-compute_dist_matrix(traits_table)
+compute_dist_matrix(traits_table, metric = "gower")
 }
 \arguments{
 \item{traits_table}{A data frame of traits with species in row and traits in
-columns, row names should be species names.}
+columns, row names should be species names,}
+
+\item{metric}{character vector in list \code{"c('gower', 'manhattan',
+euclidean')"} defining the type of distance to use
+(see\code{\link[cluster]{daisy}}).}
 }
 \value{
 A Gower's distance matrix (Gower's 1961), columns and rows get same
@@ -17,9 +21,11 @@ A Gower's distance matrix (Gower's 1961), columns and rows get same
     row names.
 }
 \description{
-This function computes a Gower's Distance matrix of trait between each pair
-of species present in given 'traits_table', each row represents a species
-and each column a trait.
+Wrapper for \code{"daisy()"} function in \code{"cluster"} package, to compute
+distance matrix of trait between each pair of species present in given
+\code{"traits_table"}, each row represents a species and each column a trait.
+To be able to compute other distances trait table must have species as row
+names.
 }
 \examples{
 set.seed(1)  # For reproducibility
