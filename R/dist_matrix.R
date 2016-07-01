@@ -1,8 +1,10 @@
 #' Functional Distance Matrix
 #'
-#' This function computes a Gower's Distance matrix of trait between each pair
-#' of species present in given 'traits_table', each row represents a species
-#' and each column a trait.
+#' Wrapper for \code{"daisy()"} function in \code{"cluster"} package, to compute
+#' distance matrix of trait between each pair of species present in given
+#' \code{"traits_table"}, each row represents a species and each column a trait.
+#' To be able to compute other distances trait table must have species as row
+#' names.
 #'
 #' @param traits_table A data frame of traits with species in row and traits in
 #'     columns, row names should be species names.
