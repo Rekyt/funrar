@@ -137,7 +137,7 @@ distinctiveness = function(com_table, sp_col, com, abund = NULL, dist_matrix) {
 #' 'distictinctiveness()'
 #'
 #' @param pres_matrix a presence-absence matrix, with species in rows and sites
-#'      in columns (not containing relative abundances for the moments)
+#'      in columns (not containing relative abundances for the moment)
 #'
 #' @inheritParams uniqueness
 #'
@@ -148,24 +148,24 @@ distinctiveness = function(com_table, sp_col, com, abund = NULL, dist_matrix) {
 #' @export
 pres_distinctiveness = function(pres_matrix, dist_matrix) {
 
-  if (nrow(dist_matrix) > nrow(pres_matrix)) {
+  if (nrow(dist_matrix) > ncol(pres_matrix)) {
 
     message(paste("Distance matrix > Presence Matrix species",
             "Taking subset of distance matrix", sep = "\n"))
 
-    dist_matrix = dist_matrix[rownames(pres_matrix), rownames(pres_matrix)]
+    dist_matrix = dist_matrix[colnames(pres_matrix), colnames(pres_matrix)]
 
-  } else if (nrow(dist_matrix) < nrow(pres_matrix)) {
+  } else if (nrow(dist_matrix) < ncol(pres_matrix)) {
 
     message(paste("More species in site-species matrix than in provided ",
                   "distance matrix\n", "Taking subset of site-species matrix",
                   sep = ""))
 
-    pres_matrix = pres_matrix[rownames(dist_matrix),]
+    pres_matrix = pres_matrix[, rownames(dist_matrix)]
   }
 
   # Matrix product of distance matrix and presence absence matrix
-  index_matrix = dist_matrix %*% pres_matrix
+  index_matrix = pres_matrix %*% dist_matrix
 
 
 
@@ -173,18 +173,18 @@ pres_distinctiveness = function(pres_matrix, dist_matrix) {
   if (requireNamespace("Matrix", quietly = TRUE) & is(pres_matrix, "sparseMatrix")) {
     # Replace species not present in communities
     index_matrix[Matrix::which(pres_matrix == 0)] = NA
-    total_sites = Matrix::colSums(pres_matrix)
+    total_sites = Matrix::rowSums(pres_matrix)
 
   } else {
 
     # Replace species not present in communities
     index_matrix[which(pres_matrix == 0)] = NA
-    total_sites = colSums(pres_matrix)
+    total_sites = rowSums(pres_matrix)
   }
 
   # Subtract focal species value to site total
   # /!\ need to Transpose because applying function to row tranposes matrix
-  denom_matrix = t(apply(pres_matrix, 1, function(x) total_sites - x))
+  denom_matrix = apply(pres_matrix, 2, function(x) total_sites - x)
 
   index_matrix = index_matrix / denom_matrix
 
