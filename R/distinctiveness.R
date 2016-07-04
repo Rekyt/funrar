@@ -128,20 +128,39 @@ distinctiveness = function(com_table, sp_col, com, abund = NULL, dist_matrix) {
   return(com_distinctiveness)
 }
 
-#' Distinctiveness on presence/absence matrix
+#' Distinctiveness on presence/absence or relative abundances matrix
 #'
-#' Computes distinctiveness from a presence-absence matrix of species with a
-#' provided functional distance matrix.
+#' Computes distinctiveness from a presence-absence matrix (or a matrix with
+#' relative abundances) of species with provided functional distance matrix. The
+#' sites-species matrix should have \strong{sites} in \strong{rows} and
+#' \strong{species} in \strong{columns}, similar to \code{\link[vegan]{vegan}}
+#' package defaults.
 #'
-#' Experimental for the moment, should be merged with previous function
-#' 'distictinctiveness()'
-#'
-#' @param pres_matrix a presence-absence matrix, with species in rows and sites
-#'      in columns (not containing relative abundances for the moment)
+#' @param pres_matrix a presence-absence matrix (or relative abundances),
+#'    with sites in rows and species in columns
 #'
 #' @inheritParams uniqueness
 #'
-#' @return a similar matrix to presence-absence with distinctiveness at sites?
+#' @return a similar matrix from provided \code{pres_matrix}, species absent
+#'    from communities will have an \code{NA} value (\see{\link{Note}})
+#'
+#' @section Note:
+#'    Absent species should be coded by \code{0} or \code{NA} in input matrices.
+#'
+#'    When a species is alone in its community the functional distinctiveness
+#'    cannot be computed, thus the output matrix contains a value of \code{NaN}
+#'    distinctiveness.
+#'
+#' @details
+#'    The Functional Distinctiveness of a species is the average functional
+#'    distance from a species to all the other in the given community. It is
+#'    computed as such:
+#'    \deqn{
+#'    D_i = \frac{\sum_{j = 0, i \neq j}^N d_{ij}}{N-1},
+#'    }
+#'    with \eqn{D_i} the functional distinctiveness of species \eqn{i}, \eqn{N}
+#'    the total number of species in the community and \eqn{d_{ij}} the
+#'    functional distance between species \eqn{i} and species \eqn{j}.
 #'
 #' @importFrom dplyr %>% bind_rows
 #'
