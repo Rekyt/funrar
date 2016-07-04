@@ -44,13 +44,15 @@ restrictedness = function(com_table, com, species) {
   }
   
   # get the total number of communities
-  n_com <- length(unique(com_table$com))
+  n_com <- length(unique(com_table[, com]))
   
   # Compute the sum of all species' occurrences divided by n_com
-  occupancy <- table(com_table$species) / n_com
+  occupancy <- table(com_table[, species]) / n_com
   
   # Format occupancy in data.frame
   occupancy <- data.frame("sp" = names(occupancy), "Ri" = as.numeric(occupancy))
+  
+  occupancy$Ri <- 1 - occupancy$Ri
   
   return(occupancy)
 }
