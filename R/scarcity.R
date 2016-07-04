@@ -106,13 +106,13 @@ pres_scarcity = function(pres_matrix) {
   # Species with no relative abundance get a scarcity of 0
   scarcity_mat[scarcity_mat == 0] = NA
 
-  # Compute total of nb of species per site (= per column)
-  total_sites = apply(scarcity_mat, 2, function(x) sum(x != 0, na.rm = T))
+  # Compute total of nb of species per site (= per row)
+  total_sites = apply(scarcity_mat, 1, function(x) sum(x != 0, na.rm = T))
 
   # Scarcity for each per row using total abundance vector
-  scarcity_mat = apply(scarcity_mat, 1, function(x) {
+  scarcity_mat = apply(scarcity_mat, 2, function(x) {
     exp(-total_sites*log(2)*x)
   })
 
-  return(t(scarcity_mat))
+  return(scarcity_mat)
 }
