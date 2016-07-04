@@ -75,16 +75,16 @@ test_that("Correct Di computation with different comm. without abundance",{
   expect_message(distinctiveness(com_table, "species", "site", abund = NULL,
                                     dist_mat))
 
-  expect_message(pres_distinctiveness(valid_mat[-1, ], dist_mat))
+  expect_message(pres_distinctiveness(t(valid_mat[-1, ]), dist_mat))
 
-  expect_message(pres_distinctiveness(valid_mat, dist_mat[-1, -1]))
+  expect_message(pres_distinctiveness(t(valid_mat), dist_mat[-1, -1]))
 
 
   # Good Distinctiveness computations
   c_dist = distinctiveness(com_table, "species", "site", abund = NULL, dist_mat)
 
-  expect_equivalent(correct_dist_mat,
-                    as.table(pres_distinctiveness(valid_mat, dist_mat)))
+  expect_equivalent(t(correct_dist_mat),
+                    as.table(pres_distinctiveness(t(valid_mat), dist_mat)))
 
   expect_equivalent(as.data.frame(c_dist), as.data.frame(correct_dist))
 })
@@ -105,8 +105,8 @@ test_that("Distinctiveness is undefined for a community with a single species", 
 
   undef_dist_mat[which(undef_dist_mat == 1)] = undef_dist$Di
 
-  expect_equivalent(undef_dist_mat,
-                    as.table(pres_distinctiveness(small_mat, dist_mat)))
+  expect_equivalent(t(undef_dist_mat),
+                    as.table(pres_distinctiveness(t(small_mat), dist_mat)))
 })
 
 # Test for Uniqueness ---------------------------------------------------------
@@ -130,11 +130,12 @@ test_that("Correct Uniqueness computation", {
                       arrange(site),
                     all_ui)
 
-  expect_equal(ui_mat, pres_uniqueness(valid_mat, dist_mat))
+  expect_equal(t(ui_mat), pres_uniqueness(t(valid_mat), dist_mat))
 })
 
 
-# Test for Sparseness ---------------------------------------------------------
+
+# Test for Scarcity ------------------------------------------------------------
 
 
 test_that("Correct Scarcity computation", {
@@ -167,5 +168,5 @@ test_that("Correct Scarcity computation", {
                                           "site", "abund"))
 
   # Correct Sparseness computation for a site-species matrix
-  expect_equal(scarcity_mat, pres_scarcity(abund_mat))
+  expect_equal(t(scarcity_mat), pres_scarcity(t(abund_mat)))
 })
