@@ -26,5 +26,6 @@ Suggests: knitr,
     microbenchmark,
     ggplot2,
     reshape2,
-    Matrix
+    Matrix,
+    StatMatch
 VignetteBuilder: knitr

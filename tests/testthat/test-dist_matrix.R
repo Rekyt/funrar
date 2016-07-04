@@ -85,13 +85,17 @@ test_that("Different distances method give consistent results", {
 
   gow_mat = compute_dist_matrix(trait_df, metric = "gower")
 
-  gow_dist = StatMatch::gower.dist(trait_df)
-  rownames(gow_dist) = rownames(trait_df)
-  colnames(gow_dist) = rownames(trait_df)
+  if (requireNamespace("StatMatch", quietly = TRUE)) {
+
+    gow_dist = StatMatch::gower.dist(trait_df)
+    rownames(gow_dist) = rownames(trait_df)
+    colnames(gow_dist) = rownames(trait_df)
+
+    expect_equal(gow_mat, gow_dist)
+  }
 
   other_gow_dist = as.matrix(cluster::daisy(trait_df, "gower"))
 
   expect_equal(def_mat, gow_mat)
-  expect_equal(gow_mat, gow_dist)
   expect_equal(gow_mat, other_gow_dist)
 })
