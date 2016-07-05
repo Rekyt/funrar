@@ -25,8 +25,8 @@ Species traits and environmental variables are also available.
 # Functional rarity indices from the site-species matrix
 
 ```{r}
-library(ade4)
-data(aravo)
+
+data("aravo", package = "ade4")
 
 # Site-species matrix stored in aravo$spe
 mat <- as.matrix(aravo$spe)
