@@ -146,7 +146,7 @@ distinctiveness = function(com_table, sp_col, com, abund = NULL, dist_matrix) {
 #' @inheritParams uniqueness
 #'
 #' @return a similar matrix from provided \code{pres_matrix}, species absent
-#'    from communities will have an \code{NA} value (\see{\link{Note}})
+#'    from communities will have an \code{NA} value (see \link{Note})
 #'
 #' @section Note:
 #'    Absent species should be coded by \code{0} or \code{NA} in input matrices.
