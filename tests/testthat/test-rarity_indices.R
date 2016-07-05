@@ -112,30 +112,22 @@ test_that("Distinctiveness is undefined for a community with a single species", 
                     as.table(pres_distinctiveness(small_mat, dist_mat)))
 })
 
+
+
 # Test for Uniqueness ---------------------------------------------------------
 
 test_that("Correct Uniqueness computation", {
 
-  valid_ui = data_frame(site = as.character(rep("s1", 2)),
-                        species = as.character(c("a", "b")), Ui = c(1/9, 1/9))
+  valid_ui = data.frame(species = c("a", "b"), Ui = c(1/9, 1/9))
 
-  all_ui = bind_cols(com_table, data_frame(Ui = c(1/9, 1/9, 1/9, 4/9, 4/9, 1/9,
-                                                  4/9, 4/9, 4/9)))
-  ui_mat = valid_mat
-  ui_mat[ui_mat == 1] = all_ui %>%
-    arrange(species) %>%
-    .$Ui
-  ui_mat[ui_mat == 0] = NA
+  all_ui = data.frame(species = letters[1:4],
+                      Ui = c(1/9, 1/9, 4/9, 4/9))
 
-  expect_equivalent(as.tbl(uniqueness(com_table[1:2, ], "species", dist_mat)),
-                    valid_ui)
+  expect_equivalent(uniqueness(com_table[1:2, ], "species", dist_mat), valid_ui)
 
-  expect_equivalent(uniqueness(com_table, "species", dist_mat) %>%
-                      .[,c("site", "species", "Ui")] %>%
-                      arrange(site),
-                    all_ui)
+  expect_equivalent(uniqueness(com_table, "species", dist_mat), all_ui)
 
-  expect_equal(ui_mat, pres_uniqueness(valid_mat, dist_mat))
+  expect_equal(pres_uniqueness(valid_mat, dist_mat), all_ui)
 })
 
 

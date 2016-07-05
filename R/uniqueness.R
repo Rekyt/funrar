@@ -37,30 +37,32 @@
 #' @importFrom dplyr %>%
 #' @export
 uniqueness = function(com_table, sp_col, dist_matrix) {
-  
+
   if (!(sp_col %in% colnames(com_table))) {
     stop(paste0("'", sp_col, "' species column not in column names"))
   }
-  
+
   if (nrow(dist_matrix) != ncol(dist_matrix)) {
     stop("Distance matrix is not square.")
   }
-  
+
   # Extract all species in community
   com_species = as.character(unique(com_table[[sp_col]]))
-  
+
   # Submatrix containing distance of species in community
   com_dist = dist_matrix[com_species, com_species]
-  
+
   # Replace diagonal by 'NA' for computation reasons
   diag(com_dist) = NA
-  
+
   # Get minimum for each line
   u_index = apply(com_dist, 1, min, na.rm = T)
-  
+
   # Data frame of species name and uniqueness
-  u_df = data.frame("sp" = names(u_index), "Ui" = as.numeric(u_index))
-  
+  u_df = data.frame(sp = names(u_index), "Ui" = as.numeric(u_index))
+
+  colnames(u_df)[1] = sp_col
+
   return(u_df)
 }
 
@@ -84,12 +86,12 @@ pres_uniqueness = function(pres_matrix, dist_matrix) {
 
   # Replace diagonal by 'NA' for computation reasons
   diag(com_dist) = NA
-  
+
   # Get minimum distance for each species
   u_index = apply(com_dist, 1, min, na.rm = T)
 
   # Results in a data.frame
-  u_df = data.frame("sp" = names(u_index), "Ui" = as.numeric(u_index))
-  
+  u_df = data.frame("species" = names(u_index), "Ui" = as.numeric(u_index))
+
   return(u_df)
 }
