@@ -1,6 +1,6 @@
 ---
 title: "How to use funrar, an example with plant communities dataset."
-author: "Denelle Pierre & Grenié Matthias"
+author: "Denelle Pierre & Greni\u00e9 Matthias"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
@@ -25,8 +25,7 @@ Species traits and environmental variables are also available.
 # Functional rarity indices from the site-species matrix
 
 ```{r}
-library(ade4)
-data(aravo)
+data(aravo, package = "ade4")
 
 # Site-species matrix stored in aravo$spe
 mat <- as.matrix(aravo$spe)
@@ -84,11 +83,10 @@ Using `outlieR` distinctiveness values can be computed using function `distincti
 ```{r distinctivenessComputation}
 
 # Compute distinctiveness for each species on each site
-di = pres_distinctiveness(pres_matrix = t(mat),  # The site x species table
-                     dist_matrix = dist_mat)  # Functional Distance matrix
+di = pres_distinctiveness(pres_matrix = mat,  # The site x species table
+                       dist_matrix = dist_mat)  # Functional Distance matrix
 
 head(di)
-
 ```
 
 The syntax for `pres_distinctiveness()` is first the table and then the distance matrix. The function returns a site-species matrix filled with `Di` values, i.e. the species distinctiveness in each species per site combination.
@@ -98,7 +96,7 @@ For abundance weighted distinctiveness you need to have a column containing rela
 ```{r abundDist}
 
 # Compute distinctiveness for each species on each site
-di = pres_distinctiveness(pres_matrix = t(mat),  # The site x species table
+di = pres_distinctiveness(pres_matrix = mat,  # The site x species table
                      dist_matrix = dist_mat)  # Functional Distance matrix
 
 di[1:5, 1:5]
@@ -123,7 +121,7 @@ With `outlieR` it can be computed with `scarcity()` function with a syntax analo
 
 ```{r scarcityComp}
 
-si = pres_scarcity(pres_matrix = t(mat))
+si = pres_scarcity(pres_matrix = mat)
 
 si[1:5, 1:5]
 
@@ -147,7 +145,7 @@ with $U_i$ the uniqueness of species $i$, $d_{ij}$ the functional distance betwe
 
 ```{r uniqComp}
 
-ui = pres_uniqueness(t(mat), dist_mat)
+ui = pres_uniqueness(mat, dist_mat)
 
 ui[1:5, 1:5]
 
@@ -195,7 +193,7 @@ identical(as.numeric(tidy_to_matrix(dat, "site", "species", "value")), as.numeri
 
 Using `outlieR` distinctiveness values can be computed using function `distinctiveness()`:
 
-```{r distinctivenessComputation}
+```{r computeDi}
 
 # Species should be character
 dat$species = as.character(dat$species)
@@ -215,7 +213,7 @@ The syntax for `distinctiveness()` is first the table, then the name of the spec
 
 For abundance weighted distinctiveness you need to have a column containing relative abundances in your data frame as such:
 
-```{r abundDist}
+```{r abundDi}
 
 di_df = distinctiveness(dat, "species", "site", "value", dist_mat)
 
@@ -229,7 +227,7 @@ head(di_df)
 
 With `outlieR` it can be computed with `scarcity()` function with a syntax analog to `distinctiveness()`
 
-```{r scarcityComp}
+```{r siComp}
 
 si_df = scarcity(dat, "species", "site", "value")
 
@@ -242,7 +240,7 @@ head(si_df)
 
 `uniqueness()` follows a similar syntax, but beware that given community table and distance matrix should be given out of **regional species pool**. And the syntax is also similar:
 
-```{r uniqComp}
+```{r uiComp}
 
 ui_df = uniqueness(dat, "species", dist_mat)
 
