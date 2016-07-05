@@ -1,46 +1,61 @@
 ---
-title: "Use `outlieR` to compute Functional Rarity indices"
-author: "Matthias Greni\u00e9"
+title: "How to use funrar, an example with plant communities dataset."
+author: "Denelle Pierre & Grenié Matthias"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Use `outlieR` to compute Functional Rarity Indices}
+  %\VignetteIndexEntry{Vignette Title}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
 
-The idea of Functional Rarity is to measure two components of the rarity of a species (or an individual). Indeed, in community ecology, people are generally interested in the rarity of a species in terms of abundances. A species with a low abundance will be considered as rare. From a Functional Ecology perspective, this does not take into consideration the "role" that a given species plays in the ecosystem, its particular niche. A framework is being developed of various indices to characterize how this function could be rare locally or regionally.
+The idea of Functional Rarity is to measure two components of the rarity of a species (or an individual). Indeed, in community ecology, people are generally interested in the rarity of a species in terms of abundances. A species with a low abundance will be considered as rare. From a functional ecology perspective, this does not take into consideration the "role" that a given species plays in the ecosystem, its particular niche. A framework is being developed of various indices to characterize how this function could be rare locally or regionally
 
+In their article, Violle et al. introduced 4 indices to compute functional rarity indices. funrar package enables any user to compute them on any dataset.
 
-## Distance Matrix
+# Dataset example
 
-The indices rely on the computation of a distance matrix. It represents the functional distance between two species given a particular set of traits. From a species traits matrix you can easily compute a distance matrix using function `compute_dist_matrix()`:
+To show how the package works, We are using a dataset describing the distribution of 82 species of Alpine plants in 75 sites. This dataset was collected by Choler et al. and is presented in the following article.
 
-```{r distanceMatrix}
-library(outlieR)
-# Species X Traits table
-traits = data.frame(tr1 = 1:10, tr2 = rep(c(1, 0), each = 5), tr3 = rep(LETTERS[1:5], 2))
+Choler, P. (2005) Consistent shifts in Alpine plant traits along a mesotopographical gradient. Arctic,
+Antarctic, and Alpine Research, 37,444-453.
 
-rownames(traits) = paste0("sp", 1:10)
+Species traits and environmental variables are also available.
 
-# Distance Matrix
-dist_mat = compute_dist_matrix(traits)
+# Functional rarity indices from the site-species matrix
 
-dist_mat[1:5, 1:5]
+```{r}
+library(ade4)
+data(aravo)
+
+# Site-species matrix stored in aravo$spe
+mat <- as.matrix(aravo$spe)
+
 ```
 
+## Distance matrix computation
+
+The indices rely on the computation of a distance matrix. It represents the functional distance between two species given a particular set of traits. From a species traits matrix you can easily compute a distance matrix using function `compute_dist_matrix()`.
 
 In order to compute distance matrix, species names must be specified as **rownames** in the traits table. And they will be named similarly in the distance matrix. Species names must be characters and not factors.
 
 The function relies on the `daisy()` function from package `cluster` and the default metric is Gower's distance to take into account ordinal, categorical and binary traits.
 
+```{r}
+tra <- aravo$traits[, c("Height", "SLA", "N_mass")]
 
+library(outlieR)
 
-## Distinctiveness
+dist_mat <- compute_dist_matrix(tra)
+dist_mat[1:5, 1:5]
+
+```
+
+## Distinctiveness computation
 
 ### Formula
 
-The distinctiveness measure how a species is locally functionally rare. From given functional distances, it is computed as such:
+The distinctiveness measures how a species is locally functionally rare. From given functional distances, it is computed as such:
 
 $$
 D_i = \frac{\sum_{\substack{j = 1, \\
@@ -67,49 +82,31 @@ with the same terms as above, and $A_j$ the relative abundance of species $j$ in
 Using `outlieR` distinctiveness values can be computed using function `distinctiveness()`:
 
 ```{r distinctivenessComputation}
-# Species X Site Table
-species_list = rownames(traits)
-
-site_species = data.frame(species = c(species_list[-1],
-                                      species_list[seq(1, 9, 2)],
-                                      species_list[seq(2, 10, 2)]),
-                          site = c(rep("com1", 9),
-                                   rep(c("com2", "com3"), each = 5)))
-
-# Species should be character
-site_species$species = as.character(site_species$species)
 
 # Compute distinctiveness for each species on each site
-site_dist = distinctiveness(com_table = site_species,  # The site x species table
-                            sp_col = "species",  # Name of the species column
-                            com = "site",  # Name of the community column
-                            abund = NULL,  # Relative abundances column (facultative)
-                            dist_matrix = dist_mat)  # Functional Distance matrix
+di = pres_distinctiveness(pres_matrix = t(mat),  # The site x species table
+                     dist_matrix = dist_mat)  # Functional Distance matrix
 
-head(site_dist)
+head(di)
+
 ```
 
-The syntax for `distinctiveness()` is first the table, then the name of the species column, then the name of the community column, then eventually the name of the relative abundance column and finally the distance matrix. The function add a `Di` column giving the species distinctiveness in each species per site combination.
+The syntax for `pres_distinctiveness()` is first the table and then the distance matrix. The function returns a site-species matrix filled with `Di` values, i.e. the species distinctiveness in each species per site combination.
 
 For abundance weighted distinctiveness you need to have a column containing relative abundances in your data frame as such:
 
 ```{r abundDist}
-set.seed(1)  # For reproducibility
 
-# Generates vector that sums up to 1
-com1 = runif(9)
-com2 = runif(5)
-com3 = runif(5)
-site_species$abund = c(com1/sum(com1), com2/sum(com2), com3/sum(com3)) 
+# Compute distinctiveness for each species on each site
+di = pres_distinctiveness(pres_matrix = t(mat),  # The site x species table
+                     dist_matrix = dist_mat)  # Functional Distance matrix
 
-data_di = distinctiveness(site_species, "species", "site", "abund", dist_mat)
-head(data_di)
+di[1:5, 1:5]
+
 ```
 
 
-
-
-## Scarcity
+## Scarcity computation
 
 ### Formula
 
@@ -125,11 +122,14 @@ with $S_i$ the scarcity of species $i$, $N$ the number of species in the local c
 With `outlieR` it can be computed with `scarcity()` function with a syntax analog to `distinctiveness()`
 
 ```{r scarcityComp}
-scarcity(site_species, "species", "site", "abund")
+
+si = pres_scarcity(pres_matrix = t(mat))
+
+si[1:5, 1:5]
+
 ```
 
-
-
+## Uniqueness computation
 
 ## Uniqueness
 
@@ -146,7 +146,128 @@ with $U_i$ the uniqueness of species $i$, $d_{ij}$ the functional distance betwe
 `uniqueness()` follows a similar syntax, but beware that given community table and distance matrix should be given out of **regional species pool**. And the syntax is also similar:
 
 ```{r uniqComp}
-site_ui = uniqueness(site_species, "species", dist_mat)
-head(site_ui)
+
+ui = pres_uniqueness(t(mat), dist_mat)
+
+ui[1:5, 1:5]
+
 ```
+## Restrictedness computation
+
+The restrictedness measures how a species is regionally rare. The following function thus represents species' occupancy of the set of communities.
+
+$$
+R_i = 1 - N_i/N_tot
+$$
+
+with $R_i$ the restrictedness of species $i$, $N_i$ the number of sites where species $i$ is found and $N_tot$ the total number of sites.
+
+
+```{r}
+ri = pres_restrictedness(mat)
+
+head(ri)
+
+```
+
+# Functional rarity indices from a tidy data.frame
+
+In some cases, datasets are not formatting following the usual site-species matrix scheme and the information is presented in a data.frame.
+funrar package contains functions to compute the same four functional rarity indices as before but with a data.frame as an input.
+
+We also included functions to go from one format to the other.
+
+## Formatting the matrix into a data.frame
+
+```{r}
+
+dat <- matrix_to_tidy(mat, "value", "site", "species")
+
+# The reverse function is provided and gives the same original matrix
+identical(as.numeric(tidy_to_matrix(dat, "site", "species", "value")), as.numeric(mat))
+
+```
+
+
+## Distinctiveness computation
+
+### Computation
+
+Using `outlieR` distinctiveness values can be computed using function `distinctiveness()`:
+
+```{r distinctivenessComputation}
+
+# Species should be character
+dat$species = as.character(dat$species)
+
+# Compute distinctiveness for each species on each site
+di_df = distinctiveness(com_table = dat,  # The site x species table
+                            sp_col = "species",  # Name of the species column
+                            com = "site",  # Name of the community column
+                            abund = NULL,  # Relative abundances column (facultative)
+                            dist_matrix = dist_mat)  # Functional Distance matrix
+
+head(di_df)
+
+```
+
+The syntax for `distinctiveness()` is first the table, then the name of the species column, then the name of the community column, then eventually the name of the relative abundance column and finally the distance matrix. The function add a `Di` column giving the species distinctiveness in each species per site combination.
+
+For abundance weighted distinctiveness you need to have a column containing relative abundances in your data frame as such:
+
+```{r abundDist}
+
+di_df = distinctiveness(dat, "species", "site", "value", dist_mat)
+
+head(di_df)
+
+```
+
+## Scarcity computation
+
+### Computation
+
+With `outlieR` it can be computed with `scarcity()` function with a syntax analog to `distinctiveness()`
+
+```{r scarcityComp}
+
+si_df = scarcity(dat, "species", "site", "value")
+
+head(si_df)
+
+```
+## Uniqueness computation
+
+### Computation
+
+`uniqueness()` follows a similar syntax, but beware that given community table and distance matrix should be given out of **regional species pool**. And the syntax is also similar:
+
+```{r uniqComp}
+
+ui_df = uniqueness(dat, "species", dist_mat)
+
+head(ui_df)
+dim(ui_df[!duplicated(ui_df$species), ])
+
+```
+
+## Restrictedness computation
+
+### Computation
+
+```{r}
+
+# Species should be character
+dat$site = as.character(dat$site)
+
+ri_df = restrictedness(dat, "site", "species")
+
+head(ri_df)
+
+```
+
+```
+
+
+
 
