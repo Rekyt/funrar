@@ -2,7 +2,7 @@
 % Please edit documentation in R/scarcity.R
 \name{pres_scarcity}
 \alias{pres_scarcity}
-\title{Distinctiveness on presence/absence matrix}
+\title{Scarcity on relative abundances matrix}
 \usage{
 pres_scarcity(pres_matrix)
 }
@@ -11,13 +11,22 @@ pres_scarcity(pres_matrix)
 in columns (not containing relative abundances for the moments)}
 }
 \value{
-a similar matrix to presence-absence with scarcity values
+a similar matrix to \code{pres_matrix} with scarcity values
 }
 \description{
-Computes scarcity from a relative abundance matrix of species.
+Computes scarcity from a relative abundance matrix of species. Scarcity
+is close to one when a species has a very low relative abundance in its
+community. See \link{Details} for the formula.
 }
 \details{
-Experimental for the moment, should be merged with previous function
-'scarcity()'
+The scarcity of species is computed as follow:
+    \deqn{
+     S_i = \exp{-N \log{2} A_i},
+    } with \eqn{S_i} the scarcity of species \eqn{i}, \eqn{N} the total
+    number of species in the community and \eqn{A_i} the relative abundance
+    of species \eqn{i} in the community. Scarcity is thus a measure of the
+    \strong{local} rarity in terms of abundances. If \eqn{S_i} is close to 1
+    the species has a very low abundances while if it's close to 0, it is
+    quite abundant in the community.
 }
 

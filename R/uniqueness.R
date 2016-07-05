@@ -68,13 +68,13 @@ uniqueness = function(com_table, sp_col, dist_matrix) {
     return(com_table)
 }
 
-#' Uniqueness for Presence/Absence matrix
+#' Uniqueness for presence/Aasence matrix
 #'
 #' Computes uniqueness from a presence-absence matrix of species with a
-#' provided functional distance matrix.
-#'
-#' Experimental for the moment, should be merged with previous function
-#' 'uniqueness()'
+#' provided functional distance matrix. The
+#' sites-species matrix should have \strong{sites} in \strong{rows} and
+#' \strong{species} in \strong{columns}, similar to \code{\link[vegan]{vegan}}
+#' package defaults.
 #'
 #' @inheritParams pres_distinctiveness
 #'

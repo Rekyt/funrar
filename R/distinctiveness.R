@@ -65,9 +65,11 @@ single_com_dist = function(com_table, species, abund = NULL, dist_matrix) {
   return(com_table)
 }
 
-#' Distinctiveness
+#' Table Functional Distinctiveness
 #'
-#' Compute distinctiveness for several communities.
+#' Compute Functional Distinctiveness for several communities, from a data.frame
+#' of communities, with one column for species identity, one for community
+#' identity and an optional one for relative abundances.
 #'
 #' @inheritParams uniqueness
 #'
@@ -79,6 +81,8 @@ single_com_dist = function(com_table, species, abund = NULL, dist_matrix) {
 #'     relative abundances.
 #'
 #' @return a table similar to \code{com_table} with an added column \eqn{D_i}
+#'     giving the Functional Distinctiveness of each species in each communities
+#'
 #' @export
 distinctiveness = function(com_table, sp_col, com, abund = NULL, dist_matrix) {
 

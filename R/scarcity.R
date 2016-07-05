@@ -24,7 +24,7 @@ single_com_scar = function(com_table, species, abund) {
 
 #' Scarcity
 #'
-#' Compute sparness values for several communities. Scarcity is computed per
+#' Compute scarcity values for several communities. Scarcity is computed per
 #' community. Scarcity corresponds to the rareness of a given species in
 #' terms of abundances, as such:
 #' \deqn{
@@ -32,18 +32,19 @@ single_com_scar = function(com_table, species, abund) {
 #' }
 #' with \eqn{S_i} the scarcity of species \eqn{i}, \eqn{N} the number of
 #' species present in the given community and \eqn{A_i} the relative abundance
-#' (in %%) of species \eqn{i}.
+#' (in \%) of species \eqn{i}.
 #'
-#' @param com_table a data frame a tidy version of species in occurences in
+#' @param com_table a data frame of species in occurences in
 #'     communities.
 #'
 #' @param species a character vector indicating the column of species in
 #'     \code{com_table}
 #'
-#' @param com a character vector indicating the column name of communities ID
+#' @param com a character vector indicating the column name of communities ID in
+#'     \code{com_table}
 #'
 #' @param abund a character vector indicating the column name of the relative
-#'     abundances of species
+#'     abundances of species in \code{com_table}
 #'
 #' @return The same table as \code{com_table} with an added \eqn{S_i} column
 #'     for Scarcity values.
@@ -86,18 +87,27 @@ scarcity = function(com_table, species, com, abund) {
   return(com_scarcity)
 }
 
-#' Distinctiveness on presence/absence matrix
+#' Scarcity on relative abundances matrix
 #'
-#' Computes scarcity from a relative abundance matrix of species.
-#'
-#' Experimental for the moment, should be merged with previous function
-#' 'scarcity()'
+#' Computes scarcity from a relative abundance matrix of species. Scarcity
+#' is close to one when a species has a very low relative abundance in its
+#' community. See \link{Details} for the formula.
 #'
 #' @param pres_matrix a presence-absence matrix, with species in rows and sites
 #'      in columns (not containing relative abundances for the moments)
 #'
 #'
-#' @return a similar matrix to presence-absence with scarcity values
+#' @return a similar matrix to \code{pres_matrix} with scarcity values
+#'
+#' @details The scarcity of species is computed as follow:
+#'     \deqn{
+#'      S_i = \exp{-N \log{2} A_i},
+#'     } with \eqn{S_i} the scarcity of species \eqn{i}, \eqn{N} the total
+#'     number of species in the community and \eqn{A_i} the relative abundance
+#'     of species \eqn{i} in the community. Scarcity is thus a measure of the
+#'     \strong{local} rarity in terms of abundances. If \eqn{S_i} is close to 1
+#'     the species has a very low abundances while if it's close to 0, it is
+#'     quite abundant in the community.
 #'
 #' @export
 pres_scarcity = function(pres_matrix) {
