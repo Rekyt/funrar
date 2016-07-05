@@ -13,7 +13,7 @@ with sites in rows and species in columns}
 \item{dist_matrix}{a functional distance matrix}
 }
 \value{
-a similar matrix to presence-absence with uniqueness values
+a data frame with uniqueness value per species
 }
 \description{
 Computes uniqueness from a presence-absence matrix of species with a

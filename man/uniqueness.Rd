@@ -15,8 +15,7 @@ in the \code{com_table} data frame}
 \item{dist_matrix}{a functional distance matrix}
 }
 \value{
-the same table as \code{com_table} with an added column called
-    \eqn{U_i} for the uniqueness.
+a data frame with uniqueness value per species
 }
 \description{
 Computes Uniqueness values over a given regional pool.
