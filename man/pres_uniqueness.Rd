@@ -2,13 +2,13 @@
 % Please edit documentation in R/uniqueness.R
 \name{pres_uniqueness}
 \alias{pres_uniqueness}
-\title{Uniqueness for Presence/Absence matrix}
+\title{Uniqueness for presence/Aasence matrix}
 \usage{
 pres_uniqueness(pres_matrix, dist_matrix)
 }
 \arguments{
-\item{pres_matrix}{a presence-absence matrix, with species in rows and sites
-in columns (not containing relative abundances for the moment)}
+\item{pres_matrix}{a presence-absence matrix (or relative abundances),
+with sites in rows and species in columns}
 
 \item{dist_matrix}{a functional distance matrix}
 }
@@ -17,10 +17,9 @@ a similar matrix to presence-absence with uniqueness values
 }
 \description{
 Computes uniqueness from a presence-absence matrix of species with a
-provided functional distance matrix.
-}
-\details{
-Experimental for the moment, should be merged with previous function
-'uniqueness()'
+provided functional distance matrix. The
+sites-species matrix should have \strong{sites} in \strong{rows} and
+\strong{species} in \strong{columns}, similar to \code{\link[vegan]{vegan}}
+package defaults.
 }
 

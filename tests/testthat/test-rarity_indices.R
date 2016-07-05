@@ -6,25 +6,25 @@ context("Functional Rarity Indices")
 
 # Empty Matrix
 empty_mat = matrix(rep(0, 4), ncol = 2)
-colnames(empty_mat) = paste0("s", 1:2)
-rownames(empty_mat) = letters[1:2]
+rownames(empty_mat) = paste0("s", 1:2)
+colnames(empty_mat) = letters[1:2]
 
 # Valid Presence-Absence Matrix
-valid_mat = matrix(c(1, 1, 0, 0,
+valid_mat = matrix(c(1, 0, 0, 0,
+                     rep(1, 3), 0,
                      0, rep(1, 3),
-                     0, 1, 1, 0,
-                     0, 0, 1, 1),
+                     0, 1, 0, 1),
                    ncol = 4)
 
-colnames(valid_mat) = paste0("s", 1:4)
-rownames(valid_mat) = letters[1:4]
+rownames(valid_mat) = paste0("s", 1:4)
+colnames(valid_mat) = letters[1:4]
 
 # Community Table
 log_mat = (valid_mat == 1)
 
 
-com_table = lapply(colnames(log_mat), function(x) {
-  species = rownames(valid_mat)[log_mat[, x]]
+com_table = lapply(rownames(log_mat), function(x) {
+  species = colnames(valid_mat)[log_mat[x, ]]
   data.frame(site = rep(x, length(species)), species = species)
 }) %>%
   bind_rows()
@@ -61,9 +61,11 @@ test_that("Correct Di computation with different comm. without abundance",{
                                        4/9)),
                            .Names = c("site", "species", "Di"),
                            row.names = c(NA, -9L), class = c("tbl_df", "tbl",
-                                                             "data.frame"))
+                                                             "data.frame")) %>%
+    # Forced to arrange by species to specify for distinctiveness matrix
+    arrange(species)
 
-  correct_dist_mat = table(correct_dist$species, correct_dist$site)
+  correct_dist_mat = table(correct_dist$site, correct_dist$species)
 
   correct_dist_mat[which(correct_dist_mat == 0)] = NA_real_
 
@@ -75,7 +77,7 @@ test_that("Correct Di computation with different comm. without abundance",{
   expect_message(distinctiveness(com_table, "species", "site", abund = NULL,
                                     dist_mat))
 
-  expect_message(pres_distinctiveness(valid_mat[-1, ], dist_mat))
+  expect_message(pres_distinctiveness(valid_mat[, -1], dist_mat))
 
   expect_message(pres_distinctiveness(valid_mat, dist_mat[-1, -1]))
 
@@ -86,26 +88,27 @@ test_that("Correct Di computation with different comm. without abundance",{
   expect_equivalent(correct_dist_mat,
                     as.table(pres_distinctiveness(valid_mat, dist_mat)))
 
-  expect_equivalent(as.data.frame(c_dist), as.data.frame(correct_dist))
+  expect_equivalent(as.data.frame(c_dist), as.data.frame(correct_dist) %>%
+                      arrange(site))
 })
 
 
 test_that("Distinctiveness is undefined for a community with a single species", {
 
   small_mat = matrix(c(1, 0, 0, 1), nrow = 2)
-  rownames(small_mat) = letters[1:2]
-  colnames(small_mat) = c("s1", "s2")
+  colnames(small_mat) = letters[1:2]
+  rownames(small_mat) = c("s1", "s2")
 
   undef_dist = data_frame(site = c("s1", "s2"), species = c("a", "b"),
                           Di = rep(NaN, 2))
 
-  undef_dist_mat = table(undef_dist$species, undef_dist$site)
+  undef_dist_mat = table(undef_dist$site, undef_dist$species)
 
   undef_dist_mat[which(undef_dist_mat == 0)] = NA_real_
 
   undef_dist_mat[which(undef_dist_mat == 1)] = undef_dist$Di
 
-  expect_equivalent(undef_dist_mat,
+  expect_equivalent(t(undef_dist_mat),
                     as.table(pres_distinctiveness(small_mat, dist_mat)))
 })
 
@@ -119,7 +122,9 @@ test_that("Correct Uniqueness computation", {
   all_ui = bind_cols(com_table, data_frame(Ui = c(1/9, 1/9, 1/9, 4/9, 4/9, 1/9,
                                                   4/9, 4/9, 4/9)))
   ui_mat = valid_mat
-  ui_mat[ui_mat == 1] = all_ui$Ui
+  ui_mat[ui_mat == 1] = all_ui %>%
+    arrange(species) %>%
+    .$Ui
   ui_mat[ui_mat == 0] = NA
 
   expect_equivalent(as.tbl(uniqueness(com_table[1:2, ], "species", dist_mat)),
@@ -134,7 +139,8 @@ test_that("Correct Uniqueness computation", {
 })
 
 
-# Test for Sparseness ---------------------------------------------------------
+
+# Test for Scarcity ------------------------------------------------------------
 
 
 test_that("Correct Scarcity computation", {
@@ -142,11 +148,13 @@ test_that("Correct Scarcity computation", {
                                                            0.2, 0.5, 0.5, 0.2,
                                                            0.8)))
   abund_mat = valid_mat
-  abund_mat[abund_mat == 1] = com_table_ex$abund
+  abund_mat[abund_mat == 1] = com_table_ex %>%
+    arrange(species) %>%
+    .$abund
 
-  scarcity_mat = apply(abund_mat, 2, function(x) {
+  scarcity_mat = apply(abund_mat, 1, function(x) {
     ifelse(x != 0, exp(-sum(x != 0)*log(2)*x), NA)
-    })
+    }) %>% t()
 
   com_scarcity = com_table_ex %>%
     group_by(site) %>%

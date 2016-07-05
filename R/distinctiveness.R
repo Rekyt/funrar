@@ -65,9 +65,11 @@ single_com_dist = function(com_table, species, abund = NULL, dist_matrix) {
   return(com_table)
 }
 
-#' Distinctiveness
+#' Table Functional Distinctiveness
 #'
-#' Compute distinctiveness for several communities.
+#' Compute Functional Distinctiveness for several communities, from a data.frame
+#' of communities, with one column for species identity, one for community
+#' identity and an optional one for relative abundances.
 #'
 #' @inheritParams uniqueness
 #'
@@ -79,6 +81,8 @@ single_com_dist = function(com_table, species, abund = NULL, dist_matrix) {
 #'     relative abundances.
 #'
 #' @return a table similar to \code{com_table} with an added column \eqn{D_i}
+#'     giving the Functional Distinctiveness of each species in each communities
+#'
 #' @export
 distinctiveness = function(com_table, sp_col, com, abund = NULL, dist_matrix) {
 
@@ -128,44 +132,63 @@ distinctiveness = function(com_table, sp_col, com, abund = NULL, dist_matrix) {
   return(com_distinctiveness)
 }
 
-#' Distinctiveness on presence/absence matrix
+#' Distinctiveness on presence/absence or relative abundances matrix
 #'
-#' Computes distinctiveness from a presence-absence matrix of species with a
-#' provided functional distance matrix.
+#' Computes distinctiveness from a presence-absence matrix (or a matrix with
+#' relative abundances) of species with provided functional distance matrix. The
+#' sites-species matrix should have \strong{sites} in \strong{rows} and
+#' \strong{species} in \strong{columns}, similar to \code{\link[vegan]{vegan}}
+#' package defaults.
 #'
-#' Experimental for the moment, should be merged with previous function
-#' 'distictinctiveness()'
-#'
-#' @param pres_matrix a presence-absence matrix, with species in rows and sites
-#'      in columns (not containing relative abundances for the moments)
+#' @param pres_matrix a presence-absence matrix (or relative abundances),
+#'    with sites in rows and species in columns
 #'
 #' @inheritParams uniqueness
 #'
-#' @return a similar matrix to presence-absence with distinctiveness at sites?
+#' @return a similar matrix from provided \code{pres_matrix}, species absent
+#'    from communities will have an \code{NA} value (\see{\link{Note}})
+#'
+#' @section Note:
+#'    Absent species should be coded by \code{0} or \code{NA} in input matrices.
+#'
+#'    When a species is alone in its community the functional distinctiveness
+#'    cannot be computed, thus the output matrix contains a value of \code{NaN}
+#'    distinctiveness.
+#'
+#' @details
+#'    The Functional Distinctiveness of a species is the average functional
+#'    distance from a species to all the other in the given community. It is
+#'    computed as such:
+#'    \deqn{
+#'    D_i = \frac{\sum_{j = 0, i \neq j}^N d_{ij}}{N-1},
+#'    }
+#'    with \eqn{D_i} the functional distinctiveness of species \eqn{i}, \eqn{N}
+#'    the total number of species in the community and \eqn{d_{ij}} the
+#'    functional distance between species \eqn{i} and species \eqn{j}.
 #'
 #' @importFrom dplyr %>% bind_rows
 #'
 #' @export
 pres_distinctiveness = function(pres_matrix, dist_matrix) {
 
-  if (nrow(dist_matrix) > nrow(pres_matrix)) {
+  if (nrow(dist_matrix) > ncol(pres_matrix)) {
 
     message(paste("Distance matrix > Presence Matrix species",
             "Taking subset of distance matrix", sep = "\n"))
 
-    dist_matrix = dist_matrix[rownames(pres_matrix), rownames(pres_matrix)]
+    dist_matrix = dist_matrix[colnames(pres_matrix), colnames(pres_matrix)]
 
-  } else if (nrow(dist_matrix) < nrow(pres_matrix)) {
+  } else if (nrow(dist_matrix) < ncol(pres_matrix)) {
 
     message(paste("More species in site-species matrix than in provided ",
                   "distance matrix\n", "Taking subset of site-species matrix",
                   sep = ""))
 
-    pres_matrix = pres_matrix[rownames(dist_matrix),]
+    pres_matrix = pres_matrix[, rownames(dist_matrix)]
   }
 
   # Matrix product of distance matrix and presence absence matrix
-  index_matrix = dist_matrix %*% pres_matrix
+  index_matrix = pres_matrix %*% dist_matrix
 
 
 
@@ -173,18 +196,18 @@ pres_distinctiveness = function(pres_matrix, dist_matrix) {
   if (requireNamespace("Matrix", quietly = TRUE) & is(pres_matrix, "sparseMatrix")) {
     # Replace species not present in communities
     index_matrix[Matrix::which(pres_matrix == 0)] = NA
-    total_sites = Matrix::colSums(pres_matrix)
+    total_sites = Matrix::rowSums(pres_matrix)
 
   } else {
 
     # Replace species not present in communities
     index_matrix[which(pres_matrix == 0)] = NA
-    total_sites = colSums(pres_matrix)
+    total_sites = rowSums(pres_matrix)
   }
 
   # Subtract focal species value to site total
   # /!\ need to Transpose because applying function to row tranposes matrix
-  denom_matrix = t(apply(pres_matrix, 1, function(x) total_sites - x))
+  denom_matrix = apply(pres_matrix, 2, function(x) total_sites - x)
 
   index_matrix = index_matrix / denom_matrix
 

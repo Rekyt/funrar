@@ -2,7 +2,7 @@
 % Please edit documentation in R/distinctiveness.R
 \name{distinctiveness}
 \alias{distinctiveness}
-\title{Distinctiveness}
+\title{Table Functional Distinctiveness}
 \usage{
 distinctiveness(com_table, sp_col, com, abund = NULL, dist_matrix)
 }
@@ -23,8 +23,11 @@ relative abundances.}
 }
 \value{
 a table similar to \code{com_table} with an added column \eqn{D_i}
+    giving the Functional Distinctiveness of each species in each communities
 }
 \description{
-Compute distinctiveness for several communities.
+Compute Functional Distinctiveness for several communities, from a data.frame
+of communities, with one column for species identity, one for community
+identity and an optional one for relative abundances.
 }
 
