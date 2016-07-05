@@ -16,8 +16,7 @@
 #' @param dist_matrix a functional distance matrix
 #'
 #'
-#' @return the same table as \code{com_table} with an added column called
-#'     \eqn{U_i} for the uniqueness.
+#' @return a data frame with uniqueness value per species
 #'
 #'
 #' @examples
@@ -38,34 +37,31 @@
 #' @importFrom dplyr %>%
 #' @export
 uniqueness = function(com_table, sp_col, dist_matrix) {
-
-    if (!(sp_col %in% colnames(com_table))) {
-        stop(paste0("'", sp_col, "' species column not in column names"))
-    }
-
-    if (nrow(dist_matrix) != ncol(dist_matrix)) {
-        stop("Distance matrix is not square.")
-    }
-
-    # Extract all species in community
-    com_species = as.character(unique(com_table[[sp_col]]))
-
-    # Submatrix containing distance of species in community
-    com_dist = dist_matrix[com_species, com_species]
-
-    # Replace diagonal by 'NA' for computation reasons
-    diag(com_dist) = NA
-
-    # Get minimum for each line
-    u_index = apply(com_dist, 1, min, na.rm = T)
-
-    # Data frame of species name and uniqueness
-    u_df = data.frame(sp_name = names(u_index), Ui = u_index)
-
-    # Add Uniqueness column by species
-    com_table = merge(com_table, u_df, by.x = sp_col, by.y = "sp_name")
-
-    return(com_table)
+  
+  if (!(sp_col %in% colnames(com_table))) {
+    stop(paste0("'", sp_col, "' species column not in column names"))
+  }
+  
+  if (nrow(dist_matrix) != ncol(dist_matrix)) {
+    stop("Distance matrix is not square.")
+  }
+  
+  # Extract all species in community
+  com_species = as.character(unique(com_table[[sp_col]]))
+  
+  # Submatrix containing distance of species in community
+  com_dist = dist_matrix[com_species, com_species]
+  
+  # Replace diagonal by 'NA' for computation reasons
+  diag(com_dist) = NA
+  
+  # Get minimum for each line
+  u_index = apply(com_dist, 1, min, na.rm = T)
+  
+  # Data frame of species name and uniqueness
+  u_df = data.frame("sp" = names(u_index), "Ui" = as.numeric(u_index))
+  
+  return(u_df)
 }
 
 #' Uniqueness for presence/Aasence matrix
@@ -79,7 +75,7 @@ uniqueness = function(com_table, sp_col, dist_matrix) {
 #' @inheritParams pres_distinctiveness
 #'
 #'
-#' @return a similar matrix to presence-absence with uniqueness values
+#' @return a data frame with uniqueness value per species
 #'
 #' @export
 pres_uniqueness = function(pres_matrix, dist_matrix) {
@@ -88,13 +84,12 @@ pres_uniqueness = function(pres_matrix, dist_matrix) {
 
   # Replace diagonal by 'NA' for computation reasons
   diag(com_dist) = NA
-
+  
   # Get minimum distance for each species
   u_index = apply(com_dist, 1, min, na.rm = T)
 
-  uniqueness_mat = apply(pres_matrix, 1, function(x) {
-    ifelse(x == 0, NA, u_index)
-  })
-
-  return(t(uniqueness_mat))
+  # Results in a data.frame
+  u_df = data.frame("sp" = names(u_index), "Ui" = as.numeric(u_index))
+  
+  return(u_df)
 }
