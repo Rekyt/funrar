@@ -16,7 +16,9 @@ LazyData: true
 Imports:
     cluster,
     dplyr (>= 0.4.3),
-    moments
+    moments,
+    methods,
+    stats
 URL: https://github.com/Rekyt/outlieR
 BugReports: https://github.com/Rekyt/outlieR/issues
 RoxygenNote: 5.0.1

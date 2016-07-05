@@ -167,6 +167,7 @@ distinctiveness = function(com_table, sp_col, com, abund = NULL, dist_matrix) {
 #'    functional distance between species \eqn{i} and species \eqn{j}.
 #'
 #' @importFrom dplyr %>% bind_rows
+#' @importFrom methods is
 #'
 #' @export
 pres_distinctiveness = function(pres_matrix, dist_matrix) {
@@ -193,7 +194,8 @@ pres_distinctiveness = function(pres_matrix, dist_matrix) {
 
 
   # Compute sum of relative abundances
-  if (requireNamespace("Matrix", quietly = TRUE) & is(pres_matrix, "sparseMatrix")) {
+  if (requireNamespace("Matrix", quietly = TRUE) &
+      is(pres_matrix, "sparseMatrix")) {
     # Replace species not present in communities
     index_matrix[Matrix::which(pres_matrix == 0)] = NA
     total_sites = Matrix::rowSums(pres_matrix)

@@ -70,6 +70,8 @@ tidy_to_matrix = function(my_df, col_to_row, col_to_col, col_value = NULL) {
 #'     data.frame corresponding to columns in matrix (default: corresponding
 #'     dimension name)
 #'
+#' @importFrom stats na.exclude
+#'
 #' @export
 matrix_to_tidy = function(my_mat, value_col = "value",
                           row_to_col = names(dimnames(my_mat))[1],
