@@ -14,7 +14,7 @@ with sites in rows and species in columns}
 }
 \value{
 a similar matrix from provided \code{pres_matrix}, species absent
-   from communities will have an \code{NA} value (see \link{Note})
+   from communities will have an \code{NA} value (see \code{Note} section)
 }
 \description{
 Computes distinctiveness from a presence-absence matrix (or a matrix with

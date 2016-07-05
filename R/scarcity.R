@@ -91,7 +91,7 @@ scarcity = function(com_table, species, com, abund) {
 #'
 #' Computes scarcity from a relative abundance matrix of species. Scarcity
 #' is close to one when a species has a very low relative abundance in its
-#' community. See \link{Details} for the formula.
+#' community. See \code{Details} section for the formula.
 #'
 #' @param pres_matrix a presence-absence matrix, with species in rows and sites
 #'      in columns (not containing relative abundances for the moments)

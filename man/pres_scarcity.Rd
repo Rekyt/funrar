@@ -16,7 +16,7 @@ a similar matrix to \code{pres_matrix} with scarcity values
 \description{
 Computes scarcity from a relative abundance matrix of species. Scarcity
 is close to one when a species has a very low relative abundance in its
-community. See \link{Details} for the formula.
+community. See \code{Details} section for the formula.
 }
 \details{
 The scarcity of species is computed as follow:
