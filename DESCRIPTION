@@ -29,5 +29,6 @@ Suggests: knitr,
     ggplot2,
     reshape2,
     Matrix,
-    StatMatch
+    StatMatch,
+    ade4
 VignetteBuilder: knitr
