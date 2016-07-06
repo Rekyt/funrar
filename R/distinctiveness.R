@@ -215,8 +215,10 @@ pres_distinctiveness = function(pres_matrix, dist_matrix) {
 
   index_matrix = index_matrix / denom_matrix
 
-  if (!all(is.na(index_matrix) | is.numeric(index_matrix))) {
-    warning("Some communities had a single species in them\nComputed value assigned to 'NaN'")
+  # Test if there is no NaN in the table for species alone in their community
+  if (!all(sapply(index_matrix, function(x) is.numeric(x) | is.na(x)))) {
+    warning(paste0("Some communities had a single species in them",
+                   "Computed value assigned to 'NaN'", sep = "\n"))
   }
 
 
