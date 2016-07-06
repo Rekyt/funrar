@@ -2,6 +2,7 @@
 
 export(compute_dist_matrix)
 export(distinctiveness)
+export(funrar)
 export(matrix_to_tidy)
 export(pres_distinctiveness)
 export(pres_restrictedness)
