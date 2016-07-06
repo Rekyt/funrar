@@ -24,8 +24,6 @@ my_mat = matrix(sample(c(0, 0, 0, 0, 0, 0, 1), replace = TRUE, size = 200000),
 colnames(my_mat) = paste0("sp", 1:ncol(my_mat))
 rownames(my_mat) = paste0("site", 1:nrow(my_mat))
 
-dimnames(my_mat) = c("site", "species")
-
 my_mat[1:5, 1:5]
 ```
 
