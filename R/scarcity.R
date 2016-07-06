@@ -29,6 +29,8 @@ single_com_scar = function(com_table, species, abund) {
 #' terms of abundances, as such:
 #' \deqn{
 #'  S_i = \exp(-N\log{2}A_i),
+#' }{%
+#'  S_i = exp^(-N*ln2*A_i),
 #' }
 #' with \eqn{S_i} the scarcity of species \eqn{i}, \eqn{N} the number of
 #' species present in the given community and \eqn{A_i} the relative abundance
@@ -102,7 +104,9 @@ scarcity = function(com_table, species, com, abund) {
 #' @details The scarcity of species is computed as follow:
 #'     \deqn{
 #'      S_i = \exp{-N \log{2} A_i},
-#'     } with \eqn{S_i} the scarcity of species \eqn{i}, \eqn{N} the total
+#'     }{%
+#'      S_i = exp^(-N*ln2*A_i),
+#'      } with \eqn{S_i} the scarcity of species \eqn{i}, \eqn{N} the total
 #'     number of species in the community and \eqn{A_i} the relative abundance
 #'     of species \eqn{i} in the community. Scarcity is thus a measure of the
 #'     \strong{local} rarity in terms of abundances. If \eqn{S_i} is close to 1

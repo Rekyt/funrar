@@ -29,9 +29,11 @@ The Functional Distinctiveness of a species is the average functional
    computed as such:
    \deqn{
    D_i = \frac{\sum_{j = 0, i \neq j}^N d_{ij}}{N-1},
+   }{%
+   D_i = ( \Sigma_(j = 0, i != j)^N d_ij) / (N - 1),
    }
    with \eqn{D_i} the functional distinctiveness of species \eqn{i}, \eqn{N}
-   the total number of species in the community and \eqn{d_{ij}} the
+   the total number of species in the community and \eqn{d_{ij}}{d_ij} the
    functional distance between species \eqn{i} and species \eqn{j}.
 }
 \section{Note}{

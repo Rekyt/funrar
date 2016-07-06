@@ -22,9 +22,9 @@ Computes Uniqueness values over a given regional pool.
 The uniqueness value of a single species is equal to the
 minimum functional distance with all other species in the regional pool. The
 formula is as such:
-\deqn{U_i = \min(d_{ij}),}
-with \eqn{d_{ij}} the functional distance between species \eqn{i} and
-\eqn{j}.
+\deqn{U_i = \min(d_{ij}),}{Ui = min(d_ij),}
+with \eqn{d_{ij}}{d_ij} the functional distance between species
+\eqn{i} and \eqn{j}.
 }
 \examples{
 set.seed(1)

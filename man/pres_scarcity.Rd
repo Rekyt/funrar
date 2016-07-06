@@ -22,7 +22,9 @@ community. See \code{Details} section for the formula.
 The scarcity of species is computed as follow:
     \deqn{
      S_i = \exp{-N \log{2} A_i},
-    } with \eqn{S_i} the scarcity of species \eqn{i}, \eqn{N} the total
+    }{%
+     S_i = exp^(-N*ln2*A_i),
+     } with \eqn{S_i} the scarcity of species \eqn{i}, \eqn{N} the total
     number of species in the community and \eqn{A_i} the relative abundance
     of species \eqn{i} in the community. Scarcity is thus a measure of the
     \strong{local} rarity in terms of abundances. If \eqn{S_i} is close to 1
