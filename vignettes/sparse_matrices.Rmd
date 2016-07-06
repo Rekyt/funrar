@@ -1,0 +1,82 @@
+---
+title: "Sparse Marices with outlieR"
+author: "Matthias Greni\u00e9"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Sparse Marices with outlieR}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+# Sparse Matrices Usefulness
+
+When a matrix contains a lot of zero, there is no need to store all its values. For example
+
+# in package `outlieR`
+
+If your site-species matrix is big, it should contain a lot zero because it is very rare that alls species are present at all sites when looking at thousands of species.
+
+```{r sparseMatExample}
+# Generate a matrix with 1000 species and 200 sites
+my_mat = matrix(sample(c(0, 0, 0, 0, 0, 0, 1), replace = TRUE, size = 200000),
+                ncol = 1000, nrow = 200)
+colnames(my_mat) = paste0("sp", 1:ncol(my_mat))
+rownames(my_mat) = paste0("site", 1:nrow(my_mat))
+
+dimnames(my_mat) = c("site", "species")
+
+my_mat[1:5, 1:5]
+```
+
+`outlieR` lets you use sparse matrices directly using function implemented in the `Matrix` package. When your matrix is filled with 0 it can be quicker to use sparse matrices.
+
+```{r estimateFilling}
+filling = 1 - sum(my_mat == 0)/(ncol(my_mat)*nrow(my_mat))
+
+filling
+```
+
+To convert from a normal matrix to a sparse matrix you can use `r as(my_mat, "sparseMatrix")`:
+
+```{r convertSparseMat}
+library(Matrix)
+
+str(my_mat)
+
+sparse_mat = as(my_mat, "sparseMatrix")
+
+str(sparse_mat)
+```
+
+it completely changes the structure as well as the memory it takes into the RAM:
+
+```{r memoryUsage}
+print(object.size(my_mat), units = "Kb")
+
+print(object.size(sparse_mat), units = "Kb")
+```
+
+sparse matrices reduce the amount of RAM necessary to store them. The more zeros there are in a given matrix the more RAM will be spared when turning it into a sparse matrix.
+
+
+
+## Benchmark
+
+We can now compare the performances of the algorithms in rarity indices computation between a sparse matrix and a regular one, using the popular `microbenchmark` R package:
+
+```{r microBenchDist}
+library(microbenchmark)
+library(outlieR)
+
+# Get a table of traits
+trait_df = data.frame(trait = runif(ncol(my_mat), 0, 1))
+rownames(trait_df) = paste0("sp", 1:ncol(my_mat))
+
+# Compute distance matrix
+dist_mat = compute_dist_matrix(trait_df)
+
+microbenchmark(regular = pres_distinctiveness(my_mat, dist_mat),
+               sparse = pres_distinctiveness(sparse_mat, dist_mat))
+```
+
