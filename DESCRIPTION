@@ -3,7 +3,8 @@ Title: Functional Rarity Indices Computations
 Version: 0.0.1
 Authors@R: c(
   person("Matthias", "Grenié", email = "matthias.grenie@ens-lyon.fr", role = c("aut", "cre")),
-  person("Pierre", "Denelle", email = "pierre.denelle@cefe.cnrs.fr", role = "aut")
+  person("Pierre", "Denelle", email = "pierre.denelle@cefe.cnrs.fr", role = "aut"),
+  person("Caroline", "Tucker", email = "carolinemtucker@gmail.com", role = "aut")
   )
 Description: Computes functional rarity indices as proposed by Violle et al.
     Various indices can be computed using both regional and local information.
