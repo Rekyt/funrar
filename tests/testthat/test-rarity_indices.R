@@ -2,7 +2,7 @@ library(dplyr)
 context("Functional Rarity Indices")
 
 
-# Needed objects --------------------------------------------------------------
+# General data -----------------------------------------------------------------
 
 # Empty Matrix
 empty_mat = matrix(rep(0, 4), ncol = 2)
@@ -39,7 +39,8 @@ rownames(trait_df) = letters[1:4]
 dist_mat = compute_dist_matrix(trait_df)
 
 
-# Distinctiveness data
+# Distinctiveness data --------------------------------------------------------
+
 # Final distinctiveness table for all communities
 correct_dist = structure(list(site = c("s1", "s1", "s2", "s2", "s2", "s3",
                                        "s3", "s4", "s4"),
@@ -59,8 +60,11 @@ correct_dist_mat[which(correct_dist_mat == 0)] = NA_real_
 
 correct_dist_mat[which(correct_dist_mat == 1)] = correct_dist$Di
 
+# Distinctiveness with abundances
+correct_dist_ab = correct_dist
 
-# Scarcity data
+
+# Scarcity data ----------------------------------------------------------------
 com_table_ex = bind_cols(com_table, data.frame(abund = c(0.3, 0.7, 0.2, 0.6,
                                                          0.2, 0.5, 0.5, 0.2,
                                                          0.8)))
@@ -95,7 +99,6 @@ test_that("Correct Di computation with different comm. without abundance",{
 
 
   # Good messages and warnings
-
   expect_message(table_distinctiveness(com_table, "species", "site",
                                        abund = NULL, dist_mat))
 
@@ -104,7 +107,7 @@ test_that("Correct Di computation with different comm. without abundance",{
   expect_message(distinctiveness(valid_mat, dist_mat[-1, -1]))
 
 
-  # Good Distinctiveness computations
+  # Good Distinctiveness computations without abundances
   c_dist = table_distinctiveness(com_table, "species", "site", abund = NULL,
                                  dist_mat)
 
@@ -113,6 +116,9 @@ test_that("Correct Di computation with different comm. without abundance",{
 
   expect_equivalent(as.data.frame(c_dist), as.data.frame(correct_dist) %>%
                       arrange(site))
+
+
+  # Distinctiveness with abundances
 })
 
 
