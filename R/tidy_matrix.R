@@ -34,7 +34,8 @@ tidy_to_matrix = function(my_df, col_to_row, col_to_col, col_value = NULL) {
 
     } else {
 
-      stop(paste0("Columns '", absent[1], "' and '", absent[2], "' are not in data.frame"))
+      stop(paste0("Columns '", absent[1], "' and '", absent[2],
+                  "' are not in data.frame"))
 
     }
 

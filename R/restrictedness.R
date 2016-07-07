@@ -22,19 +22,19 @@
 table_restrictedness = function(com_table, com, species) {
 
   # Test to be sure
-  if ((is.character(com)) == FALSE) {
+  if ( (is.character(com)) == FALSE) {
     stop("com has to be a character string.")
   }
 
-  if ((is.character(species)) == FALSE) {
+  if ( (is.character(species)) == FALSE) {
     stop("species has to be a character string.")
   }
 
-  if ((com %in% colnames(com_table)) == FALSE) {
+  if ( (com %in% colnames(com_table)) == FALSE) {
     stop("Community table does not have any communities.")
   }
 
-  if ((species %in% colnames(com_table)) == FALSE) {
+  if ( (species %in% colnames(com_table)) == FALSE) {
     stop("Community table does not have any species.")
   }
 

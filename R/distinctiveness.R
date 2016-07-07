@@ -29,7 +29,8 @@ single_com_dist = function(com_table, species, abund = NULL, dist_matrix) {
 
   # Check if distance matrix has same row and column numbers
   if (nrow(dist_matrix) != ncol(dist_matrix)) {
-    stop("Provided distance matrix doesn't have same number of rows and columns.")
+    stop(paste0("Provided distance matrix doesn't have same number of rows and",
+                "columns."))
   }
 
   # Get functional distance matrix of species in communities
@@ -88,11 +89,11 @@ table_distinctiveness = function(com_table, sp_col, com, abund = NULL,
                                  dist_matrix) {
 
   # Test to be sure
-  if ((com %in% colnames(com_table)) == FALSE) {
+  if ( (com %in% colnames(com_table)) == FALSE) {
     stop("Community table does not have any communities.")
   }
 
-  if ((sp_col %in% colnames(com_table)) == FALSE) {
+  if ( (sp_col %in% colnames(com_table)) == FALSE) {
     stop("Community table does not have any species.")
   }
 
@@ -116,7 +117,8 @@ table_distinctiveness = function(com_table, sp_col, com, abund = NULL,
 
   # Check if distance matrix has same row and column numbers
   if (nrow(dist_matrix) != ncol(dist_matrix)) {
-    stop("Provided distance matrix doesn't have same number of rows and columns.")
+    stop(paste0("Provided distance matrix doesn't have same number of rows and",
+                "columns."))
   }
 
   # Compute Distinctivenness

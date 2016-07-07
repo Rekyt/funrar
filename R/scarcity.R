@@ -55,11 +55,11 @@ single_com_scar = function(com_table, species, abund) {
 table_scarcity = function(com_table, species, com, abund) {
 
   # Test to be sure
-  if ((com %in% colnames(com_table)) == FALSE) {
+  if ( (com %in% colnames(com_table)) == FALSE) {
     stop("Community table does not have any communities.")
   }
 
-  if ((species %in% colnames(com_table)) == FALSE) {
+  if ( (species %in% colnames(com_table)) == FALSE) {
     stop("Community table does not have any species.")
   }
 
@@ -125,7 +125,7 @@ scarcity = function(pres_matrix) {
 
   # Scarcity for each per row using total abundance vector
   scarcity_mat = apply(scarcity_mat, 2, function(x) {
-    exp(-total_sites*log(2)*x)
+    exp(-total_sites * log(2) * x)
   })
 
   return(scarcity_mat)
