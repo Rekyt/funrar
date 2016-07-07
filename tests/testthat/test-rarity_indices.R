@@ -39,6 +39,27 @@ rownames(trait_df) = letters[1:4]
 dist_mat = compute_dist_matrix(trait_df)
 
 
+# Distinctiveness data
+# Final distinctiveness table for all communities
+correct_dist = structure(list(site = c("s1", "s1", "s2", "s2", "s2", "s3",
+                                       "s3", "s4", "s4"),
+                              species = c("a", "b", "b", "c", "d","b", "c",
+                                          "c", "d"),
+                              Di = c(1/9, 1/9, 6/9, 4/9, 6/9, 4/9, 4/9, 4/9,
+                                     4/9)),
+                         .Names = c("site", "species", "Di"),
+                         row.names = c(NA, -9L), class = c("tbl_df", "tbl",
+                                                           "data.frame")) %>%
+  # Forced to arrange by species to specify for distinctiveness matrix
+  arrange(species)
+
+correct_dist_mat = table(correct_dist$site, correct_dist$species)
+
+correct_dist_mat[which(correct_dist_mat == 0)] = NA_real_
+
+correct_dist_mat[which(correct_dist_mat == 1)] = correct_dist$Di
+
+
 # Scarcity data
 com_table_ex = bind_cols(com_table, data.frame(abund = c(0.3, 0.7, 0.2, 0.6,
                                                          0.2, 0.5, 0.5, 0.2,
@@ -71,25 +92,6 @@ test_that("Invalid input types do not work", {
 
 
 test_that("Correct Di computation with different comm. without abundance",{
-
-  # Final distinctiveness table for all communities
-  correct_dist = structure(list(site = c("s1", "s1", "s2", "s2", "s2", "s3",
-                                         "s3", "s4", "s4"),
-                                species = c("a", "b", "b", "c", "d","b", "c",
-                                            "c", "d"),
-                                Di = c(1/9, 1/9, 6/9, 4/9, 6/9, 4/9, 4/9, 4/9,
-                                       4/9)),
-                           .Names = c("site", "species", "Di"),
-                           row.names = c(NA, -9L), class = c("tbl_df", "tbl",
-                                                             "data.frame")) %>%
-    # Forced to arrange by species to specify for distinctiveness matrix
-    arrange(species)
-
-  correct_dist_mat = table(correct_dist$site, correct_dist$species)
-
-  correct_dist_mat[which(correct_dist_mat == 0)] = NA_real_
-
-  correct_dist_mat[which(correct_dist_mat == 1)] = correct_dist$Di
 
 
   # Good messages and warnings
@@ -131,9 +133,22 @@ test_that("Distinctiveness is undefined for a community with a single species", 
 
   expect_equivalent(t(undef_dist_mat),
                     as.table(distinctiveness(small_mat, dist_mat)))
+
+  # Check warning for NaN created in the matrix
+  expect_warning(distinctiveness(small_mat, dist_mat))
 })
 
 
+test_that("Distinctiveness works with sparse matrices", {
+  library(Matrix)
+  sparse_mat = as(valid_mat, "sparseMatrix")
+
+  dist_sparse_mat = as(correct_dist_mat, "sparseMatrix")
+
+  expect_silent(distinctiveness(sparse_mat, dist_mat))
+
+  #expect_equal(distinctiveness(sparse_mat, dist_mat), dist_sparse_mat)
+})
 
 # Test for Uniqueness ---------------------------------------------------------
 
