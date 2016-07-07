@@ -56,7 +56,7 @@ single_com_scar = function(com_table, species, abund) {
 #' mat = as.matrix(aravo$spe); dat <- matrix_to_tidy(mat, "value", "site", "species")
 #' dat$site = as.character(dat$site)
 #'
-#' si_df = scarcity(dat, "species", "site", "value")
+#' si_df = table_scarcity(dat, "species", "site", "value")
 #' head(si_df)
 #'
 #' @export
@@ -124,7 +124,7 @@ scarcity = function(com_table, species, com, abund) {
 #' # Site-species matrix
 #' mat = as.matrix(aravo$spe)
 #'
-#' si = pres_scarcity(pres_matrix = mat)
+#' si = scarcity(pres_matrix = mat)
 #' si[1:5, 1:5]
 #'
 #' @export

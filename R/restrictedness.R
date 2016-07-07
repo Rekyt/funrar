@@ -24,7 +24,7 @@
 #' # Site-species matrix converted into data.frame
 #' mat = as.matrix(aravo$spe); dat <- matrix_to_tidy(mat, "value", "site", "species")
 #' dat$site = as.character(dat$site)
-#' ri_df = restrictedness(dat, "site", "species")
+#' ri_df = table_restrictedness(dat, "site", "species")
 #' head(ri_df)
 #'
 #' @export
@@ -85,7 +85,7 @@ restrictedness = function(com_table, com, species) {
 #' data("aravo", package = "ade4")
 #' # Site-species matrix
 #' mat = as.matrix(aravo$spe)
-#' ri = pres_restrictedness(mat)
+#' ri = restrictedness(mat)
 #' head(ri)
 #'
 #' @export

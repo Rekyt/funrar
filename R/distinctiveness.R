@@ -95,7 +95,7 @@ single_com_dist = function(com_table, species, abund = NULL, dist_matrix) {
 #' mat = as.matrix(aravo$spe); dat <- matrix_to_tidy(mat, "value", "site", "species")
 #' dat$site = as.character(dat$site)
 #'
-#' di_df = distinctiveness(dat, "species", "site", "value", dist_mat)
+#' di_df = table_distinctiveness(dat, "species", "site", "value", dist_mat)
 #' head(di_df)
 #'
 #' @export
@@ -194,7 +194,7 @@ distinctiveness = function(com_table, sp_col, com, abund = NULL, dist_matrix) {
 #' # Distance matrix
 #' dist_mat <- compute_dist_matrix(tra)
 #'
-#' di = pres_distinctiveness(pres_matrix = mat, dist_matrix = dist_mat)
+#' di = distinctiveness(pres_matrix = mat, dist_matrix = dist_mat)
 #' di[1:5, 1:5]
 #'
 #' @export

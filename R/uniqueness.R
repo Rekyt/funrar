@@ -30,7 +30,7 @@
 #' # Distance matrix
 #' dist_mat <- compute_dist_matrix(tra)
 #'
-#' ui_df = uniqueness(dat, "species", dist_mat)
+#' ui_df = table_uniqueness(dat, "species", dist_mat)
 #' head(ui_df)
 #'
 #' @importFrom dplyr %>%
@@ -87,7 +87,7 @@ uniqueness = function(com_table, sp_col, dist_matrix) {
 #' # Distance matrix
 #' dist_mat <- compute_dist_matrix(tra)
 #'
-#' ui = pres_uniqueness(mat, dist_mat)
+#' ui = uniqueness(mat, dist_mat)
 #' ui[1:5, 1:5]
 #'
 #' @export
