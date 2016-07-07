@@ -143,11 +143,12 @@ test_that("Distinctiveness works with sparse matrices", {
   library(Matrix)
   sparse_mat = as(valid_mat, "sparseMatrix")
 
-  dist_sparse_mat = as(correct_dist_mat, "sparseMatrix")
+  dist_sparse_mat = as(correct_dist_mat, "sparseMatrix") %>%
+    as("dgeMatrix")
 
   expect_silent(distinctiveness(sparse_mat, dist_mat))
 
-  #expect_equal(distinctiveness(sparse_mat, dist_mat), dist_sparse_mat)
+  expect_equivalent(distinctiveness(sparse_mat, dist_mat), dist_sparse_mat)
 })
 
 # Test for Uniqueness ---------------------------------------------------------
