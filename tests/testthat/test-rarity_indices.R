@@ -64,6 +64,23 @@ correct_dist_mat[which(correct_dist_mat == 1)] = correct_dist$Di
 correct_dist_ab = correct_dist
 
 
+# Undefined Distinctiveness
+small_mat = matrix(c(1, 0, 0, 1), nrow = 2)
+colnames(small_mat) = letters[1:2]
+rownames(small_mat) = c("s1", "s2")
+
+undef_dist = data_frame(site = c("s1", "s2"), species = c("a", "b"),
+                        Di = rep(NaN, 2))
+
+undef_dist_mat = table(undef_dist$site, undef_dist$species)
+
+undef_dist_mat[which(undef_dist_mat == 0)] = NA_real_
+
+undef_dist_mat[which(undef_dist_mat == 1)] = undef_dist$Di
+
+undef_test = distinctiveness(small_mat, dist_mat)
+
+
 # Scarcity data ----------------------------------------------------------------
 com_table_ex = bind_cols(com_table, data.frame(abund = c(0.3, 0.7, 0.2, 0.6,
                                                          0.2, 0.5, 0.5, 0.2,
@@ -102,9 +119,9 @@ test_that("Correct Di computation with different comm. without abundance",{
   expect_message(table_distinctiveness(com_table, "species", "site",
                                        abund = NULL, dist_mat))
 
-  expect_message(distinctiveness(valid_mat[, -1], dist_mat))
+  expect_message(distinctiveness(valid_mat[-1, -1], dist_mat))
 
-  expect_message(distinctiveness(valid_mat, dist_mat[-1, -1]))
+  expect_message(distinctiveness(valid_mat[2:3, 1:4], dist_mat[-1, -1]))
 
 
   # Good Distinctiveness computations without abundances
@@ -124,21 +141,9 @@ test_that("Correct Di computation with different comm. without abundance",{
 
 test_that("Distinctiveness is undefined for a community with a single species", {
 
-  small_mat = matrix(c(1, 0, 0, 1), nrow = 2)
-  colnames(small_mat) = letters[1:2]
-  rownames(small_mat) = c("s1", "s2")
 
-  undef_dist = data_frame(site = c("s1", "s2"), species = c("a", "b"),
-                          Di = rep(NaN, 2))
 
-  undef_dist_mat = table(undef_dist$site, undef_dist$species)
-
-  undef_dist_mat[which(undef_dist_mat == 0)] = NA_real_
-
-  undef_dist_mat[which(undef_dist_mat == 1)] = undef_dist$Di
-
-  expect_equivalent(t(undef_dist_mat),
-                    as.table(distinctiveness(small_mat, dist_mat)))
+  expect_equivalent(t(undef_dist_mat), as.table(undef_test))
 
   # Check warning for NaN created in the matrix
   expect_warning(distinctiveness(small_mat, dist_mat))
