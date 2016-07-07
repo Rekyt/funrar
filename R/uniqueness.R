@@ -18,49 +18,48 @@
 #'
 #' @return a data frame with uniqueness value per species
 #'
-#'
 #' @examples
-#' set.seed(1)
-#' trait = data.frame(sp = paste0("sp", 1:5), trait_1 = runif(5),
-#'     trait_2 = as.factor(c("A", "A", "A", "B", "B")))
+#' data("aravo", package = "ade4")
 #'
-#' rownames(trait) = trait$sp
+#' # Site-species matrix converted into data.frame
+#' mat = as.matrix(aravo$spe); dat <- matrix_to_tidy(mat, "value", "site", "species")
+#' dat$site = as.character(dat$site)
 #'
-#' dist_mat = compute_dist_matrix(trait[, -1])
+#' # Example of trait table
+#' tra <- aravo$traits[, c("Height", "SLA", "N_mass")]
+#' # Distance matrix
+#' dist_mat <- compute_dist_matrix(tra)
 #'
-#' com_table = data.frame(com = c(rep("com1", 3), rep("com2", 4)),
-#'  sp = c("sp1", "sp2", "sp3", "sp2", "sp3", "sp4", "sp5"))
-#'
-#' com_ui = uniqueness(com_table, "sp", dist_mat)
-#'
+#' ui_df = uniqueness(dat, "species", dist_mat)
+#' head(ui_df)
 #'
 #' @importFrom dplyr %>%
 #' @export
 uniqueness = function(com_table, sp_col, dist_matrix) {
-  
+
   if (!(sp_col %in% colnames(com_table))) {
     stop(paste0("'", sp_col, "' species column not in column names"))
   }
-  
+
   if (nrow(dist_matrix) != ncol(dist_matrix)) {
     stop("Distance matrix is not square.")
   }
-  
+
   # Extract all species in community
   com_species = as.character(unique(com_table[[sp_col]]))
-  
+
   # Submatrix containing distance of species in community
   com_dist = dist_matrix[com_species, com_species]
-  
+
   # Replace diagonal by 'NA' for computation reasons
   diag(com_dist) = NA
-  
+
   # Get minimum for each line
   u_index = apply(com_dist, 1, min, na.rm = T)
-  
+
   # Data frame of species name and uniqueness
   u_df = data.frame("sp" = names(u_index), "Ui" = as.numeric(u_index))
-  
+
   return(u_df)
 }
 
@@ -77,6 +76,20 @@ uniqueness = function(com_table, sp_col, dist_matrix) {
 #'
 #' @return a data frame with uniqueness value per species
 #'
+#' @examples
+#' data("aravo", package = "ade4")
+#'
+#' # Site-species matrix
+#' mat = as.matrix(aravo$spe)
+#'
+#' # Example of trait table
+#' tra <- aravo$traits[, c("Height", "SLA", "N_mass")]
+#' # Distance matrix
+#' dist_mat <- compute_dist_matrix(tra)
+#'
+#' ui = pres_uniqueness(mat, dist_mat)
+#' ui[1:5, 1:5]
+#'
 #' @export
 pres_uniqueness = function(pres_matrix, dist_matrix) {
 
@@ -84,12 +97,12 @@ pres_uniqueness = function(pres_matrix, dist_matrix) {
 
   # Replace diagonal by 'NA' for computation reasons
   diag(com_dist) = NA
-  
+
   # Get minimum distance for each species
   u_index = apply(com_dist, 1, min, na.rm = T)
 
   # Results in a data.frame
   u_df = data.frame("sp" = names(u_index), "Ui" = as.numeric(u_index))
-  
+
   return(u_df)
 }
