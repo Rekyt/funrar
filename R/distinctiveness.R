@@ -83,6 +83,21 @@ single_com_dist = function(com_table, species, abund = NULL, dist_matrix) {
 #' @return a table similar to \code{com_table} with an added column \eqn{D_i}
 #'     giving the Functional Distinctiveness of each species in each communities
 #'
+#' @examples
+#' data("aravo", package = "ade4")
+#'
+#' # Example of trait table
+#' tra <- aravo$traits[, c("Height", "SLA", "N_mass")]
+#' # Distance matrix
+#' dist_mat <- compute_dist_matrix(tra)
+#'
+#' # Site-species matrix converted into data.frame
+#' mat = as.matrix(aravo$spe); dat <- matrix_to_tidy(mat, "value", "site", "species")
+#' dat$site = as.character(dat$site)
+#'
+#' di_df = distinctiveness(dat, "species", "site", "value", dist_mat)
+#' head(di_df)
+#'
 #' @export
 distinctiveness = function(com_table, sp_col, com, abund = NULL, dist_matrix) {
 
@@ -168,6 +183,19 @@ distinctiveness = function(com_table, sp_col, com, abund = NULL, dist_matrix) {
 #'
 #' @importFrom dplyr %>% bind_rows
 #' @importFrom methods is
+#'
+#' @examples
+#' data("aravo", package = "ade4")
+#' # Site-species matrix
+#' mat = as.matrix(aravo$spe)
+#'
+#' # Example of trait table
+#' tra <- aravo$traits[, c("Height", "SLA", "N_mass")]
+#' # Distance matrix
+#' dist_mat <- compute_dist_matrix(tra)
+#'
+#' di = pres_distinctiveness(pres_matrix = mat, dist_matrix = dist_mat)
+#' di[1:5, 1:5]
 #'
 #' @export
 pres_distinctiveness = function(pres_matrix, dist_matrix) {
