@@ -56,7 +56,7 @@ single_com_dist = function(com_table, species, abund = NULL, dist_matrix) {
   }
 
   # Computes distinctiveness by species
-  if (denom != 0) {
+  if (length(denom) > 1 | (length(denom) == 1 & denom != 0)) {
     com_table[, "Di"] <- as.numeric(num / denom)
   } else {
     com_table[, "Di"] = NA
@@ -219,7 +219,7 @@ distinctiveness = function(pres_matrix, dist_matrix) {
   index_matrix = index_matrix / denom_matrix
 
   # Test if there is no NaN in the table for species alone in their community
-  if (!all(sapply(index_matrix, function(x) is.numeric(x) | is.na(x)))) {
+  if (!all(sapply(index_matrix, function(x) !is.nan(x)))) {
     warning(paste0("Some communities had a single species in them",
                    "Computed value assigned to 'NaN'", sep = "\n"))
   }
