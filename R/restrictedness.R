@@ -1,7 +1,7 @@
 
 # Function to compute restrictedness on various databases
 #
-# Authors: Pierre Denelle & Matthias Grenie
+# Authors: Pierre Denelle & Matthias Grenié
 #
 #
 
@@ -19,7 +19,7 @@
 #' @return A tidy data.frame containing species' names and their restrictedness
 #'    value
 #' @export
-restrictedness = function(com_table, com, species) {
+table_restrictedness = function(com_table, com, species) {
 
   # Test to be sure
   if ((is.character(com)) == FALSE) {
@@ -67,13 +67,12 @@ restrictedness = function(com_table, com, species) {
 #' provided functional distance matrix.
 #'
 #'
-#' @param pres_matrix a presence-absence matrix, with sites in rows and species
-#'      in columns
+#' @inheritParams scarcity
 #'
 #' @return A tidy data.frame containing species' names and their restrictedness value
 #'
 #' @export
-pres_restrictedness = function(pres_matrix) {
+restrictedness = function(pres_matrix) {
 
   # Making sure that pres_restrictedness is a matrix
   if (is.matrix(pres_matrix) == FALSE) {

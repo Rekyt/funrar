@@ -52,7 +52,7 @@ single_com_scar = function(com_table, species, abund) {
 #'     for Scarcity values.
 #'
 #' @export
-scarcity = function(com_table, species, com, abund) {
+table_scarcity = function(com_table, species, com, abund) {
 
   # Test to be sure
   if ((com %in% colnames(com_table)) == FALSE) {
@@ -114,7 +114,7 @@ scarcity = function(com_table, species, com, abund) {
 #'     quite abundant in the community.
 #'
 #' @export
-pres_scarcity = function(pres_matrix) {
+scarcity = function(pres_matrix) {
   scarcity_mat = pres_matrix
 
   # Species with no relative abundance get a scarcity of 0

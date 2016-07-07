@@ -2,44 +2,24 @@
 % Please edit documentation in R/uniqueness.R
 \name{uniqueness}
 \alias{uniqueness}
-\title{Uniqueness}
+\title{Uniqueness for presence/Aasence matrix}
 \usage{
-uniqueness(com_table, sp_col, dist_matrix)
+uniqueness(pres_matrix, dist_matrix)
 }
 \arguments{
-\item{com_table}{a data frame of the species in the regional pool.}
+\item{pres_matrix}{a presence-absence matrix (or relative abundances),
+with sites in rows and species in columns}
 
-\item{sp_col}{a character vector indicating the name of the species column
-in the \code{com_table} data frame}
-
-\item{dist_matrix}{a functional distance matrix}
+\item{dist_matrix}{a species functional distance matrix}
 }
 \value{
 a data frame with uniqueness value per species
 }
 \description{
-Computes Uniqueness values over a given regional pool.
-The uniqueness value of a single species is equal to the
-minimum functional distance with all other species in the regional pool. The
-formula is as such:
-\deqn{U_i = \min(d_{ij}),}{Ui = min(d_ij),}
-with \eqn{d_{ij}}{d_ij} the functional distance between species
-\eqn{i} and \eqn{j}.
-}
-\examples{
-set.seed(1)
-trait = data.frame(sp = paste0("sp", 1:5), trait_1 = runif(5),
-    trait_2 = as.factor(c("A", "A", "A", "B", "B")))
-
-rownames(trait) = trait$sp
-
-dist_mat = compute_dist_matrix(trait[, -1])
-
-com_table = data.frame(com = c(rep("com1", 3), rep("com2", 4)),
- sp = c("sp1", "sp2", "sp3", "sp2", "sp3", "sp4", "sp5"))
-
-com_ui = uniqueness(com_table, "sp", dist_mat)
-
-
+Computes uniqueness from a presence-absence matrix of species with a
+provided functional distance matrix. The
+sites-species matrix should have \strong{sites} in \strong{rows} and
+\strong{species} in \strong{columns}, similar to \code{\link[vegan]{vegan}}
+package defaults.
 }
 

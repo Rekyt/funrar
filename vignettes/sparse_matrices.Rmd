@@ -74,7 +74,7 @@ rownames(trait_df) = paste0("sp", 1:ncol(my_mat))
 # Compute distance matrix
 dist_mat = compute_dist_matrix(trait_df)
 
-microbenchmark(regular = pres_distinctiveness(my_mat, dist_mat),
-               sparse = pres_distinctiveness(sparse_mat, dist_mat))
+microbenchmark(regular = distinctiveness(my_mat, dist_mat),
+               sparse = distinctiveness(sparse_mat, dist_mat))
 ```
 

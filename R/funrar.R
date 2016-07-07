@@ -6,7 +6,7 @@
 #' scarcity (local). \strong{Note}: scarcity can only be computed if relative
 #' abundances are provided in the site-species matrix.
 #'
-#' @inheritParams pres_distinctiveness
+#' @inheritParams distinctiveness
 #'
 #' @param rel_abund logical (\code{TRUE} or \code{FALSE}) indicating if
 #'    site-species matrix contain relative abundances values or only
@@ -26,23 +26,23 @@
 #'        species per site.}
 #'    }
 #'
-#' @seealso \code{\link[outlieR]{pres_uniqueness}},
-#'    \code{\link[outlieR]{pres_distinctiveness}},
-#'    \code{\link[outlieR]{pres_restrictedness}},
-#'    \code{\link[outlieR]{pres_scarcity}}
+#' @seealso \code{\link[outlieR]{uniqueness}},
+#'    \code{\link[outlieR]{distinctiveness}},
+#'    \code{\link[outlieR]{restrictedness}},
+#'    \code{\link[outlieR]{scarcity}}
 #'
 #' @export
 funrar = function(pres_matrix, dist_matrix, rel_abund = FALSE) {
 
 
-  funct_uniq = pres_uniqueness(pres_matrix, dist_matrix)
+  funct_uniq = uniqueness(pres_matrix, dist_matrix)
 
-  funct_dist = pres_distinctiveness(pres_matrix, dist_matrix)
+  funct_dist = distinctiveness(pres_matrix, dist_matrix)
 
-  geog_rest = pres_restrictedness(pres_matrix)
+  geog_rest = restrictedness(pres_matrix)
 
   if (rel_abund) {
-    scarcity = pres_scarcity(pres_matrix)
+    scarcity = scarcity(pres_matrix)
 
     return(list(Ui = funct_uniq,
                 Di = funct_dist,

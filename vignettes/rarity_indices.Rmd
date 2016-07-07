@@ -85,20 +85,20 @@ Using `outlieR` distinctiveness values can be computed using function `distincti
 ```{r distinctivenessComputation}
 
 # Compute distinctiveness for each species on each site
-di = pres_distinctiveness(pres_matrix = mat,  # The site x species table
-                       dist_matrix = dist_mat)  # Functional Distance matrix
+di = distinctiveness(pres_matrix = mat,  # The site x species table
+                     dist_matrix = dist_mat)  # Functional Distance matrix
 
 head(di)
 ```
 
-The syntax for `pres_distinctiveness()` is first the table and then the distance matrix. The function returns a site-species matrix filled with `Di` values, i.e. the species distinctiveness in each species per site combination.
+The syntax for `distinctiveness()` is first the table and then the distance matrix. The function returns a site-species matrix filled with `Di` values, i.e. the species distinctiveness in each species per site combination.
 
 For abundance weighted distinctiveness you need to have a column containing relative abundances in your data frame as such:
 
 ```{r abundDist}
 
 # Compute distinctiveness for each species on each site
-di = pres_distinctiveness(pres_matrix = mat,  # The site x species table
+di = distinctiveness(pres_matrix = mat,  # The site x species table
                      dist_matrix = dist_mat)  # Functional Distance matrix
 
 di[1:5, 1:5]
@@ -123,7 +123,7 @@ With `outlieR` it can be computed with `scarcity()` function with a syntax analo
 
 ```{r scarcityComp}
 
-si = pres_scarcity(pres_matrix = mat)
+si = scarcity(pres_matrix = mat)
 
 si[1:5, 1:5]
 
@@ -147,7 +147,7 @@ with $U_i$ the uniqueness of species $i$, $d_{ij}$ the functional distance betwe
 
 ```{r uniqComp}
 
-ui = pres_uniqueness(mat, dist_mat)
+ui = uniqueness(mat, dist_mat)
 
 head(ui)
 ```
@@ -163,7 +163,7 @@ with $R_i$ the restrictedness of species $i$, $N_i$ the number of sites where sp
 
 
 ```{r}
-ri = pres_restrictedness(mat)
+ri = restrictedness(mat)
 
 head(ri)
 ```
@@ -191,7 +191,7 @@ identical(as.numeric(tidy_to_matrix(dat, "site", "species", "value")), as.numeri
 
 ### Computation
 
-Using `outlieR` distinctiveness values can be computed using function `distinctiveness()`:
+Using `outlieR` distinctiveness values can be computed using function `table_distinctiveness()`:
 
 ```{r computeDi}
 
@@ -199,23 +199,23 @@ Using `outlieR` distinctiveness values can be computed using function `distincti
 dat$species = as.character(dat$species)
 
 # Compute distinctiveness for each species on each site
-di_df = distinctiveness(com_table = dat,  # The site x species table
-                            sp_col = "species",  # Name of the species column
-                            com = "site",  # Name of the community column
-                            abund = NULL,  # Relative abundances column (facultative)
-                            dist_matrix = dist_mat)  # Functional Distance matrix
+di_df = table_distinctiveness(com_table = dat,  # The site x species table
+                              sp_col = "species",  # Name of the species column
+                              com = "site",  # Name of the community column
+                              abund = NULL,  # Relative abundances column (facultative)
+                              dist_matrix = dist_mat)  # Functional Distance matrix
 
 head(di_df)
 
 ```
 
-The syntax for `distinctiveness()` is first the table, then the name of the species column, then the name of the community column, then eventually the name of the relative abundance column and finally the distance matrix. The function add a `Di` column giving the species distinctiveness in each species per site combination.
+The syntax for `table_distinctiveness()` is first the table, then the name of the species column, then the name of the community column, then eventually the name of the relative abundance column and finally the distance matrix. The function add a `Di` column giving the species distinctiveness in each species per site combination.
 
 For abundance weighted distinctiveness you need to have a column containing relative abundances in your data frame as such:
 
 ```{r abundDi}
 
-di_df = distinctiveness(dat, "species", "site", "value", dist_mat)
+di_df = table_distinctiveness(dat, "species", "site", "value", dist_mat)
 
 head(di_df)
 
@@ -229,7 +229,7 @@ With `outlieR` it can be computed with `scarcity()` function with a syntax analo
 
 ```{r siComp}
 
-si_df = scarcity(dat, "species", "site", "value")
+si_df = table_scarcity(dat, "species", "site", "value")
 
 head(si_df)
 
@@ -242,7 +242,7 @@ head(si_df)
 
 ```{r uiComp}
 
-ui_df = uniqueness(dat, "species", dist_mat)
+ui_df = table_uniqueness(dat, "species", dist_mat)
 
 head(ui_df)
 dim(ui_df[!duplicated(ui_df$species), ])
@@ -258,7 +258,7 @@ dim(ui_df[!duplicated(ui_df$species), ])
 # Species should be character
 dat$site = as.character(dat$site)
 
-ri_df = restrictedness(dat, "site", "species")
+ri_df = table_restrictedness(dat, "site", "species")
 
 head(ri_df)
 

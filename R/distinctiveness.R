@@ -71,7 +71,7 @@ single_com_dist = function(com_table, species, abund = NULL, dist_matrix) {
 #' of communities, with one column for species identity, one for community
 #' identity and an optional one for relative abundances.
 #'
-#' @inheritParams uniqueness
+#' @inheritParams table_uniqueness
 #'
 #' @param com a character vector, indicating the column name of communities
 #'     names.
@@ -84,7 +84,8 @@ single_com_dist = function(com_table, species, abund = NULL, dist_matrix) {
 #'     giving the Functional Distinctiveness of each species in each communities
 #'
 #' @export
-distinctiveness = function(com_table, sp_col, com, abund = NULL, dist_matrix) {
+table_distinctiveness = function(com_table, sp_col, com, abund = NULL,
+                                 dist_matrix) {
 
   # Test to be sure
   if ((com %in% colnames(com_table)) == FALSE) {
@@ -143,7 +144,7 @@ distinctiveness = function(com_table, sp_col, com, abund = NULL, dist_matrix) {
 #' @param pres_matrix a presence-absence matrix (or relative abundances),
 #'    with sites in rows and species in columns
 #'
-#' @inheritParams uniqueness
+#' @param dist_matrix a species functional distance matrix
 #'
 #' @return a similar matrix from provided \code{pres_matrix}, species absent
 #'    from communities will have an \code{NA} value (see \code{Note} section)
@@ -172,7 +173,7 @@ distinctiveness = function(com_table, sp_col, com, abund = NULL, dist_matrix) {
 #' @importFrom methods is
 #'
 #' @export
-pres_distinctiveness = function(pres_matrix, dist_matrix) {
+distinctiveness = function(pres_matrix, dist_matrix) {
 
   if (nrow(dist_matrix) > ncol(pres_matrix)) {
 

@@ -74,19 +74,20 @@ test_that("Correct Di computation with different comm. without abundance",{
 
   # Good messages and warnings
 
-  expect_message(distinctiveness(com_table, "species", "site", abund = NULL,
-                                    dist_mat))
+  expect_message(table_distinctiveness(com_table, "species", "site",
+                                       abund = NULL, dist_mat))
 
-  expect_message(pres_distinctiveness(valid_mat[, -1], dist_mat))
+  expect_message(distinctiveness(valid_mat[, -1], dist_mat))
 
-  expect_message(pres_distinctiveness(valid_mat, dist_mat[-1, -1]))
+  expect_message(distinctiveness(valid_mat, dist_mat[-1, -1]))
 
 
   # Good Distinctiveness computations
-  c_dist = distinctiveness(com_table, "species", "site", abund = NULL, dist_mat)
+  c_dist = table_distinctiveness(com_table, "species", "site", abund = NULL,
+                                 dist_mat)
 
   expect_equivalent(correct_dist_mat,
-                    as.table(pres_distinctiveness(valid_mat, dist_mat)))
+                    as.table(distinctiveness(valid_mat, dist_mat)))
 
   expect_equivalent(as.data.frame(c_dist), as.data.frame(correct_dist) %>%
                       arrange(site))
@@ -109,7 +110,7 @@ test_that("Distinctiveness is undefined for a community with a single species", 
   undef_dist_mat[which(undef_dist_mat == 1)] = undef_dist$Di
 
   expect_equivalent(t(undef_dist_mat),
-                    as.table(pres_distinctiveness(small_mat, dist_mat)))
+                    as.table(distinctiveness(small_mat, dist_mat)))
 })
 
 
@@ -123,11 +124,12 @@ test_that("Correct Uniqueness computation", {
   all_ui = data.frame(species = letters[1:4],
                       Ui = c(1/9, 1/9, 4/9, 4/9))
 
-  expect_equivalent(uniqueness(com_table[1:2, ], "species", dist_mat), valid_ui)
+  expect_equivalent(table_uniqueness(com_table[1:2, ], "species", dist_mat),
+                    valid_ui)
 
-  expect_equivalent(uniqueness(com_table, "species", dist_mat), all_ui)
+  expect_equivalent(table_uniqueness(com_table, "species", dist_mat), all_ui)
 
-  expect_equal(pres_uniqueness(valid_mat, dist_mat), all_ui)
+  expect_equal(uniqueness(valid_mat, dist_mat), all_ui)
 })
 
 
@@ -163,9 +165,9 @@ test_that("Correct Scarcity computation", {
                                "species", "abund"))
 
   # Scarcity correct computation over many communities
-  expect_equal(com_scarcity, scarcity(as.data.frame(com_table_ex), "species",
-                                          "site", "abund"))
+  expect_equal(com_scarcity, table_scarcity(as.data.frame(com_table_ex),
+                                            "species", "site", "abund"))
 
   # Correct Sparseness computation for a site-species matrix
-  expect_equal(scarcity_mat, pres_scarcity(abund_mat))
+  expect_equal(scarcity_mat, scarcity(abund_mat))
 })

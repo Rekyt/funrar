@@ -10,7 +10,7 @@ funrar(pres_matrix, dist_matrix, rel_abund = FALSE)
 \item{pres_matrix}{a presence-absence matrix (or relative abundances),
 with sites in rows and species in columns}
 
-\item{dist_matrix}{a functional distance matrix}
+\item{dist_matrix}{a species functional distance matrix}
 
 \item{rel_abund}{logical (\code{TRUE} or \code{FALSE}) indicating if
 site-species matrix contain relative abundances values or only
@@ -39,9 +39,9 @@ scarcity (local). \strong{Note}: scarcity can only be computed if relative
 abundances are provided in the site-species matrix.
 }
 \seealso{
-\code{\link[outlieR]{pres_uniqueness}},
-   \code{\link[outlieR]{pres_distinctiveness}},
-   \code{\link[outlieR]{pres_restrictedness}},
-   \code{\link[outlieR]{pres_scarcity}}
+\code{\link[outlieR]{uniqueness}},
+   \code{\link[outlieR]{distinctiveness}},
+   \code{\link[outlieR]{restrictedness}},
+   \code{\link[outlieR]{scarcity}}
 }
 

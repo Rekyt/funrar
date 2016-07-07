@@ -2,32 +2,46 @@
 % Please edit documentation in R/distinctiveness.R
 \name{distinctiveness}
 \alias{distinctiveness}
-\title{Table Functional Distinctiveness}
+\title{Distinctiveness on presence/absence or relative abundances matrix}
 \usage{
-distinctiveness(com_table, sp_col, com, abund = NULL, dist_matrix)
+distinctiveness(pres_matrix, dist_matrix)
 }
 \arguments{
-\item{com_table}{a data frame of the species in the regional pool.}
+\item{pres_matrix}{a presence-absence matrix (or relative abundances),
+with sites in rows and species in columns}
 
-\item{sp_col}{a character vector indicating the name of the species column
-in the \code{com_table} data frame}
-
-\item{com}{a character vector, indicating the column name of communities
-names.}
-
-\item{abund}{optional character vector indicating the column name of the
-relative abundances of species, if provided, weight distinctiveness by
-relative abundances.}
-
-\item{dist_matrix}{a functional distance matrix}
+\item{dist_matrix}{a species functional distance matrix}
 }
 \value{
-a table similar to \code{com_table} with an added column \eqn{D_i}
-    giving the Functional Distinctiveness of each species in each communities
+a similar matrix from provided \code{pres_matrix}, species absent
+   from communities will have an \code{NA} value (see \code{Note} section)
 }
 \description{
-Compute Functional Distinctiveness for several communities, from a data.frame
-of communities, with one column for species identity, one for community
-identity and an optional one for relative abundances.
+Computes distinctiveness from a presence-absence matrix (or a matrix with
+relative abundances) of species with provided functional distance matrix. The
+sites-species matrix should have \strong{sites} in \strong{rows} and
+\strong{species} in \strong{columns}, similar to \code{\link[vegan]{vegan}}
+package defaults.
+}
+\details{
+The Functional Distinctiveness of a species is the average functional
+   distance from a species to all the other in the given community. It is
+   computed as such:
+   \deqn{
+   D_i = \frac{\sum_{j = 0, i \neq j}^N d_{ij}}{N-1},
+   }{%
+   D_i = ( \Sigma_(j = 0, i != j)^N d_ij) / (N - 1),
+   }
+   with \eqn{D_i} the functional distinctiveness of species \eqn{i}, \eqn{N}
+   the total number of species in the community and \eqn{d_{ij}}{d_ij} the
+   functional distance between species \eqn{i} and species \eqn{j}.
+}
+\section{Note}{
+
+   Absent species should be coded by \code{0} or \code{NA} in input matrices.
+
+   When a species is alone in its community the functional distinctiveness
+   cannot be computed, thus the output matrix contains a value of \code{NaN}
+   distinctiveness.
 }
 

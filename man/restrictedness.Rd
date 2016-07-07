@@ -2,22 +2,19 @@
 % Please edit documentation in R/restrictedness.R
 \name{restrictedness}
 \alias{restrictedness}
-\title{Table Restrictedness}
+\title{Restrictedness on presence/absence matrix}
 \usage{
-restrictedness(com_table, com, species)
+restrictedness(pres_matrix)
 }
 \arguments{
-\item{com_table}{a tidy data.frame of community with column with species}
-
-\item{com}{a character vector indicating the name of community column}
-
-\item{species}{a character vector indicating the name of species column}
+\item{pres_matrix}{a presence-absence matrix, with species in rows and sites
+in columns (not containing relative abundances for the moments)}
 }
 \value{
-A tidy data.frame containing species' names and their restrictedness
-   value
+A tidy data.frame containing species' names and their restrictedness value
 }
 \description{
-Compute restrictedness for every species
+Computes restrictedness from a presence-absence matrix of species with a
+provided functional distance matrix.
 }
 

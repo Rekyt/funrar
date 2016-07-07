@@ -76,11 +76,12 @@ benchmark = function(dataset, times = 20) {
   dataset[[2]]$species = as.character(dataset[[2]]$species)
 
   bench = microbenchmark(
-    table = distinctiveness(dataset[[2]], sp_col = "species",
-                            com = "com", abund = NULL,
-                            dist_matrix = dataset[[3]]),
-    matrix = pres_distinctiveness(dataset[[1]],
-                                  dataset[[3]]), times = times
+    table = table_distinctiveness(dataset[[2]], sp_col = "species",
+                                  com = "com", abund = NULL,
+                                  dist_matrix = dataset[[3]]),
+    matrix = distinctiveness(dataset[[1]],
+                             dataset[[3]]),
+    times = times
   )
   
   return(bench)

@@ -31,12 +31,12 @@
 #' com_table = data.frame(com = c(rep("com1", 3), rep("com2", 4)),
 #'  sp = c("sp1", "sp2", "sp3", "sp2", "sp3", "sp4", "sp5"))
 #'
-#' com_ui = uniqueness(com_table, "sp", dist_mat)
+#' com_ui = table_uniqueness(com_table, "sp", dist_mat)
 #'
 #'
 #' @importFrom dplyr %>%
 #' @export
-uniqueness = function(com_table, sp_col, dist_matrix) {
+table_uniqueness = function(com_table, sp_col, dist_matrix) {
 
   if (!(sp_col %in% colnames(com_table))) {
     stop(paste0("'", sp_col, "' species column not in column names"))
@@ -74,13 +74,13 @@ uniqueness = function(com_table, sp_col, dist_matrix) {
 #' \strong{species} in \strong{columns}, similar to \code{\link[vegan]{vegan}}
 #' package defaults.
 #'
-#' @inheritParams pres_distinctiveness
+#' @inheritParams distinctiveness
 #'
 #'
 #' @return a data frame with uniqueness value per species
 #'
 #' @export
-pres_uniqueness = function(pres_matrix, dist_matrix) {
+uniqueness = function(pres_matrix, dist_matrix) {
 
   com_dist = dist_matrix[colnames(pres_matrix), colnames(pres_matrix)]
 
