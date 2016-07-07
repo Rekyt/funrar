@@ -79,4 +79,16 @@ test_that("Conversion from matrix to tidy data.frame works", {
                                    col_to_col = "site")[, -3], com_table)
 
   expect_equivalent(matrix_to_tidy(abund_mat, value_col = "val"), abund_df)
+
+  expect_equal(matrix_to_tidy(valid_mat, row_to_col = NULL,
+                              col_to_col = "site") %>%
+                 colnames() %>%
+                 .[2],
+               "row")
+
+  expect_equal(matrix_to_tidy(valid_mat, row_to_col = "species",
+                              col_to_col = NULL) %>%
+                 colnames() %>%
+                 .[1],
+               "col")
 })
