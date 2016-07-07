@@ -18,21 +18,20 @@
 #'
 #' @return a data frame with uniqueness value per species
 #'
-#'
 #' @examples
-#' set.seed(1)
-#' trait = data.frame(sp = paste0("sp", 1:5), trait_1 = runif(5),
-#'     trait_2 = as.factor(c("A", "A", "A", "B", "B")))
+#' data("aravo", package = "ade4")
 #'
-#' rownames(trait) = trait$sp
+#' # Site-species matrix converted into data.frame
+#' mat = as.matrix(aravo$spe); dat <- matrix_to_tidy(mat, "value", "site", "species")
+#' dat$site = as.character(dat$site)
 #'
-#' dist_mat = compute_dist_matrix(trait[, -1])
+#' # Example of trait table
+#' tra <- aravo$traits[, c("Height", "SLA", "N_mass")]
+#' # Distance matrix
+#' dist_mat <- compute_dist_matrix(tra)
 #'
-#' com_table = data.frame(com = c(rep("com1", 3), rep("com2", 4)),
-#'  sp = c("sp1", "sp2", "sp3", "sp2", "sp3", "sp4", "sp5"))
-#'
-#' com_ui = table_uniqueness(com_table, "sp", dist_mat)
-#'
+#' ui_df = table_uniqueness(dat, "species", dist_mat)
+#' head(ui_df)
 #'
 #' @importFrom dplyr %>%
 #' @export
@@ -78,6 +77,20 @@ table_uniqueness = function(com_table, sp_col, dist_matrix) {
 #'
 #'
 #' @return a data frame with uniqueness value per species
+#'
+#' @examples
+#' data("aravo", package = "ade4")
+#'
+#' # Site-species matrix
+#' mat = as.matrix(aravo$spe)
+#'
+#' # Example of trait table
+#' tra <- aravo$traits[, c("Height", "SLA", "N_mass")]
+#' # Distance matrix
+#' dist_mat <- compute_dist_matrix(tra)
+#'
+#' ui = uniqueness(mat, dist_mat)
+#' ui[1:5, 1:5]
 #'
 #' @export
 uniqueness = function(pres_matrix, dist_matrix) {

@@ -18,6 +18,15 @@
 #'
 #' @return A tidy data.frame containing species' names and their restrictedness
 #'    value
+#'
+#' @examples
+#' data("aravo", package = "ade4")
+#' # Site-species matrix converted into data.frame
+#' mat = as.matrix(aravo$spe); dat <- matrix_to_tidy(mat, "value", "site", "species")
+#' dat$site = as.character(dat$site)
+#' ri_df = table_restrictedness(dat, "site", "species")
+#' head(ri_df)
+#'
 #' @export
 table_restrictedness = function(com_table, com, species) {
 
@@ -70,6 +79,13 @@ table_restrictedness = function(com_table, com, species) {
 #' @inheritParams scarcity
 #'
 #' @return A tidy data.frame containing species' names and their restrictedness value
+#'
+#' @examples
+#' data("aravo", package = "ade4")
+#' # Site-species matrix
+#' mat = as.matrix(aravo$spe)
+#' ri = restrictedness(mat)
+#' head(ri)
 #'
 #' @export
 restrictedness = function(pres_matrix) {

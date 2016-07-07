@@ -51,6 +51,16 @@ single_com_scar = function(com_table, species, abund) {
 #' @return The same table as \code{com_table} with an added \eqn{S_i} column
 #'     for Scarcity values.
 #'
+#' @examples
+#' data("aravo", package = "ade4")
+#'
+#' # Site-species matrix converted into data.frame
+#' mat = as.matrix(aravo$spe); dat <- matrix_to_tidy(mat, "value", "site", "species")
+#' dat$site = as.character(dat$site)
+#'
+#' si_df = table_scarcity(dat, "species", "site", "value")
+#' head(si_df)
+#'
 #' @export
 table_scarcity = function(com_table, species, com, abund) {
 
@@ -112,6 +122,14 @@ table_scarcity = function(com_table, species, com, abund) {
 #'     \strong{local} rarity in terms of abundances. If \eqn{S_i} is close to 1
 #'     the species has a very low abundances while if it's close to 0, it is
 #'     quite abundant in the community.
+#'
+#' @examples
+#' data("aravo", package = "ade4")
+#' # Site-species matrix
+#' mat = as.matrix(aravo$spe)
+#'
+#' si = scarcity(pres_matrix = mat)
+#' si[1:5, 1:5]
 #'
 #' @export
 scarcity = function(pres_matrix) {
