@@ -150,7 +150,7 @@ test_that("Correct Uniqueness computation", {
   expect_error(table_uniqueness(com_table[1:2, ], "NOT_IN_TABLE", dist_mat),
     regexp = "'NOT_IN_TABLE' species column not in column names")
 
-  expect_error(table_uniqueness(com_table[1:2, ], "NOT_IN_TABLE", dist_mat[1,]),
+  expect_error(table_uniqueness(com_table[1:2, ], "species", dist_mat[1:2,]),
                regexp = "Distance matrix is not square.")
 
   expect_equivalent(table_uniqueness(com_table, "species", dist_mat), all_ui)
