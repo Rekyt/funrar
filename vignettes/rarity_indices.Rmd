@@ -45,7 +45,7 @@ Ecologist usually have to deal with site-species matrix, containing sites names 
 ```{r}
 
 # Site-species matrix stored in aravo$spe
-mat <- as.matrix(aravo$spe)
+mat = as.matrix(aravo$spe)
 
 mat[1:5, 1:5]
 
@@ -57,11 +57,14 @@ In other cases, users can have a stacked data.frame containing columns for sites
 
 ```{r}
 
-dat <- matrix_to_tidy(mat, "value", "site", "species")
+dat = matrix_to_tidy(mat, "value", "site", "species")
 head(dat)
 
 # The reverse function is provided and gives the same original matrix
 identical(as.numeric(tidy_to_matrix(dat, "site", "species", "value")), as.numeric(mat))
+
+# Removal of empty rows
+dat = dat[which(dat$value > 0), ]
 
 ```
 
@@ -79,12 +82,12 @@ The function relies on the `daisy()` function from package `cluster` and the def
 
 ```{r}
 
-tra <- aravo$traits[, c("Height", "SLA", "N_mass")]
+tra = aravo$traits[, c("Height", "SLA", "N_mass")]
 head(tra)
 # Package loading
 library(outlieR)
 
-dist_mat <- compute_dist_matrix(tra)
+dist_mat = compute_dist_matrix(tra)
 dist_mat[1:5, 1:5]
 
 ```
@@ -219,6 +222,7 @@ with $U_i$ the uniqueness of species $i$, $d_{ij}$ the functional distance betwe
 ui = uniqueness(mat, dist_mat)
 
 head(ui)
+
 ```
 
 ```{r uiComp}
@@ -245,9 +249,11 @@ with $R_i$ the restrictedness of species $i$, $N_i$ the number of sites where sp
 #### Computation
 
 ```{r}
+
 ri = restrictedness(mat)
 
 head(ri)
+
 ```
 
 ```{r}
@@ -287,24 +293,64 @@ In this section, some ideas to plot your results are presented.
 
 library(ggplot2)
 library(RColorBrewer)
+library(dplyr)
 
-#quant <- quantile(species_agg$di_mean, probs = seq(0, 1, 0.10))
-#labels_quant <- paste(names(quant)[-length(quant)], names(quant)[-1], sep="-")
+# Heatmap with distinctiveness values
+ggplot(di_df, aes(species, site)) +
+  geom_tile(aes(fill = Di), colour = "white") +
+  scale_fill_gradient(low = "white", high = "steelblue")
 
-#di_density <- data.frame(density(species_agg$di_mean)[c("x", "y")])
-#di_density <- filter(di_density, x >= quant[[1]] & x <= quant[[length(quant)]])
-#di_density$quant <- cut(di_density$x, breaks = quant)   
-#quant <- quantile(species_agg$di_mean, probs = seq(0, 1, 0.10))
-#labels_quant <- paste(names(quant)[-length(quant)], names(quant)[-1], sep="-")
+# Density of distinctiveness values
 
-#di_dens <- ggplot(data = di_density, aes(x = x, y = y)) +
-#geom_area(aes(fill = quant)) +
-#scale_fill_brewer(palette = "RdYlBu", labels = labels_quant, name = "Quantile") +
-#geom_line(size = 1) +
-#xlab("Di mean per species") +
-#ylab("Frequency") +
-# ggtitle("All traits") +
-# theme_classic()
+quant = quantile(di_df$Di, probs = seq(0, 1, 0.10))
+labels_quant = paste(names(quant)[-length(quant)], names(quant)[-1], sep="-")
+ 
+di_density = data.frame(density(di_df$Di)[c("x", "y")])
+di_density = filter(di_density, x >= quant[[1]] & x <= quant[[length(quant)]])
+di_density$quant = cut(di_density$x, breaks = quant)   
+quant = quantile(di_df$Di, probs = seq(0, 1, 0.10))
+labels_quant = paste(names(quant)[-length(quant)], names(quant)[-1], sep="-")
+
+di_dens = ggplot(data = di_density, aes(x = x, y = y)) +
+geom_area(aes(fill = quant)) +
+scale_fill_brewer(palette = "RdYlBu", labels = labels_quant, name = "Quantile") +
+geom_line(size = 1) +
+xlab("Distinctiveness values") +
+ylab("Frequency") +
+ ggtitle("Density of distinctiveness values") +
+ theme_classic()
+
+di_dens
+
+# Density of scarcity values
+
+quant = quantile(si_df$Si, probs = seq(0, 1, 0.10))
+labels_quant = paste(names(quant)[-length(quant)], names(quant)[-1], sep="-")
+ 
+si_density = data.frame(density(si_df$Si)[c("x", "y")])
+si_density = filter(si_density, x >= quant[[1]] & x <= quant[[length(quant)]])
+si_density$quant = cut(si_density$x, breaks = quant)   
+quant = quantile(si_df$Si, probs = seq(0, 1, 0.10))
+labels_quant = paste(names(quant)[-length(quant)], names(quant)[-1], sep="-")
+
+si_dens = ggplot(data = si_density, aes(x = x, y = y)) +
+geom_area(aes(fill = quant)) +
+scale_fill_brewer(palette = "RdYlBu", labels = labels_quant, name = "Quantile") +
+geom_line(size = 1) +
+xlab("Scarcity values") +
+ylab("Frequency") +
+ ggtitle("Density of scarcity values") +
+ theme_classic()
+
+si_dens
+
+# Regional rarity: restrictedness versus uniqueness
+colnames(ri_df)[colnames(ri_df)=="sp"] = "species"
+ri_ui <- inner_join(ri_df, ui_df, by = "species")
+
+ggplot(ri_ui, aes(Ri, Ui)) +
+  geom_point() + 
+  theme_classic() 
 
 ```
 
