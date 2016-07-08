@@ -65,7 +65,7 @@ table_uniqueness = function(com_table, sp_col, dist_matrix) {
   return(u_df)
 }
 
-#' Uniqueness for presence/Aasence matrix
+#' Uniqueness for presence/absence matrix
 #'
 #' Computes uniqueness from a presence-absence matrix of species with a
 #' provided functional distance matrix. The
