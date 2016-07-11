@@ -311,13 +311,14 @@ quant = quantile(di_df$Di, probs = seq(0, 1, 0.10))
 labels_quant = paste(names(quant)[-length(quant)], names(quant)[-1], sep="-")
 
 di_dens = ggplot(data = di_density, aes(x = x, y = y)) +
-geom_area(aes(fill = quant)) +
-scale_fill_brewer(palette = "RdYlBu", labels = labels_quant, name = "Quantile") +
-geom_line(size = 1) +
-xlab("Distinctiveness values") +
-ylab("Frequency") +
- ggtitle("Density of distinctiveness values") +
- theme_classic()
+  geom_area(aes(fill = quant)) +
+  scale_fill_brewer(palette = "RdYlBu", labels = labels_quant,
+                    name = "Quantile") +
+  geom_line(size = 1) +
+  xlab("Distinctiveness values") +
+  ylab("Frequency") +
+  ggtitle("Density of distinctiveness values") +
+  theme_classic()
 
 di_dens
 
@@ -333,13 +334,14 @@ quant = quantile(si_df$Si, probs = seq(0, 1, 0.10))
 labels_quant = paste(names(quant)[-length(quant)], names(quant)[-1], sep="-")
 
 si_dens = ggplot(data = si_density, aes(x = x, y = y)) +
-geom_area(aes(fill = quant)) +
-scale_fill_brewer(palette = "RdYlBu", labels = labels_quant, name = "Quantile") +
-geom_line(size = 1) +
-xlab("Scarcity values") +
-ylab("Frequency") +
- ggtitle("Density of scarcity values") +
- theme_classic()
+  geom_area(aes(fill = quant)) +
+  scale_fill_brewer(palette = "RdYlBu", labels = labels_quant,
+                    name = "Quantile") +
+  geom_line(size = 1) +
+  xlab("Scarcity values") +
+  ylab("Frequency") +
+  ggtitle("Density of scarcity values") +
+  theme_classic()
 
 si_dens
 
