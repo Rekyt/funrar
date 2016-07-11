@@ -227,7 +227,7 @@ head(ui)
 
 ```{r uiComp}
 
-ui_df = table_uniqueness(dat, "species", dist_mat)
+ui_df = uniqueness_stack(dat, "species", dist_mat)
 
 head(ui_df)
 dim(ui_df[!duplicated(ui_df$species), ])

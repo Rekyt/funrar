@@ -72,7 +72,7 @@ distinctiveness_com = function(com_df, species, abund = NULL, dist_matrix) {
 #' of communities, with one column for species identity, one for community
 #' identity and an optional one for relative abundances.
 #'
-#' @inheritParams table_uniqueness
+#' @inheritParams uniqueness_stack
 #'
 #' @param com a character vector, indicating the column name of communities
 #'     names.

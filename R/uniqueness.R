@@ -31,12 +31,12 @@
 #' # Distance matrix
 #' dist_mat <- compute_dist_matrix(tra)
 #'
-#' ui_df = table_uniqueness(dat, "species", dist_mat)
+#' ui_df = uniqueness_stack(dat, "species", dist_mat)
 #' head(ui_df)
 #'
 #' @importFrom dplyr %>%
 #' @export
-table_uniqueness = function(com_df, sp_col, dist_matrix) {
+uniqueness_stack = function(com_df, sp_col, dist_matrix) {
 
   if (!(sp_col %in% colnames(com_df))) {
     stop(paste0("'", sp_col, "' species column not in column names"))
