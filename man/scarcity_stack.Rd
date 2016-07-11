@@ -7,17 +7,17 @@
 scarcity_stack(com_df, species, com, abund)
 }
 \arguments{
-\item{com_df}{a data frame of species in occurences in
-communities.}
+\item{com_df}{a stacked (or tidy) data.frame from a single community with
+each row representing a species}
 
-\item{species}{a character vector indicating the column of species in
+\item{species}{a character vector the name of the species column in
 \code{com_df}}
 
 \item{com}{a character vector indicating the column name of communities ID in
 \code{com_df}}
 
-\item{abund}{a character vector indicating the column name of the relative
-abundances of species in \code{com_df}}
+\item{abund}{(optional, default = \code{NULL}) a character vector indicating
+the name of the column containing relative abundances values}
 }
 \value{
 The same table as \code{com_df} with an added \eqn{S_i} column

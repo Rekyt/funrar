@@ -1,17 +1,23 @@
-# Compute scarcity for a single community -----------------------------------
-#
-# Arguments:
-#   com_df, a tidy data.frame of community with column with species, and
-#   abundance
-#
-#   species, a character vector indicating the name of species column
-#
-#   abund, a character vector in the name of relative abundances column
-#
-#
-# Output:
-#   A tidy data.frame with a new column containing species scarcity
-
+#' Scarcity for a single community in stack data.frame
+#'
+#' Given a stacked data.frame compute species scarcity.
+#' See \code{\link[outlieR]{scarcity}} function or the functional rarity indices
+#' vignette included in the package (type \code{vignette(package = "outlieR")})
+#' for details about the indices.
+#'
+#' @param com_df a stacked (or tidy) data.frame from a single community with
+#'    each row representing a species
+#'
+#' @param species a character vector the name of the species column in
+#'    \code{com_df}
+#'
+#' @param abund (optional, default = \code{NULL}) a character vector indicating
+#'    the name of the column containing relative abundances values
+#'
+#' @return the same data.frame with the additional \strong{Si} column giving
+#'    scarcity values for each species
+#'
+#' @export
 scarcity_com = function(com_df, species, abund) {
 
   # Computes scarcity by species
@@ -36,17 +42,10 @@ scarcity_com = function(com_df, species, abund) {
 #' species present in the given community and \eqn{A_i} the relative abundance
 #' (in \%) of species \eqn{i}.
 #'
-#' @param com_df a data frame of species in occurences in
-#'     communities.
-#'
-#' @param species a character vector indicating the column of species in
-#'     \code{com_df}
+#' @inheritParams scarcity_com
 #'
 #' @param com a character vector indicating the column name of communities ID in
 #'     \code{com_df}
-#'
-#' @param abund a character vector indicating the column name of the relative
-#'     abundances of species in \code{com_df}
 #'
 #' @return The same table as \code{com_df} with an added \eqn{S_i} column
 #'     for Scarcity values.
