@@ -4,7 +4,7 @@ author: "Denelle Pierre & Greni\u00e9 Matthias"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{How to use funrar, an example with plant communities dataset.}
+  %\VignetteIndexEntry{How to use funrar, an example with plant communities dataset}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -19,7 +19,9 @@ In their article, Violle et al. (2016) introduced 4 indices to compute functiona
 
 The following figure show the 4 aspects covered by the metrics. Rarity is thus considered at local and regional scales and also from abundance and functional point of views. The name of the package functions are written underneath metrics' names.
 
+```
 ![Rarity indices and corresponding functions.](F:/PIERRE_DENELLE/Functional_rarity/outlier_scheme.png)
+```
 
 # Dataset example
 
