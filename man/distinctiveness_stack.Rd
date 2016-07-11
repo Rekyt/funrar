@@ -10,11 +10,14 @@ distinctiveness_stack(com_df, sp_col, com, abund = NULL, dist_matrix)
 \item{com_df}{a stacked (or tidy) data.frame from a single community with
 each row representing a species}
 
+\item{sp_col}{a character vector the name of the species column in
+\code{com_df}}
+
 \item{com}{a character vector, indicating the column name of communities
 names.}
 
-\item{abund}{(optional, default = \code{NULL}) a character vector indicating
-the name of the column containing relative abundances values}
+\item{abund}{a character vector indicating the name of the column containing
+relative abundances values}
 
 \item{dist_matrix}{a functional distance matrix as given by
 \code{compute_dist_matrix()}}

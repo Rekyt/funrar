@@ -21,7 +21,7 @@
 #'    functional distinctiveness values for each species
 #'
 #' @export
-distinctiveness_com = function(com_df, species, abund = NULL, dist_matrix) {
+distinctiveness_com = function(com_df, sp_col, abund = NULL, dist_matrix) {
 
   # Check if distance matrix is a matrix or data frame
   if (!is.matrix(dist_matrix) & !is.data.frame(dist_matrix)) {
@@ -35,7 +35,7 @@ distinctiveness_com = function(com_df, species, abund = NULL, dist_matrix) {
   }
 
   # Get functional distance matrix of species in communities
-  com_dist <- dist_matrix[com_df[[species]], com_df[[species]]]
+  com_dist <- dist_matrix[com_df[[sp_col]], com_df[[sp_col]]]
 
   if (!is.null(dim(com_dist))) {
     if (is.null(abund)) {

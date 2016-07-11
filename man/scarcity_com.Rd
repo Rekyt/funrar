@@ -4,17 +4,17 @@
 \alias{scarcity_com}
 \title{Scarcity for a single community in stack data.frame}
 \usage{
-scarcity_com(com_df, species, abund)
+scarcity_com(com_df, sp_col, abund)
 }
 \arguments{
 \item{com_df}{a stacked (or tidy) data.frame from a single community with
 each row representing a species}
 
-\item{species}{a character vector the name of the species column in
+\item{sp_col}{a character vector the name of the species column in
 \code{com_df}}
 
-\item{abund}{(optional, default = \code{NULL}) a character vector indicating
-the name of the column containing relative abundances values}
+\item{abund}{a character vector indicating the name of the column containing
+relative abundances values}
 }
 \value{
 the same data.frame with the additional \strong{Si} column giving

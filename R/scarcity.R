@@ -8,22 +8,22 @@
 #' @param com_df a stacked (or tidy) data.frame from a single community with
 #'    each row representing a species
 #'
-#' @param species a character vector the name of the species column in
+#' @param sp_col a character vector the name of the species column in
 #'    \code{com_df}
 #'
-#' @param abund (optional, default = \code{NULL}) a character vector indicating
-#'    the name of the column containing relative abundances values
+#' @param abund a character vector indicating the name of the column containing
+#'    relative abundances values
 #'
 #' @return the same data.frame with the additional \strong{Si} column giving
 #'    scarcity values for each species
 #'
 #' @export
-scarcity_com = function(com_df, species, abund) {
+scarcity_com = function(com_df, sp_col, abund) {
 
   # Computes scarcity by species
-  N_sp = nrow(com_df)
+  N_sp = length(com_df[[sp_col]])
 
-  com_df[, "Si"] = exp(-N_sp * log(2) * com_df[, abund])
+  com_df[, "Si"] = exp(-N_sp * log(2) * com_df[[abund]])
 
   return(com_df)
 }
@@ -62,18 +62,18 @@ scarcity_com = function(com_df, species, abund) {
 #' head(si_df)
 #'
 #' @export
-scarcity_stack = function(com_df, species, com, abund) {
+scarcity_stack = function(com_df, sp_col, com, abund) {
 
   # Test to be sure
   if ( (com %in% colnames(com_df)) == FALSE) {
     stop("Community table does not have any communities.")
   }
 
-  if ( (species %in% colnames(com_df)) == FALSE) {
+  if ( (sp_col %in% colnames(com_df)) == FALSE) {
     stop("Community table does not have any species.")
   }
 
-  if (!is.character(com_df[, species])) {
+  if (!is.character(com_df[, sp_col])) {
     stop("Provided species are not character.")
   }
 
@@ -91,7 +91,7 @@ scarcity_stack = function(com_df, species, com, abund) {
 
   com_split = lapply(com_split,
                       function(one_com)
-                        scarcity_com(one_com, species, abund)
+                        scarcity_com(one_com, sp_col, abund)
   )
 
   com_scarcity = dplyr::bind_rows(com_split)

@@ -4,17 +4,17 @@
 \alias{distinctiveness_com}
 \title{Distinctiveness for a single community in stack data.frame}
 \usage{
-distinctiveness_com(com_df, species, abund = NULL, dist_matrix)
+distinctiveness_com(com_df, sp_col, abund = NULL, dist_matrix)
 }
 \arguments{
 \item{com_df}{a stacked (or tidy) data.frame from a single community with
 each row representing a species}
 
-\item{species}{a character vector the name of the species column in
+\item{sp_col}{a character vector the name of the species column in
 \code{com_df}}
 
-\item{abund}{(optional, default = \code{NULL}) a character vector indicating
-the name of the column containing relative abundances values}
+\item{abund}{a character vector indicating the name of the column containing
+relative abundances values}
 
 \item{dist_matrix}{a functional distance matrix as given by
 \code{compute_dist_matrix()}}
