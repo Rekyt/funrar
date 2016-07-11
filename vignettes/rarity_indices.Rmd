@@ -261,7 +261,7 @@ head(ri)
 # Species should be character
 dat$site = as.character(dat$site)
 
-ri_df = table_restrictedness(dat, "site", "species")
+ri_df = restrictedness_stack(dat, "site", "species")
 
 head(ri_df)
 
