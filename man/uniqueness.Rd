@@ -27,6 +27,7 @@ data("aravo", package = "ade4")
 
 # Site-species matrix
 mat = as.matrix(aravo$spe)
+colnames(mat) = as.character(colnames(mat))
 
 # Example of trait table
 tra <- aravo$traits[, c("Height", "SLA", "N_mass")]

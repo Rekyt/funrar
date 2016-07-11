@@ -95,6 +95,7 @@ single_com_dist = function(com_df, species, abund = NULL, dist_matrix) {
 #' # Site-species matrix converted into data.frame
 #' mat = as.matrix(aravo$spe); dat <- matrix_to_tidy(mat, "value", "site", "species")
 #' dat$site = as.character(dat$site)
+#' dat$species = as.character(dat$species)
 #'
 #' di_df = table_distinctiveness(dat, "species", "site", "value", dist_mat)
 #' head(di_df)

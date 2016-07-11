@@ -24,6 +24,7 @@
 #' # Site-species matrix converted into data.frame
 #' mat = as.matrix(aravo$spe); dat <- matrix_to_tidy(mat, "value", "site", "species")
 #' dat$site = as.character(dat$site)
+#' dat$species = as.character(dat$species)
 #'
 #' # Example of trait table
 #' tra <- aravo$traits[, c("Height", "SLA", "N_mass")]
@@ -83,6 +84,7 @@ table_uniqueness = function(com_df, sp_col, dist_matrix) {
 #'
 #' # Site-species matrix
 #' mat = as.matrix(aravo$spe)
+#' colnames(mat) = as.character(colnames(mat))
 #'
 #' # Example of trait table
 #' tra <- aravo$traits[, c("Height", "SLA", "N_mass")]
