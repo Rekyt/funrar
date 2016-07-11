@@ -35,7 +35,7 @@ tra <- aravo$traits[, c("Height", "SLA", "N_mass")]
 dist_mat <- compute_dist_matrix(tra)
 
 ui = uniqueness(mat, dist_mat)
-ui[1:5, 1:5]
+head(ui)
 
 }
 

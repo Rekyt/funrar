@@ -92,7 +92,7 @@ table_uniqueness = function(com_df, sp_col, dist_matrix) {
 #' dist_mat <- compute_dist_matrix(tra)
 #'
 #' ui = uniqueness(mat, dist_mat)
-#' ui[1:5, 1:5]
+#' head(ui)
 #'
 #' @export
 uniqueness = function(pres_matrix, dist_matrix) {
