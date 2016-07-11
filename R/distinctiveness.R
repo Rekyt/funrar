@@ -20,7 +20,7 @@
 #
 # Output: A tidy data.frame with a new column containing species distinctiveness
 
-single_com_dist = function(com_df, species, abund = NULL, dist_matrix) {
+distinctiveness_com = function(com_df, species, abund = NULL, dist_matrix) {
 
   # Check if distance matrix is a matrix or data frame
   if (!is.matrix(dist_matrix) & !is.data.frame(dist_matrix)) {
@@ -97,11 +97,11 @@ single_com_dist = function(com_df, species, abund = NULL, dist_matrix) {
 #' dat$site = as.character(dat$site)
 #' dat$species = as.character(dat$species)
 #'
-#' di_df = table_distinctiveness(dat, "species", "site", "value", dist_mat)
+#' di_df = distinctiveness_stack(dat, "species", "site", "value", dist_mat)
 #' head(di_df)
 #'
 #' @export
-table_distinctiveness = function(com_df, sp_col, com, abund = NULL,
+distinctiveness_stack = function(com_df, sp_col, com, abund = NULL,
                                  dist_matrix) {
 
   # Test to be sure
@@ -143,7 +143,7 @@ table_distinctiveness = function(com_df, sp_col, com, abund = NULL,
 
   com_split <- lapply(com_split,
                       function(one_com)
-                        single_com_dist(one_com, sp_col, abund, dist_matrix)
+                        distinctiveness_com(one_com, sp_col, abund, dist_matrix)
   )
 
   com_distinctiveness <- dplyr::bind_rows(com_split)

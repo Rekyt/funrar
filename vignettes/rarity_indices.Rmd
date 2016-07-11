@@ -138,7 +138,7 @@ The syntax for `distinctiveness()` is first the table and then the distance matr
 
 #### Computation with stacked data.frame
 
-Using `outlieR` distinctiveness values can be computed using function `table_distinctiveness()`:
+Using `outlieR` distinctiveness values can be computed using function `distinctiveness_stack()`:
 
 ```{r computeDi}
 
@@ -146,7 +146,7 @@ Using `outlieR` distinctiveness values can be computed using function `table_dis
 dat$species = as.character(dat$species)
 
 # Compute distinctiveness for each species on each site
-di_df = table_distinctiveness(com_df = dat,  # The site x species table
+di_df = distinctiveness_stack(com_df = dat,  # The site x species table
                               sp_col = "species",  # Name of the species column
                               com = "site",  # Name of the community column
                               abund = NULL,  # Relative abundances column (facultative)
@@ -156,13 +156,13 @@ head(di_df)
 
 ```
 
-The syntax for `table_distinctiveness()` is first the table, then the name of the species column, then the name of the community column, then eventually the name of the relative abundance column and finally the distance matrix. The function add a `Di` column giving the species distinctiveness in each species per site combination.
+The syntax for `distinctiveness_stack()` is first the table, then the name of the species column, then the name of the community column, then eventually the name of the relative abundance column and finally the distance matrix. The function add a `Di` column giving the species distinctiveness in each species per site combination.
 
 For abundance weighted distinctiveness you need to have a column containing relative abundances in your data frame as such:
 
 ```{r abundDi}
 
-di_df = table_distinctiveness(dat, "species", "site", "value", dist_mat)
+di_df = distinctiveness_stack(dat, "species", "site", "value", dist_mat)
 
 head(di_df)
 

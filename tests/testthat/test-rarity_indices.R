@@ -106,8 +106,8 @@ com_scarcity = com_df_ex %>%
 
 test_that("Invalid input types do not work", {
 
-  expect_error(single_com_dist("a", "species", NULL, "d"))
-  expect_error(single_com_dist(3, "species", NULL, "d"))
+  expect_error(distinctiveness_com("a", "species", NULL, "d"))
+  expect_error(distinctiveness_com(3, "species", NULL, "d"))
 
 })
 
@@ -116,7 +116,7 @@ test_that("Correct Di computation with different comm. without abundance",{
 
 
   # Good messages and warnings
-  expect_message(table_distinctiveness(com_df, "species", "site",
+  expect_message(distinctiveness_stack(com_df, "species", "site",
                                        abund = NULL, dist_mat))
 
   expect_message(distinctiveness(valid_mat[-1, -1], dist_mat))
@@ -125,7 +125,7 @@ test_that("Correct Di computation with different comm. without abundance",{
 
 
   # Good Distinctiveness computations without abundances
-  c_dist = table_distinctiveness(com_df, "species", "site", abund = NULL,
+  c_dist = distinctiveness_stack(com_df, "species", "site", abund = NULL,
                                  dist_mat)
 
   expect_equivalent(correct_dist_mat,

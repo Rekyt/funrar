@@ -2,11 +2,11 @@
 
 export(compute_dist_matrix)
 export(distinctiveness)
+export(distinctiveness_stack)
 export(funrar)
 export(matrix_to_tidy)
 export(restrictedness)
 export(scarcity)
-export(table_distinctiveness)
 export(table_restrictedness)
 export(table_scarcity)
 export(table_uniqueness)
