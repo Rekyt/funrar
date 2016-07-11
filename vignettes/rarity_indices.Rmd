@@ -56,6 +56,7 @@ In other cases, users can have a stacked data.frame containing columns for sites
 `funrar` package includes two functions to go from one format to the other: `matrix_to_tidy()` and `tidy_to_matrix()`
 
 ```{r}
+library(outlieR)
 
 dat = matrix_to_tidy(mat, "value", "site", "species")
 head(dat)
@@ -84,8 +85,6 @@ The function relies on the `daisy()` function from package `cluster` and the def
 
 tra = aravo$traits[, c("Height", "SLA", "N_mass")]
 head(tra)
-# Package loading
-library(outlieR)
 
 dist_mat = compute_dist_matrix(tra)
 dist_mat[1:5, 1:5]
@@ -146,7 +145,7 @@ Using `outlieR` distinctiveness values can be computed using function `table_dis
 dat$species = as.character(dat$species)
 
 # Compute distinctiveness for each species on each site
-di_df = table_distinctiveness(com_table = dat,  # The site x species table
+di_df = table_distinctiveness(com_df = dat,  # The site x species table
                               sp_col = "species",  # Name of the species column
                               com = "site",  # Name of the community column
                               abund = NULL,  # Relative abundances column (facultative)
