@@ -195,7 +195,7 @@ si[1:5, 1:5]
 
 ```{r siComp}
 
-si_df = table_scarcity(dat, "species", "site", "value")
+si_df = scarcity_stack(dat, "species", "site", "value")
 
 head(si_df)
 

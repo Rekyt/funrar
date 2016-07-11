@@ -12,7 +12,7 @@
 # Output:
 #   A tidy data.frame with a new column containing species scarcity
 
-single_com_scar = function(com_df, species, abund) {
+scarcity_com = function(com_df, species, abund) {
 
   # Computes scarcity by species
   N_sp = nrow(com_df)
@@ -59,11 +59,11 @@ single_com_scar = function(com_df, species, abund) {
 #' dat$site = as.character(dat$site)
 #' dat$species = as.character(dat$species)
 #'
-#' si_df = table_scarcity(dat, "species", "site", "value")
+#' si_df = scarcity_stack(dat, "species", "site", "value")
 #' head(si_df)
 #'
 #' @export
-table_scarcity = function(com_df, species, com, abund) {
+scarcity_stack = function(com_df, species, com, abund) {
 
   # Test to be sure
   if ( (com %in% colnames(com_df)) == FALSE) {
@@ -92,7 +92,7 @@ table_scarcity = function(com_df, species, com, abund) {
 
   com_split = lapply(com_split,
                       function(one_com)
-                        single_com_scar(one_com, species, abund)
+                        scarcity_com(one_com, species, abund)
   )
 
   com_scarcity = dplyr::bind_rows(com_split)

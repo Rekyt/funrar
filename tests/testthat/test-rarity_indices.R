@@ -194,13 +194,13 @@ test_that("Correct Scarcity computation", {
 
   # Single community scarcity correct computation
   expect_equal(filter(com_scarcity, site == "s1"),
-               single_com_scar(com_df_ex %>%
+               scarcity_com(com_df_ex %>%
                                  filter(site == "s1") %>%
                                  as.data.frame(),
                                "species", "abund"))
 
   # Scarcity correct computation over many communities
-  expect_equal(com_scarcity, table_scarcity(as.data.frame(com_df_ex),
+  expect_equal(com_scarcity, scarcity_stack(as.data.frame(com_df_ex),
                                             "species", "site", "abund"))
 
   # Correct Sparseness computation for a site-species matrix
@@ -209,11 +209,11 @@ test_that("Correct Scarcity computation", {
 
 
 test_that("Scarcity errors with bad input", {
-  expect_error(table_scarcity(as.data.frame(com_df_ex),
+  expect_error(scarcity_stack(as.data.frame(com_df_ex),
                               "species", "SITE_NOT_IN_TABLE", "abund"),
                regexp = "Community table does not have any communities")
 
-  expect_error(table_scarcity(as.data.frame(com_df_ex),
+  expect_error(scarcity_stack(as.data.frame(com_df_ex),
                               "SPECIES_NOT_IN_TABLE", "site", "abund"),
                regexp = "Community table does not have any species")
 
@@ -222,11 +222,11 @@ test_that("Scarcity errors with bad input", {
 
   com_df_sp$species = as.factor(com_df_ex$species)
 
-  expect_error(table_scarcity(as.data.frame(com_df_sp),
+  expect_error(scarcity_stack(as.data.frame(com_df_sp),
                 "species", "site", "abund"),
                regexp = "Provided species are not character")
 
-  expect_error(table_scarcity(as.data.frame(com_df_ex), "species", "site",
+  expect_error(scarcity_stack(as.data.frame(com_df_ex), "species", "site",
                               NULL),
                regexp = "No relative abundance provided.")
 
@@ -234,7 +234,7 @@ test_that("Scarcity errors with bad input", {
 
   com_df_ab$abund = as.character(com_df_ex$abund)
 
-  expect_error(table_scarcity(as.data.frame(com_df_ab), "species", "site",
+  expect_error(scarcity_stack(as.data.frame(com_df_ab), "species", "site",
                               "abund"),
                regexp = "Provided abundances are not numeric.")
 })
