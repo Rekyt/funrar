@@ -15,15 +15,15 @@ colnames(valid_mat) = paste0("s", 1:4)
 rownames(valid_mat) = letters[1:4]
 
 log_mat = (valid_mat == 1 & !is.na(valid_mat))
-com_table = lapply(colnames(log_mat), function(x) {
+com_df = lapply(colnames(log_mat), function(x) {
   species = rownames(valid_mat)[log_mat[, x]]
   data.frame(site = rep(x, length(species)), species = species)
 }) %>%
   bind_rows()
 
-com_table$site = factor(com_table$site)
+com_df$site = factor(com_df$site)
 
-com_table$species = factor(com_table$species)
+com_df$species = factor(com_df$species)
 
 
 # Abundance Matrix
@@ -61,13 +61,13 @@ na_mat["d", "s4"] = NA
 
 test_that("Conversion from tidy data frame to matrix works", {
 
-  expect_equivalent(tidy_to_matrix(com_table, "species", "site"), valid_mat)
+  expect_equivalent(tidy_to_matrix(com_df, "species", "site"), valid_mat)
   expect_equivalent(tidy_to_matrix(abund_df, "species", "site", "val"), abund_mat)
 
-  expect_error(tidy_to_matrix(com_table, "speies", "site"),
+  expect_error(tidy_to_matrix(com_df, "speies", "site"),
                label = "Column 'speies' is not in data.frame")
 
-  expect_error(tidy_to_matrix(com_table, "speies", "seit"),
+  expect_error(tidy_to_matrix(com_df, "speies", "seit"),
                label = "Columns 'speies' and 'seit' are not in data.frame")
 
 })
@@ -76,7 +76,7 @@ test_that("Conversion from tidy data frame to matrix works", {
 test_that("Conversion from matrix to tidy data.frame works", {
 
   expect_equivalent(matrix_to_tidy(valid_mat, row_to_col = "species",
-                                   col_to_col = "site")[, -3], com_table)
+                                   col_to_col = "site")[, -3], com_df)
 
   expect_equivalent(matrix_to_tidy(abund_mat, value_col = "val"), abund_df)
 

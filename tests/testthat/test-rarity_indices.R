@@ -23,7 +23,7 @@ colnames(valid_mat) = letters[1:4]
 log_mat = (valid_mat == 1)
 
 
-com_table = lapply(rownames(log_mat), function(x) {
+com_df = lapply(rownames(log_mat), function(x) {
   species = colnames(valid_mat)[log_mat[x, ]]
   data.frame(site = rep(x, length(species)), species = species)
 }) %>%
@@ -82,11 +82,11 @@ undef_test = distinctiveness(small_mat, dist_mat)
 
 
 # Scarcity data ----------------------------------------------------------------
-com_table_ex = bind_cols(com_table, data.frame(abund = c(0.3, 0.7, 0.2, 0.6,
+com_df_ex = bind_cols(com_df, data.frame(abund = c(0.3, 0.7, 0.2, 0.6,
                                                          0.2, 0.5, 0.5, 0.2,
                                                          0.8)))
 abund_mat = valid_mat
-abund_mat[abund_mat == 1] = com_table_ex %>%
+abund_mat[abund_mat == 1] = com_df_ex %>%
   arrange(species) %>%
   .$abund
 
@@ -94,10 +94,10 @@ scarcity_mat = apply(abund_mat, 1, function(x) {
   ifelse(x != 0, exp(-sum(x != 0)*log(2)*x), NA)
 }) %>% t()
 
-com_scarcity = com_table_ex %>%
+com_scarcity = com_df_ex %>%
   group_by(site) %>%
   summarise(N_sp = n()) %>%
-  right_join(com_table_ex, by = "site") %>%
+  right_join(com_df_ex, by = "site") %>%
   mutate(Si = exp(-N_sp*log(2)*abund)) %>%
   select(-N_sp)
 
@@ -116,7 +116,7 @@ test_that("Correct Di computation with different comm. without abundance",{
 
 
   # Good messages and warnings
-  expect_message(table_distinctiveness(com_table, "species", "site",
+  expect_message(table_distinctiveness(com_df, "species", "site",
                                        abund = NULL, dist_mat))
 
   expect_message(distinctiveness(valid_mat[-1, -1], dist_mat))
@@ -125,7 +125,7 @@ test_that("Correct Di computation with different comm. without abundance",{
 
 
   # Good Distinctiveness computations without abundances
-  c_dist = table_distinctiveness(com_table, "species", "site", abund = NULL,
+  c_dist = table_distinctiveness(com_df, "species", "site", abund = NULL,
                                  dist_mat)
 
   expect_equivalent(correct_dist_mat,
@@ -171,16 +171,16 @@ test_that("Correct Uniqueness computation", {
   all_ui = data.frame(species = letters[1:4],
                       Ui = c(1/9, 1/9, 4/9, 4/9))
 
-  expect_equivalent(table_uniqueness(com_table[1:2, ], "species", dist_mat),
+  expect_equivalent(table_uniqueness(com_df[1:2, ], "species", dist_mat),
                     valid_ui)
 
-  expect_error(table_uniqueness(com_table[1:2, ], "NOT_IN_TABLE", dist_mat),
+  expect_error(table_uniqueness(com_df[1:2, ], "NOT_IN_TABLE", dist_mat),
     regexp = "'NOT_IN_TABLE' species column not in column names")
 
-  expect_error(table_uniqueness(com_table[1:2, ], "species", dist_mat[1:2,]),
+  expect_error(table_uniqueness(com_df[1:2, ], "species", dist_mat[1:2,]),
                regexp = "Distance matrix is not square.")
 
-  expect_equivalent(table_uniqueness(com_table, "species", dist_mat), all_ui)
+  expect_equivalent(table_uniqueness(com_df, "species", dist_mat), all_ui)
 
   expect_equal(uniqueness(valid_mat, dist_mat), all_ui)
 })
@@ -194,13 +194,13 @@ test_that("Correct Scarcity computation", {
 
   # Single community scarcity correct computation
   expect_equal(filter(com_scarcity, site == "s1"),
-               single_com_scar(com_table_ex %>%
+               single_com_scar(com_df_ex %>%
                                  filter(site == "s1") %>%
                                  as.data.frame(),
                                "species", "abund"))
 
   # Scarcity correct computation over many communities
-  expect_equal(com_scarcity, table_scarcity(as.data.frame(com_table_ex),
+  expect_equal(com_scarcity, table_scarcity(as.data.frame(com_df_ex),
                                             "species", "site", "abund"))
 
   # Correct Sparseness computation for a site-species matrix
@@ -209,32 +209,32 @@ test_that("Correct Scarcity computation", {
 
 
 test_that("Scarcity errors with bad input", {
-  expect_error(table_scarcity(as.data.frame(com_table_ex),
+  expect_error(table_scarcity(as.data.frame(com_df_ex),
                               "species", "SITE_NOT_IN_TABLE", "abund"),
                regexp = "Community table does not have any communities")
 
-  expect_error(table_scarcity(as.data.frame(com_table_ex),
+  expect_error(table_scarcity(as.data.frame(com_df_ex),
                               "SPECIES_NOT_IN_TABLE", "site", "abund"),
                regexp = "Community table does not have any species")
 
 
-  com_table_sp = com_table_ex
+  com_df_sp = com_df_ex
 
-  com_table_sp$species = as.factor(com_table_ex$species)
+  com_df_sp$species = as.factor(com_df_ex$species)
 
-  expect_error(table_scarcity(as.data.frame(com_table_sp),
+  expect_error(table_scarcity(as.data.frame(com_df_sp),
                 "species", "site", "abund"),
                regexp = "Provided species are not character")
 
-  expect_error(table_scarcity(as.data.frame(com_table_ex), "species", "site",
+  expect_error(table_scarcity(as.data.frame(com_df_ex), "species", "site",
                               NULL),
                regexp = "No relative abundance provided.")
 
-  com_table_ab = com_table_ex
+  com_df_ab = com_df_ex
 
-  com_table_ab$abund = as.character(com_table_ex$abund)
+  com_df_ab$abund = as.character(com_df_ex$abund)
 
-  expect_error(table_scarcity(as.data.frame(com_table_ab), "species", "site",
+  expect_error(table_scarcity(as.data.frame(com_df_ab), "species", "site",
                               "abund"),
                regexp = "Provided abundances are not numeric.")
 })
