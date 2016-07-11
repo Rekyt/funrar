@@ -4,10 +4,10 @@
 \alias{table_restrictedness}
 \title{Table Restrictedness}
 \usage{
-table_restrictedness(com_table, com, species)
+table_restrictedness(com_df, com, species)
 }
 \arguments{
-\item{com_table}{a tidy data.frame of community with column with species}
+\item{com_df}{a tidy data.frame of community with column with species}
 
 \item{com}{a character vector indicating the name of community column}
 
@@ -19,5 +19,14 @@ A tidy data.frame containing species' names and their restrictedness
 }
 \description{
 Compute restrictedness for every species
+}
+\examples{
+data("aravo", package = "ade4")
+# Site-species matrix converted into data.frame
+mat = as.matrix(aravo$spe); dat <- matrix_to_tidy(mat, "value", "site", "species")
+dat$site = as.character(dat$site)
+ri_df = table_restrictedness(dat, "site", "species")
+head(ri_df)
+
 }
 

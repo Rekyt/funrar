@@ -17,4 +17,12 @@ A tidy data.frame containing species' names and their restrictedness value
 Computes restrictedness from a presence-absence matrix of species with a
 provided functional distance matrix.
 }
+\examples{
+data("aravo", package = "ade4")
+# Site-species matrix
+mat = as.matrix(aravo$spe)
+ri = restrictedness(mat)
+head(ri)
+
+}
 

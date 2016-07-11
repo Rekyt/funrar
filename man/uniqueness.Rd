@@ -2,7 +2,7 @@
 % Please edit documentation in R/uniqueness.R
 \name{uniqueness}
 \alias{uniqueness}
-\title{Uniqueness for presence/Aasence matrix}
+\title{Uniqueness for presence/absence matrix}
 \usage{
 uniqueness(pres_matrix, dist_matrix)
 }
@@ -21,5 +21,20 @@ provided functional distance matrix. The
 sites-species matrix should have \strong{sites} in \strong{rows} and
 \strong{species} in \strong{columns}, similar to \code{\link[vegan]{vegan}}
 package defaults.
+}
+\examples{
+data("aravo", package = "ade4")
+
+# Site-species matrix
+mat = as.matrix(aravo$spe)
+
+# Example of trait table
+tra <- aravo$traits[, c("Height", "SLA", "N_mass")]
+# Distance matrix
+dist_mat <- compute_dist_matrix(tra)
+
+ui = uniqueness(mat, dist_mat)
+ui[1:5, 1:5]
+
 }
 

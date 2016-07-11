@@ -22,4 +22,13 @@ coding the values that will be put in the matrix}
 Passes from a tidy data frame (only present species) with an index to a
 matrix.
 }
+\examples{
+example = data.frame("sites" = c(rep("1", 3), rep("2", 2)),
+ "species" = c("A", "B", "C", "B", "D"),
+  "abundance" = c(0.33, 0.33, 0.33, 0.4, 0.6))
+
+mat = tidy_to_matrix(example, "sites", "species", "abundance")
+mat
+
+}
 

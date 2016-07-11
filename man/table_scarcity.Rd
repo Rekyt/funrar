@@ -4,23 +4,23 @@
 \alias{table_scarcity}
 \title{Scarcity}
 \usage{
-table_scarcity(com_table, species, com, abund)
+table_scarcity(com_df, species, com, abund)
 }
 \arguments{
-\item{com_table}{a data frame of species in occurences in
+\item{com_df}{a data frame of species in occurences in
 communities.}
 
 \item{species}{a character vector indicating the column of species in
-\code{com_table}}
+\code{com_df}}
 
 \item{com}{a character vector indicating the column name of communities ID in
-\code{com_table}}
+\code{com_df}}
 
 \item{abund}{a character vector indicating the column name of the relative
-abundances of species in \code{com_table}}
+abundances of species in \code{com_df}}
 }
 \value{
-The same table as \code{com_table} with an added \eqn{S_i} column
+The same table as \code{com_df} with an added \eqn{S_i} column
     for Scarcity values.
 }
 \description{
@@ -35,5 +35,16 @@ terms of abundances, as such:
 with \eqn{S_i} the scarcity of species \eqn{i}, \eqn{N} the number of
 species present in the given community and \eqn{A_i} the relative abundance
 (in \%) of species \eqn{i}.
+}
+\examples{
+data("aravo", package = "ade4")
+
+# Site-species matrix converted into data.frame
+mat = as.matrix(aravo$spe); dat <- matrix_to_tidy(mat, "value", "site", "species")
+dat$site = as.character(dat$site)
+
+si_df = table_scarcity(dat, "species", "site", "value")
+head(si_df)
+
 }
 

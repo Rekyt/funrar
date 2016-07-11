@@ -4,13 +4,13 @@
 \alias{table_distinctiveness}
 \title{Table Functional Distinctiveness}
 \usage{
-table_distinctiveness(com_table, sp_col, com, abund = NULL, dist_matrix)
+table_distinctiveness(com_df, sp_col, com, abund = NULL, dist_matrix)
 }
 \arguments{
-\item{com_table}{a data frame of the species in the regional pool.}
+\item{com_df}{a data frame of the species in the regional pool.}
 
 \item{sp_col}{a character vector indicating the name of the species column
-in the \code{com_table} data frame}
+in the \code{com_df} data frame}
 
 \item{com}{a character vector, indicating the column name of communities
 names.}
@@ -22,12 +22,28 @@ relative abundances.}
 \item{dist_matrix}{a functional distance matrix}
 }
 \value{
-a table similar to \code{com_table} with an added column \eqn{D_i}
+a table similar to \code{com_df} with an added column \eqn{D_i}
     giving the Functional Distinctiveness of each species in each communities
 }
 \description{
 Compute Functional Distinctiveness for several communities, from a data.frame
 of communities, with one column for species identity, one for community
 identity and an optional one for relative abundances.
+}
+\examples{
+data("aravo", package = "ade4")
+
+# Example of trait table
+tra <- aravo$traits[, c("Height", "SLA", "N_mass")]
+# Distance matrix
+dist_mat <- compute_dist_matrix(tra)
+
+# Site-species matrix converted into data.frame
+mat = as.matrix(aravo$spe); dat <- matrix_to_tidy(mat, "value", "site", "species")
+dat$site = as.character(dat$site)
+
+di_df = table_distinctiveness(dat, "species", "site", "value", dist_mat)
+head(di_df)
+
 }
 

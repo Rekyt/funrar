@@ -4,13 +4,13 @@
 \alias{table_uniqueness}
 \title{Uniqueness}
 \usage{
-table_uniqueness(com_table, sp_col, dist_matrix)
+table_uniqueness(com_df, sp_col, dist_matrix)
 }
 \arguments{
-\item{com_table}{a data frame of the species in the regional pool.}
+\item{com_df}{a data frame of the species in the regional pool.}
 
 \item{sp_col}{a character vector indicating the name of the species column
-in the \code{com_table} data frame}
+in the \code{com_df} data frame}
 
 \item{dist_matrix}{a functional distance matrix}
 }
@@ -27,19 +27,19 @@ with \eqn{d_{ij}}{d_ij} the functional distance between species
 \eqn{i} and \eqn{j}.
 }
 \examples{
-set.seed(1)
-trait = data.frame(sp = paste0("sp", 1:5), trait_1 = runif(5),
-    trait_2 = as.factor(c("A", "A", "A", "B", "B")))
+data("aravo", package = "ade4")
 
-rownames(trait) = trait$sp
+# Site-species matrix converted into data.frame
+mat = as.matrix(aravo$spe); dat <- matrix_to_tidy(mat, "value", "site", "species")
+dat$site = as.character(dat$site)
 
-dist_mat = compute_dist_matrix(trait[, -1])
+# Example of trait table
+tra <- aravo$traits[, c("Height", "SLA", "N_mass")]
+# Distance matrix
+dist_mat <- compute_dist_matrix(tra)
 
-com_table = data.frame(com = c(rep("com1", 3), rep("com2", 4)),
- sp = c("sp1", "sp2", "sp3", "sp2", "sp3", "sp4", "sp5"))
-
-com_ui = table_uniqueness(com_table, "sp", dist_mat)
-
+ui_df = table_uniqueness(dat, "species", dist_mat)
+head(ui_df)
 
 }
 

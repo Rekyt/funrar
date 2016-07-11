@@ -25,4 +25,13 @@ dimension name)}
 \description{
 From a matrix with values to a tidy data.frame
 }
+\examples{
+data("aravo", package = "ade4")
+
+# Site-species matrix converted into data.frame
+mat = as.matrix(aravo$spe)
+dat = matrix_to_tidy(mat, "value", "site", "species")
+str(dat)
+
+}
 

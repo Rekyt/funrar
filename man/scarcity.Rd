@@ -31,4 +31,13 @@ The scarcity of species is computed as follow:
     the species has a very low abundances while if it's close to 0, it is
     quite abundant in the community.
 }
+\examples{
+data("aravo", package = "ade4")
+# Site-species matrix
+mat = as.matrix(aravo$spe)
+
+si = scarcity(pres_matrix = mat)
+si[1:5, 1:5]
+
+}
 

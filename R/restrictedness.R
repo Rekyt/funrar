@@ -9,7 +9,7 @@
 #'
 #' Compute restrictedness for every species
 #'
-#' @param com_table a tidy data.frame of community with column with species
+#' @param com_df a tidy data.frame of community with column with species
 #'
 #' @param com a character vector indicating the name of community column
 #'
@@ -28,7 +28,7 @@
 #' head(ri_df)
 #'
 #' @export
-table_restrictedness = function(com_table, com, species) {
+table_restrictedness = function(com_df, com, species) {
 
   # Test to be sure
   if ( (is.character(com)) == FALSE) {
@@ -39,27 +39,27 @@ table_restrictedness = function(com_table, com, species) {
     stop("species has to be a character string.")
   }
 
-  if ( (com %in% colnames(com_table)) == FALSE) {
+  if ( (com %in% colnames(com_df)) == FALSE) {
     stop("Community table does not have any communities.")
   }
 
-  if ( (species %in% colnames(com_table)) == FALSE) {
+  if ( (species %in% colnames(com_df)) == FALSE) {
     stop("Community table does not have any species.")
   }
 
-  if (!is.character(com_table[[species]])) {
+  if (!is.character(com_df[[species]])) {
     stop("Provided species are not character.")
   }
 
-  if (!is.character(com_table[[com]])) {
+  if (!is.character(com_df[[com]])) {
     stop("Provided communities are not character.")
   }
 
   # get the total number of communities
-  n_com = length(unique(com_table[, com]))
+  n_com = length(unique(com_df[, com]))
 
   # Compute the sum of all species' occurrences divided by n_com
-  occupancy = table(com_table[, species]) / n_com
+  occupancy = table(com_df[, species]) / n_com
 
   # Format occupancy in data.frame
   occupancy = data.frame("sp" = names(occupancy), "Ri" = as.numeric(occupancy))
@@ -98,7 +98,7 @@ restrictedness = function(pres_matrix) {
 
   # get the total number of communities
   n_com = nrow(pres_matrix)
-  
+
   # Convert all the matrix values into 0/1
   pres_matrix[is.na(pres_matrix)==T] = 0
   pres_matrix[pres_matrix > 0] = 1

@@ -1,7 +1,7 @@
 # Compute scarcity for a single community -----------------------------------
 #
 # Arguments:
-#   com_table, a tidy data.frame of community with column with species, and
+#   com_df, a tidy data.frame of community with column with species, and
 #   abundance
 #
 #   species, a character vector indicating the name of species column
@@ -12,14 +12,14 @@
 # Output:
 #   A tidy data.frame with a new column containing species scarcity
 
-single_com_scar = function(com_table, species, abund) {
+single_com_scar = function(com_df, species, abund) {
 
   # Computes scarcity by species
-  N_sp = nrow(com_table)
+  N_sp = nrow(com_df)
 
-  com_table[, "Si"] = exp(-N_sp * log(2) * com_table[, abund])
+  com_df[, "Si"] = exp(-N_sp * log(2) * com_df[, abund])
 
-  return(com_table)
+  return(com_df)
 }
 
 #' Scarcity
@@ -36,19 +36,19 @@ single_com_scar = function(com_table, species, abund) {
 #' species present in the given community and \eqn{A_i} the relative abundance
 #' (in \%) of species \eqn{i}.
 #'
-#' @param com_table a data frame of species in occurences in
+#' @param com_df a data frame of species in occurences in
 #'     communities.
 #'
 #' @param species a character vector indicating the column of species in
-#'     \code{com_table}
+#'     \code{com_df}
 #'
 #' @param com a character vector indicating the column name of communities ID in
-#'     \code{com_table}
+#'     \code{com_df}
 #'
 #' @param abund a character vector indicating the column name of the relative
-#'     abundances of species in \code{com_table}
+#'     abundances of species in \code{com_df}
 #'
-#' @return The same table as \code{com_table} with an added \eqn{S_i} column
+#' @return The same table as \code{com_df} with an added \eqn{S_i} column
 #'     for Scarcity values.
 #'
 #' @examples
@@ -62,18 +62,18 @@ single_com_scar = function(com_table, species, abund) {
 #' head(si_df)
 #'
 #' @export
-table_scarcity = function(com_table, species, com, abund) {
+table_scarcity = function(com_df, species, com, abund) {
 
   # Test to be sure
-  if ( (com %in% colnames(com_table)) == FALSE) {
+  if ( (com %in% colnames(com_df)) == FALSE) {
     stop("Community table does not have any communities.")
   }
 
-  if ( (species %in% colnames(com_table)) == FALSE) {
+  if ( (species %in% colnames(com_df)) == FALSE) {
     stop("Community table does not have any species.")
   }
 
-  if (!is.character(com_table[, species])) {
+  if (!is.character(com_df[, species])) {
     stop("Provided species are not character.")
   }
 
@@ -81,13 +81,13 @@ table_scarcity = function(com_table, species, com, abund) {
     stop("No relative abundance provided.")
   }
 
-  if (!is.numeric(com_table[, abund])) {
+  if (!is.numeric(com_df[, abund])) {
     stop("Provided abundances are not numeric.")
   }
 
   # Compute Scarcity
   # Split table by communities
-  com_split = split(com_table, factor(com_table[[com]]))
+  com_split = split(com_df, factor(com_df[[com]]))
 
   com_split = lapply(com_split,
                       function(one_com)

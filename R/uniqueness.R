@@ -8,10 +8,10 @@
 #' with \eqn{d_{ij}}{d_ij} the functional distance between species
 #' \eqn{i} and \eqn{j}.
 #'
-#' @param com_table a data frame of the species in the regional pool.
+#' @param com_df a data frame of the species in the regional pool.
 #'
 #' @param sp_col a character vector indicating the name of the species column
-#'     in the \code{com_table} data frame
+#'     in the \code{com_df} data frame
 #'
 #' @param dist_matrix a functional distance matrix
 #'
@@ -35,9 +35,9 @@
 #'
 #' @importFrom dplyr %>%
 #' @export
-table_uniqueness = function(com_table, sp_col, dist_matrix) {
+table_uniqueness = function(com_df, sp_col, dist_matrix) {
 
-  if (!(sp_col %in% colnames(com_table))) {
+  if (!(sp_col %in% colnames(com_df))) {
     stop(paste0("'", sp_col, "' species column not in column names"))
   }
 
@@ -46,7 +46,7 @@ table_uniqueness = function(com_table, sp_col, dist_matrix) {
   }
 
   # Extract all species in community
-  com_species = as.character(unique(com_table[[sp_col]]))
+  com_species = as.character(unique(com_df[[sp_col]]))
 
   # Submatrix containing distance of species in community
   com_dist = dist_matrix[com_species, com_species]

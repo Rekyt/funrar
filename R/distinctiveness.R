@@ -7,7 +7,7 @@
 
 # Compute distinctiveness for a single community ------------------------------
 #
-# Arguments: com_table, a tidy data.frame of community with column with species
+# Arguments: com_df, a tidy data.frame of community with column with species
 # and abundance
 #
 # species, a character vector indicating the name of species column
@@ -20,7 +20,7 @@
 #
 # Output: A tidy data.frame with a new column containing species distinctiveness
 
-single_com_dist = function(com_table, species, abund = NULL, dist_matrix) {
+single_com_dist = function(com_df, species, abund = NULL, dist_matrix) {
 
   # Check if distance matrix is a matrix or data frame
   if (!is.matrix(dist_matrix) & !is.data.frame(dist_matrix)) {
@@ -34,7 +34,7 @@ single_com_dist = function(com_table, species, abund = NULL, dist_matrix) {
   }
 
   # Get functional distance matrix of species in communities
-  com_dist <- dist_matrix[com_table[[species]], com_table[[species]]]
+  com_dist <- dist_matrix[com_df[[species]], com_df[[species]]]
 
   if (!is.null(dim(com_dist))) {
     if (is.null(abund)) {
@@ -42,14 +42,14 @@ single_com_dist = function(com_table, species, abund = NULL, dist_matrix) {
       num <- colSums(com_dist)
 
       # Number of species minus the focal species
-      denom <- nrow(com_table) - 1
+      denom <- nrow(com_df) - 1
 
     } else {
       # For each species multiplies its functional distance with corresponding
       # abundance to compute distinctiveness
-      num <- apply(com_dist, 2, function(x) sum(x * com_table[, abund]))
+      num <- apply(com_dist, 2, function(x) sum(x * com_df[, abund]))
       # Compute the sum of all abundances minus the one focal species
-      denom <- sum(com_table[[abund]]) - com_table[[abund]]
+      denom <- sum(com_df[[abund]]) - com_df[[abund]]
     }
   } else {
     denom = 0
@@ -57,13 +57,13 @@ single_com_dist = function(com_table, species, abund = NULL, dist_matrix) {
 
   # Computes distinctiveness by species
   if (length(denom) > 1 | (length(denom) == 1 & denom != 0)) {
-    com_table[, "Di"] <- as.numeric(num / denom)
+    com_df[, "Di"] <- as.numeric(num / denom)
   } else {
-    com_table[, "Di"] = NA
+    com_df[, "Di"] = NA
   }
 
 
-  return(com_table)
+  return(com_df)
 }
 
 #' Table Functional Distinctiveness
@@ -81,7 +81,7 @@ single_com_dist = function(com_table, species, abund = NULL, dist_matrix) {
 #'     relative abundances of species, if provided, weight distinctiveness by
 #'     relative abundances.
 #'
-#' @return a table similar to \code{com_table} with an added column \eqn{D_i}
+#' @return a table similar to \code{com_df} with an added column \eqn{D_i}
 #'     giving the Functional Distinctiveness of each species in each communities
 #'
 #' @examples
@@ -100,23 +100,23 @@ single_com_dist = function(com_table, species, abund = NULL, dist_matrix) {
 #' head(di_df)
 #'
 #' @export
-table_distinctiveness = function(com_table, sp_col, com, abund = NULL,
+table_distinctiveness = function(com_df, sp_col, com, abund = NULL,
                                  dist_matrix) {
 
   # Test to be sure
-  if ( (com %in% colnames(com_table)) == FALSE) {
+  if ( (com %in% colnames(com_df)) == FALSE) {
     stop("Community table does not have any communities.")
   }
 
-  if ( (sp_col %in% colnames(com_table)) == FALSE) {
+  if ( (sp_col %in% colnames(com_df)) == FALSE) {
     stop("Community table does not have any species.")
   }
 
-  if (!is.character(com_table[[sp_col]])) {
+  if (!is.character(com_df[[sp_col]])) {
     stop("Provided species are not character.")
   }
 
-  if (!is.null(abund) & !is.numeric(com_table[, abund])) {
+  if (!is.null(abund) & !is.numeric(com_df[, abund])) {
     stop("Provided abundances are not numeric.")
   }
 
@@ -138,7 +138,7 @@ table_distinctiveness = function(com_table, sp_col, com, abund = NULL,
 
   # Compute Distinctivenness
   # Split table by communities
-  com_split <- split(com_table, factor(com_table[[com]]))
+  com_split <- split(com_df, factor(com_df[[com]]))
 
   com_split <- lapply(com_split,
                       function(one_com)

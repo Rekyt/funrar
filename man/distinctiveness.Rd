@@ -44,4 +44,18 @@ The Functional Distinctiveness of a species is the average functional
    cannot be computed, thus the output matrix contains a value of \code{NaN}
    distinctiveness.
 }
+\examples{
+data("aravo", package = "ade4")
+# Site-species matrix
+mat = as.matrix(aravo$spe)
+
+# Example of trait table
+tra <- aravo$traits[, c("Height", "SLA", "N_mass")]
+# Distance matrix
+dist_mat <- compute_dist_matrix(tra)
+
+di = distinctiveness(pres_matrix = mat, dist_matrix = dist_mat)
+di[1:5, 1:5]
+
+}
 
