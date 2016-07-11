@@ -292,7 +292,6 @@ In this section, some ideas to plot your results are presented.
 ```{r}
 
 library(ggplot2)
-library(RColorBrewer)
 library(dplyr)
 
 # Heatmap with distinctiveness values
