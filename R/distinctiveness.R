@@ -5,21 +5,22 @@
 #
 #
 
-# Compute distinctiveness for a single community ------------------------------
-#
-# Arguments: com_df, a tidy data.frame of community with column with species
-# and abundance
-#
-# species, a character vector indicating the name of species column
-#
-# abund, a character vector in the name of relative abundances column
-#
-# dist_matrix, the whole distance matrix from region obtained with
-# compute_dist_matrix function
-#
-#
-# Output: A tidy data.frame with a new column containing species distinctiveness
-
+#' Distinctiveness for a single community in stack data.frame
+#'
+#' Given a stacked data.frame and a distance matrix compute the functional
+#' distinctiveness. See \code{\link[outlieR]{distinctiveness}} function or the
+#' functional rarity indices vignette included in the package (type
+#' \code{vignette(package = "outlieR")}).
+#'
+#' @inheritParams scarcity_com
+#'
+#' @param dist_matrix a functional distance matrix as given by
+#'    \code{compute_dist_matrix()}
+#'
+#' @return the same data.frame with the additional \strong{Di} column giving
+#'    functional distinctiveness values for each species
+#'
+#' @export
 distinctiveness_com = function(com_df, species, abund = NULL, dist_matrix) {
 
   # Check if distance matrix is a matrix or data frame
@@ -72,17 +73,13 @@ distinctiveness_com = function(com_df, species, abund = NULL, dist_matrix) {
 #' of communities, with one column for species identity, one for community
 #' identity and an optional one for relative abundances.
 #'
-#' @inheritParams uniqueness_stack
+#' @inheritParams distinctiveness_com
 #'
 #' @param com a character vector, indicating the column name of communities
 #'     names.
 #'
-#' @param abund optional character vector indicating the column name of the
-#'     relative abundances of species, if provided, weight distinctiveness by
-#'     relative abundances.
-#'
-#' @return a table similar to \code{com_df} with an added column \eqn{D_i}
-#'     giving the Functional Distinctiveness of each species in each communities
+#' @return the same data.frame with the additional \strong{Di} column giving
+#'    functional distinctiveness values for each species
 #'
 #' @examples
 #' data("aravo", package = "ade4")

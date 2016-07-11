@@ -7,23 +7,21 @@
 distinctiveness_stack(com_df, sp_col, com, abund = NULL, dist_matrix)
 }
 \arguments{
-\item{com_df}{a data frame of the species in the regional pool.}
-
-\item{sp_col}{a character vector indicating the name of the species column
-in the \code{com_df} data frame}
+\item{com_df}{a stacked (or tidy) data.frame from a single community with
+each row representing a species}
 
 \item{com}{a character vector, indicating the column name of communities
 names.}
 
-\item{abund}{optional character vector indicating the column name of the
-relative abundances of species, if provided, weight distinctiveness by
-relative abundances.}
+\item{abund}{(optional, default = \code{NULL}) a character vector indicating
+the name of the column containing relative abundances values}
 
-\item{dist_matrix}{a functional distance matrix}
+\item{dist_matrix}{a functional distance matrix as given by
+\code{compute_dist_matrix()}}
 }
 \value{
-a table similar to \code{com_df} with an added column \eqn{D_i}
-    giving the Functional Distinctiveness of each species in each communities
+the same data.frame with the additional \strong{Di} column giving
+   functional distinctiveness values for each species
 }
 \description{
 Compute Functional Distinctiveness for several communities, from a data.frame
