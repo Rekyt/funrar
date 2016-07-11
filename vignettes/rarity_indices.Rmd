@@ -54,16 +54,16 @@ mat[1:5, 1:5]
 
 In other cases, users can have a stacked data.frame containing columns for sites, species and abundances. This format can be used to have a better overview of the data and can be perceived as more intuitive. The package contains for each metric another function called `metricname_stack()` function that can take these stacked data.frames as inputs.
 
-`funrar` package includes two functions to go from one format to the other: `matrix_to_tidy()` and `tidy_to_matrix()`
+`funrar` package includes two functions to go from one format to the other: `matrix_to_stack()` and `stack_to_matrix()`
 
 ```{r}
 library(outlieR)
 
-dat = matrix_to_tidy(mat, "value", "site", "species")
+dat = matrix_to_stack(mat, "value", "site", "species")
 head(dat)
 
 # The reverse function is provided and gives the same original matrix
-identical(as.numeric(tidy_to_matrix(dat, "site", "species", "value")), as.numeric(mat))
+identical(as.numeric(stack_to_matrix(dat, "site", "species", "value")), as.numeric(mat))
 
 # Removal of empty rows
 dat = dat[which(dat$value > 0), ]

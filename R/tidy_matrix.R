@@ -22,11 +22,11 @@
 #'  "species" = c("A", "B", "C", "B", "D"),
 #'   "abundance" = c(0.33, 0.33, 0.33, 0.4, 0.6))
 #'
-#' mat = tidy_to_matrix(example, "sites", "species", "abundance")
+#' mat = stack_to_matrix(example, "sites", "species", "abundance")
 #' mat
 #'
 #' @export
-tidy_to_matrix = function(my_df, col_to_row, col_to_col, col_value = NULL) {
+stack_to_matrix = function(my_df, col_to_row, col_to_col, col_value = NULL) {
 
   col_names = colnames(my_df)
 
@@ -86,11 +86,11 @@ tidy_to_matrix = function(my_df, col_to_row, col_to_col, col_value = NULL) {
 #'
 #' # Site-species matrix converted into data.frame
 #' mat = as.matrix(aravo$spe)
-#' dat = matrix_to_tidy(mat, "value", "site", "species")
+#' dat = matrix_to_stack(mat, "value", "site", "species")
 #' str(dat)
 #'
 #' @export
-matrix_to_tidy = function(my_mat, value_col = "value",
+matrix_to_stack = function(my_mat, value_col = "value",
                           row_to_col = names(dimnames(my_mat))[1],
                           col_to_col = names(dimnames(my_mat))[2]) {
 

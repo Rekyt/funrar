@@ -61,13 +61,13 @@ na_mat["d", "s4"] = NA
 
 test_that("Conversion from tidy data frame to matrix works", {
 
-  expect_equivalent(tidy_to_matrix(com_df, "species", "site"), valid_mat)
-  expect_equivalent(tidy_to_matrix(abund_df, "species", "site", "val"), abund_mat)
+  expect_equivalent(stack_to_matrix(com_df, "species", "site"), valid_mat)
+  expect_equivalent(stack_to_matrix(abund_df, "species", "site", "val"), abund_mat)
 
-  expect_error(tidy_to_matrix(com_df, "speies", "site"),
+  expect_error(stack_to_matrix(com_df, "speies", "site"),
                label = "Column 'speies' is not in data.frame")
 
-  expect_error(tidy_to_matrix(com_df, "speies", "seit"),
+  expect_error(stack_to_matrix(com_df, "speies", "seit"),
                label = "Columns 'speies' and 'seit' are not in data.frame")
 
 })
@@ -75,18 +75,18 @@ test_that("Conversion from tidy data frame to matrix works", {
 
 test_that("Conversion from matrix to tidy data.frame works", {
 
-  expect_equivalent(matrix_to_tidy(valid_mat, row_to_col = "species",
+  expect_equivalent(matrix_to_stack(valid_mat, row_to_col = "species",
                                    col_to_col = "site")[, -3], com_df)
 
-  expect_equivalent(matrix_to_tidy(abund_mat, value_col = "val"), abund_df)
+  expect_equivalent(matrix_to_stack(abund_mat, value_col = "val"), abund_df)
 
-  expect_equal(matrix_to_tidy(valid_mat, row_to_col = NULL,
+  expect_equal(matrix_to_stack(valid_mat, row_to_col = NULL,
                               col_to_col = "site") %>%
                  colnames() %>%
                  .[2],
                "row")
 
-  expect_equal(matrix_to_tidy(valid_mat, row_to_col = "species",
+  expect_equal(matrix_to_stack(valid_mat, row_to_col = "species",
                               col_to_col = NULL) %>%
                  colnames() %>%
                  .[1],
