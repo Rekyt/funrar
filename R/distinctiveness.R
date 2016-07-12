@@ -1,4 +1,3 @@
-
 # Function to compute distinctiveness on various Databases
 #
 # Authors: Pierre Denelle & Matthias Grenié
@@ -35,22 +34,22 @@ distinctiveness_com = function(com_df, sp_col, abund = NULL, dist_matrix) {
   }
 
   # Get functional distance matrix of species in communities
-  com_dist <- dist_matrix[com_df[[sp_col]], com_df[[sp_col]]]
+  com_dist = dist_matrix[com_df[[sp_col]], com_df[[sp_col]]]
 
   if (!is.null(dim(com_dist))) {
     if (is.null(abund)) {
       # Sum the distances by species
-      num <- colSums(com_dist)
+      num = colSums(com_dist)
 
       # Number of species minus the focal species
-      denom <- nrow(com_df) - 1
+      denom = nrow(com_df) - 1
 
     } else {
       # For each species multiplies its functional distance with corresponding
       # abundance to compute distinctiveness
-      num <- apply(com_dist, 2, function(x) sum(x * com_df[, abund]))
+      num = apply(com_dist, 2, function(x) sum(x * com_df[, abund]))
       # Compute the sum of all abundances minus the one focal species
-      denom <- sum(com_df[[abund]]) - com_df[[abund]]
+      denom = sum(com_df[[abund]]) - com_df[[abund]]
     }
   } else {
     denom = 0
@@ -58,7 +57,7 @@ distinctiveness_com = function(com_df, sp_col, abund = NULL, dist_matrix) {
 
   # Computes distinctiveness by species
   if (length(denom) > 1 | (length(denom) == 1 & denom != 0)) {
-    com_df[, "Di"] <- as.numeric(num / denom)
+    com_df[, "Di"] = as.numeric(num / denom)
   } else {
     com_df[, "Di"] = NA
   }
@@ -85,12 +84,12 @@ distinctiveness_com = function(com_df, sp_col, abund = NULL, dist_matrix) {
 #' data("aravo", package = "ade4")
 #'
 #' # Example of trait table
-#' tra <- aravo$traits[, c("Height", "SLA", "N_mass")]
+#' tra = aravo$traits[, c("Height", "SLA", "N_mass")]
 #' # Distance matrix
-#' dist_mat <- compute_dist_matrix(tra)
+#' dist_mat = compute_dist_matrix(tra)
 #'
 #' # Site-species matrix converted into data.frame
-#' mat = as.matrix(aravo$spe); dat <- matrix_to_stack(mat, "value", "site", "species")
+#' mat = as.matrix(aravo$spe); dat = matrix_to_stack(mat, "value", "site", "species")
 #' dat$site = as.character(dat$site)
 #' dat$species = as.character(dat$species)
 #'
@@ -136,14 +135,14 @@ distinctiveness_stack = function(com_df, sp_col, com, abund = NULL,
 
   # Compute Distinctivenness
   # Split table by communities
-  com_split <- split(com_df, factor(com_df[[com]]))
+  com_split = split(com_df, factor(com_df[[com]]))
 
-  com_split <- lapply(com_split,
+  com_split = lapply(com_split,
                       function(one_com)
                         distinctiveness_com(one_com, sp_col, abund, dist_matrix)
   )
 
-  com_distinctiveness <- dplyr::bind_rows(com_split)
+  com_distinctiveness = dplyr::bind_rows(com_split)
 
   return(com_distinctiveness)
 }
@@ -193,9 +192,9 @@ distinctiveness_stack = function(com_df, sp_col, com, abund = NULL,
 #' mat = as.matrix(aravo$spe)
 #'
 #' # Example of trait table
-#' tra <- aravo$traits[, c("Height", "SLA", "N_mass")]
+#' tra = aravo$traits[, c("Height", "SLA", "N_mass")]
 #' # Distance matrix
-#' dist_mat <- compute_dist_matrix(tra)
+#' dist_mat = compute_dist_matrix(tra)
 #'
 #' di = distinctiveness(pres_matrix = mat, dist_matrix = dist_mat)
 #' di[1:5, 1:5]

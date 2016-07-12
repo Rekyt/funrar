@@ -22,7 +22,7 @@
 #' @examples
 #' data("aravo", package = "ade4")
 #' # Site-species matrix converted into data.frame
-#' mat = as.matrix(aravo$spe); dat <- matrix_to_stack(mat, "value", "site", "species")
+#' mat = as.matrix(aravo$spe); dat = matrix_to_stack(mat, "value", "site", "species")
 #' dat$site = as.character(dat$site)
 #' dat$species = as.character(dat$species)
 #' ri_df = restrictedness_stack(dat, "site", "species")

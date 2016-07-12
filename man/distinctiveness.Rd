@@ -50,9 +50,9 @@ data("aravo", package = "ade4")
 mat = as.matrix(aravo$spe)
 
 # Example of trait table
-tra <- aravo$traits[, c("Height", "SLA", "N_mass")]
+tra = aravo$traits[, c("Height", "SLA", "N_mass")]
 # Distance matrix
-dist_mat <- compute_dist_matrix(tra)
+dist_mat = compute_dist_matrix(tra)
 
 di = distinctiveness(pres_matrix = mat, dist_matrix = dist_mat)
 di[1:5, 1:5]

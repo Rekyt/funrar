@@ -30,9 +30,9 @@ mat = as.matrix(aravo$spe)
 colnames(mat) = as.character(colnames(mat))
 
 # Example of trait table
-tra <- aravo$traits[, c("Height", "SLA", "N_mass")]
+tra = aravo$traits[, c("Height", "SLA", "N_mass")]
 # Distance matrix
-dist_mat <- compute_dist_matrix(tra)
+dist_mat = compute_dist_matrix(tra)
 
 ui = uniqueness(mat, dist_mat)
 head(ui)
