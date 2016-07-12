@@ -26,10 +26,10 @@
 #'        species per site.}
 #'    }
 #'
-#' @seealso \code{\link[outlieR]{uniqueness}},
-#'    \code{\link[outlieR]{distinctiveness}},
-#'    \code{\link[outlieR]{restrictedness}},
-#'    \code{\link[outlieR]{scarcity}}
+#' @seealso \code{\link[funrar]{uniqueness}},
+#'    \code{\link[funrar]{distinctiveness}},
+#'    \code{\link[funrar]{restrictedness}},
+#'    \code{\link[funrar]{scarcity}}
 #'
 #' @export
 funrar = function(pres_matrix, dist_matrix, rel_abund = FALSE) {

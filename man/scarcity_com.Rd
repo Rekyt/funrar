@@ -22,8 +22,8 @@ the same data.frame with the additional \strong{Si} column giving
 }
 \description{
 Given a stacked data.frame compute species scarcity.
-See \code{\link[outlieR]{scarcity}} function or the functional rarity indices
-vignette included in the package (type \code{vignette(package = "outlieR")})
+See \code{\link[funrar]{scarcity}} function or the functional rarity indices
+vignette included in the package (type \code{vignette(package = "funrar")})
 for details about the indices.
 }
 

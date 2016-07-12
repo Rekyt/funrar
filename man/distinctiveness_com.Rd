@@ -25,8 +25,8 @@ the same data.frame with the additional \strong{Di} column giving
 }
 \description{
 Given a stacked data.frame and a distance matrix compute the functional
-distinctiveness. See \code{\link[outlieR]{distinctiveness}} function or the
+distinctiveness. See \code{\link[funrar]{distinctiveness}} function or the
 functional rarity indices vignette included in the package (type
-\code{vignette(package = "outlieR")}).
+\code{vignette(package = "funrar")}).
 }
 

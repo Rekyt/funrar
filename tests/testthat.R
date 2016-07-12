@@ -1,4 +1,4 @@
 library(testthat)
-library(outlieR)
+library(funrar)
 
-test_check("outlieR")
+test_check("funrar")

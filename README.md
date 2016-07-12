@@ -1,5 +1,5 @@
-# `outlieR` package
-[![Travis-CI Build Status](https://travis-ci.org/Rekyt/outlieR.svg?branch=master)](https://travis-ci.org/Rekyt/outlieR) [![codecov.io](https://codecov.io/github/Rekyt/outlieR/coverage.svg?branch=master)](https://codecov.io/github/Rekyt/outlieR?branch=master)
+# `funrar` package
+[![Travis-CI Build Status](https://travis-ci.org/Rekyt/funrar.svg?branch=master)](https://travis-ci.org/Rekyt/funrar) [![codecov.io](https://codecov.io/github/Rekyt/funrar/coverage.svg?branch=master)](https://codecov.io/github/Rekyt/funrar?branch=master)
 
 Package project to describe Functional Rarity, may be added in the future to [package cati](http://github.com/adrientaudiere/cati/)
 

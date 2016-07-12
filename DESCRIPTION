@@ -1,6 +1,6 @@
-Package: outlieR
+Package: funrar
 Title: Functional Rarity Indices Computations
-Version: 0.0.1
+Version: 1.0.0
 Authors@R: c(
   person("Matthias", "Grenié", email = "matthias.grenie@gmail.com", role = c("aut", "cre")),
   person("Pierre", "Denelle", email = "pierre.denelle@cefe.cnrs.fr", role = "aut"),
@@ -20,8 +20,8 @@ Imports:
     moments,
     methods,
     stats
-URL: https://github.com/Rekyt/outlieR
-BugReports: https://github.com/Rekyt/outlieR/issues
+URL: https://github.com/Rekyt/funrar
+BugReports: https://github.com/Rekyt/funrar/issues
 RoxygenNote: 5.0.1
 Suggests: knitr,
     rmarkdown,

@@ -39,9 +39,9 @@ scarcity (local). \strong{Note}: scarcity can only be computed if relative
 abundances are provided in the site-species matrix.
 }
 \seealso{
-\code{\link[outlieR]{uniqueness}},
-   \code{\link[outlieR]{distinctiveness}},
-   \code{\link[outlieR]{restrictedness}},
-   \code{\link[outlieR]{scarcity}}
+\code{\link[funrar]{uniqueness}},
+   \code{\link[funrar]{distinctiveness}},
+   \code{\link[funrar]{restrictedness}},
+   \code{\link[funrar]{scarcity}}
 }
 

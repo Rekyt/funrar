@@ -1,8 +1,8 @@
 #' Scarcity for a single community in stack data.frame
 #'
 #' Given a stacked data.frame compute species scarcity.
-#' See \code{\link[outlieR]{scarcity}} function or the functional rarity indices
-#' vignette included in the package (type \code{vignette(package = "outlieR")})
+#' See \code{\link[funrar]{scarcity}} function or the functional rarity indices
+#' vignette included in the package (type \code{vignette(package = "funrar")})
 #' for details about the indices.
 #'
 #' @param com_df a stacked (or tidy) data.frame from a single community with

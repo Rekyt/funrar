@@ -1,10 +1,10 @@
 ---
-title: "Sparse Marices with outlieR"
+title: "Sparse Marices with funrar"
 author: "Matthias Greni\u00e9"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Sparse Marices with outlieR}
+  %\VignetteIndexEntry{Sparse Marices with funrar}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -13,7 +13,7 @@ vignette: >
 
 When a matrix contains a lot of zero, there is no need to store all its values. For example
 
-# in package `outlieR`
+# in package `funrar`
 
 If your site-species matrix is big, it should contain a lot zero because it is very rare that alls species are present at all sites when looking at thousands of species.
 
@@ -27,7 +27,7 @@ rownames(my_mat) = paste0("site", 1:nrow(my_mat))
 my_mat[1:5, 1:5]
 ```
 
-`outlieR` lets you use sparse matrices directly using function implemented in the `Matrix` package. When your matrix is filled with 0 it can be quicker to use sparse matrices.
+`funrar` lets you use sparse matrices directly using function implemented in the `Matrix` package. When your matrix is filled with 0 it can be quicker to use sparse matrices.
 
 ```{r estimateFilling}
 filling = 1 - sum(my_mat == 0)/(ncol(my_mat)*nrow(my_mat))
@@ -65,7 +65,7 @@ We can now compare the performances of the algorithms in rarity indices computat
 
 ```{r microBenchDist}
 library(microbenchmark)
-library(outlieR)
+library(funrar)
 
 # Get a table of traits
 trait_df = data.frame(trait = runif(ncol(my_mat), 0, 1))

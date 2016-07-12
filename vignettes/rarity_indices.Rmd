@@ -19,7 +19,7 @@ In their article, Violle et al. (2016) introduced 4 indices to compute functiona
 
 The following figure show the 4 aspects covered by the metrics. Rarity is thus considered at local and regional scales and also from abundance and functional point of views. The name of the package functions are written underneath metrics' names.
 
-![Rarity indices and corresponding functions.](figures/outlier_scheme.png)
+![Rarity indices and corresponding functions.](figures/funrar_scheme.png)
 
 
 # Dataset example
@@ -57,7 +57,7 @@ In other cases, users can have a stacked data.frame containing columns for sites
 `funrar` package includes two functions to go from one format to the other: `matrix_to_stack()` and `stack_to_matrix()`
 
 ```{r}
-library(outlieR)
+library(funrar)
 
 dat = matrix_to_stack(mat, "value", "site", "species")
 head(dat)
@@ -122,7 +122,7 @@ with the same terms as above, and $A_j$ the relative abundance of species $j$ in
 
 #### Computation with site-species matrix
 
-Using `outlieR` distinctiveness values can be computed using function `distinctiveness()`:
+Using `funrar` distinctiveness values can be computed using function `distinctiveness()`:
 
 ```{r distinctivenessComputation}
 
@@ -138,7 +138,7 @@ The syntax for `distinctiveness()` is first the table and then the distance matr
 
 #### Computation with stacked data.frame
 
-Using `outlieR` distinctiveness values can be computed using function `distinctiveness_stack()`:
+Using `funrar` distinctiveness values can be computed using function `distinctiveness_stack()`:
 
 ```{r computeDi}
 
@@ -183,7 +183,7 @@ with $S_i$ the scarcity of species $i$, $N$ the number of species in the local c
 
 #### Computation
 
-With `outlieR` it can be computed with `scarcity()` function with a syntax analog to `distinctiveness()`
+With `funrar` it can be computed with `scarcity()` function with a syntax analog to `distinctiveness()`
 
 ```{r scarcityComp}
 
