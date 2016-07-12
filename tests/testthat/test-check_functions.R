@@ -15,9 +15,10 @@ rownames(dist_mat) = letters[1:3]
 test_that("Messages show up with wrong input", {
   library(Matrix)
 
-  expect_silent(check_matrix(pres_mat, dist_mat))
-  expect_silent(check_matrix(as(pres_mat, "sparseMatrix"), dist_mat))
-  expect_silent(check_matrix(pres_mat, as(dist_mat, "sparseMatrix")))
+  expect_silent(check_matrix(pres_mat, "site-species"))
+  expect_silent(check_matrix(dist_mat, "distance"))
+  expect_silent(check_matrix(as(pres_mat, "sparseMatrix"), "site-species"))
+  expect_silent(check_matrix(as(dist_mat, "sparseMatrix"), "distance"))
 
   expect_silent(check_bigger_dist(pres_mat, dist_mat))
   expect_silent(check_bigger_pres(pres_mat, dist_mat))
@@ -28,19 +29,19 @@ test_that("Messages show up with wrong input", {
 
   # Provided objects not matrices
   expect_error(
-    check_matrix(NULL, dist_mat),
+    check_matrix(NULL, "site-species"),
     regexp = "Provided site-species matrix is not a matrix"
   )
   expect_error(
-    check_matrix(rep(1, 2), dist_mat),
+    check_matrix(rep(1, 2), "site-species"),
     regexp = "Provided site-species matrix is not a matrix"
   )
   expect_error(
-    check_matrix(pres_mat, NULL),
+    check_matrix(NULL, "distance"),
     regexp = "Provided distance matrix is not a matrix"
   )
   expect_error(
-    check_matrix(pres_mat, rep(1, 2)),
+    check_matrix(rep(1, 2),"distance"),
     regexp = "Provided distance matrix is not a matrix"
   )
 

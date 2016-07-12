@@ -12,12 +12,10 @@
 #
 # Returns:
 #   nothing, shows an error message
-check_matrix = function(pres_matrix, dist_matrix) {
+check_matrix = function(given_matrix, message = NULL) {
 
-  if (!is.matrix(pres_matrix) & !is(pres_matrix, "sparseMatrix")) {
-    stop("Provided site-species matrix is not a matrix")
-  } else if (!is.matrix(dist_matrix) & !is(dist_matrix, "sparseMatrix")) {
-    stop("Provided distance matrix is not a matrix")
+  if (!is.matrix(given_matrix) & !is(given_matrix, "sparseMatrix")) {
+    stop(paste0("Provided ", message, " matrix is not a matrix"))
   }
 }
 
@@ -73,7 +71,8 @@ check_bigger_pres = function(pres_matrix, dist_matrix) {
 # Returns:
 #   a character vector of names in common
 full_matrix_checks = function(pres_matrix, dist_matrix) {
-  check_matrix(pres_matrix, dist_matrix)
+  check_matrix(pres_matrix, "site-species")
+  check_matrix(dist_matrix, "distance")
   check_bigger_dist(pres_matrix, dist_matrix)
   check_bigger_pres(pres_matrix, dist_matrix)
 }
