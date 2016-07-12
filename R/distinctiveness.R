@@ -207,16 +207,21 @@ distinctiveness = function(pres_matrix, dist_matrix) {
     message(paste("Distance matrix > Presence Matrix species",
             "Taking subset of distance matrix", sep = "\n"))
 
-    dist_matrix = dist_matrix[colnames(pres_matrix), colnames(pres_matrix)]
-
   } else if (nrow(dist_matrix) < ncol(pres_matrix)) {
 
     message(paste("More species in site-species matrix than in provided ",
                   "distance matrix\n", "Taking subset of site-species matrix",
                   sep = ""))
-
-    pres_matrix = pres_matrix[, rownames(dist_matrix)]
   }
+
+  species_in_common = get_common_species(pres_matrix, dist_matrix)
+
+  if (identical(species_in_common, character(0))) {
+    stop("No species found in common between matrices")
+  }
+
+  pres_matrix = pres_matrix[, species_in_common]
+  dist_matrix = dist_matrix[species_in_common, species_in_common]
 
   # Matrix product of distance matrix and presence absence matrix
   index_matrix = pres_matrix %*% dist_matrix
