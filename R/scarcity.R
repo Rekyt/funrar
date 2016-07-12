@@ -133,6 +133,11 @@ scarcity_stack = function(com_df, sp_col, com, abund) {
 #'
 #' @export
 scarcity = function(pres_matrix) {
+
+  if (!is.matrix(pres_matrix) & !is(pres_matrix, "sparseMatrix")) {
+    stop("Provided site-species matrix is not a matrix")
+  }
+
   scarcity_mat = pres_matrix
 
   # Species with no relative abundance get a scarcity of 0

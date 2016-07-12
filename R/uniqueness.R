@@ -97,7 +97,14 @@ uniqueness_stack = function(com_df, sp_col, dist_matrix) {
 #' @export
 uniqueness = function(pres_matrix, dist_matrix) {
 
-  com_dist = dist_matrix[colnames(pres_matrix), colnames(pres_matrix)]
+  full_matrix_checks(pres_matrix, dist_matrix)
+
+  common = species_in_common(pres_matrix, dist_matrix)
+
+  pres_matrix = pres_matrix[, common]
+  dist_matrix = dist_matrix[common, common]
+
+  com_dist = dist_matrix
 
   # Replace diagonal by 'NA' for computation reasons
   diag(com_dist) = NA

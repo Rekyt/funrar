@@ -91,17 +91,15 @@ restrictedness_stack = function(com_df, com, species) {
 #' @export
 restrictedness = function(pres_matrix) {
 
-  # Making sure that pres_restrictedness is a matrix
-  if (is.matrix(pres_matrix) == FALSE) {
-    pres_matrix = as.matrix(pres_matrix)
-    warning("Site-species input was not a matrix.")
+  if (!is.matrix(pres_matrix) & !is(pres_matrix, "sparseMatrix")) {
+    stop("Provided site-species matrix is not a matrix")
   }
 
   # get the total number of communities
   n_com = nrow(pres_matrix)
 
   # Convert all the matrix values into 0/1
-  pres_matrix[is.na(pres_matrix)==T] = 0
+  pres_matrix[is.na(pres_matrix) == T] = 0
   pres_matrix[pres_matrix > 0] = 1
 
   # Compute the sum of all species' occurrences divided by n_com
