@@ -157,6 +157,35 @@ check_col_in_df = function(com_df, given_col) {
 
 
 
+# Shows message if more species are present in stacked data.frame than in
+# distance matrix
+#
+# Args:
+#   com_df a stacked community data.frame
+#
+#   sp_col a character vector indicating the column for species
+#
+#   dist_matrix a functional distance matrix
+#
+# Returns:
+#   nothing, shows a message
+check_n_sp_df = function(com_df, sp_col, dist_matrix) {
+  df_sp = length(unique(com_df[[sp_col]]))
+
+  mat_sp = min(length(unique(colnames(dist_matrix))),
+               length(unique(rownames(dist_matrix))))
+
+  if (df_sp > mat_sp) {
+    message(paste("More species in community data.frame than in distance matrix\n",
+                  "Taking subset of community data.frame", sep = ""))
+  } else if (df_sp < mat_sp) {
+    message(paste("More species in distance matrix than in community data.frame",
+          "Taking subset of distance matrix", sep = "\n"))
+  }
+}
+
+
+
 # Get common species between functional distance matrix and community data.frame
 #
 # Args:
@@ -210,9 +239,14 @@ full_df_checks = function(com_df, sp_col, com = NULL, abund = NULL,
 
   if (!is.null(abund)) {
     check_col_in_df(com_df, abund)
+
+    if (!is.numeric(com_df[[abund]])) {
+      stop("Provided abundances are not numeric")
+    }
   }
 
   if (!is.null(dist_matrix)) {
     check_matrix(dist_matrix, "distance")
+    check_n_sp_df(com_df, sp_col, dist_matrix)
   }
 }

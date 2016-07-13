@@ -125,6 +125,7 @@ test_that("Check for _stack() and _com() functions", {
   expect_silent(check_df(com_df))
   expect_silent(check_col_in_df(com_df, "site"))
   expect_silent(check_col_in_df(com_df, "species"))
+  expect_silent(check_n_sp_df(com_df, "species", dist_mat))
 
 
   # Check if input is a data.frame
@@ -136,6 +137,18 @@ test_that("Check for _stack() and _com() functions", {
   # Check if column in data.frame
   expect_error(check_col_in_df(com_df, "abund"),
                regexp = "'abund' column not in provided data.frame")
+
+  # Check number of species between distance matrix and community data.frame
+  expect_message(
+    check_n_sp_df(com_df, "species", dist_mat[1:2,]),
+    regexp = paste("More species in community data.frame than in distance matrix\n",
+                   "Taking subset of community data.frame", sep = "")
+  )
+  expect_message(
+    check_n_sp_df(com_df[1:2,], "species", dist_mat),
+    regexp = paste("More species in distance matrix than in community data.frame",
+                   "Taking subset of distance matrix", sep = "\n")
+  )
 })
 
 
@@ -157,4 +170,9 @@ test_that("Full checks work", {
   expect_error(full_df_checks(com_df, "species", "si", abund = NULL, dist_mat))
   expect_error(full_df_checks(com_df, "species", "site", "a", dist_mat))
   expect_error(full_df_checks(com_df, "species", "site", abund = NULL, ""))
+  expect_error(full_df_checks(com_df, "species", "site", "species", dist_mat))
+  expect_message(full_df_checks(com_df, "species", "site",
+                                dist_matrix = dist_mat[1:2,]))
+  expect_message(full_df_checks(com_df[1:2,], "species", "site",
+                                dist_matrix = dist_mat))
 })

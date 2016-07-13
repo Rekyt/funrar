@@ -175,10 +175,13 @@ test_that("Correct Uniqueness computation", {
                     valid_ui)
 
   expect_error(uniqueness_stack(com_df[1:2, ], "NOT_IN_TABLE", dist_mat),
-    regexp = "'NOT_IN_TABLE' species column not in column names")
+    regexp = "'NOT_IN_TABLE' column not in provided data.frame")
 
-  expect_error(uniqueness_stack(com_df[1:2, ], "species", dist_mat[1:2,]),
-               regexp = "Distance matrix is not square.")
+  expect_message(
+    uniqueness_stack(com_df, "species", dist_mat[1:2,]),
+    regexp = paste("More species in community data.frame than in distance matrix\n",
+                   "Taking subset of community data.frame", sep = "")
+  )
 
   expect_equivalent(uniqueness_stack(com_df, "species", dist_mat), all_ui)
 
@@ -211,24 +214,15 @@ test_that("Correct Scarcity computation", {
 test_that("Scarcity errors with bad input", {
   expect_error(scarcity_stack(as.data.frame(com_df_ex),
                               "species", "SITE_NOT_IN_TABLE", "abund"),
-               regexp = "Community table does not have any communities")
+               regexp = "'SITE_NOT_IN_TABLE' column not in provided data.frame")
 
   expect_error(scarcity_stack(as.data.frame(com_df_ex),
                               "SPECIES_NOT_IN_TABLE", "site", "abund"),
-               regexp = "Community table does not have any species")
-
-
-  com_df_sp = com_df_ex
-
-  com_df_sp$species = as.factor(com_df_ex$species)
-
-  expect_error(scarcity_stack(as.data.frame(com_df_sp),
-                "species", "site", "abund"),
-               regexp = "Provided species are not character")
+               regexp = "'SPECIES_NOT_IN_TABLE' column not in provided data.frame")
 
   expect_error(scarcity_stack(as.data.frame(com_df_ex), "species", "site",
                               NULL),
-               regexp = "No relative abundance provided.")
+               regexp = "No relative abundance provided")
 
   com_df_ab = com_df_ex
 
@@ -236,5 +230,5 @@ test_that("Scarcity errors with bad input", {
 
   expect_error(scarcity_stack(as.data.frame(com_df_ab), "species", "site",
                               "abund"),
-               regexp = "Provided abundances are not numeric.")
+               regexp = "Provided abundances are not numeric")
 })

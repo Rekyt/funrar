@@ -25,42 +25,20 @@
 #' mat = as.matrix(aravo$spe); dat = matrix_to_stack(mat, "value", "site", "species")
 #' dat$site = as.character(dat$site)
 #' dat$species = as.character(dat$species)
-#' ri_df = restrictedness_stack(dat, "site", "species")
+#' ri_df = restrictedness_stack(dat, "species", "site")
 #' head(ri_df)
 #'
 #' @export
-restrictedness_stack = function(com_df, com, species) {
+restrictedness_stack = function(com_df, sp_col, com) {
 
-  # Test to be sure
-  if ( (is.character(com)) == FALSE) {
-    stop("com has to be a character string.")
-  }
-
-  if ( (is.character(species)) == FALSE) {
-    stop("species has to be a character string.")
-  }
-
-  if ( (com %in% colnames(com_df)) == FALSE) {
-    stop("Community table does not have any communities.")
-  }
-
-  if ( (species %in% colnames(com_df)) == FALSE) {
-    stop("Community table does not have any species.")
-  }
-
-  if (!is.character(com_df[[species]])) {
-    stop("Provided species are not character.")
-  }
-
-  if (!is.character(com_df[[com]])) {
-    stop("Provided communities are not character.")
-  }
+  # Test to be sure of inputs
+  full_df_checks(com_df, sp_col, com)
 
   # get the total number of communities
   n_com = length(unique(com_df[, com]))
 
   # Compute the sum of all species' occurrences divided by n_com
-  occupancy = table(com_df[, species]) / n_com
+  occupancy = table(com_df[, sp_col]) / n_com
 
   # Format occupancy in data.frame
   occupancy = data.frame("sp" = names(occupancy), "Ri" = as.numeric(occupancy))

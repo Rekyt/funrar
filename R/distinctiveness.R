@@ -100,37 +100,10 @@ distinctiveness_com = function(com_df, sp_col, abund = NULL, dist_matrix) {
 distinctiveness_stack = function(com_df, sp_col, com, abund = NULL,
                                  dist_matrix) {
 
-  # Test to be sure
-  if ( (com %in% colnames(com_df)) == FALSE) {
-    stop("Community table does not have any communities.")
-  }
-
-  if ( (sp_col %in% colnames(com_df)) == FALSE) {
-    stop("Community table does not have any species.")
-  }
-
-  if (!is.character(com_df[[sp_col]])) {
-    stop("Provided species are not character.")
-  }
-
-  if (!is.null(abund) & !is.numeric(com_df[, abund])) {
-    stop("Provided abundances are not numeric.")
-  }
-
+  # Test to be sure of inputs
+  full_df_checks(com_df, sp_col, com, abund, dist_matrix)
   if (is.null(abund)) {
-    message("No relative abundance provided, computing distinctiveness without
-            it.")
-  }
-
-  # Check if distance matrix is a matrix or data frame
-  if (!is.matrix(dist_matrix) & !is.data.frame(dist_matrix)) {
-    stop("Provided distance matrix should be a 'data.frame' or a 'matrix'")
-  }
-
-  # Check if distance matrix has same row and column numbers
-  if (nrow(dist_matrix) != ncol(dist_matrix)) {
-    stop(paste0("Provided distance matrix doesn't have same number of rows and",
-                "columns."))
+    message("No relative abundance provided, computing Di without it")
   }
 
   # Compute Distinctivenness

@@ -38,13 +38,8 @@
 #' @export
 uniqueness_stack = function(com_df, sp_col, dist_matrix) {
 
-  if (!(sp_col %in% colnames(com_df))) {
-    stop(paste0("'", sp_col, "' species column not in column names"))
-  }
-
-  if (nrow(dist_matrix) != ncol(dist_matrix)) {
-    stop("Distance matrix is not square.")
-  }
+  # Test input
+  full_df_checks(com_df, sp_col, dist_matrix = dist_matrix)
 
   # Extract all species in community
   com_species = as.character(unique(com_df[[sp_col]]))
