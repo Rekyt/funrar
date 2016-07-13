@@ -11,9 +11,10 @@
 #'
 #' @param com_df a tidy data.frame of community with column with species
 #'
+#' @param sp_col a character vector indicating the name of species column
+#'
 #' @param com a character vector indicating the name of community column
 #'
-#' @param species a character vector indicating the name of species column
 #'
 #'
 #' @return A tidy data.frame containing species' names and their restrictedness

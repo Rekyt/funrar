@@ -9,9 +9,9 @@ restrictedness_stack(com_df, sp_col, com)
 \arguments{
 \item{com_df}{a tidy data.frame of community with column with species}
 
-\item{com}{a character vector indicating the name of community column}
+\item{sp_col}{a character vector indicating the name of species column}
 
-\item{species}{a character vector indicating the name of species column}
+\item{com}{a character vector indicating the name of community column}
 }
 \value{
 A tidy data.frame containing species' names and their restrictedness
