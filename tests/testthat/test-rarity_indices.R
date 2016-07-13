@@ -101,6 +101,13 @@ com_scarcity = com_df_ex %>%
   mutate(Si = exp(-N_sp*log(2)*abund)) %>%
   select(-N_sp)
 
+abund_com = abund_mat %>%
+  matrix_to_stack(value_col = "abund", row_to_col = "site",
+                  col_to_col = "species") %>%
+  filter(abund > 0, site == "s3")
+abund_com$Di = c(4/9, 4/9)
+
+
 
 # Test for Distinctiveness ----------------------------------------------------
 
@@ -134,8 +141,14 @@ test_that("Correct Di computation with different comm. without abundance",{
   expect_equivalent(as.data.frame(c_dist), as.data.frame(correct_dist) %>%
                       arrange(site))
 
+  # Undefined distinctiveness for species alone in communities
+  expect_equal(distinctiveness_com(com_df[1,], "species",
+                                   dist_matrix = dist_mat)[1,3], NaN)
+
 
   # Distinctiveness with abundances
+  expect_equal(distinctiveness_com(abund_com[, -4], "species", "abund",
+                                        dist_mat), abund_com)
 })
 
 
