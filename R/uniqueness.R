@@ -95,7 +95,7 @@ uniqueness = function(pres_matrix, dist_matrix) {
 
   common = species_in_common(pres_matrix, dist_matrix)
 
-  pres_matrix = pres_matrix[, common]
+  pres_matrix = pres_matrix[, common, drop = FALSE]
   dist_matrix = dist_matrix[common, common]
 
   com_dist = dist_matrix

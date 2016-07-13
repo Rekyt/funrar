@@ -180,7 +180,7 @@ distinctiveness = function(pres_matrix, dist_matrix) {
 
   common = species_in_common(pres_matrix, dist_matrix)
 
-  pres_matrix = pres_matrix[, common]
+  pres_matrix = pres_matrix[, common, drop = FALSE]
   dist_matrix = dist_matrix[common, common]
 
   # Matrix product of distance matrix and presence absence matrix
