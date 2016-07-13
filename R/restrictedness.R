@@ -91,9 +91,8 @@ restrictedness_stack = function(com_df, com, species) {
 #' @export
 restrictedness = function(pres_matrix) {
 
-  if (!is.matrix(pres_matrix) & !is(pres_matrix, "sparseMatrix")) {
-    stop("Provided site-species matrix is not a matrix")
-  }
+  # Check site-species matrix type
+  check_matrix(pres_matrix, "site-species")
 
   # get the total number of communities
   n_com = nrow(pres_matrix)
