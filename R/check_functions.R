@@ -61,6 +61,8 @@ check_bigger_pres = function(pres_matrix, dist_matrix) {
   }
 }
 
+
+
 # Run all the checks and show errors or messages
 #
 # Args:
@@ -99,6 +101,8 @@ get_common_species = function(pres_matrix, dist_matrix) {
   return(common_species)
 }
 
+
+
 # Get common species between presence-absence matrix
 #
 # Args:
@@ -116,5 +120,99 @@ species_in_common = function(pres_matrix, dist_matrix) {
      stop("No species found in common between matrices")
   } else {
      return(common)
+  }
+}
+
+
+
+# Test if argument is data.frame shows an error message otherwise
+#
+# Args:
+#   com_df a stacked community data.frame
+#
+# Returns:
+#   nothing, shows an error message if input is not a data.frame
+check_df = function(com_df) {
+  if (!is.data.frame(com_df)) {
+    stop("Provided community data.frame is not a data.frame")
+  }
+}
+
+
+
+# Test if column is in data.frame
+#
+# Args:
+#   com_df a stacked community data.frame
+#
+#   given_col a character vector for column name
+#
+# Returns:
+#   nothing, shows an error message if column is not in provided data.frame
+check_col_in_df = function(com_df, given_col) {
+  if (!(given_col %in% colnames(com_df))) {
+    stop(paste0("'", given_col,"' column not in provided data.frame"))
+  }
+}
+
+
+
+# Get common species between functional distance matrix and community data.frame
+#
+# Args:
+#   com_df a stacked community data.frame
+#
+#   sp_col a character vector of the column containing species information
+#
+#   dist_matrix a functional distance matrix
+#
+# Returns:
+#   a list of species in common if there is any, otherwise shows an error
+species_in_common_df = function(com_df, sp_col, dist_matrix) {
+  common = intersect(com_df[[sp_col]], colnames(dist_matrix))
+  common = intersect(common, rownames(dist_matrix))
+
+  if (identical(common, character(0)) | is.null(common)) {
+    stop("No species found in common between distance matrix and data.frame")
+  } else {
+    return(common)
+  }
+}
+
+
+
+# Run all the checks and show errors if wrong input
+#
+# Args:
+#   com_df a stacked community data.frame
+#
+#   sp_col a character vector of the column containing species information
+#
+#   com a character vector of the column containing site information
+#
+#   abund a character vector of the column containing abundance information
+#
+#   dist_matrix the functional distance matrix
+#
+#
+# Returns:
+#   nothing, shows up errors
+full_df_checks = function(com_df, sp_col, com = NULL, abund = NULL,
+                          dist_matrix = NULL) {
+  check_df(com_df)
+
+  check_col_in_df(com_df, sp_col)
+
+  if (!is.null(com)) {
+    check_col_in_df(com_df, com)
+  }
+
+
+  if (!is.null(abund)) {
+    check_col_in_df(com_df, abund)
+  }
+
+  if (!is.null(dist_matrix)) {
+    check_matrix(dist_matrix, "distance")
   }
 }

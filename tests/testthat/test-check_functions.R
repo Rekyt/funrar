@@ -10,6 +10,9 @@ dist_mat = matrix(0, nrow = 3, ncol = 3)
 colnames(dist_mat) = letters[1:3]
 rownames(dist_mat) = letters[1:3]
 
+com_df = matrix_to_stack(pres_mat, value_col = "pres", row_to_col = "site",
+                         col_to_col = "species")
+
 
 # Tests ------------------------------------------------------------------------
 test_that("Messages show up with wrong input", {
@@ -71,7 +74,8 @@ test_that("Messages show up with wrong input", {
 
 })
 
-test_that("Find Common species between matrices", {
+test_that("Find Common species between matrices or between df and matrix", {
+  # Between matrices
   expect_equal(get_common_species(pres_mat, dist_mat), letters[1:3])
 
   expect_equal(get_common_species(pres_mat[,1:2], dist_mat), letters[1:2])
@@ -81,13 +85,25 @@ test_that("Find Common species between matrices", {
 
   expect_identical(get_common_species(pres_mat[0, 0], dist_mat), character(0))
   expect_identical(get_common_species(pres_mat, dist_mat[0, 0]), character(0))
+
+  # Between distance matrix and data.frame
+  expect_equal(species_in_common_df(com_df, "species", dist_mat), letters[1:3])
+
+  expect_equal(species_in_common_df(com_df[1:4,], "species", dist_mat), "a")
+  expect_equal(species_in_common_df(com_df, "species", dist_mat[1:2,]),
+               letters[1:2])
+  expect_equal(species_in_common_df(com_df, "species", dist_mat[, 1:2]),
+               letters[1:2])
+  expect_equal(species_in_common_df(com_df, "species", dist_mat[1:2, 1:2]),
+               letters[1:2])
 })
 
-test_that("No common species between matrices gives an error", {
+test_that("No common species gives an error", {
   bad_mat = pres_mat
   colnames(bad_mat) = letters[4:6]
 
   expect_silent(species_in_common(pres_mat, dist_mat))
+  expect_silent(species_in_common_df(com_df, "species", dist_mat))
 
   expect_equal(species_in_common(pres_mat, dist_mat), letters[1:3])
 
@@ -95,6 +111,50 @@ test_that("No common species between matrices gives an error", {
     species_in_common(bad_mat, dist_mat),
     regexp = "No species found in common between matrices"
   )
+  expect_error(
+    species_in_common_df(com_df, "species", dist_mat[0, 0]),
+    regexp = "No species found in common between distance matrix and data.frame"
+  )
+  expect_error(
+    species_in_common_df(com_df[0, 0], "species", dist_mat),
+    regexp = "No species found in common between distance matrix and data.frame"
+  )
+})
+
+test_that("Check for _stack() and _com() functions", {
+  expect_silent(check_df(com_df))
+  expect_silent(check_col_in_df(com_df, "site"))
+  expect_silent(check_col_in_df(com_df, "species"))
+
+
+  # Check if input is a data.frame
+  expect_error(check_df(""),
+               regexp = "Provided community data.frame is not a data.frame")
+  expect_error(check_df(pres_mat),
+               regexp = "Provided community data.frame is not a data.frame")
+
+  # Check if column in data.frame
+  expect_error(check_col_in_df(com_df, "abund"),
+               regexp = "'abund' column not in provided data.frame")
 })
 
 
+test_that("Full checks work", {
+  expect_silent(full_matrix_checks(pres_mat, dist_mat))
+  expect_silent(full_df_checks(com_df, "species"))
+  expect_silent(full_df_checks(com_df, "species", "site"))
+  expect_silent(full_df_checks(com_df, "species", "site", "pres"))
+  expect_silent(full_df_checks(com_df, "species", "site", "pres", dist_mat))
+  expect_silent(full_df_checks(com_df, "species", "site", dist_matrix =  dist_mat))
+
+  expect_error(full_matrix_checks("", dist_mat))
+  expect_error(full_matrix_checks(pres_mat, ""))
+  expect_message(full_matrix_checks(pres_mat[,1:2], dist_mat))
+  expect_message(full_matrix_checks(pres_mat, dist_mat[,1:2]))
+
+  expect_error(full_df_checks("", "species", "site", abund = NULL, dist_mat))
+  expect_error(full_df_checks(com_df, "sp", "site", abund = NULL, dist_mat))
+  expect_error(full_df_checks(com_df, "species", "si", abund = NULL, dist_mat))
+  expect_error(full_df_checks(com_df, "species", "site", "a", dist_mat))
+  expect_error(full_df_checks(com_df, "species", "site", abund = NULL, ""))
+})
