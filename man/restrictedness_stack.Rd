@@ -4,7 +4,7 @@
 \alias{restrictedness_stack}
 \title{Table Restrictedness}
 \usage{
-restrictedness_stack(com_df, com, species)
+restrictedness_stack(com_df, sp_col, com)
 }
 \arguments{
 \item{com_df}{a tidy data.frame of community with column with species}
@@ -26,7 +26,7 @@ data("aravo", package = "ade4")
 mat = as.matrix(aravo$spe); dat = matrix_to_stack(mat, "value", "site", "species")
 dat$site = as.character(dat$site)
 dat$species = as.character(dat$species)
-ri_df = restrictedness_stack(dat, "site", "species")
+ri_df = restrictedness_stack(dat, "species", "site")
 head(ri_df)
 
 }
