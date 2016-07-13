@@ -245,3 +245,14 @@ test_that("Scarcity errors with bad input", {
                               "abund"),
                regexp = "Provided abundances are not numeric")
 })
+
+
+# Tests for Restrictedness -----------------------------------------------------
+
+test_that("Restrictedness computations work", {
+  expect_equal(restrictedness_stack(com_df, "species", "site"),
+               data.frame("sp" = letters[1:4], "Ri" = c(3/4, 1/4, 1/4, 1/2)))
+
+  expect_equal(restrictedness(valid_mat),
+               restrictedness_stack(com_df, "species", "site"))
+})
