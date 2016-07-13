@@ -262,13 +262,13 @@ test_that("Restrictedness computations work", {
 
 test_that("Funrar runs smoothly", {
   expect_silent(funrar(valid_mat, dist_mat))
-  expect_silent(funrar_stack(abund_df, "species", "site", "abund", dist_mat))
+  expect_silent(funrar_stack(com_df_ex, "species", "site", "abund", dist_mat))
 
   expect_equal(length(funrar(valid_mat, dist_mat)), 3)
   expect_equal(length(funrar(abund_mat, dist_mat, rel_abund = TRUE)), 4)
 
   expect_equal(length(funrar_stack(com_df, "species", "site",
                                    dist_matrix = dist_mat)), 3)
-  expect_equal(length(funrar_stack(abund_df, "species", "site", "abund",
+  expect_equal(length(funrar_stack(com_df_ex, "species", "site", "abund",
                                    dist_mat)), 4)
 })
