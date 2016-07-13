@@ -101,6 +101,13 @@ com_scarcity = com_df_ex %>%
   mutate(Si = exp(-N_sp*log(2)*abund)) %>%
   select(-N_sp)
 
+abund_com = abund_mat %>%
+  matrix_to_stack(value_col = "abund", row_to_col = "site",
+                  col_to_col = "species") %>%
+  filter(abund > 0, site == "s3")
+abund_com$Di = c(4/9, 4/9)
+
+
 
 # Test for Distinctiveness ----------------------------------------------------
 
@@ -134,8 +141,14 @@ test_that("Correct Di computation with different comm. without abundance",{
   expect_equivalent(as.data.frame(c_dist), as.data.frame(correct_dist) %>%
                       arrange(site))
 
+  # Undefined distinctiveness for species alone in communities
+  expect_equal(distinctiveness_com(com_df[1,], "species",
+                                   dist_matrix = dist_mat)[1,3], NaN)
+
 
   # Distinctiveness with abundances
+  expect_equal(distinctiveness_com(abund_com[, -4], "species", "abund",
+                                        dist_mat), abund_com)
 })
 
 
@@ -175,10 +188,13 @@ test_that("Correct Uniqueness computation", {
                     valid_ui)
 
   expect_error(uniqueness_stack(com_df[1:2, ], "NOT_IN_TABLE", dist_mat),
-    regexp = "'NOT_IN_TABLE' species column not in column names")
+    regexp = "'NOT_IN_TABLE' column not in provided data.frame")
 
-  expect_error(uniqueness_stack(com_df[1:2, ], "species", dist_mat[1:2,]),
-               regexp = "Distance matrix is not square.")
+  expect_message(
+    uniqueness_stack(com_df, "species", dist_mat[1:2,]),
+    regexp = paste("More species in community data.frame than in distance matrix\n",
+                   "Taking subset of community data.frame", sep = "")
+  )
 
   expect_equivalent(uniqueness_stack(com_df, "species", dist_mat), all_ui)
 
@@ -211,24 +227,15 @@ test_that("Correct Scarcity computation", {
 test_that("Scarcity errors with bad input", {
   expect_error(scarcity_stack(as.data.frame(com_df_ex),
                               "species", "SITE_NOT_IN_TABLE", "abund"),
-               regexp = "Community table does not have any communities")
+               regexp = "'SITE_NOT_IN_TABLE' column not in provided data.frame")
 
   expect_error(scarcity_stack(as.data.frame(com_df_ex),
                               "SPECIES_NOT_IN_TABLE", "site", "abund"),
-               regexp = "Community table does not have any species")
-
-
-  com_df_sp = com_df_ex
-
-  com_df_sp$species = as.factor(com_df_ex$species)
-
-  expect_error(scarcity_stack(as.data.frame(com_df_sp),
-                "species", "site", "abund"),
-               regexp = "Provided species are not character")
+               regexp = "'SPECIES_NOT_IN_TABLE' column not in provided data.frame")
 
   expect_error(scarcity_stack(as.data.frame(com_df_ex), "species", "site",
                               NULL),
-               regexp = "No relative abundance provided.")
+               regexp = "No relative abundance provided")
 
   com_df_ab = com_df_ex
 
@@ -236,5 +243,32 @@ test_that("Scarcity errors with bad input", {
 
   expect_error(scarcity_stack(as.data.frame(com_df_ab), "species", "site",
                               "abund"),
-               regexp = "Provided abundances are not numeric.")
+               regexp = "Provided abundances are not numeric")
+})
+
+
+# Tests for Restrictedness -----------------------------------------------------
+
+test_that("Restrictedness computations work", {
+  expect_equal(restrictedness_stack(com_df, "species", "site"),
+               data.frame("sp" = letters[1:4], "Ri" = c(3/4, 1/4, 1/4, 1/2)))
+
+  expect_equal(restrictedness(valid_mat),
+               restrictedness_stack(com_df, "species", "site"))
+})
+
+
+# Tests for Combined function --------------------------------------------------
+
+test_that("Funrar runs smoothly", {
+  expect_silent(funrar(valid_mat, dist_mat))
+  expect_silent(funrar_stack(com_df_ex, "species", "site", "abund", dist_mat))
+
+  expect_equal(length(funrar(valid_mat, dist_mat)), 3)
+  expect_equal(length(funrar(abund_mat, dist_mat, rel_abund = TRUE)), 4)
+
+  expect_equal(length(funrar_stack(com_df, "species", "site",
+                                   dist_matrix = dist_mat)), 3)
+  expect_equal(length(funrar_stack(com_df_ex, "species", "site", "abund",
+                                   dist_mat)), 4)
 })

@@ -1,4 +1,3 @@
-
 # Function to compute distinctiveness on various Databases
 #
 # Authors: Pierre Denelle & Matthias Grenié
@@ -23,44 +22,39 @@
 #' @export
 distinctiveness_com = function(com_df, sp_col, abund = NULL, dist_matrix) {
 
-  # Check if distance matrix is a matrix or data frame
-  if (!is.matrix(dist_matrix) & !is.data.frame(dist_matrix)) {
-    stop("Provided distance matrix should be a 'data.frame' or a 'matrix'")
-  }
+  common = species_in_common_df(com_df, sp_col, dist_matrix)
 
-  # Check if distance matrix has same row and column numbers
-  if (nrow(dist_matrix) != ncol(dist_matrix)) {
-    stop(paste0("Provided distance matrix doesn't have same number of rows and",
-                "columns."))
-  }
+  com_df = subset(com_df, com_df[[sp_col]] %in% common)
 
   # Get functional distance matrix of species in communities
-  com_dist <- dist_matrix[com_df[[sp_col]], com_df[[sp_col]]]
+  com_dist = dist_matrix[common, common]
 
   if (!is.null(dim(com_dist))) {
     if (is.null(abund)) {
       # Sum the distances by species
-      num <- colSums(com_dist)
+      num = colSums(com_dist)
 
       # Number of species minus the focal species
-      denom <- nrow(com_df) - 1
+      denom = nrow(com_df) - 1
 
     } else {
       # For each species multiplies its functional distance with corresponding
       # abundance to compute distinctiveness
-      num <- apply(com_dist, 2, function(x) sum(x * com_df[, abund]))
+      num = apply(com_dist, 2, function(x) sum(x * com_df[, abund]))
       # Compute the sum of all abundances minus the one focal species
-      denom <- sum(com_df[[abund]]) - com_df[[abund]]
+      denom = sum(com_df[[abund]]) - com_df[[abund]]
     }
   } else {
     denom = 0
   }
 
   # Computes distinctiveness by species
-  if (length(denom) > 1 | (length(denom) == 1 & denom != 0)) {
-    com_df[, "Di"] <- as.numeric(num / denom)
+  if (length(denom) > 1) {
+    com_df[, "Di"] = as.numeric(num / denom)
+  } else if (length(denom) == 1 & denom != 0) {
+    com_df[, "Di"] = as.numeric(num / denom)
   } else {
-    com_df[, "Di"] = NA
+    com_df[, "Di"] = NaN
   }
 
 
@@ -85,12 +79,12 @@ distinctiveness_com = function(com_df, sp_col, abund = NULL, dist_matrix) {
 #' data("aravo", package = "ade4")
 #'
 #' # Example of trait table
-#' tra <- aravo$traits[, c("Height", "SLA", "N_mass")]
+#' tra = aravo$traits[, c("Height", "SLA", "N_mass")]
 #' # Distance matrix
-#' dist_mat <- compute_dist_matrix(tra)
+#' dist_mat = compute_dist_matrix(tra)
 #'
 #' # Site-species matrix converted into data.frame
-#' mat = as.matrix(aravo$spe); dat <- matrix_to_stack(mat, "value", "site", "species")
+#' mat = as.matrix(aravo$spe); dat = matrix_to_stack(mat, "value", "site", "species")
 #' dat$site = as.character(dat$site)
 #' dat$species = as.character(dat$species)
 #'
@@ -101,49 +95,28 @@ distinctiveness_com = function(com_df, sp_col, abund = NULL, dist_matrix) {
 distinctiveness_stack = function(com_df, sp_col, com, abund = NULL,
                                  dist_matrix) {
 
-  # Test to be sure
-  if ( (com %in% colnames(com_df)) == FALSE) {
-    stop("Community table does not have any communities.")
-  }
-
-  if ( (sp_col %in% colnames(com_df)) == FALSE) {
-    stop("Community table does not have any species.")
-  }
-
-  if (!is.character(com_df[[sp_col]])) {
-    stop("Provided species are not character.")
-  }
-
-  if (!is.null(abund) & !is.numeric(com_df[, abund])) {
-    stop("Provided abundances are not numeric.")
-  }
-
+  # Test to be sure of inputs
+  full_df_checks(com_df, sp_col, com, abund, dist_matrix)
   if (is.null(abund)) {
-    message("No relative abundance provided, computing distinctiveness without
-            it.")
+    message("No relative abundance provided, computing Di without it")
   }
 
-  # Check if distance matrix is a matrix or data frame
-  if (!is.matrix(dist_matrix) & !is.data.frame(dist_matrix)) {
-    stop("Provided distance matrix should be a 'data.frame' or a 'matrix'")
-  }
+  # Take subsets of species if needed between distance matrix and community
+  common = species_in_common_df(com_df, sp_col, dist_matrix)
 
-  # Check if distance matrix has same row and column numbers
-  if (nrow(dist_matrix) != ncol(dist_matrix)) {
-    stop(paste0("Provided distance matrix doesn't have same number of rows and",
-                "columns."))
-  }
+  com_df = subset(com_df, com_df[[sp_col]] %in% common)
+  dist_matrix = dist_matrix[common, common]
 
   # Compute Distinctivenness
   # Split table by communities
-  com_split <- split(com_df, factor(com_df[[com]]))
+  com_split = split(com_df, factor(com_df[[com]]))
 
-  com_split <- lapply(com_split,
+  com_split = lapply(com_split,
                       function(one_com)
                         distinctiveness_com(one_com, sp_col, abund, dist_matrix)
   )
 
-  com_distinctiveness <- dplyr::bind_rows(com_split)
+  com_distinctiveness = dplyr::bind_rows(com_split)
 
   return(com_distinctiveness)
 }
@@ -193,9 +166,9 @@ distinctiveness_stack = function(com_df, sp_col, com, abund = NULL,
 #' mat = as.matrix(aravo$spe)
 #'
 #' # Example of trait table
-#' tra <- aravo$traits[, c("Height", "SLA", "N_mass")]
+#' tra = aravo$traits[, c("Height", "SLA", "N_mass")]
 #' # Distance matrix
-#' dist_mat <- compute_dist_matrix(tra)
+#' dist_mat = compute_dist_matrix(tra)
 #'
 #' di = distinctiveness(pres_matrix = mat, dist_matrix = dist_mat)
 #' di[1:5, 1:5]
@@ -203,21 +176,12 @@ distinctiveness_stack = function(com_df, sp_col, com, abund = NULL,
 #' @export
 distinctiveness = function(pres_matrix, dist_matrix) {
 
-  if (nrow(dist_matrix) > ncol(pres_matrix)) {
+  full_matrix_checks(pres_matrix, dist_matrix)
 
-    message(paste("Distance matrix > Presence Matrix species",
-            "Taking subset of distance matrix", sep = "\n"))
+  common = species_in_common(pres_matrix, dist_matrix)
 
-    dist_matrix = dist_matrix[colnames(pres_matrix), colnames(pres_matrix)]
-
-  } else if (nrow(dist_matrix) < ncol(pres_matrix)) {
-
-    message(paste("More species in site-species matrix than in provided ",
-                  "distance matrix\n", "Taking subset of site-species matrix",
-                  sep = ""))
-
-    pres_matrix = pres_matrix[, rownames(dist_matrix)]
-  }
+  pres_matrix = pres_matrix[, common, drop = FALSE]
+  dist_matrix = dist_matrix[common, common]
 
   # Matrix product of distance matrix and presence absence matrix
   index_matrix = pres_matrix %*% dist_matrix

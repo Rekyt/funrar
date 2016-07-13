@@ -81,7 +81,7 @@ funrar_stack = function(com_df, sp_col, com, abund = NULL,
 
   funct_dist = distinctiveness_stack(com_df, sp_col, com, abund, dist_matrix)
   funct_uniq = uniqueness_stack(com_df, sp_col, dist_matrix)
-  geog_rest = restrictedness_stack(com_df, sp_col, dist_matrix)
+  geog_rest = restrictedness_stack(com_df, sp_col, com)
 
   if (is.null(abund)) {
     return(list(

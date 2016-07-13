@@ -35,12 +35,12 @@ identity and an optional one for relative abundances.
 data("aravo", package = "ade4")
 
 # Example of trait table
-tra <- aravo$traits[, c("Height", "SLA", "N_mass")]
+tra = aravo$traits[, c("Height", "SLA", "N_mass")]
 # Distance matrix
-dist_mat <- compute_dist_matrix(tra)
+dist_mat = compute_dist_matrix(tra)
 
 # Site-species matrix converted into data.frame
-mat = as.matrix(aravo$spe); dat <- matrix_to_stack(mat, "value", "site", "species")
+mat = as.matrix(aravo$spe); dat = matrix_to_stack(mat, "value", "site", "species")
 dat$site = as.character(dat$site)
 dat$species = as.character(dat$species)
 

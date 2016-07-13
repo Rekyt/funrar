@@ -22,14 +22,14 @@
 #' data("aravo", package = "ade4")
 #'
 #' # Site-species matrix converted into data.frame
-#' mat = as.matrix(aravo$spe); dat <- matrix_to_stack(mat, "value", "site", "species")
+#' mat = as.matrix(aravo$spe); dat = matrix_to_stack(mat, "value", "site", "species")
 #' dat$site = as.character(dat$site)
 #' dat$species = as.character(dat$species)
 #'
 #' # Example of trait table
-#' tra <- aravo$traits[, c("Height", "SLA", "N_mass")]
+#' tra = aravo$traits[, c("Height", "SLA", "N_mass")]
 #' # Distance matrix
-#' dist_mat <- compute_dist_matrix(tra)
+#' dist_mat = compute_dist_matrix(tra)
 #'
 #' ui_df = uniqueness_stack(dat, "species", dist_mat)
 #' head(ui_df)
@@ -38,19 +38,13 @@
 #' @export
 uniqueness_stack = function(com_df, sp_col, dist_matrix) {
 
-  if (!(sp_col %in% colnames(com_df))) {
-    stop(paste0("'", sp_col, "' species column not in column names"))
-  }
+  # Test input
+  full_df_checks(com_df, sp_col, dist_matrix = dist_matrix)
 
-  if (nrow(dist_matrix) != ncol(dist_matrix)) {
-    stop("Distance matrix is not square.")
-  }
+  # Take subsets of species if needed between distance matrix and community
+  common = species_in_common_df(com_df, sp_col, dist_matrix)
 
-  # Extract all species in community
-  com_species = as.character(unique(com_df[[sp_col]]))
-
-  # Submatrix containing distance of species in community
-  com_dist = dist_matrix[com_species, com_species]
+  com_dist = dist_matrix[common, common]
 
   # Replace diagonal by 'NA' for computation reasons
   diag(com_dist) = NA
@@ -87,9 +81,9 @@ uniqueness_stack = function(com_df, sp_col, dist_matrix) {
 #' colnames(mat) = as.character(colnames(mat))
 #'
 #' # Example of trait table
-#' tra <- aravo$traits[, c("Height", "SLA", "N_mass")]
+#' tra = aravo$traits[, c("Height", "SLA", "N_mass")]
 #' # Distance matrix
-#' dist_mat <- compute_dist_matrix(tra)
+#' dist_mat = compute_dist_matrix(tra)
 #'
 #' ui = uniqueness(mat, dist_mat)
 #' head(ui)
@@ -97,7 +91,14 @@ uniqueness_stack = function(com_df, sp_col, dist_matrix) {
 #' @export
 uniqueness = function(pres_matrix, dist_matrix) {
 
-  com_dist = dist_matrix[colnames(pres_matrix), colnames(pres_matrix)]
+  full_matrix_checks(pres_matrix, dist_matrix)
+
+  common = species_in_common(pres_matrix, dist_matrix)
+
+  pres_matrix = pres_matrix[, common, drop = FALSE]
+  dist_matrix = dist_matrix[common, common]
+
+  com_dist = dist_matrix
 
   # Replace diagonal by 'NA' for computation reasons
   diag(com_dist) = NA

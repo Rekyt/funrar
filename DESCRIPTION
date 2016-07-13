@@ -33,5 +33,4 @@ Suggests:
     rmarkdown,
     StatMatch,
     testthat
-
 VignetteBuilder: knitr

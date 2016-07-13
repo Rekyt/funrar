@@ -54,7 +54,7 @@ scarcity_com = function(com_df, sp_col, abund) {
 #' data("aravo", package = "ade4")
 #'
 #' # Site-species matrix converted into data.frame
-#' mat = as.matrix(aravo$spe); dat <- matrix_to_stack(mat, "value", "site", "species")
+#' mat = as.matrix(aravo$spe); dat = matrix_to_stack(mat, "value", "site", "species")
 #' dat$site = as.character(dat$site)
 #' dat$species = as.character(dat$species)
 #'
@@ -64,25 +64,10 @@ scarcity_com = function(com_df, sp_col, abund) {
 #' @export
 scarcity_stack = function(com_df, sp_col, com, abund) {
 
-  # Test to be sure
-  if ( (com %in% colnames(com_df)) == FALSE) {
-    stop("Community table does not have any communities.")
-  }
-
-  if ( (sp_col %in% colnames(com_df)) == FALSE) {
-    stop("Community table does not have any species.")
-  }
-
-  if (!is.character(com_df[, sp_col])) {
-    stop("Provided species are not character.")
-  }
-
+  # Test to be sure of inputs
+  full_df_checks(com_df, sp_col, com, abund)
   if (is.null(abund)) {
-    stop("No relative abundance provided.")
-  }
-
-  if (!is.numeric(com_df[, abund])) {
-    stop("Provided abundances are not numeric.")
+    stop("No relative abundance provided")
   }
 
   # Compute Scarcity
@@ -133,6 +118,10 @@ scarcity_stack = function(com_df, sp_col, com, abund) {
 #'
 #' @export
 scarcity = function(pres_matrix) {
+
+  # Check site-species matrix type
+  check_matrix(pres_matrix, "site-species")
+
   scarcity_mat = pres_matrix
 
   # Species with no relative abundance get a scarcity of 0
