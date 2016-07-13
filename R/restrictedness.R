@@ -81,7 +81,7 @@ restrictedness = function(pres_matrix) {
   pres_matrix[pres_matrix > 0] = 1
 
   # Compute the sum of all species' occurrences divided by n_com
-  occupancy = colSums(pres_matrix, na.rm = TRUE) / n_com
+  occupancy = 1 - (colSums(pres_matrix, na.rm = TRUE) / n_com)
 
   # Format occupancy in data.frame
   occupancy = data.frame("sp" = names(occupancy), "Ri" = as.numeric(occupancy))
