@@ -49,10 +49,12 @@ distinctiveness_com = function(com_df, sp_col, abund = NULL, dist_matrix) {
   }
 
   # Computes distinctiveness by species
-  if (length(denom) > 1 | (length(denom) == 1 & denom != 0)) {
+  if (length(denom) > 1) {
+    com_df[, "Di"] = as.numeric(num / denom)
+  } else if (length(denom) == 1 & denom != 0) {
     com_df[, "Di"] = as.numeric(num / denom)
   } else {
-    com_df[, "Di"] = NA
+    com_df[, "Di"] = NaN
   }
 
 
