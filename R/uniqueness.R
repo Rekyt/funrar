@@ -41,11 +41,10 @@ uniqueness_stack = function(com_df, sp_col, dist_matrix) {
   # Test input
   full_df_checks(com_df, sp_col, dist_matrix = dist_matrix)
 
-  # Extract all species in community
-  com_species = as.character(unique(com_df[[sp_col]]))
+  # Take subsets of species if needed between distance matrix and community
+  common = species_in_common_df(com_df, sp_col, dist_matrix)
 
-  # Submatrix containing distance of species in community
-  com_dist = dist_matrix[com_species, com_species]
+  com_dist = dist_matrix[common, common]
 
   # Replace diagonal by 'NA' for computation reasons
   diag(com_dist) = NA

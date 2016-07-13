@@ -22,19 +22,12 @@
 #' @export
 distinctiveness_com = function(com_df, sp_col, abund = NULL, dist_matrix) {
 
-  # Check if distance matrix is a matrix or data frame
-  if (!is.matrix(dist_matrix) & !is.data.frame(dist_matrix)) {
-    stop("Provided distance matrix should be a 'data.frame' or a 'matrix'")
-  }
+  common = species_in_common_df(com_df, sp_col, dist_matrix)
 
-  # Check if distance matrix has same row and column numbers
-  if (nrow(dist_matrix) != ncol(dist_matrix)) {
-    stop(paste0("Provided distance matrix doesn't have same number of rows and",
-                "columns."))
-  }
+  com_df = subset(com_df, com_df[[sp_col]] %in% common)
 
   # Get functional distance matrix of species in communities
-  com_dist = dist_matrix[com_df[[sp_col]], com_df[[sp_col]]]
+  com_dist = dist_matrix[common, common]
 
   if (!is.null(dim(com_dist))) {
     if (is.null(abund)) {
@@ -105,6 +98,12 @@ distinctiveness_stack = function(com_df, sp_col, com, abund = NULL,
   if (is.null(abund)) {
     message("No relative abundance provided, computing Di without it")
   }
+
+  # Take subsets of species if needed between distance matrix and community
+  common = species_in_common_df(com_df, sp_col, dist_matrix)
+
+  com_df = subset(com_df, com_df[[sp_col]] %in% common)
+  dist_matrix = dist_matrix[common, common]
 
   # Compute Distinctivenness
   # Split table by communities
