@@ -2,21 +2,23 @@
 % Please edit documentation in R/scarcity.R
 \name{scarcity}
 \alias{scarcity}
-\title{Scarcity on relative abundances matrix}
+\title{Scarcity on site-species matrix}
 \usage{
 scarcity(pres_matrix)
 }
 \arguments{
-\item{pres_matrix}{a presence-absence matrix, with species in rows and sites
-in columns (not containing relative abundances for the moments)}
+\item{pres_matrix}{a site-species matrix, with species in rows and sites
+in columns, containing \strong{relative abundances} values}
 }
 \value{
-a similar matrix to \code{pres_matrix} with scarcity values
+a similar matrix to \code{pres_matrix} with scarcity values in lieu
+     of relative abundances.
 }
 \description{
-Computes scarcity from a relative abundance matrix of species. Scarcity
-is close to one when a species has a very low relative abundance in its
-community. See \code{Details} section for the formula.
+Computes scarcity from a relative abundance matrix of species. Scarcity is
+close to 1 when a species is rare in a community and close to 0 when it is
+abundant. It requires a site-species matrix with relative abundances. See
+\code{Details} section for the formula.
 }
 \details{
 The scarcity of species is computed as follow:
@@ -39,5 +41,12 @@ mat = as.matrix(aravo$spe)
 si = scarcity(pres_matrix = mat)
 si[1:5, 1:5]
 
+}
+\seealso{
+\code{vignette("rarity_indices", package = "funrar")} for details
+on the scarcity metric;
+\code{\link[funrar]{distinctiveness}},
+\code{\link[funrar]{restrictedness}},
+\code{\link[funrar]{uniqueness}}
 }
 

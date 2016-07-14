@@ -7,16 +7,16 @@
 scarcity_stack(com_df, sp_col, com, abund)
 }
 \arguments{
-\item{com_df}{a stacked (or tidy) data.frame from a single community with
-each row representing a species}
+\item{com_df}{a stacked (= tidy) data.frame from a single community with
+each row representing a species in a community}
 
-\item{sp_col}{a character vector the name of the species column in
+\item{sp_col}{a character vector, the name of the species column in
 \code{com_df}}
 
 \item{com}{a character vector indicating the column name of communities ID in
 \code{com_df}}
 
-\item{abund}{a character vector indicating the name of the column containing
+\item{abund}{a character vector, the name of the column containing
 relative abundances values}
 }
 \value{
@@ -24,17 +24,13 @@ The same table as \code{com_df} with an added \eqn{S_i} column
     for Scarcity values.
 }
 \description{
-Compute scarcity values for several communities. Scarcity is computed per
-community. Scarcity corresponds to the rareness of a given species in
-terms of abundances, as such:
-\deqn{
- S_i = \exp(-N\log{2}A_i),
-}{%
- S_i = exp^(-N*ln2*A_i),
-}
-with \eqn{S_i} the scarcity of species \eqn{i}, \eqn{N} the number of
-species present in the given community and \eqn{A_i} the relative abundance
-(in \%) of species \eqn{i}.
+Compute scarcity values for several communities. Scarcity computation requires
+relative abundances. Scarcity is close to 1 when a species is rare in a
+community and close to 0 when it is abundant. See
+\code{\link[funrar]{scarcity}} function or the functional rarity indices
+vignette included in the package
+(type \code{vignette("rarity_indices", package = "funrar")}) for details
+about the index.
 }
 \examples{
 data("aravo", package = "ade4")
@@ -47,5 +43,13 @@ dat$species = as.character(dat$species)
 si_df = scarcity_stack(dat, "species", "site", "value")
 head(si_df)
 
+}
+\seealso{
+\code{\link[funrar]{scarcity}} and
+\code{vignette("rarity_indices", package = "funrar")} for details on the
+scarcity metric;
+\code{\link[funrar]{distinctiveness_stack}},
+\code{\link[funrar]{restrictedness_stack}},
+\code{\link[funrar]{uniqueness_stack}}
 }
 

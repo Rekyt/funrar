@@ -2,18 +2,18 @@
 % Please edit documentation in R/scarcity.R
 \name{scarcity_com}
 \alias{scarcity_com}
-\title{Scarcity for a single community in stack data.frame}
+\title{Scarcity for a single community}
 \usage{
 scarcity_com(com_df, sp_col, abund)
 }
 \arguments{
-\item{com_df}{a stacked (or tidy) data.frame from a single community with
-each row representing a species}
+\item{com_df}{a stacked (= tidy) data.frame from a single community with
+each row representing a species in a community}
 
-\item{sp_col}{a character vector the name of the species column in
+\item{sp_col}{a character vector, the name of the species column in
 \code{com_df}}
 
-\item{abund}{a character vector indicating the name of the column containing
+\item{abund}{a character vector, the name of the column containing
 relative abundances values}
 }
 \value{
@@ -21,9 +21,18 @@ the same data.frame with the additional \strong{Si} column giving
    scarcity values for each species
 }
 \description{
-Given a stacked data.frame compute species scarcity.
-See \code{\link[funrar]{scarcity}} function or the functional rarity indices
-vignette included in the package (type \code{vignette(package = "funrar")})
-for details about the indices.
+Given a stacked data.frame compute species scarcity. Scarcity measures how
+abundant is a species locally. Scarcity is close to 1 when a species is rare
+in a community and close to 0 when it is abundant. See
+\code{\link[funrar]{scarcity}} function or the functional rarity indices
+vignette included in the package
+(type \code{vignette("rarity_indices", package = "funrar")}) for details
+about the index.
+}
+\seealso{
+\code{\link[funrar]{scarcity}} and
+\code{vignette("rarity_indices", package = "funrar")} for details on the
+scarcity metric;
+\code{\link[funrar]{distinctiveness_com}}
 }
 
