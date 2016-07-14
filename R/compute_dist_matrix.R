@@ -1,25 +1,38 @@
 #' Functional Distance Matrix
 #'
-#' Wrapper for \code{"daisy()"} function in \code{"cluster"} package, to compute
-#' distance matrix of trait between each pair of species present in given
-#' \code{"traits_table"}, each row represents a species and each column a trait.
-#' To be able to compute other distances trait table must have species as row
-#' names.
+#' Wrapper for \code{\link[cluster]{daisy}} function in \code{cluster} package,
+#' to compute distance matrix of trait between each pair of species present in
+#' given \code{traits_table}, each row represents a species and each column
+#' a trait. To be able to compute other metrics \code{traits_table} must have
+#' species name as row names.
 #'
-#' @param traits_table A data frame of traits with species in row and traits in
-#'     columns, row names should be species names,
+#' @param traits_table a data.sframe of traits with species in row and traits in
+#'     columns, \strong{row names} should be \strong{species names},
 #'
-#' @param metric character vector in list \code{"c('gower', 'manhattan',
-#' euclidean')"} defining the type of distance to use
-#' (see\code{\link[cluster]{daisy}}).
+#' @param metric character vector in list \code{'gower'}, \code{'manhattan'},
+#' \code{'euclidean'} defining the type of distance to use (see \code{\link[cluster]{daisy}}),
+#' see Details section.
 #'
-#' @return A Gower's distance matrix (Gower's 1961), columns and rows get same
-#'     names as \code{trait_table} row names. Be sure to give them consistent
-#'     row names.
+#'
+#' @return
+#' A functional distance matrix, \strong{column} and \strong{row} names follow
+#' \strong{species name} from \code{trait_table} row names.
+#'
+#'
+#' @details The functional distance matrix can be computed using any type of
+#'     distance metric. When traits are both quantitative and qualitative Gower's
+#'     distance can be used. Otherwise, any other distance metric (Euclidean,
+#'     Manhattan, Minkowski) can be used – as long as the rows and the columns
+#'     are named following the species.
+#'
+#' @seealso \code{\link[cluster]{daisy}} which this function wraps,
+#'     \code{\link[stats]{dist}}
 #'
 #' @examples
 #' set.seed(1)  # For reproducibility
-#' trait = data.frame(sp = paste("sp", 1:5), trait_1 = runif(5),
+#' trait = data.frame(
+#'    sp = paste("sp", 1:5),
+#'    trait_1 = runif(5),
 #'    trait_2 = as.factor(c("A", "A", "A", "B", "B")))
 #'
 #' rownames(trait) = trait$sp
