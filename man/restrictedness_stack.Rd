@@ -2,23 +2,30 @@
 % Please edit documentation in R/restrictedness.R
 \name{restrictedness_stack}
 \alias{restrictedness_stack}
-\title{Table Restrictedness}
+\title{Geographical Restrictedness for stacked data.frame}
 \usage{
 restrictedness_stack(com_df, sp_col, com)
 }
 \arguments{
-\item{com_df}{a tidy data.frame of community with column with species}
+\item{com_df}{a stacked (= tidy) data.frame of communities}
 
-\item{sp_col}{a character vector indicating the name of species column}
+\item{sp_col}{a character vector indicating the name of the species column}
 
-\item{com}{a character vector indicating the name of community column}
+\item{com}{a character vector indicating the name of the community column}
 }
 \value{
-A tidy data.frame containing species' names and their restrictedness
-   value
+A stacked data.frame containing species' names and their restrictedness
+   value in the \strong{Ri} column, similar to what
+   \code{\link[funrar]{uniqueness_stack}} returns.
 }
 \description{
-Compute restrictedness for every species
+Compute the geographical restrictedness for each species present in the
+stacked data.frame. Geographical restrictedness is an index related to the
+extent of a species in a given dataset, it is close to 1 when the species is
+present in only a single site of the dataset (restricted) and close to 0 when
+the species is present at all sites. It estimates the geographical extent of
+a species in a dataset. See \code{\link[funrar]{restrictedness}} for details
+on restrictedness computation.
 }
 \examples{
 data("aravo", package = "ade4")
@@ -29,5 +36,9 @@ dat$species = as.character(dat$species)
 ri_df = restrictedness_stack(dat, "species", "site")
 head(ri_df)
 
+}
+\seealso{
+\code{\link[funrar]{restrictedness}},
+\code{\link[funrar]{uniqueness_stack}}
 }
 

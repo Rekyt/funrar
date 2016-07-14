@@ -4,20 +4,28 @@
 #
 #
 
-#' Table Restrictedness
+#' Geographical Restrictedness for stacked data.frame
 #'
-#' Compute restrictedness for every species
+#' Compute the geographical restrictedness for each species present in the
+#' stacked data.frame. Geographical restrictedness is an index related to the
+#' extent of a species in a given dataset, it is close to 1 when the species is
+#' present in only a single site of the dataset (restricted) and close to 0 when
+#' the species is present at all sites. It estimates the geographical extent of
+#' a species in a dataset. See \code{\link[funrar]{restrictedness}} for details
+#' on restrictedness computation.
 #'
-#' @param com_df a tidy data.frame of community with column with species
+#' @param com_df a stacked (= tidy) data.frame of communities
 #'
-#' @param sp_col a character vector indicating the name of species column
+#' @param sp_col a character vector indicating the name of the species column
 #'
-#' @param com a character vector indicating the name of community column
+#' @param com a character vector indicating the name of the community column
 #'
+#' @return A stacked data.frame containing species' names and their restrictedness
+#'    value in the \strong{Ri} column, similar to what
+#'    \code{\link[funrar]{uniqueness_stack}} returns.
 #'
-#'
-#' @return A tidy data.frame containing species' names and their restrictedness
-#'    value
+#' @seealso \code{\link[funrar]{restrictedness}},
+#' \code{\link[funrar]{uniqueness_stack}}
 #'
 #' @examples
 #' data("aravo", package = "ade4")
@@ -43,21 +51,49 @@ restrictedness_stack = function(com_df, sp_col, com) {
   # Format occupancy in data.frame
   occupancy = data.frame("sp" = names(occupancy), "Ri" = as.numeric(occupancy))
 
+  colnames(occupancy)[1] = sp_col
+
   occupancy$Ri = 1 - occupancy$Ri
 
   return(occupancy)
 }
 
 
-#' Restrictedness on presence/absence matrix
+#' Geographical Restrictedness on site-species matrix
 #'
-#' Computes restrictedness from a presence-absence matrix of species with a
-#' provided functional distance matrix.
+#' Computes geographical restrictedness from a site-species matrix.
+#' Geographical restrictedness is an index related to the extent of a species
+#' in a given dataset, it is close to 1 when the species is present in only a
+#' single site of the dataset (restricted) and close to 0 when the species is
+#' present at all sites. It estimates the geographical extent of a species in a
+#' dataset. See \code{Details} section to have details on the formula used for
+#' the computation.
 #'
 #'
-#' @inheritParams scarcity
+#' @param pres_matrix a site-species matrix, with species in rows and sites
+#'      in columns, containing \strong{relative abundances} values
 #'
-#' @return A tidy data.frame containing species' names and their restrictedness value
+#' @return A stacked data.frame containing species' names and their restrictedness
+#'    value in the \strong{Ri} column, similar to what
+#'    \code{\link[funrar]{uniqueness}} returns.
+#'
+#' @details
+#' Geographical Restrictedness aims to measure the regional extent of a species
+#' in \pkg{funrar} it is computed the simplest way possible: a ratio of the
+#' number of sites where a species is present over the total number of sites in
+#' the dataset. We take this ratio off 1 to have a index between 0 and 1 that
+#' represents how restricted a species is:
+#' \deqn{
+#'  R_i = 1 - \frac{N_i}{N_tot},
+#' }{
+#'  R_i = 1 - (N_i/N_tot),
+#' }
+#' where \eqn{R_i} is the geographical restrictedness value, \eqn{N_i} the total
+#' number of sites where species \eqn{i} occur and \eqn{N_tot} the total number
+#' of sites in the dataset.
+#' Other approaches can be used to measure the geographical extent (convex hulls,
+#' occupancy models, etc.) but for the sake of simplicity only the counting
+#' method is implemented in \pkg{funrar}.
 #'
 #' @examples
 #' data("aravo", package = "ade4")
