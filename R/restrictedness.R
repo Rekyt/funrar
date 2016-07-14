@@ -1,5 +1,4 @@
-
-# Function to compute restrictedness on various databases
+# Functions to compute restrictedness on various datasets
 #
 # Authors: Pierre Denelle & Matthias Grenié
 #

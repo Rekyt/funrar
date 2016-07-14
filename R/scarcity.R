@@ -1,3 +1,8 @@
+# Functions to compute scarcity on various datasets
+#
+# Authors: Pierre Denelle & Matthias Grenié
+#
+#
 #' Scarcity for a single community
 #'
 #' Given a stacked data.frame compute species scarcity. Scarcity measures how

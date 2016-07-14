@@ -1,4 +1,4 @@
-# Function to compute distinctiveness on various Databases
+# Functions to compute functional distinctiveness on various datasets
 #
 # Authors: Pierre Denelle & Matthias Grenié
 #

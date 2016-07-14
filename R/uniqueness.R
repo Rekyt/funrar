@@ -1,3 +1,8 @@
+# Functions to compute functional uniqueness on various datasets
+#
+# Authors: Pierre Denelle & Matthias Grenié
+#
+#
 #' Functional Uniqueness on stacked data.frame
 #'
 #' Computes functional uniqueness values over a given regional pool. Functional
