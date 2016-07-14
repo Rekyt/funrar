@@ -7,8 +7,8 @@
 funrar(pres_matrix, dist_matrix, rel_abund = FALSE)
 }
 \arguments{
-\item{pres_matrix}{a presence-absence matrix (or relative abundances),
-with sites in rows and species in columns}
+\item{pres_matrix}{a site-species matrix (presence-absence or relative
+abundances), with sites in rows and species in columns}
 
 \item{dist_matrix}{a species functional distance matrix}
 
@@ -33,10 +33,11 @@ A list of 3 objects (or 4 if \code{rel_abund = TRUE}):
 }
 \description{
 From a site-species matrix and functional distance matrix compute all indices
-included in the package: functional uniqueness (regional),
-functional distinctiveness (local), geographical restrictedness (regional),
-scarcity (local). \strong{Note}: scarcity can only be computed if relative
-abundances are provided in the site-species matrix.
+included in the package: functional uniqueness (regional, functional),
+functional distinctiveness (local, functional), geographical restrictedness
+(regional, extent), scarcity (local, abundance). \strong{Note}: scarcity can
+only be computed if relative abundances are provided in the site-species
+matrix.
 }
 \seealso{
 \code{\link[funrar]{uniqueness}},

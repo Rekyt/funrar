@@ -2,28 +2,27 @@
 % Please edit documentation in R/funrar.R
 \name{funrar_stack}
 \alias{funrar_stack}
-\title{Functional Rarity indices for data.frame}
+\title{Functional Rarity indices on stacked data.frame}
 \usage{
 funrar_stack(com_df, sp_col, com, abund = NULL, dist_matrix)
 }
 \arguments{
-\item{com_df}{a stacked (or tidy) data.frame from a single community with
-each row representing a species}
+\item{com_df}{a stacked (= tidy) data.frame from a single community with
+each row representing a species in a community}
 
-\item{sp_col}{a character vector the name of the species column in
+\item{sp_col}{a character vector, the name of the species column in
 \code{com_df}}
 
-\item{com}{a character vector, indicating the column name of communities
-names.}
+\item{com}{a character vector, the column name for communities names}
 
-\item{abund}{a character vector indicating the name of the column containing
+\item{abund}{a character vector, the name of the column containing
 relative abundances values}
 
 \item{dist_matrix}{a functional distance matrix as given by
-\code{compute_dist_matrix()}}
+\code{compute_dist_matrix()}, with species name as row and column names}
 }
 \value{
-A list of 3 objects (or 4 if \code{rel_abund = TRUE}):
+A list of 3 objects (or 4 if \code{abund} is not \code{NULL}):
    \describe{
      \item{\strong{Ui}}{a vector containing uniqueness values per species,}
      \item{\strong{Di}}{a site-species matrix with functional distinctiveness
@@ -31,13 +30,24 @@ A list of 3 objects (or 4 if \code{rel_abund = TRUE}):
      \item{\strong{Ri}}{a vector containing geographical restrictedness values
        per species,}
    }
-   and if \code{rel_abund = TRUE},
+   and if \code{abund} is not \code{NULL},
    \describe{
      \item{\strong{Si}}{a site-species matrix with scarcity values per
        species per site.}
    }
 }
 \description{
-From a stack community data.frame
+From a stacked (= tidy) data.frame and functional distance matrix compute
+all indices included in the package: functional uniqueness (regional,
+functional), functional distinctiveness (local, functional), geographical
+restrictedness (regional, extent), scarcity (local, abundance).
+\strong{Note}: scarcity can only be computed if relative abundances are
+provided in the data.frame.
+}
+\seealso{
+\code{\link[funrar]{uniqueness_stack}},
+   \code{\link[funrar]{distinctiveness_stack}},
+   \code{\link[funrar]{restrictedness_stack}},
+   \code{\link[funrar]{scarcity_stack}}
 }
 

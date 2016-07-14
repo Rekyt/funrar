@@ -1,10 +1,16 @@
+# Functions to compute functional rarity indices on various datasets
+#
+# Authors: Pierre Denelle & Matthias Grenié
+#
+#
 #' Functional Rarity Indices
 #'
 #' From a site-species matrix and functional distance matrix compute all indices
-#' included in the package: functional uniqueness (regional),
-#' functional distinctiveness (local), geographical restrictedness (regional),
-#' scarcity (local). \strong{Note}: scarcity can only be computed if relative
-#' abundances are provided in the site-species matrix.
+#' included in the package: functional uniqueness (regional, functional),
+#' functional distinctiveness (local, functional), geographical restrictedness
+#' (regional, extent), scarcity (local, abundance). \strong{Note}: scarcity can
+#' only be computed if relative abundances are provided in the site-species
+#' matrix.
 #'
 #' @inheritParams distinctiveness
 #'
@@ -55,13 +61,18 @@ funrar = function(pres_matrix, dist_matrix, rel_abund = FALSE) {
   }
 }
 
-#' Functional Rarity indices for data.frame
+#' Functional Rarity indices on stacked data.frame
 #'
-#' From a stack community data.frame
+#' From a stacked (= tidy) data.frame and functional distance matrix compute
+#' all indices included in the package: functional uniqueness (regional,
+#' functional), functional distinctiveness (local, functional), geographical
+#' restrictedness (regional, extent), scarcity (local, abundance).
+#' \strong{Note}: scarcity can only be computed if relative abundances are
+#' provided in the data.frame.
 #'
 #' @inheritParams distinctiveness_stack
 #'
-#' @return A list of 3 objects (or 4 if \code{rel_abund = TRUE}):
+#' @return A list of 3 objects (or 4 if \code{abund} is not \code{NULL}):
 #'    \describe{
 #'      \item{\strong{Ui}}{a vector containing uniqueness values per species,}
 #'      \item{\strong{Di}}{a site-species matrix with functional distinctiveness
@@ -69,11 +80,16 @@ funrar = function(pres_matrix, dist_matrix, rel_abund = FALSE) {
 #'      \item{\strong{Ri}}{a vector containing geographical restrictedness values
 #'        per species,}
 #'    }
-#'    and if \code{rel_abund = TRUE},
+#'    and if \code{abund} is not \code{NULL},
 #'    \describe{
 #'      \item{\strong{Si}}{a site-species matrix with scarcity values per
 #'        species per site.}
 #'    }
+#'
+#' @seealso \code{\link[funrar]{uniqueness_stack}},
+#'    \code{\link[funrar]{distinctiveness_stack}},
+#'    \code{\link[funrar]{restrictedness_stack}},
+#'    \code{\link[funrar]{scarcity_stack}}
 #'
 #' @export
 funrar_stack = function(com_df, sp_col, com, abund = NULL,
