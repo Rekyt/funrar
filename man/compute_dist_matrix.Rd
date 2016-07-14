@@ -30,7 +30,7 @@ species name as row names.
 The functional distance matrix can be computed using any type of
     distance metric. When traits are both quantitative and qualitative Gower's
     distance can be used. Otherwise, any other distance metric (Euclidean,
-    Manhattan, Minkowski) can be used – as long as the rows and the columns
+    Manhattan, Minkowski) can be used - as long as the rows and the columns
     are named following the species.
 }
 \examples{
