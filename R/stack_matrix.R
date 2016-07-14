@@ -1,10 +1,9 @@
 # Functions to pass from tidy data.frame to site-species matrix and vice-versa
 
 
-#' Tidy data.frame to matrix
+#' Stacked (= tidy) data.frame to matrix
 #'
-#' Passes from a tidy data frame (only present species) with an index to a
-#' matrix.
+#' Passes from a stacked (= tidy) data.frame to a matrix.
 #'
 #' @param my_df data.frame you want to transform in matrix
 #'
@@ -16,6 +15,13 @@
 #'
 #' @param col_value (optional) character vector indicating the name of a column
 #'     coding the values that will be put in the matrix
+#'
+#' @return a matrix with given \code{col_to_row} column in rows and
+#' \code{col_to_col} column in columns. If some cells are not present in the
+#' data.frame (e.g. some species not present at some sites), the matrix will have
+#' a \code{NA}.
+#'
+#' @seealso \code{\link[funrar]{matrix_to_stack}} for the reverse operation
 #'
 #' @examples
 #' example = data.frame("sites" = c(rep("1", 3), rep("2", 2)),
@@ -62,14 +68,14 @@ stack_to_matrix = function(my_df, col_to_row, col_to_col, col_value = NULL) {
   return(my_mat)
 }
 
-#' Matrix to tidy data.frame
+#' Matrix to stacked (= tidy) data.frame
 #'
-#' From a matrix with values to a tidy data.frame
+#' From a matrix with values to a stacked (= tidy) data.frame
 #'
-#' @param my_mat matrix you want to transform in tidy data.frame
+#' @param my_mat matrix you want to transform in stacked (= tidy) data.frame
 #'
-#' @param value_col (optional) character vector to use for value column (default
-#' : 'value')
+#' @param value_col (optional) character vector to use for value column
+#' (default: 'value')
 #'
 #' @param row_to_col (optional) character vector used for name of column in
 #'     data.frame corresponding to rows in matrix (default: corresponding
@@ -78,6 +84,11 @@ stack_to_matrix = function(my_df, col_to_row, col_to_col, col_value = NULL) {
 #' @param col_to_col (optional) character vector used for name of column in
 #'     data.frame corresponding to columns in matrix (default: corresponding
 #'     dimension name)
+#'
+#' @return a stacked (= tidy) data.frame with, a column for row names, one for
+#' column names and a third one for the values.
+#'
+#' @seealso \code{\link[funrar]{stack_to_matrix}} for the reverse operation
 #'
 #' @importFrom stats na.exclude
 #'

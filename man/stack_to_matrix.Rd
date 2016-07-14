@@ -2,7 +2,7 @@
 % Please edit documentation in R/stack_matrix.R
 \name{stack_to_matrix}
 \alias{stack_to_matrix}
-\title{Tidy data.frame to matrix}
+\title{Stacked (= tidy) data.frame to matrix}
 \usage{
 stack_to_matrix(my_df, col_to_row, col_to_col, col_value = NULL)
 }
@@ -18,9 +18,14 @@ want to be as columns in matrix}
 \item{col_value}{(optional) character vector indicating the name of a column
 coding the values that will be put in the matrix}
 }
+\value{
+a matrix with given \code{col_to_row} column in rows and
+\code{col_to_col} column in columns. If some cells are not present in the
+data.frame (e.g. some species not present at some sites), the matrix will have
+a \code{NA}.
+}
 \description{
-Passes from a tidy data frame (only present species) with an index to a
-matrix.
+Passes from a stacked (= tidy) data.frame to a matrix.
 }
 \examples{
 example = data.frame("sites" = c(rep("1", 3), rep("2", 2)),
@@ -30,5 +35,8 @@ example = data.frame("sites" = c(rep("1", 3), rep("2", 2)),
 mat = stack_to_matrix(example, "sites", "species", "abundance")
 mat
 
+}
+\seealso{
+\code{\link[funrar]{matrix_to_stack}} for the reverse operation
 }
 

@@ -2,17 +2,17 @@
 % Please edit documentation in R/stack_matrix.R
 \name{matrix_to_stack}
 \alias{matrix_to_stack}
-\title{Matrix to tidy data.frame}
+\title{Matrix to stacked (= tidy) data.frame}
 \usage{
 matrix_to_stack(my_mat, value_col = "value",
   row_to_col = names(dimnames(my_mat))[1],
   col_to_col = names(dimnames(my_mat))[2])
 }
 \arguments{
-\item{my_mat}{matrix you want to transform in tidy data.frame}
+\item{my_mat}{matrix you want to transform in stacked (= tidy) data.frame}
 
-\item{value_col}{(optional) character vector to use for value column (default
-: 'value')}
+\item{value_col}{(optional) character vector to use for value column
+(default: 'value')}
 
 \item{row_to_col}{(optional) character vector used for name of column in
 data.frame corresponding to rows in matrix (default: corresponding
@@ -22,8 +22,12 @@ dimension name)}
 data.frame corresponding to columns in matrix (default: corresponding
 dimension name)}
 }
+\value{
+a stacked (= tidy) data.frame with, a column for row names, one for
+column names and a third one for the values.
+}
 \description{
-From a matrix with values to a tidy data.frame
+From a matrix with values to a stacked (= tidy) data.frame
 }
 \examples{
 data("aravo", package = "ade4")
@@ -33,5 +37,8 @@ mat = as.matrix(aravo$spe)
 dat = matrix_to_stack(mat, "value", "site", "species")
 str(dat)
 
+}
+\seealso{
+\code{\link[funrar]{stack_to_matrix}} for the reverse operation
 }
 
