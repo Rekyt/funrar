@@ -2,26 +2,27 @@
 % Please edit documentation in R/distinctiveness.R
 \name{distinctiveness}
 \alias{distinctiveness}
-\title{Distinctiveness on presence/absence or relative abundances matrix}
+\title{Distinctiveness on site-species matrix}
 \usage{
 distinctiveness(pres_matrix, dist_matrix)
 }
 \arguments{
-\item{pres_matrix}{a presence-absence matrix (or relative abundances),
-with sites in rows and species in columns}
+\item{pres_matrix}{a site-species matrix (presence-absence or relative
+abundances), with sites in rows and species in columns}
 
 \item{dist_matrix}{a species functional distance matrix}
 }
 \value{
-a similar matrix from provided \code{pres_matrix}, species absent
-   from communities will have an \code{NA} value (see \code{Note} section)
+a similar matrix from provided \code{pres_matrix} with Distinctiveness
+   values in lieu of presences or relative abundances, species absent from
+   communities will have an \code{NA} value (see \code{Note} section)
 }
 \description{
-Computes distinctiveness from a presence-absence matrix (or a matrix with
-relative abundances) of species with provided functional distance matrix. The
-sites-species matrix should have \strong{sites} in \strong{rows} and
-\strong{species} in \strong{columns}, similar to \code{\link[vegan]{vegan}}
-package defaults.
+Computes distinctiveness from a site-species matrix (containing
+presence-absence or relative abundances) of species with provided functional
+distance matrix. The sites-species matrix should have \strong{sites} in
+\strong{rows} and \strong{species} in \strong{columns}, similar to
+\pkg{\link[vegan]{vegan}} package defaults.
 }
 \details{
 The Functional Distinctiveness of a species is the average functional
@@ -41,8 +42,13 @@ The Functional Distinctiveness of a species is the average functional
    Absent species should be coded by \code{0} or \code{NA} in input matrices.
 
    When a species is alone in its community the functional distinctiveness
-   cannot be computed, thus the output matrix contains a value of \code{NaN}
-   distinctiveness.
+   cannot be computed (denominator = 0 in formula), and its value is assigned
+   as \code{NaN}.
+
+   For speed and memory efficiency sparse matrices can be used as input of
+   the function using \code{as(pres_matrix, "sparseMatrix")} from the
+   \code{Matrix} package.
+   (see \code{vignette("sparse_matrices", package = "funrar")})
 }
 \examples{
 data("aravo", package = "ade4")

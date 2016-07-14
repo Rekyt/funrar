@@ -4,20 +4,29 @@
 #
 #
 
-#' Distinctiveness for a single community in stack data.frame
+#' Distinctiveness for a single community in stacked data.frame
 #'
 #' Given a stacked data.frame and a distance matrix compute the functional
-#' distinctiveness. See \code{\link[funrar]{distinctiveness}} function or the
-#' functional rarity indices vignette included in the package (type
-#' \code{vignette(package = "funrar")}).
+#' distinctiveness for a single community. See
+#' \code{\link[funrar]{distinctiveness}} function or the functional rarity
+#' indices vignette included in the package (type \code{browseVignettes("funrar")}).
 #'
 #' @inheritParams scarcity_com
 #'
 #' @param dist_matrix a functional distance matrix as given by
-#'    \code{compute_dist_matrix()}
+#'    \code{compute_dist_matrix()}, with species name as row and column names
 #'
 #' @return the same data.frame with the additional \strong{Di} column giving
 #'    functional distinctiveness values for each species
+#'
+#' @section Caution:
+#' This function is meant for internal uses mostly, thus it does not include any
+#' tests on inputs and may fail unexpectedly. Please use
+#' \code{\link[funrar]{distinctiveness_stack}} to avoid input errors.
+#'
+#' @seealso \code{\link[funrar]{scarcity_com}},
+#' \code{vignette("rarity_indices", package = "funrar")} and
+#' \code{link[funrar]{distinctiveness}} Details section for detail on the index
 #'
 #' @export
 distinctiveness_com = function(com_df, sp_col, abund = NULL, dist_matrix) {
@@ -61,19 +70,24 @@ distinctiveness_com = function(com_df, sp_col, abund = NULL, dist_matrix) {
   return(com_df)
 }
 
-#' Table Functional Distinctiveness
+#' Stacked data.frame Functional Distinctiveness
 #'
-#' Compute Functional Distinctiveness for several communities, from a data.frame
-#' of communities, with one column for species identity, one for community
-#' identity and an optional one for relative abundances.
+#' Compute Functional Distinctiveness for several communities, from a stacked
+#' (or tidy) data.frame  of communities, with one column for species identity,
+#' one for community identity and an optional one for relative abundances. Also
+#' needs a species functional distances matrix.
 #'
 #' @inheritParams distinctiveness_com
 #'
-#' @param com a character vector, indicating the column name of communities
-#'     names.
+#' @param com a character vector, the column name for communities names
 #'
 #' @return the same data.frame with the additional \strong{Di} column giving
 #'    functional distinctiveness values for each species
+#'
+#' @seealso \code{\link[funrar]{scarcity_stack}},
+#' \code{\link[funrar]{uniqueness_stack}},
+#' \code{\link[funrar]{restrictedness_stack}};
+#' \code{\link[funrar]{distinctiveness}} Details section for detail on the index
 #'
 #' @examples
 #' data("aravo", package = "ade4")
@@ -84,7 +98,8 @@ distinctiveness_com = function(com_df, sp_col, abund = NULL, dist_matrix) {
 #' dist_mat = compute_dist_matrix(tra)
 #'
 #' # Site-species matrix converted into data.frame
-#' mat = as.matrix(aravo$spe); dat = matrix_to_stack(mat, "value", "site", "species")
+#' mat = as.matrix(aravo$spe)
+#' dat = matrix_to_stack(mat, "value", "site", "species")
 #' dat$site = as.character(dat$site)
 #' dat$species = as.character(dat$species)
 #'
@@ -121,28 +136,34 @@ distinctiveness_stack = function(com_df, sp_col, com, abund = NULL,
   return(com_distinctiveness)
 }
 
-#' Distinctiveness on presence/absence or relative abundances matrix
+#' Distinctiveness on site-species matrix
 #'
-#' Computes distinctiveness from a presence-absence matrix (or a matrix with
-#' relative abundances) of species with provided functional distance matrix. The
-#' sites-species matrix should have \strong{sites} in \strong{rows} and
-#' \strong{species} in \strong{columns}, similar to \code{\link[vegan]{vegan}}
-#' package defaults.
+#' Computes distinctiveness from a site-species matrix (containing
+#' presence-absence or relative abundances) of species with provided functional
+#' distance matrix. The sites-species matrix should have \strong{sites} in
+#' \strong{rows} and \strong{species} in \strong{columns}, similar to
+#' \pkg{\link[vegan]{vegan}} package defaults.
 #'
-#' @param pres_matrix a presence-absence matrix (or relative abundances),
-#'    with sites in rows and species in columns
+#' @param pres_matrix a site-species matrix (presence-absence or relative
+#' abundances), with sites in rows and species in columns
 #'
 #' @param dist_matrix a species functional distance matrix
 #'
-#' @return a similar matrix from provided \code{pres_matrix}, species absent
-#'    from communities will have an \code{NA} value (see \code{Note} section)
+#' @return a similar matrix from provided \code{pres_matrix} with Distinctiveness
+#'    values in lieu of presences or relative abundances, species absent from
+#'    communities will have an \code{NA} value (see \code{Note} section)
 #'
 #' @section Note:
 #'    Absent species should be coded by \code{0} or \code{NA} in input matrices.
 #'
 #'    When a species is alone in its community the functional distinctiveness
-#'    cannot be computed, thus the output matrix contains a value of \code{NaN}
-#'    distinctiveness.
+#'    cannot be computed (denominator = 0 in formula), and its value is assigned
+#'    as \code{NaN}.
+#'
+#'    For speed and memory efficiency sparse matrices can be used as input of
+#'    the function using \code{as(pres_matrix, "sparseMatrix")} from the
+#'    \code{Matrix} package.
+#'    (see \code{vignette("sparse_matrices", package = "funrar")})
 #'
 #' @details
 #'    The Functional Distinctiveness of a species is the average functional

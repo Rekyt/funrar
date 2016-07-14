@@ -2,34 +2,34 @@
 % Please edit documentation in R/distinctiveness.R
 \name{distinctiveness_stack}
 \alias{distinctiveness_stack}
-\title{Table Functional Distinctiveness}
+\title{Stacked data.frame Functional Distinctiveness}
 \usage{
 distinctiveness_stack(com_df, sp_col, com, abund = NULL, dist_matrix)
 }
 \arguments{
-\item{com_df}{a stacked (or tidy) data.frame from a single community with
-each row representing a species}
+\item{com_df}{a stacked (= tidy) data.frame from a single community with
+each row representing a species in a community}
 
-\item{sp_col}{a character vector the name of the species column in
+\item{sp_col}{a character vector, the name of the species column in
 \code{com_df}}
 
-\item{com}{a character vector, indicating the column name of communities
-names.}
+\item{com}{a character vector, the column name for communities names}
 
-\item{abund}{a character vector indicating the name of the column containing
+\item{abund}{a character vector, the name of the column containing
 relative abundances values}
 
 \item{dist_matrix}{a functional distance matrix as given by
-\code{compute_dist_matrix()}}
+\code{compute_dist_matrix()}, with species name as row and column names}
 }
 \value{
 the same data.frame with the additional \strong{Di} column giving
    functional distinctiveness values for each species
 }
 \description{
-Compute Functional Distinctiveness for several communities, from a data.frame
-of communities, with one column for species identity, one for community
-identity and an optional one for relative abundances.
+Compute Functional Distinctiveness for several communities, from a stacked
+(or tidy) data.frame  of communities, with one column for species identity,
+one for community identity and an optional one for relative abundances. Also
+needs a species functional distances matrix.
 }
 \examples{
 data("aravo", package = "ade4")
@@ -40,12 +40,19 @@ tra = aravo$traits[, c("Height", "SLA", "N_mass")]
 dist_mat = compute_dist_matrix(tra)
 
 # Site-species matrix converted into data.frame
-mat = as.matrix(aravo$spe); dat = matrix_to_stack(mat, "value", "site", "species")
+mat = as.matrix(aravo$spe)
+dat = matrix_to_stack(mat, "value", "site", "species")
 dat$site = as.character(dat$site)
 dat$species = as.character(dat$species)
 
 di_df = distinctiveness_stack(dat, "species", "site", "value", dist_mat)
 head(di_df)
 
+}
+\seealso{
+\code{\link[funrar]{scarcity_stack}},
+\code{\link[funrar]{uniqueness_stack}},
+\code{\link[funrar]{restrictedness_stack}};
+\code{\link[funrar]{distinctiveness}} Details section for detail on the index
 }
 

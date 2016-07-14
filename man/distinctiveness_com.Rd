@@ -2,22 +2,22 @@
 % Please edit documentation in R/distinctiveness.R
 \name{distinctiveness_com}
 \alias{distinctiveness_com}
-\title{Distinctiveness for a single community in stack data.frame}
+\title{Distinctiveness for a single community in stacked data.frame}
 \usage{
 distinctiveness_com(com_df, sp_col, abund = NULL, dist_matrix)
 }
 \arguments{
-\item{com_df}{a stacked (or tidy) data.frame from a single community with
-each row representing a species}
+\item{com_df}{a stacked (= tidy) data.frame from a single community with
+each row representing a species in a community}
 
-\item{sp_col}{a character vector the name of the species column in
+\item{sp_col}{a character vector, the name of the species column in
 \code{com_df}}
 
-\item{abund}{a character vector indicating the name of the column containing
+\item{abund}{a character vector, the name of the column containing
 relative abundances values}
 
 \item{dist_matrix}{a functional distance matrix as given by
-\code{compute_dist_matrix()}}
+\code{compute_dist_matrix()}, with species name as row and column names}
 }
 \value{
 the same data.frame with the additional \strong{Di} column giving
@@ -25,8 +25,19 @@ the same data.frame with the additional \strong{Di} column giving
 }
 \description{
 Given a stacked data.frame and a distance matrix compute the functional
-distinctiveness. See \code{\link[funrar]{distinctiveness}} function or the
-functional rarity indices vignette included in the package (type
-\code{vignette(package = "funrar")}).
+distinctiveness for a single community. See
+\code{\link[funrar]{distinctiveness}} function or the functional rarity
+indices vignette included in the package (type \code{browseVignettes("funrar")}).
+}
+\section{Caution}{
+
+This function is meant for internal uses mostly, thus it does not include any
+tests on inputs and may fail unexpectedly. Please use
+\code{\link[funrar]{distinctiveness_stack}} to avoid input errors.
+}
+\seealso{
+\code{\link[funrar]{scarcity_com}},
+\code{vignette("rarity_indices", package = "funrar")} and
+\code{link[funrar]{distinctiveness}} Details section for detail on the index
 }
 
