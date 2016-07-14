@@ -16,12 +16,10 @@ valid_mat = matrix(c(1, 0, 0, 0,
                      0, 1, 0, 1),
                    ncol = 4)
 
-rownames(valid_mat) = paste0("s", 1:4)
-colnames(valid_mat) = letters[1:4]
+dimnames(valid_mat) = list("site" = paste0("s", 1:4), "species" = letters[1:4])
 
 # Community Table
 log_mat = (valid_mat == 1)
-
 
 com_df = lapply(rownames(log_mat), function(x) {
   species = colnames(valid_mat)[log_mat[x, ]]
@@ -251,10 +249,10 @@ test_that("Scarcity errors with bad input", {
 
 test_that("Restrictedness computations work", {
   expect_equal(restrictedness_stack(com_df, "species", "site"),
-               data.frame("sp" = letters[1:4], "Ri" = c(3/4, 1/4, 1/4, 1/2)))
+               data.frame("species" = letters[1:4], "Ri" = c(3/4, 1/4, 1/4, 1/2)))
 
   expect_equal(restrictedness(valid_mat),
-               restrictedness_stack(com_df, "species", "site"))
+               data.frame("species" = letters[1:4], "Ri" = c(3/4, 1/4, 1/4, 1/2)))
 })
 
 

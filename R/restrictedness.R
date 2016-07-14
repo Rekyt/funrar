@@ -119,7 +119,8 @@ restrictedness = function(pres_matrix) {
   occupancy = 1 - (colSums(pres_matrix, na.rm = TRUE) / n_com)
 
   # Format occupancy in data.frame
-  occupancy = data.frame("sp" = names(occupancy), "Ri" = as.numeric(occupancy))
+  occupancy = data.frame("species" = names(occupancy),
+                         "Ri" = as.numeric(occupancy))
 
   return(occupancy)
 }
