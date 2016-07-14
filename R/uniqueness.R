@@ -86,7 +86,7 @@ uniqueness_stack = function(com_df, sp_col, dist_matrix) {
 #' @details
 #' Functional Uniqueness \eqn{U_i} is computed as follow:
 #' \deqn{
-#'  U_i = \text{min}(d_{ij}) \forall j, j \neq i,
+#'  U_i = \min(d_{ij}) \forall j, j \neq i,
 #' }{
 #'  U_i = min(d_ij),
 #' }

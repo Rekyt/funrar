@@ -29,7 +29,7 @@ in \strong{rows} and \strong{species} in \strong{columns}, similar to
 \details{
 Functional Uniqueness \eqn{U_i} is computed as follow:
 \deqn{
- U_i = \text{min}(d_{ij}) \forall j, j \neq i,
+ U_i = \min(d_{ij}) \forall j, j \neq i,
 }{
  U_i = min(d_ij),
 }
