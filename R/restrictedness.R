@@ -67,7 +67,9 @@ restrictedness_stack = function(com_df, sp_col, com) {
 #' single site of the dataset (restricted) and close to 0 when the species is
 #' present at all sites. It estimates the geographical extent of a species in a
 #' dataset. See \code{Details} section to have details on the formula used for
-#' the computation.
+#' the computation. The sites-species matrix should have \strong{sites}
+#' in \strong{rows} and \strong{species} in \strong{columns}, similar to
+#' \pkg{vegan} package defaults.
 #'
 #'
 #' @param pres_matrix a site-species matrix, with species in rows and sites

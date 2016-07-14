@@ -22,7 +22,9 @@ in a given dataset, it is close to 1 when the species is present in only a
 single site of the dataset (restricted) and close to 0 when the species is
 present at all sites. It estimates the geographical extent of a species in a
 dataset. See \code{Details} section to have details on the formula used for
-the computation.
+the computation. The sites-species matrix should have \strong{sites}
+in \strong{rows} and \strong{species} in \strong{columns}, similar to
+\pkg{vegan} package defaults.
 }
 \details{
 Geographical Restrictedness aims to measure the regional extent of a species

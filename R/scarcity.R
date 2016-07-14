@@ -105,7 +105,9 @@ scarcity_stack = function(com_df, sp_col, com, abund) {
 #' Computes scarcity from a relative abundance matrix of species. Scarcity is
 #' close to 1 when a species is rare in a community and close to 0 when it is
 #' abundant. It requires a site-species matrix with relative abundances. See
-#' \code{Details} section for the formula.
+#' \code{Details} section for the formula. The sites-species matrix should have
+#' \strong{sites} in \strong{rows} and \strong{species} in \strong{columns},
+#' similar to \pkg{vegan} package defaults.
 #'
 #' @param pres_matrix a site-species matrix, with species in rows and sites
 #'      in columns, containing \strong{relative abundances} values

@@ -152,7 +152,7 @@ distinctiveness_stack = function(com_df, sp_col, com, abund = NULL,
 #' presence-absence or relative abundances) of species with provided functional
 #' distance matrix. The sites-species matrix should have \strong{sites} in
 #' \strong{rows} and \strong{species} in \strong{columns}, similar to
-#' \pkg{\link[vegan]{vegan}} package defaults.
+#' \pkg{vegan} package defaults.
 #'
 #' @param pres_matrix a site-species matrix (presence-absence or relative
 #' abundances), with sites in rows and species in columns

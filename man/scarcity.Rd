@@ -18,7 +18,9 @@ a similar matrix to \code{pres_matrix} with scarcity values in lieu
 Computes scarcity from a relative abundance matrix of species. Scarcity is
 close to 1 when a species is rare in a community and close to 0 when it is
 abundant. It requires a site-species matrix with relative abundances. See
-\code{Details} section for the formula.
+\code{Details} section for the formula. The sites-species matrix should have
+\strong{sites} in \strong{rows} and \strong{species} in \strong{columns},
+similar to \pkg{vegan} package defaults.
 }
 \details{
 The scarcity of species is computed as follow:

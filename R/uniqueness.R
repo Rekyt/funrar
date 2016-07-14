@@ -79,7 +79,7 @@ uniqueness_stack = function(com_df, sp_col, dist_matrix) {
 #' distance to the nearest neighbor of the species of interest (see \code{Details}
 #' section for the formula). The sites-species matrix should have \strong{sites}
 #' in \strong{rows} and \strong{species} in \strong{columns}, similar to
-#' \code{\link[vegan]{vegan}} package defaults.
+#' \pkg{vegan} package defaults.
 #'
 #' @inheritParams distinctiveness
 #'

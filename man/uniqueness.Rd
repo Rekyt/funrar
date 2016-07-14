@@ -24,7 +24,7 @@ provided functional distance matrix. Functional Uniqueness represents how
 distance to the nearest neighbor of the species of interest (see \code{Details}
 section for the formula). The sites-species matrix should have \strong{sites}
 in \strong{rows} and \strong{species} in \strong{columns}, similar to
-\code{\link[vegan]{vegan}} package defaults.
+\pkg{vegan} package defaults.
 }
 \details{
 Functional Uniqueness \eqn{U_i} is computed as follow:

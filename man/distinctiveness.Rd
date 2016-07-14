@@ -22,7 +22,7 @@ Computes functional distinctiveness from a site-species matrix (containing
 presence-absence or relative abundances) of species with provided functional
 distance matrix. The sites-species matrix should have \strong{sites} in
 \strong{rows} and \strong{species} in \strong{columns}, similar to
-\pkg{\link[vegan]{vegan}} package defaults.
+\pkg{vegan} package defaults.
 }
 \details{
 The Functional Distinctiveness of a species is the average functional
