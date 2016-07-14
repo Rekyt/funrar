@@ -2,7 +2,7 @@
 % Please edit documentation in R/uniqueness.R
 \name{uniqueness_stack}
 \alias{uniqueness_stack}
-\title{Uniqueness}
+\title{Functional Uniqueness on stacked data.frame}
 \usage{
 uniqueness_stack(com_df, sp_col, dist_matrix)
 }
@@ -15,16 +15,15 @@ in the \code{com_df} data frame}
 \item{dist_matrix}{a functional distance matrix}
 }
 \value{
-a data frame with uniqueness value per species
+A data.frame with uniqueness value per species, with one column with
+    provided species column name and the \strong{Ui} column with the uniqueness
+    values.
 }
 \description{
-Computes Uniqueness values over a given regional pool.
-The uniqueness value of a single species is equal to the
-minimum functional distance with all other species in the regional pool. The
-formula is as such:
-\deqn{U_i = \min(d_{ij}),}{Ui = min(d_ij),}
-with \eqn{d_{ij}}{d_ij} the functional distance between species
-\eqn{i} and \eqn{j}.
+Computes functional uniqueness values over a given regional pool. Functional
+uniqueness gives the functional distance to the nearest-neighbor of a given species
+in the provided distance matrix. See \code{\link[funrar]{uniqueness}}
+function for details on computation.
 }
 \examples{
 data("aravo", package = "ade4")
@@ -42,5 +41,13 @@ dist_mat = compute_dist_matrix(tra)
 ui_df = uniqueness_stack(dat, "species", dist_mat)
 head(ui_df)
 
+}
+\seealso{
+\code{\link[funrar]{uniqueness}} and
+\code{vignette("rarity_indices", package = "funrar")} for details on the
+uniqueness metric;
+\code{\link[funrar]{distinctiveness_stack}},
+\code{\link[funrar]{restrictedness_stack}},
+\code{\link[funrar]{scarcity_stack}}
 }
 

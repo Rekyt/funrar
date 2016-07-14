@@ -2,25 +2,39 @@
 % Please edit documentation in R/uniqueness.R
 \name{uniqueness}
 \alias{uniqueness}
-\title{Uniqueness for presence/absence matrix}
+\title{Functional Uniqueness for site-sepcies matrix matrix}
 \usage{
 uniqueness(pres_matrix, dist_matrix)
 }
 \arguments{
-\item{pres_matrix}{a presence-absence matrix (or relative abundances),
-with sites in rows and species in columns}
+\item{pres_matrix}{a site-species matrix (presence-absence or relative
+abundances), with sites in rows and species in columns}
 
 \item{dist_matrix}{a species functional distance matrix}
 }
 \value{
-a data frame with uniqueness value per species
+A data.frame with functional uniqueness values per species, with one
+    column with provided species column name and the \strong{Ui} column with
+    functional uniqueness values.
 }
 \description{
-Computes uniqueness from a presence-absence matrix of species with a
-provided functional distance matrix. The
-sites-species matrix should have \strong{sites} in \strong{rows} and
-\strong{species} in \strong{columns}, similar to \code{\link[vegan]{vegan}}
-package defaults.
+Computes the functional uniqueness from a site-species matrix with the
+provided functional distance matrix. Functional Uniqueness represents how
+"isolated" is a species in the global species pool, it is the functional
+distance to the nearest neighbor of the species of interest (see \code{Details}
+section for the formula). The sites-species matrix should have \strong{sites}
+in \strong{rows} and \strong{species} in \strong{columns}, similar to
+\code{\link[vegan]{vegan}} package defaults.
+}
+\details{
+Functional Uniqueness \eqn{U_i} is computed as follow:
+\deqn{
+ U_i = \text{min}(d_{ij}) \forall j, j \neq i,
+}{
+ U_i = min(d_ij),
+}
+with \eqn{U_i} the functional uniqueness of speices \eqn{i}, and \eqn{d_ij}
+the functional distance between species \eqn{i} and species \eqn{j}
 }
 \examples{
 data("aravo", package = "ade4")
@@ -37,5 +51,9 @@ dist_mat = compute_dist_matrix(tra)
 ui = uniqueness(mat, dist_mat)
 head(ui)
 
+}
+\seealso{
+\code{\link[funrar]{distinctiveness}}, \code{\link[funrar]{restrictedness}},
+\code{\link[funrar]{scarcity}}
 }
 
