@@ -2,7 +2,7 @@
 % Please edit documentation in R/distinctiveness.R
 \name{distinctiveness_stack}
 \alias{distinctiveness_stack}
-\title{Stacked data.frame Functional Distinctiveness}
+\title{Functional Distinctiveness on a stacked data.frame}
 \usage{
 distinctiveness_stack(com_df, sp_col, com, abund = NULL, dist_matrix)
 }
@@ -27,9 +27,15 @@ the same data.frame with the additional \strong{Di} column giving
 }
 \description{
 Compute Functional Distinctiveness for several communities, from a stacked
-(or tidy) data.frame  of communities, with one column for species identity,
+(or tidy) data.frame of communities, with one column for species identity,
 one for community identity and an optional one for relative abundances. Also
-needs a species functional distances matrix.
+needs a species functional distances matrix. Functional distinctiveness
+relates to the functional "originality" of a species in a community. The
+closer to 1 the more the species is functionally distinct from the rest of
+the community. See \code{\link[funrar]{distinctiveness}} function or the
+functional rarity indices vignette included in the package
+(type \code{vignette("rarity_indices", package = "funrar")}), for more details
+on the metric.
 }
 \examples{
 data("aravo", package = "ade4")

@@ -4,12 +4,16 @@
 #
 #
 
-#' Distinctiveness for a single community in stacked data.frame
+#' Functional Distinctiveness for a single community
 #'
 #' Given a stacked data.frame and a distance matrix compute the functional
-#' distinctiveness for a single community. See
+#' distinctiveness for a single community. Functional distinctiveness relates to
+#' the functional "originality" of a species in a community. The closer to 1 the
+#' more the species is functionally distinct from the rest of the community. See
 #' \code{\link[funrar]{distinctiveness}} function or the functional rarity
-#' indices vignette included in the package (type \code{browseVignettes("funrar")}).
+#' indices vignette included in the package
+#' (type \code{vignette("rarity_indices", package = "funrar")}), for more details
+#' on the metric.
 #'
 #' @inheritParams scarcity_com
 #'
@@ -70,12 +74,18 @@ distinctiveness_com = function(com_df, sp_col, abund = NULL, dist_matrix) {
   return(com_df)
 }
 
-#' Stacked data.frame Functional Distinctiveness
+#' Functional Distinctiveness on a stacked data.frame
 #'
 #' Compute Functional Distinctiveness for several communities, from a stacked
-#' (or tidy) data.frame  of communities, with one column for species identity,
+#' (or tidy) data.frame of communities, with one column for species identity,
 #' one for community identity and an optional one for relative abundances. Also
-#' needs a species functional distances matrix.
+#' needs a species functional distances matrix. Functional distinctiveness
+#' relates to the functional "originality" of a species in a community. The
+#' closer to 1 the more the species is functionally distinct from the rest of
+#' the community. See \code{\link[funrar]{distinctiveness}} function or the
+#' functional rarity indices vignette included in the package
+#' (type \code{vignette("rarity_indices", package = "funrar")}), for more details
+#' on the metric.
 #'
 #' @inheritParams distinctiveness_com
 #'
@@ -136,9 +146,9 @@ distinctiveness_stack = function(com_df, sp_col, com, abund = NULL,
   return(com_distinctiveness)
 }
 
-#' Distinctiveness on site-species matrix
+#' Functional Distinctiveness on site-species matrix
 #'
-#' Computes distinctiveness from a site-species matrix (containing
+#' Computes functional distinctiveness from a site-species matrix (containing
 #' presence-absence or relative abundances) of species with provided functional
 #' distance matrix. The sites-species matrix should have \strong{sites} in
 #' \strong{rows} and \strong{species} in \strong{columns}, similar to

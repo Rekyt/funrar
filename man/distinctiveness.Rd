@@ -2,7 +2,7 @@
 % Please edit documentation in R/distinctiveness.R
 \name{distinctiveness}
 \alias{distinctiveness}
-\title{Distinctiveness on site-species matrix}
+\title{Functional Distinctiveness on site-species matrix}
 \usage{
 distinctiveness(pres_matrix, dist_matrix)
 }
@@ -18,7 +18,7 @@ a similar matrix from provided \code{pres_matrix} with Distinctiveness
    communities will have an \code{NA} value (see \code{Note} section)
 }
 \description{
-Computes distinctiveness from a site-species matrix (containing
+Computes functional distinctiveness from a site-species matrix (containing
 presence-absence or relative abundances) of species with provided functional
 distance matrix. The sites-species matrix should have \strong{sites} in
 \strong{rows} and \strong{species} in \strong{columns}, similar to
