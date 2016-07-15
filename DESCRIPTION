@@ -6,10 +6,10 @@ Authors@R: c(
   person("Pierre", "Denelle", email = "pierre.denelle@cefe.cnrs.fr", role = "aut"),
   person("Caroline", "Tucker", email = "carolinemtucker@gmail.com", role = "aut")
   )
-Description: Computes functional rarity indices as proposed by Violle et al.
+Description: Computes functional rarity indices as proposed by Violle et al (2016).
     Various indices can be computed using both regional and local information.
-    Most function need a table of sites and species present, plus traits table
-    for all the present species. It can also abundance weighted metrics.
+    Functional Rarity combines both the functional aspect of rarity as well as
+    the extent aspect of rarity.
 Depends:
     R (>= 3.2.2)
 License: GPL (>= 2)
