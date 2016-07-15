@@ -15,7 +15,7 @@ When a matrix contains a lot of zero, there is no need to store all its values. 
 
 # in package `funrar`
 
-If your site-species matrix is big, it should contain a lot zero because it is very rare that alls species are present at all sites when looking at thousands of species.
+If your site-species matrix is big, it likely contains a lot of zeroes, because it is very rare that all species are present at all sites when looking at thousands of species.
 
 ```{r sparseMatExample}
 # Generate a matrix with 1000 species and 200 sites
@@ -27,7 +27,7 @@ rownames(my_mat) = paste0("site", 1:nrow(my_mat))
 my_mat[1:5, 1:5]
 ```
 
-`funrar` lets you use sparse matrices directly using function implemented in the `Matrix` package. When your matrix is filled with 0 it can be quicker to use sparse matrices.
+`funrar` lets you use sparse matrices directly using a function implemented in the `Matrix` package. When your matrix is filled with 0s it can be quicker to use sparse matrices.
 
 ```{r estimateFilling}
 filling = 1 - sum(my_mat == 0)/(ncol(my_mat)*nrow(my_mat))
@@ -47,7 +47,7 @@ sparse_mat = as(my_mat, "sparseMatrix")
 str(sparse_mat)
 ```
 
-it completely changes the structure as well as the memory it takes into the RAM:
+it completely changes the structure as well as the memory it takes in the RAM:
 
 ```{r memoryUsage}
 print(object.size(my_mat), units = "Kb")
