@@ -137,7 +137,7 @@ mat_filling(all_mats$`99`$mat)
 
 Now we can compare the speed of the algorithms:
 
-```{r}
+```{r, eval=FALSE}
 mat_bench = microbenchmark(
   mat_0 = distinctiveness(all_mats$`0`$mat, dist_mat),
   sparse_0 = distinctiveness(all_mats$`0`$sparse, dist_mat),
