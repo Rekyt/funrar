@@ -11,11 +11,31 @@ vignette: >
 
 # Sparse Matrices Usefulness
 
-When a matrix contains a lot of zero, there is no need to store all its values. For example
+When a matrix contains a lot of zero, there is no need to store all its values. But only the non-zero values, for example the following matrix:
 
-# in package `funrar`
+\begin{equation}
+  M =
+    \bordermatrix{
+             ~      & \text{sp. A} & \text{sp. B} & {sp. C} \cr
+      \text{site 1} & 1 & 0 & 0 \cr
+      \text{site 2} & 0 & 1 & 1 \cr
+      \text{site 3} & 0 & 1 & 0 \cr}
+\end{equation}
 
-If your site-species matrix is big, it likely contains a lot of zeroes, because it is very rare that all species are present at all sites when looking at thousands of species.
+can be stored using only a matrix with non zero-values $S$, with row index $i$ and column index $j$:
+
+\begin{equation}
+  S =
+    \begin{matrix}
+            i       &       j       & \text{value} \\
+      \text{site 1} & \text{sp. A} & 1 \\
+      \text{site 2} & \text{sp. B} & 1 \\
+      \text{site 3} & \text{sp. B} & 1 \\
+      \text{site 2} & \text{sp. C} & 1
+    \end{matrix}
+\end{equation}
+
+If your site-species matrix is big, it may contain a lot zero because it is very unlikely that all species are present at all sites when looking at thousands of species and hundreds of sites. Thus, the sparse matrix notation would save a good amount of lines (look how $S$ compared to $M$).
 
 ```{r sparseMatExample}
 # Generate a matrix with 1000 species and 200 sites
@@ -27,7 +47,7 @@ rownames(my_mat) = paste0("site", 1:nrow(my_mat))
 my_mat[1:5, 1:5]
 ```
 
-`funrar` lets you use sparse matrices directly using a function implemented in the `Matrix` package. When your matrix is filled with 0s it can be quicker to use sparse matrices.
+`funrar` lets you use sparse matrices directly using a function implemented in the `Matrix` package. When your matrix is filled with 0s it can be quicker to use sparse matrices. To know if you should use sparse matrices you can compute the filling of your matrix, i.e. the percentage of non-zero cells in your matrix:
 
 ```{r estimateFilling}
 filling = 1 - sum(my_mat == 0)/(ncol(my_mat)*nrow(my_mat))
@@ -35,23 +55,26 @@ filling = 1 - sum(my_mat == 0)/(ncol(my_mat)*nrow(my_mat))
 filling
 ```
 
-To convert from a normal matrix to a sparse matrix you can use `r as(my_mat, "sparseMatrix")`:
+To convert from a normal matrix to a sparse matrix you can use `as(my_mat, "sparseMatrix")`:
 
 ```{r convertSparseMat}
 library(Matrix)
 
-str(my_mat)
-
 sparse_mat = as(my_mat, "sparseMatrix")
 
-str(sparse_mat)
+is(my_mat, "sparseMatrix")
+is(sparse_mat, "sparseMatrix")
 ```
 
 it completely changes the structure as well as the memory it takes in the RAM:
 
 ```{r memoryUsage}
+# Regular Matrix
+str(my_mat)
 print(object.size(my_mat), units = "Kb")
 
+# Sparse Matrix from 'Matrix' package
+str(sparse_mat)
 print(object.size(sparse_mat), units = "Kb")
 ```
 
@@ -76,5 +99,64 @@ dist_mat = compute_dist_matrix(trait_df)
 
 microbenchmark(regular = distinctiveness(my_mat, dist_mat),
                sparse = distinctiveness(sparse_mat, dist_mat))
+```
+
+
+### Systematic benchmark
+
+We generate matrices with different filling rate and compare the speed of regular matrix and sparse matrices computation.
+
+```{r fillingInfluence}
+generate_matrix = function(n_zero = 5, nrow = 200, ncol = 1000) {
+  matrix(sample(c(rep(0, n_zero), 1), replace = TRUE, size = nrow*ncol),
+                ncol = ncol, nrow = nrow)
+}
+
+mat_filling = function(my_mat) {
+  sum(my_mat != 0)/(ncol(my_mat)*nrow(my_mat))
+}
+
+sparse_and_mat = function(n_zero) {
+  my_mat = generate_matrix(n_zero)
+  colnames(my_mat) = paste0("sp", 1:ncol(my_mat))
+  rownames(my_mat) = paste0("site", 1:nrow(my_mat))
+  
+  sparse_mat = as(my_mat, "sparseMatrix")
+  
+  return(list(mat = my_mat, sparse = sparse_mat))
+}
+
+n_zero_vector = c(0, 1, 2, 4, 9, 29, 49, 99)
+names(n_zero_vector) = n_zero_vector
+
+all_mats = lapply(n_zero_vector, sparse_and_mat)
+
+mat_filling(all_mats$`0`$mat)
+mat_filling(all_mats$`99`$mat)
+```
+
+Now we can compare the speed of the algorithms:
+
+```{r}
+mat_bench = microbenchmark(
+  mat_0 = distinctiveness(all_mats$`0`$mat, dist_mat),
+  sparse_0 = distinctiveness(all_mats$`0`$sparse, dist_mat),
+  mat_1 = distinctiveness(all_mats$`1`$mat, dist_mat),
+  sparse_1 = distinctiveness(all_mats$`1`$sparse, dist_mat),
+  mat_2 = distinctiveness(all_mats$`2`$mat, dist_mat),
+  sparse_2 = distinctiveness(all_mats$`2`$sparse, dist_mat),
+  mat_4 = distinctiveness(all_mats$`4`$mat, dist_mat),
+  sparse_4 = distinctiveness(all_mats$`4`$sparse, dist_mat),
+  mat_9 = distinctiveness(all_mats$`9`$mat, dist_mat),
+  sparse_9 = distinctiveness(all_mats$`9`$sparse, dist_mat),
+  mat_29 = distinctiveness(all_mats$`29`$mat, dist_mat),
+  sparse_29 = distinctiveness(all_mats$`29`$sparse, dist_mat),
+  mat_49 = distinctiveness(all_mats$`49`$mat, dist_mat),
+  sparse_49 = distinctiveness(all_mats$`49`$sparse, dist_mat),
+  mat_99 = distinctiveness(all_mats$`99`$mat, dist_mat),
+  sparse_99 = distinctiveness(all_mats$`99`$sparse, dist_mat),
+  times = 30)
+
+autoplot(mat_bench)
 ```
 
