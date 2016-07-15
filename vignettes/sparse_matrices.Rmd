@@ -11,11 +11,31 @@ vignette: >
 
 # Sparse Matrices Usefulness
 
-When a matrix contains a lot of zero, there is no need to store all its values. For example
+When a matrix contains a lot of zero, there is no need to store all its values. But only the non-zero values, for example the following matrix:
 
-# in package `funrar`
+\begin{equation}
+  M =
+    \bordermatrix{
+             ~      & \text{sp. A} & \text{sp. B} & {sp. C} \cr
+      \text{site 1} & 1 & 0 & 0 \cr
+      \text{site 2} & 0 & 1 & 1 \cr
+      \text{site 3} & 0 & 1 & 0 \cr}
+\end{equation}
 
-If your site-species matrix is big, it should contain a lot zero because it is very rare that alls species are present at all sites when looking at thousands of species.
+can be stored using only a matrix with non zero-values $S$, with row index $i$ and column index $j$:
+
+\begin{equation}
+  S =
+    \begin{matrix}
+            i       &       j       & \text{value} \\
+      \text{site 1} & \text{sp. A} & 1 \\
+      \text{site 2} & \text{sp. B} & 1 \\
+      \text{site 3} & \text{sp. B} & 1 \\
+      \text{site 2} & \text{sp. C} & 1
+    \end{matrix}
+\end{equation}
+
+If your site-species matrix is big, it may contain a lot zero because it is very unlikely that all species are present at all sites when looking at thousands of species and hundreds of sites. Thus, the sparse matrix notation would save a good amount of lines (look how $S$ compared to $M$).
 
 ```{r sparseMatExample}
 # Generate a matrix with 1000 species and 200 sites
@@ -27,7 +47,7 @@ rownames(my_mat) = paste0("site", 1:nrow(my_mat))
 my_mat[1:5, 1:5]
 ```
 
-`funrar` lets you use sparse matrices directly using function implemented in the `Matrix` package. When your matrix is filled with 0 it can be quicker to use sparse matrices.
+`funrar` lets you use sparse matrices directly using function implemented in the `Matrix` package. When your matrix is filled with 0 it can be quicker to use sparse matrices. To know if you should use sparse matrices you can compute the filling of your matrix, i.e. the percentage of non-zero cells in your matrix:
 
 ```{r estimateFilling}
 filling = 1 - sum(my_mat == 0)/(ncol(my_mat)*nrow(my_mat))
@@ -35,23 +55,26 @@ filling = 1 - sum(my_mat == 0)/(ncol(my_mat)*nrow(my_mat))
 filling
 ```
 
-To convert from a normal matrix to a sparse matrix you can use `r as(my_mat, "sparseMatrix")`:
+To convert from a normal matrix to a sparse matrix you can use `as(my_mat, "sparseMatrix")`:
 
 ```{r convertSparseMat}
 library(Matrix)
 
-str(my_mat)
-
 sparse_mat = as(my_mat, "sparseMatrix")
 
-str(sparse_mat)
+is(my_mat, "sparseMatrix")
+is(sparse_mat, "sparseMatrix")
 ```
 
 it completely changes the structure as well as the memory it takes into the RAM:
 
 ```{r memoryUsage}
+# Regular Matrix
+str(my_mat)
 print(object.size(my_mat), units = "Kb")
 
+# Sparse Matrix from 'Matrix' package
+str(sparse_mat)
 print(object.size(sparse_mat), units = "Kb")
 ```
 
