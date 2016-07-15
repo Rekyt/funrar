@@ -13,7 +13,7 @@ vignette: >
 
 The idea of Functional Rarity is to measure two components of the rarity of a species (or an individual). In community ecology, researchers are generally interested in the rarity of a species as measured in terms of abundances. A species with a low abundance will be considered 'rare'. From a functional ecology perspective, this omits important information about the "role" that a given species plays in the ecosystem, its particular niche. A framework is being developed of various indices to characterize how functioning can be rare locally or regionally
 
-In their article, Violle et al. (2016) introduced 4 indices to compute functional rarity indices. `funrar` package enables ecologists to compute these on any dataset.
+In their article, Violle et al. (in revision) introduced 4 indices to compute functional rarity indices. `funrar` package enables ecologists to compute these on any dataset.
 
 
 
@@ -345,6 +345,6 @@ ggplot(ri_ui, aes(Ri, Ui)) +
 
 Choler, P. (2005) Consistent shifts in Alpine plant traits along a mesotopographical gradient. Arctic, Antarctic, and Alpine Research, 37,444-453.
 
-Violle C., Thuiller W., Mouquet N., Munoz F., Kraft NJ., Cadotte MW., Livingstone SW., Mouillot D. (2016) Functional rarity: the ecology of outliers. *in revision*
+Violle C., Thuiller W., Mouquet N., Munoz F., Kraft NJ., Cadotte MW., Livingstone SW., Mouillot D. Functional rarity: the ecology of outliers. *in revision*
 
 
