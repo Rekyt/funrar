@@ -11,9 +11,9 @@ vignette: >
 
 # Introduction
 
-The idea of Functional Rarity is to measure two components of the rarity of a species (or an individual). Indeed, in community ecology, people are generally interested in the rarity of a species in terms of abundances. A species with a low abundance will be considered as rare. From a functional ecology perspective, this does not take into consideration the "role" that a given species plays in the ecosystem, its particular niche. A framework is being developed of various indices to characterize how this function could be rare locally or regionally
+The idea of Functional Rarity is to measure two components of the rarity of a species (or an individual). In community ecology, researchers are generally interested in the rarity of a species as measured in terms of abundances. A species with a low abundance will be considered 'rare'. From a functional ecology perspective, this omits important information about the "role" that a given species plays in the ecosystem, its particular niche. A framework is being developed of various indices to characterize how functioning can be rare locally or regionally
 
-In their article, Violle et al. (2016) introduced 4 indices to compute functional rarity indices. `funrar` package enables ecologists to compute them on any dataset.
+In their article, Violle et al. (2016) introduced 4 indices to compute functional rarity indices. `funrar` package enables ecologists to compute these on any dataset.
 
 # Framework
 
@@ -24,7 +24,7 @@ The following figure show the 4 aspects covered by the metrics. Rarity is thus c
 
 # Dataset example
 
-To show how the package works, We are using a dataset describing the distribution of 82 species of Alpine plants in 75 sites. This dataset was collected by Choler et al. and is presented in the following article.
+To illustrate the package, we are using a dataset describing the distribution of 82 species of Alpine plants in 75 sites. This dataset was collected by Choler et al.(2005).
 
 Species traits and environmental variables are also available.
 
@@ -52,7 +52,7 @@ mat[1:5, 1:5]
 
 ```
 
-In other cases, users can have a stacked data.frame containing columns for sites, species and abundances. This format can be used to have a better overview of the data and can be perceived as more intuitive. The package contains for each metric another function called `metricname_stack()` function that can take these stacked data.frames as inputs.
+Users can also use a stacked data.frame, containing columns for sites, species and abundances, as an input. The package contains for each metric another species function called `metricname_stack()` function that can take these stacked data.frames.
 
 `funrar` package includes two functions to go from one format to the other: `matrix_to_stack()` and `stack_to_matrix()`
 
@@ -70,7 +70,7 @@ dat = dat[which(dat$value > 0), ]
 
 ```
 
-The package is also able to deal with big matrices by using a sparse matrix approach. For more details, see `sparse_matrices` vignette.
+The package is also able to deal with large matrices by using a sparse matrix approach. For more details, see `sparse_matrices` vignette.
 
 ## Indices
 
@@ -78,7 +78,7 @@ The package is also able to deal with big matrices by using a sparse matrix appr
 
 The indices rely on the computation of a distance matrix. It represents the functional distance between two species given a particular set of traits. From a species traits matrix you can easily compute a distance matrix using function `compute_dist_matrix()`.
 
-In order to compute distance matrix, species names must be specified as **rownames** in the traits table. And they will be named similarly in the distance matrix. Species names must be characters and not factors.
+In order to compute distance matrix, species names must be specified as **rownames** in the traits table. Further, species names must match between the traits table and distance matrix. Species names must be characters and not factors.
 
 The function relies on the `daisy()` function from package `cluster` and the default metric is Gower's distance to take into account ordinal, categorical and binary traits.
 
@@ -96,7 +96,7 @@ dist_mat[1:5, 1:5]
 
 #### Formula
 
-The distinctiveness measures how a species is locally functionally rare, in comparison with the other species of community. Each species (or individual) in each community will get a distinctiveness value. Distinctiveness values range from 0 to 1. A 0 value indicates that the focal species is not locally functionally distant from the other and conversely.
+The distinctiveness measures how a species is locally functionally rare, in comparison with the other species of community. Each species (or individual) in each community will get a distinctiveness value. Distinctiveness values range from 0 to 1. A 0 value indicates that the focal species is not functionally distant from the other species present locally.
 
 From given functional distances, it is computed as such:
 
@@ -134,7 +134,7 @@ di[1:5, 1:5]
 
 ```
 
-The syntax for `distinctiveness()` is first the table and then the distance matrix. The function returns a site-species matrix filled with `Di` values, i.e. the species distinctiveness in each species per site combination.
+The syntax for `distinctiveness()` is first the table and then the distance matrix. The function returns a site-species matrix filled with `Di` values, i.e. the species distinctiveness for each species per site combination.
 
 #### Computation with stacked data.frame
 
@@ -156,7 +156,7 @@ head(di_df)
 
 ```
 
-The syntax for `distinctiveness_stack()` is first the table, then the name of the species column, then the name of the community column, then eventually the name of the relative abundance column and finally the distance matrix. The function add a `Di` column giving the species distinctiveness in each species per site combination.
+The syntax for `distinctiveness_stack()` is first the table, then the name of the species column, then the name of the community column, then the name of the relative abundance column and finally the distance matrix. The function add a `Di` column giving the species distinctiveness in each species per site combination.
 
 For abundance weighted distinctiveness you need to have a column containing relative abundances in your data frame as such:
 
@@ -172,7 +172,7 @@ head(di_df)
 
 #### Formula
 
-The scarcity measures how a species is locally abundant, in comparison with the other species of community. Each species (or individual) in each community will get a scarcity value. Scarcity values range from 0 to 1. A 0 value indicates that the focal species is locally abundant and conversely.
+The scarcity measures how locally abundant a species is, in comparison to the other species of community. Each species (or individual) in each community will get a scarcity value. Scarcity values range from 0 to 1. A 0 value indicates that the focal species is locally abundant and conversely.
 
 $$
 S_i = \exp(-NA_i\log2),
@@ -205,7 +205,7 @@ head(si_df)
 
 #### Formula
 
-The uniqueness measures how a species is functionally rare at regional scale. Each species (or individual) of the species pool will get a uniqueness value. Uniqueness values range from 0 to 1. A 0 value indicates that the focal species shares the exact same traits than other species in the pool and conversely.
+ Uniqueness measures how functionally rare a species is at the regional scale. Each species (or individual) in the species pool will get a uniqueness value. Uniqueness values range from 0 to 1. A 0 value indicates that the focal species shares the exact same traits as other species in the pool and conversely.
 
 $$
 U_i = \text{min}(d_{ij}), \forall j \in [1, N_R], j \neq i,
@@ -215,7 +215,7 @@ with $U_i$ the uniqueness of species $i$, $d_{ij}$ the functional distance betwe
 
 #### Computation
 
-`uniqueness()` follows a similar syntax, but beware that given community table and distance matrix should be given out of **regional species pool**. And the syntax is also similar:
+`uniqueness()` follows a similar syntax, but beware that given community table and distance matrix should respresent the **regional species pool**. And the syntax is also similar:
 
 ```{r uniqComp}
 
@@ -238,7 +238,7 @@ dim(ui_df[!duplicated(ui_df$species), ])
 
 #### Formula
 
-The restrictedness measures how a species is regionally rare. The following function thus represents species' occupancy of the set of communities. Each species (or individual) of the species pool will get a restrictedness value. Restrictedness values range from 0 to 1. A 0 value indicates that the focal species is present in all the sites and conversely.
+Restrictedness measures how regionally rare a species is. The following function represents a species' occupancy for a set of communities. Each species (or individual) in the species pool will have a restrictedness value. Restrictedness values range from 0 to 1. A 0 value indicates that the focal species is present in all the sites.
 
 $$
 R_i = 1 - N_i/N_tot
@@ -269,7 +269,7 @@ head(ri_df)
 
 ### funrar
 
-This function computes at the same time the four metrics introduced above.
+This function computes all of the four metrics introduced above.
 
 ```{r}
 
@@ -285,9 +285,6 @@ identical(all_ind$Si, si)
 
 ```
 
-# Plots
-
-In this section, some ideas to plot your results are presented.
 
 ```{r}
 
