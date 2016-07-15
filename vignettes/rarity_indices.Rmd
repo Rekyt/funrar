@@ -15,11 +15,14 @@ The idea of Functional Rarity is to measure two components of the rarity of a sp
 
 In their article, Violle et al. (2016) introduced 4 indices to compute functional rarity indices. `funrar` package enables ecologists to compute them on any dataset.
 
+
+
 # Framework
 
 The following figure show the 4 aspects covered by the metrics. Rarity is thus considered at local and regional scales and also from abundance and functional point of views. The name of the package functions are written underneath metrics' names.
 
 ![Rarity indices and corresponding functions.](figures/funrar_scheme.png)
+
 
 
 # Dataset example
@@ -29,10 +32,11 @@ To show how the package works, We are using a dataset describing the distributio
 Species traits and environmental variables are also available.
 
 ```{r}
-
 data("aravo", package = "ade4")
 
+str(aravo)
 ```
+
 
 
 # Functional rarity indices 
@@ -44,12 +48,10 @@ Ecologist usually have to deal with site-species matrix, containing sites names 
 
 
 ```{r}
-
 # Site-species matrix stored in aravo$spe
 mat = as.matrix(aravo$spe)
 
 mat[1:5, 1:5]
-
 ```
 
 In other cases, users can have a stacked data.frame containing columns for sites, species and abundances. This format can be used to have a better overview of the data and can be perceived as more intuitive. The package contains for each metric another function called `metricname_stack()` function that can take these stacked data.frames as inputs.
@@ -67,10 +69,11 @@ identical(as.numeric(stack_to_matrix(dat, "site", "species", "value")), as.numer
 
 # Removal of empty rows
 dat = dat[which(dat$value > 0), ]
-
 ```
 
 The package is also able to deal with big matrices by using a sparse matrix approach. For more details, see `sparse_matrices` vignette.
+
+
 
 ## Indices
 
@@ -83,14 +86,13 @@ In order to compute distance matrix, species names must be specified as **rownam
 The function relies on the `daisy()` function from package `cluster` and the default metric is Gower's distance to take into account ordinal, categorical and binary traits.
 
 ```{r}
-
 tra = aravo$traits[, c("Height", "SLA", "N_mass")]
 head(tra)
 
 dist_mat = compute_dist_matrix(tra)
 dist_mat[1:5, 1:5]
-
 ```
+
 
 ### Distinctiveness computation
 
@@ -125,13 +127,11 @@ with the same terms as above, and $A_j$ the relative abundance of species $j$ in
 Using `funrar` distinctiveness values can be computed using function `distinctiveness()`:
 
 ```{r distinctivenessComputation}
-
 # Compute distinctiveness for each species on each site
 di = distinctiveness(pres_matrix = mat,  # The site x species table
                      dist_matrix = dist_mat)  # Functional Distance matrix
 
 di[1:5, 1:5]
-
 ```
 
 The syntax for `distinctiveness()` is first the table and then the distance matrix. The function returns a site-species matrix filled with `Di` values, i.e. the species distinctiveness in each species per site combination.
@@ -141,7 +141,6 @@ The syntax for `distinctiveness()` is first the table and then the distance matr
 Using `funrar` distinctiveness values can be computed using function `distinctiveness_stack()`:
 
 ```{r computeDi}
-
 # Species should be character
 dat$species = as.character(dat$species)
 
@@ -153,7 +152,6 @@ di_df = distinctiveness_stack(com_df = dat,  # The site x species table
                               dist_matrix = dist_mat)  # Functional Distance matrix
 
 head(di_df)
-
 ```
 
 The syntax for `distinctiveness_stack()` is first the table, then the name of the species column, then the name of the community column, then eventually the name of the relative abundance column and finally the distance matrix. The function add a `Di` column giving the species distinctiveness in each species per site combination.
@@ -161,12 +159,11 @@ The syntax for `distinctiveness_stack()` is first the table, then the name of th
 For abundance weighted distinctiveness you need to have a column containing relative abundances in your data frame as such:
 
 ```{r abundDi}
-
 di_df = distinctiveness_stack(dat, "species", "site", "value", dist_mat)
 
 head(di_df)
-
 ```
+
 
 ### Scarcity
 
@@ -186,20 +183,17 @@ with $S_i$ the scarcity of species $i$, $N$ the number of species in the local c
 With `funrar` it can be computed with `scarcity()` function with a syntax analog to `distinctiveness()`
 
 ```{r scarcityComp}
-
 si = scarcity(pres_matrix = mat)
 
 si[1:5, 1:5]
-
 ```
 
 ```{r siComp}
-
 si_df = scarcity_stack(dat, "species", "site", "value")
 
 head(si_df)
-
 ```
+
 
 ### Uniqueness
 
@@ -218,21 +212,18 @@ with $U_i$ the uniqueness of species $i$, $d_{ij}$ the functional distance betwe
 `uniqueness()` follows a similar syntax, but beware that given community table and distance matrix should be given out of **regional species pool**. And the syntax is also similar:
 
 ```{r uniqComp}
-
 ui = uniqueness(mat, dist_mat)
 
 head(ui)
-
 ```
 
 ```{r uiComp}
-
 ui_df = uniqueness_stack(dat, "species", dist_mat)
 
 head(ui_df)
 dim(ui_df[!duplicated(ui_df$species), ])
-
 ```
+
 
 ### Restrictedness
 
@@ -249,22 +240,18 @@ with $R_i$ the restrictedness of species $i$, $N_i$ the number of sites where sp
 #### Computation
 
 ```{r}
-
 ri = restrictedness(mat)
 
 head(ri)
-
 ```
 
 ```{r}
-
 # Species should be character
 dat$site = as.character(dat$site)
 
 ri_df = restrictedness_stack(dat, "species", "site")
 
 head(ri_df)
-
 ```
 
 ### funrar
@@ -272,8 +259,6 @@ head(ri_df)
 This function computes at the same time the four metrics introduced above.
 
 ```{r}
-
-
 all_ind = funrar(mat, dist_mat, rel_abund = TRUE)
 
 str(all_ind)
@@ -282,15 +267,15 @@ identical(all_ind$Ui, ui)
 identical(all_ind$Di, di)
 identical(all_ind$Ri, ri)
 identical(all_ind$Si, si)
-
 ```
+
+
 
 # Plots
 
 In this section, some ideas to plot your results are presented.
 
 ```{r}
-
 library(ggplot2)
 library(dplyr)
 
@@ -302,13 +287,13 @@ ggplot(di_df, aes(species, site)) +
 # Density of distinctiveness values
 
 quant = quantile(di_df$Di, probs = seq(0, 1, 0.10))
-labels_quant = paste(names(quant)[-length(quant)], names(quant)[-1], sep="-")
+labels_quant = paste(names(quant)[-length(quant)], names(quant)[-1], sep = "-")
  
 di_density = data.frame(density(di_df$Di)[c("x", "y")])
 di_density = filter(di_density, x >= quant[[1]] & x <= quant[[length(quant)]])
 di_density$quant = cut(di_density$x, breaks = quant)   
 quant = quantile(di_df$Di, probs = seq(0, 1, 0.10))
-labels_quant = paste(names(quant)[-length(quant)], names(quant)[-1], sep="-")
+labels_quant = paste(names(quant)[-length(quant)], names(quant)[-1], sep = "-")
 
 di_dens = ggplot(data = di_density, aes(x = x, y = y)) +
   geom_area(aes(fill = quant)) +
@@ -325,13 +310,13 @@ di_dens
 # Density of scarcity values
 
 quant = quantile(si_df$Si, probs = seq(0, 1, 0.10))
-labels_quant = paste(names(quant)[-length(quant)], names(quant)[-1], sep="-")
+labels_quant = paste(names(quant)[-length(quant)], names(quant)[-1], sep = "-")
  
 si_density = data.frame(density(si_df$Si)[c("x", "y")])
 si_density = filter(si_density, x >= quant[[1]] & x <= quant[[length(quant)]])
 si_density$quant = cut(si_density$x, breaks = quant)   
 quant = quantile(si_df$Si, probs = seq(0, 1, 0.10))
-labels_quant = paste(names(quant)[-length(quant)], names(quant)[-1], sep="-")
+labels_quant = paste(names(quant)[-length(quant)], names(quant)[-1], sep = "-")
 
 si_dens = ggplot(data = si_density, aes(x = x, y = y)) +
   geom_area(aes(fill = quant)) +
@@ -346,20 +331,20 @@ si_dens = ggplot(data = si_density, aes(x = x, y = y)) +
 si_dens
 
 # Regional rarity: restrictedness versus uniqueness
-colnames(ri_df)[colnames(ri_df)=="sp"] = "species"
+colnames(ri_df)[colnames(ri_df) == "sp"] = "species"
 ri_ui <- inner_join(ri_df, ui_df, by = "species")
 
 ggplot(ri_ui, aes(Ri, Ui)) +
   geom_point() + 
   theme_classic() 
-
 ```
+
+
 
 # References
 
-Choler, P. (2005) Consistent shifts in Alpine plant traits along a mesotopographical gradient. Arctic,
-Antarctic, and Alpine Research, 37,444-453.
+Choler, P. (2005) Consistent shifts in Alpine plant traits along a mesotopographical gradient. Arctic, Antarctic, and Alpine Research, 37,444-453.
 
-
+Violle C., Thuiller W., Mouquet N., Munoz F., Kraft NJ., Cadotte MW., Livingstone SW., Mouillot D. (2016) Functional rarity: the ecology of outliers. *in revision*
 
 
