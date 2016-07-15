@@ -101,3 +101,62 @@ microbenchmark(regular = distinctiveness(my_mat, dist_mat),
                sparse = distinctiveness(sparse_mat, dist_mat))
 ```
 
+
+### Systematic benchmark
+
+We generate matrices with different filling rate and compare the speed of regular matrix and sparse matrices computation.
+
+```{r fillingInfluence}
+generate_matrix = function(n_zero = 5, nrow = 200, ncol = 1000) {
+  matrix(sample(c(rep(0, n_zero), 1), replace = TRUE, size = nrow*ncol),
+                ncol = ncol, nrow = nrow)
+}
+
+mat_filling = function(my_mat) {
+  sum(my_mat != 0)/(ncol(my_mat)*nrow(my_mat))
+}
+
+sparse_and_mat = function(n_zero) {
+  my_mat = generate_matrix(n_zero)
+  colnames(my_mat) = paste0("sp", 1:ncol(my_mat))
+  rownames(my_mat) = paste0("site", 1:nrow(my_mat))
+  
+  sparse_mat = as(my_mat, "sparseMatrix")
+  
+  return(list(mat = my_mat, sparse = sparse_mat))
+}
+
+n_zero_vector = c(0, 1, 2, 4, 9, 29, 49, 99)
+names(n_zero_vector) = n_zero_vector
+
+all_mats = lapply(n_zero_vector, sparse_and_mat)
+
+mat_filling(all_mats$`0`$mat)
+mat_filling(all_mats$`99`$mat)
+```
+
+Now we can compare the speed of the algorithms:
+
+```{r}
+mat_bench = microbenchmark(
+  mat_0 = distinctiveness(all_mats$`0`$mat, dist_mat),
+  sparse_0 = distinctiveness(all_mats$`0`$sparse, dist_mat),
+  mat_1 = distinctiveness(all_mats$`1`$mat, dist_mat),
+  sparse_1 = distinctiveness(all_mats$`1`$sparse, dist_mat),
+  mat_2 = distinctiveness(all_mats$`2`$mat, dist_mat),
+  sparse_2 = distinctiveness(all_mats$`2`$sparse, dist_mat),
+  mat_4 = distinctiveness(all_mats$`4`$mat, dist_mat),
+  sparse_4 = distinctiveness(all_mats$`4`$sparse, dist_mat),
+  mat_9 = distinctiveness(all_mats$`9`$mat, dist_mat),
+  sparse_9 = distinctiveness(all_mats$`9`$sparse, dist_mat),
+  mat_29 = distinctiveness(all_mats$`29`$mat, dist_mat),
+  sparse_29 = distinctiveness(all_mats$`29`$sparse, dist_mat),
+  mat_49 = distinctiveness(all_mats$`49`$mat, dist_mat),
+  sparse_49 = distinctiveness(all_mats$`49`$sparse, dist_mat),
+  mat_99 = distinctiveness(all_mats$`99`$mat, dist_mat),
+  sparse_99 = distinctiveness(all_mats$`99`$sparse, dist_mat),
+  times = 30)
+
+autoplot(mat_bench)
+```
+
