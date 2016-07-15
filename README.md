@@ -1,46 +1,31 @@
 # `funrar` package
+
 [![Travis-CI Build Status](https://travis-ci.org/Rekyt/funrar.svg?branch=master)](https://travis-ci.org/Rekyt/funrar) [![codecov.io](https://codecov.io/github/Rekyt/funrar/coverage.svg?branch=master)](https://codecov.io/github/Rekyt/funrar?branch=master)
 
-Package project to describe Functional Rarity, may be added in the future to [package cati](http://github.com/adrientaudiere/cati/)
+`funrar` is a package to compute functional rarity indices quantifies how species are rare both from a functional and an extent point of view. Following the different facets of rarity proposed by Rabinowitz 1981. See this reference for more details on Functional Rarity indices:
 
-## Installation Procedure
+Violle C., Thuiller W., Mouquet N., Munoz F., Kraft NJ., Cadotte MW., Livingstone SW., Mouillot D., Functional rarity: the ecology of outliers. *in revision*
 
-As **`outlieR`** is not on CRAN you can install it using R package `devtools` as follow:
+
+## Installation
+
+The package will soon be submitted to CRAN, but is not released yet, so please download the development version from github:
 
 ```r
+# install.packages("devtools") # If 'devtools' is not installed yet
 devtools::install_github("Rekyt/outlieR")
 ```
 
 ## Dependencies
 
-`outlieR` depends on Hadley Whickam R package for data manipulation [`dplyr`](http://github.com/hadley/dplyr). And also `cluster` package.
+Apart from base packages dependencies, `funrar` depends on `dplyr` and `cluster`.
 
-## Included functions
-
-For the moment only 5 functions are exported (all of them include a help file accessible using `?function_name` in R):
-
-- `compute_dist_matrix()`  it computes a Gower's distance matrix between species from a traits matrix, trait scaling is done automatically; **WARNING:** categorical traits should be clearly defined as `ordered` or `factor` to compute the needed distance;
-- `distinctiveness()` computes the distinctiveness index (local functional rarity) over a range of species, index can be weighted by species abundances, see help for syntax;
-- `scarcity()` computes the scarcity index (local abundance rarity), **needs abundances**;
-- `uniqueness()` computes uniqueness index (regional functional rarity) (minimum functional distance to other species).
-- `agg_ind()` computes moments (mean, variance and skewness) of functional rarity metrics per community or species.
-
-Restrictedness index is not included in the package because its computation is dataset-dependent (convex hulls, actual range, grid-based estimations, etc.).
 
 ## Example vignette
 
-In addition to code example included in help of functions, an example vignette can help you use the above functions. [Click here](vignettes/rarity_indices.Rmd) to access the vignette
+In addition to code example included in help of functions, two vignettes explain how to use the package. The [functional rarity indices](vignettes/rarity_indices.Rmd) vignette explains in details the different indices and function provided; while the [sparse matrices](vignettes/sparse_matrices.Rmd) vignette shows how to use sparse matrices to gain speed in memory when computing functional rarity indices.
 
+## References
 
-## TO DO
+Rabinowitz D., Seven forms of rarity  In The Biological Aspects of Rare Plant Conservation (1981), pp. 205-217
 
-- [ ] Provide example dataset,
-- [ ] Implement a general restrictedness computation,
-- [ ] Make species as factor compatible,
-- [ ] Submit to CRAN (seems valid),
-- [ ] Rethink about the package name,
-- [ ] Provide benchmark to test influence of type of data on speed of computation,
-- [X] Look into sparse matrix packages to optimize computation (`sparseM`, `Matrix`) make a `sparseMatrix` specific implementation,
-- [ ] Add corresponding tests,
-- [ ] Warn the user about the option of sparse matrices if matrix is sparse,
-- [ ] Benchmark those functions depending on presence-absence (or abundance) matrix density (non-zero elements).
