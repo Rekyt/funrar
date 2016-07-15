@@ -126,7 +126,7 @@ sparse_and_mat = function(n_zero) {
   return(list(mat = my_mat, sparse = sparse_mat))
 }
 
-n_zero_vector = c(0, 1, 2, 4, 9, 29, 49, 99)
+n_zero_vector = c(0, 1, 2, 49, 99)
 names(n_zero_vector) = n_zero_vector
 
 all_mats = lapply(n_zero_vector, sparse_and_mat)
@@ -145,17 +145,11 @@ mat_bench = microbenchmark(
   sparse_1 = distinctiveness(all_mats$`1`$sparse, dist_mat),
   mat_2 = distinctiveness(all_mats$`2`$mat, dist_mat),
   sparse_2 = distinctiveness(all_mats$`2`$sparse, dist_mat),
-  mat_4 = distinctiveness(all_mats$`4`$mat, dist_mat),
-  sparse_4 = distinctiveness(all_mats$`4`$sparse, dist_mat),
-  mat_9 = distinctiveness(all_mats$`9`$mat, dist_mat),
-  sparse_9 = distinctiveness(all_mats$`9`$sparse, dist_mat),
-  mat_29 = distinctiveness(all_mats$`29`$mat, dist_mat),
-  sparse_29 = distinctiveness(all_mats$`29`$sparse, dist_mat),
   mat_49 = distinctiveness(all_mats$`49`$mat, dist_mat),
   sparse_49 = distinctiveness(all_mats$`49`$sparse, dist_mat),
   mat_99 = distinctiveness(all_mats$`99`$mat, dist_mat),
   sparse_99 = distinctiveness(all_mats$`99`$sparse, dist_mat),
-  times = 30)
+  times = 5)
 
 autoplot(mat_bench)
 ```
