@@ -1,6 +1,8 @@
 # `funrar` package
 
 [![Travis-CI Build Status](https://travis-ci.org/Rekyt/funrar.svg?branch=master)](https://travis-ci.org/Rekyt/funrar) [![codecov.io](https://codecov.io/github/Rekyt/funrar/coverage.svg?branch=master)](https://codecov.io/github/Rekyt/funrar?branch=master)
+![](http://www.r-pkg.org/badges/version/funrar)
+![](http://cranlogs.r-pkg.org/badges/grand-total/funrar)
 
 `funrar` is a package to compute functional rarity indices quantifies how species are rare both from a functional and an extent point of view. Following the different facets of rarity proposed by Rabinowitz 1981. See this reference for more details on Functional Rarity indices:
 
@@ -9,7 +11,13 @@ Violle C., Thuiller W., Mouquet N., Munoz F., Kraft NJ., Cadotte MW., Livingston
 
 ## Installation
 
-The package will soon be submitted to CRAN, but is not released yet, so please download the development version from github:
+The package is on CRAN, you can install it using:
+
+```r
+install.packages("funrar")
+```
+
+If you want to have the latest development version use `devtools`:
 
 ```r
 # install.packages("devtools") # If 'devtools' is not installed yet
