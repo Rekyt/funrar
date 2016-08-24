@@ -21,7 +21,7 @@ If you want to have the latest development version use `devtools`:
 
 ```r
 # install.packages("devtools") # If 'devtools' is not installed yet
-devtools::install_github("Rekyt/outlieR")
+devtools::install_github("Rekyt/funrar")
 ```
 
 ## Dependencies
