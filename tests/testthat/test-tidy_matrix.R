@@ -59,7 +59,7 @@ na_mat["d", "s4"] = NA
 
 # Tests ------------------------------------------------------------------------
 
-test_that("Conversion from tidy data frame to matrix works", {
+test_that("Conversion from tidy data.frame to matrix works", {
 
   expect_equivalent(stack_to_matrix(com_df, "species", "site"), valid_mat)
   expect_equivalent(stack_to_matrix(abund_df, "species", "site", "val"), abund_mat)
@@ -88,6 +88,31 @@ test_that("Conversion from matrix to tidy data.frame works", {
 
   expect_equal(matrix_to_stack(valid_mat, row_to_col = "species",
                               col_to_col = NULL) %>%
+                 colnames() %>%
+                 .[1],
+               "col")
+})
+
+test_that("Conversion from sparse matrix to tidy data.frame", {
+  library(Matrix)
+
+  valid_sparse = as(valid_mat, "sparseMatrix")
+
+  abund_sparse = as(abund_mat, "sparseMatrix")
+
+  expect_equivalent(matrix_to_stack(valid_sparse, row_to_col = "species",
+                                    col_to_col = "site")[, -3], com_df)
+
+  expect_equivalent(matrix_to_stack(abund_sparse, value_col = "val"), abund_df)
+
+  expect_equal(matrix_to_stack(valid_sparse, row_to_col = NULL,
+                               col_to_col = "site") %>%
+                 colnames() %>%
+                 .[2],
+               "row")
+
+  expect_equal(matrix_to_stack(valid_sparse, row_to_col = "species",
+                               col_to_col = NULL) %>%
                  colnames() %>%
                  .[1],
                "col")
