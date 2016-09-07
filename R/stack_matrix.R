@@ -70,7 +70,8 @@ stack_to_matrix = function(my_df, col_to_row, col_to_col, col_value = NULL) {
 
 #' Matrix to stacked (= tidy) data.frame
 #'
-#' From a matrix with values to a stacked (= tidy) data.frame
+#' From a matrix with values to a stacked (= tidy) data.frame, exclude NA from
+#' given data.frame.
 #'
 #' @param my_mat matrix you want to transform in stacked (= tidy) data.frame
 #'

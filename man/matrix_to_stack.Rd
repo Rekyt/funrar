@@ -27,7 +27,8 @@ a stacked (= tidy) data.frame with, a column for row names, one for
 column names and a third one for the values.
 }
 \description{
-From a matrix with values to a stacked (= tidy) data.frame
+From a matrix with values to a stacked (= tidy) data.frame, exclude NA from
+given data.frame.
 }
 \examples{
 data("aravo", package = "ade4")
