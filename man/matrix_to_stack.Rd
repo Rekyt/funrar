@@ -2,6 +2,7 @@
 % Please edit documentation in R/stack_matrix.R
 \name{matrix_to_stack}
 \alias{matrix_to_stack}
+\alias{matrix_to_tidy}
 \title{Matrix to stacked (= tidy) data.frame}
 \usage{
 matrix_to_stack(my_mat, value_col = "value",

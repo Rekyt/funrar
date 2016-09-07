@@ -22,7 +22,7 @@
 #' a \code{NA}.
 #'
 #' @seealso \code{\link[funrar]{matrix_to_stack}} for the reverse operation
-#'
+#' @aliases tidy_to_matrix
 #' @examples
 #' example = data.frame("sites" = c(rep("1", 3), rep("2", 2)),
 #'  "species" = c("A", "B", "C", "B", "D"),
@@ -32,7 +32,8 @@
 #' mat
 #'
 #' @export
-stack_to_matrix = function(my_df, col_to_row, col_to_col, col_value = NULL) {
+stack_to_matrix = tidy_to_matrix = function(my_df, col_to_row, col_to_col,
+                                            col_value = NULL) {
 
   col_names = colnames(my_df)
 
@@ -90,6 +91,7 @@ stack_to_matrix = function(my_df, col_to_row, col_to_col, col_value = NULL) {
 #' column names and a third one for the values.
 #'
 #' @seealso \code{\link[funrar]{stack_to_matrix}} for the reverse operation
+#' @aliases matrix_to_tidy
 #'
 #' @importFrom stats na.exclude
 #'
@@ -102,7 +104,7 @@ stack_to_matrix = function(my_df, col_to_row, col_to_col, col_value = NULL) {
 #' str(dat)
 #'
 #' @export
-matrix_to_stack = function(my_mat, value_col = "value",
+matrix_to_stack = matrix_to_tidy = function(my_mat, value_col = "value",
                           row_to_col = names(dimnames(my_mat))[1],
                           col_to_col = names(dimnames(my_mat))[2]) {
 
