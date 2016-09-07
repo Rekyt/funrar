@@ -114,8 +114,20 @@ matrix_to_stack = function(my_mat, value_col = "value",
   if (is.null(col_to_col)) {
     col_to_col = "col"
   }
+  if (is.matrix(my_mat)) {
 
-  tidy_df = as.data.frame(as.table(my_mat))
+    # Tidy data frame from contingency table
+    tidy_df = as.data.frame(as.table(my_mat))
+
+  } else if (is(my_mat, "sparseMatrix")) {
+    # If input matrix is a sparse matrix need to get the data.frame of non-zero
+    # values: summary gives a df with first row coordinate, col coord and value
+    summ_df = Matrix::summary(my_mat)
+
+    tidy_df = data.frame(rows_index = rownames(my_mat)[summ_df$i],
+                         cols_index = colnames(my_mat)[summ_df$j],
+                         val = summ_df$x)
+  }
 
   tidy_df = na.exclude(tidy_df)
 
