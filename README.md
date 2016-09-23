@@ -3,6 +3,9 @@
 [![Travis-CI Build Status](https://travis-ci.org/Rekyt/funrar.svg?branch=master)](https://travis-ci.org/Rekyt/funrar) [![codecov.io](https://codecov.io/github/Rekyt/funrar/coverage.svg?branch=master)](https://codecov.io/github/Rekyt/funrar?branch=master)
 ![](http://www.r-pkg.org/badges/version/funrar)
 ![](http://cranlogs.r-pkg.org/badges/grand-total/funrar)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.154729.svg)](https://doi.org/10.5281/zenodo.154729)
+
+
 
 `funrar` is a package to compute functional rarity indices, it quantifies how species are rare both from a functional and an extent point of view. Following the different facets of rarity proposed by Rabinowitz 1981. See this reference for more details on Functional Rarity indices:
 
