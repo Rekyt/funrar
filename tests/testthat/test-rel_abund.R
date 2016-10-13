@@ -1,7 +1,6 @@
 # Test file for function to convert abundance matrix to relative abundances
 # matrix
-
-context("Abundances to Relative abundances Matrix")
+context("Convert Absolute and Relative Abund Matrices")
 
 # Packages ---------------------------------------------------------------------
 library(Matrix)
@@ -34,4 +33,12 @@ test_that("Can convert from absolute to relative abundances matrices", {
 
   # On sparse matrices
   expect_equal(make_relative(sparse_abs_abund), sparse_rel_abund)
+})
+
+test_that("Convert relative abundances to absolute abundances matrices", {
+  # On regular matrices
+  expect_equal(make_absolute(rel_abund_mat), abs_abund_mat)
+
+  # On sparse matrices
+  expect_equal(make_absolute(sparse_rel_abund), sparse_abs_abund)
 })
