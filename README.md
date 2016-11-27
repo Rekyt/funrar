@@ -3,7 +3,7 @@
 [![Travis-CI Build Status](https://travis-ci.org/Rekyt/funrar.svg?branch=master)](https://travis-ci.org/Rekyt/funrar) [![codecov.io](https://codecov.io/github/Rekyt/funrar/coverage.svg?branch=master)](https://codecov.io/github/Rekyt/funrar?branch=master)
 ![](http://www.r-pkg.org/badges/version/funrar)
 ![](http://cranlogs.r-pkg.org/badges/grand-total/funrar)
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.154729.svg)](https://doi.org/10.5281/zenodo.154729)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.168055.svg)](https://doi.org/10.5281/zenodo.168055)
 
 
 
