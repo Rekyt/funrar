@@ -153,7 +153,7 @@ scarcity = function(pres_matrix) {
   scarcity_mat[scarcity_mat == 0] = NA
 
   # Compute total of nb of species per site (= per row)
-  total_sites = apply(scarcity_mat, 1, function(x) sum(x != 0, na.rm = T))
+  total_sites = apply(scarcity_mat, 1, function(x) sum(x != 0, na.rm = TRUE))
 
   # Scarcity for each per row using total abundance vector
   scarcity_mat = apply(scarcity_mat, 2, function(x) {

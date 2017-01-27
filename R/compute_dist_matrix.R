@@ -45,7 +45,8 @@
 compute_dist_matrix = function(traits_table, metric = "gower") {
 
   if (is.null(rownames(traits_table)) ||
-              rownames(traits_table) == as.character(1:nrow(traits_table))) {
+              rownames(traits_table) == as.character(seq_len(
+                nrow(traits_table)))) {
     warning(paste("No row names provided in trait table",
                   "Distinctiveness and scarcity won't be computable",
                   sep = "\n"))

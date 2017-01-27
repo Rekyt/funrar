@@ -61,7 +61,7 @@ uniqueness_stack = function(com_df, sp_col, dist_matrix) {
   diag(com_dist) = NA
 
   # Get minimum for each line
-  u_index = apply(com_dist, 1, min, na.rm = T)
+  u_index = apply(com_dist, 1, min, na.rm = TRUE)
 
   # Data frame of species name and uniqueness
   u_df = data.frame(sp = names(u_index), "Ui" = as.numeric(u_index))
@@ -132,7 +132,7 @@ uniqueness = function(pres_matrix, dist_matrix) {
   diag(com_dist) = NA
 
   # Get minimum distance for each species
-  u_index = apply(com_dist, 1, min, na.rm = T)
+  u_index = apply(com_dist, 1, min, na.rm = TRUE)
 
   # Results in a data.frame
   u_df = data.frame("species" = names(u_index), "Ui" = as.numeric(u_index))
