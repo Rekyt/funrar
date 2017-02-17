@@ -29,7 +29,8 @@ column names and a third one for the values.
 }
 \description{
 From a matrix with values to a stacked (= tidy) data.frame, exclude NA from
-given data.frame.
+given data.frame. If supplied object is not a matrix, try to coerce object
+to matrix first.
 }
 \examples{
 data("aravo", package = "ade4")
@@ -43,4 +44,3 @@ str(dat)
 \seealso{
 \code{\link[funrar]{stack_to_matrix}} for the reverse operation
 }
-

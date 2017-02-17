@@ -72,7 +72,8 @@ stack_to_matrix = tidy_to_matrix = function(my_df, col_to_row, col_to_col,
 #' Matrix to stacked (= tidy) data.frame
 #'
 #' From a matrix with values to a stacked (= tidy) data.frame, exclude NA from
-#' given data.frame.
+#' given data.frame. If supplied object is not a matrix, try to coerce object
+#' to matrix first.
 #'
 #' @param my_mat matrix you want to transform in stacked (= tidy) data.frame
 #'
@@ -104,7 +105,7 @@ stack_to_matrix = tidy_to_matrix = function(my_df, col_to_row, col_to_col,
 #' str(dat)
 #'
 #' @export
-matrix_to_stack = matrix_to_tidy = function(my_mat, value_col = "value",
+matrix_to_stack = function(my_mat, value_col = "value",
                           row_to_col = names(dimnames(my_mat))[1],
                           col_to_col = names(dimnames(my_mat))[2]) {
 
@@ -129,6 +130,17 @@ matrix_to_stack = matrix_to_tidy = function(my_mat, value_col = "value",
     tidy_df = data.frame(rows_index = rownames(my_mat)[summ_df$i],
                          cols_index = colnames(my_mat)[summ_df$j],
                          val = summ_df$x)
+
+  } else if (is(my_mat, "Matrix")) {
+    # If matrix is a dense matrix from Matrix package
+    tidy_df = as.data.frame(as.table(as.matrix(my_mat)))
+
+  } else {
+    # Try coercion if possible
+    warning("Object is not a matrix. Coercing it to matrix")
+    real_mat = as.matrix(my_mat)
+
+    tidy_df = as.data.frame(as.table(real_mat))
   }
 
   tidy_df = na.exclude(tidy_df)
@@ -142,3 +154,8 @@ matrix_to_stack = matrix_to_tidy = function(my_mat, value_col = "value",
 
   return(tidy_df)
 }
+
+
+#' @export
+#' @aliases matrix_to_stack
+matrix_to_tidy = matrix_to_stack

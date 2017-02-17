@@ -93,13 +93,16 @@ test_that("Conversion from matrix to tidy data.frame works", {
                "col")
 })
 
-test_that("Conversion from sparse matrix to tidy data.frame", {
+test_that("Conversion from sparse & dense matrices to tidy data.frame", {
   library(Matrix)
 
   valid_sparse = as(valid_mat, "sparseMatrix")
+  valid_dens   = as(valid_mat, "Matrix")
 
   abund_sparse = as(abund_mat, "sparseMatrix")
+  abund_dens   = as(abund_mat, "Matrix")
 
+  # Test for sparse matrices
   expect_equivalent(matrix_to_stack(valid_sparse, row_to_col = "species",
                                     col_to_col = "site")[, -3], com_df)
 
@@ -116,4 +119,35 @@ test_that("Conversion from sparse matrix to tidy data.frame", {
                  colnames() %>%
                  .[1],
                "col")
+
+
+  # Test for dense matrices
+  expect_equivalent(matrix_to_stack(valid_dens, row_to_col = "species",
+                                    col_to_col = "site")[, -3], com_df)
+
+  expect_equivalent(matrix_to_stack(abund_dens, value_col = "val"), abund_df)
+
+  expect_equal(matrix_to_stack(valid_dens, row_to_col = NULL,
+                               col_to_col = "site") %>%
+                 colnames() %>%
+                 .[2],
+               "row")
+
+  expect_equal(matrix_to_stack(valid_dens, row_to_col = "species",
+                               col_to_col = NULL) %>%
+                 colnames() %>%
+                 .[1],
+               "col")
+})
+
+test_that("Conversion works only for matrices or coercible objects",{
+
+  valid_df = as.data.frame(valid_mat)
+
+  expect_warning(matrix_to_stack(valid_df),
+                 regexp = "Object is not a matrix. Coercing it to matrix",
+                 fixed = TRUE)
+
+  expect_error(suppressWarnings(matrix_to_stack(as.formula(mpg ~ cyl))))
+
 })
