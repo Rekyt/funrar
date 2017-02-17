@@ -41,4 +41,3 @@ head(ri_df)
 \code{\link[funrar]{restrictedness}},
 \code{\link[funrar]{uniqueness_stack}}
 }
-

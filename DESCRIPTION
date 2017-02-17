@@ -21,7 +21,7 @@ Imports:
     stats
 URL: https://github.com/Rekyt/funrar
 BugReports: https://github.com/Rekyt/funrar/issues
-RoxygenNote: 5.0.1
+RoxygenNote: 6.0.0
 Suggests:
     ade4,
     ggplot2,

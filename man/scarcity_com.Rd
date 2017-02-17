@@ -35,4 +35,3 @@ about the index.
 scarcity metric;
 \code{\link[funrar]{distinctiveness_com}}
 }
-

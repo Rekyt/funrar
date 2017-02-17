@@ -51,4 +51,3 @@ on the scarcity metric;
 \code{\link[funrar]{restrictedness}},
 \code{\link[funrar]{uniqueness}}
 }
-

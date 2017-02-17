@@ -52,4 +52,3 @@ ri = restrictedness(mat)
 head(ri)
 
 }
-

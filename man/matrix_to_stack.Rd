@@ -30,7 +30,7 @@ column names and a third one for the values.
 \description{
 From a matrix with values to a stacked (= tidy) data.frame, exclude NA from
 given data.frame. If supplied object is not a matrix, try to coerce object
-to matrix first.
+to matrix first. \code{matrix_to_tidy()} is an alias of this function.
 }
 \examples{
 data("aravo", package = "ade4")

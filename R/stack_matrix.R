@@ -4,6 +4,7 @@
 #' Stacked (= tidy) data.frame to matrix
 #'
 #' Passes from a stacked (= tidy) data.frame to a matrix.
+#' \code{tidy_to_matrix()} is an alias of this function.
 #'
 #' @param my_df data.frame you want to transform in matrix
 #'
@@ -73,7 +74,7 @@ stack_to_matrix = tidy_to_matrix = function(my_df, col_to_row, col_to_col,
 #'
 #' From a matrix with values to a stacked (= tidy) data.frame, exclude NA from
 #' given data.frame. If supplied object is not a matrix, try to coerce object
-#' to matrix first.
+#' to matrix first. \code{matrix_to_tidy()} is an alias of this function.
 #'
 #' @param my_mat matrix you want to transform in stacked (= tidy) data.frame
 #'
@@ -105,7 +106,7 @@ stack_to_matrix = tidy_to_matrix = function(my_df, col_to_row, col_to_col,
 #' str(dat)
 #'
 #' @export
-matrix_to_stack = function(my_mat, value_col = "value",
+matrix_to_stack = matrix_to_tidy = function(my_mat, value_col = "value",
                           row_to_col = names(dimnames(my_mat))[1],
                           col_to_col = names(dimnames(my_mat))[2]) {
 
@@ -154,8 +155,3 @@ matrix_to_stack = function(my_mat, value_col = "value",
 
   return(tidy_df)
 }
-
-
-#' @export
-#' @aliases matrix_to_stack
-matrix_to_tidy = matrix_to_stack

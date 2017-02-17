@@ -27,6 +27,7 @@ a \code{NA}.
 }
 \description{
 Passes from a stacked (= tidy) data.frame to a matrix.
+\code{tidy_to_matrix()} is an alias of this function.
 }
 \examples{
 example = data.frame("sites" = c(rep("1", 3), rep("2", 2)),
@@ -40,4 +41,3 @@ mat
 \seealso{
 \code{\link[funrar]{matrix_to_stack}} for the reverse operation
 }
-

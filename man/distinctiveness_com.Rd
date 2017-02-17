@@ -39,9 +39,9 @@ This function is meant for internal uses mostly, thus it does not include any
 tests on inputs and may fail unexpectedly. Please use
 \code{\link[funrar]{distinctiveness_stack}} to avoid input errors.
 }
+
 \seealso{
 \code{\link[funrar]{scarcity_com}},
 \code{vignette("rarity_indices", package = "funrar")} and
 \code{link[funrar]{distinctiveness}} Details section for detail on the index
 }
-

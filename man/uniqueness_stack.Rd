@@ -50,4 +50,3 @@ uniqueness metric;
 \code{\link[funrar]{restrictedness_stack}},
 \code{\link[funrar]{scarcity_stack}}
 }
-

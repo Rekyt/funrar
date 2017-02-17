@@ -56,4 +56,3 @@ head(ui)
 \code{\link[funrar]{distinctiveness}}, \code{\link[funrar]{restrictedness}},
 \code{\link[funrar]{scarcity}}
 }
-

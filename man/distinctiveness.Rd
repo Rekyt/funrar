@@ -50,6 +50,7 @@ The Functional Distinctiveness of a species is the average functional
    \code{Matrix} package.
    (see \code{vignette("sparse_matrices", package = "funrar")})
 }
+
 \examples{
 data("aravo", package = "ade4")
 # Site-species matrix
@@ -64,4 +65,3 @@ di = distinctiveness(pres_matrix = mat, dist_matrix = dist_mat)
 di[1:5, 1:5]
 
 }
-

@@ -52,4 +52,3 @@ scarcity metric;
 \code{\link[funrar]{restrictedness_stack}},
 \code{\link[funrar]{uniqueness_stack}}
 }
-

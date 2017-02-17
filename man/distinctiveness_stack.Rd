@@ -61,4 +61,3 @@ head(di_df)
 \code{\link[funrar]{restrictedness_stack}};
 \code{\link[funrar]{distinctiveness}} Details section for detail on the index
 }
-

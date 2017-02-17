@@ -17,4 +17,3 @@ at a given site). This function works also with sparse matrices.
 \seealso{
 \code{\link[funrar]{make_absolute}} for the reverse operation
 }
-

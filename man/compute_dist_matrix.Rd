@@ -49,4 +49,3 @@ dist_mat = compute_dist_matrix(trait[, -1])
 \code{\link[cluster]{daisy}} which this function wraps,
     \code{\link[stats]{dist}}
 }
-

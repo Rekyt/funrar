@@ -16,4 +16,3 @@ Convert the input relative abundances matrix to an abundance matrix
 \seealso{
 \code{\link[funrar]{make_relative}} for the reverse operation
 }
-

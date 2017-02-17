@@ -45,4 +45,3 @@ matrix.
    \code{\link[funrar]{restrictedness}},
    \code{\link[funrar]{scarcity}}
 }
-
