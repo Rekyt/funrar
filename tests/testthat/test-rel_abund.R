@@ -25,6 +25,19 @@ rel_abund_mat = matrix(c(1,  1/3, 1/4, NA,
 
 sparse_rel_abund = as(rel_abund_mat, "sparseMatrix")
 
+# Corresponding presence-absence matrix
+# With NA
+pres_mat = abs_abund_mat
+
+pres_mat[!is.na(abs_abund_mat)] = 1
+
+# Without NA
+pres_zero_mat = pres_mat
+pres_zero_mat[is.na(pres_zero_mat)] = 0
+
+sparse_pres = as(pres_mat, "sparseMatrix")
+
+
 # Tests ------------------------------------------------------------------------
 
 test_that("Can convert from absolute to relative abundances matrices", {
@@ -41,4 +54,15 @@ test_that("Convert relative abundances to absolute abundances matrices", {
 
   # On sparse matrices
   expect_equal(make_absolute(sparse_rel_abund), sparse_abs_abund)
+})
+
+test_that("Test if matrix has relative abundances or presence-absence", {
+  expect_warning(is_relative(abs_abund_mat))
+  expect_warning(is_relative(sparse_abund_mat))
+
+  expect_true(is_relative(rel_abund_mat))
+  expect_true(is_relative(sparse_rel_abund))
+  expect_true(is_relative(pres_mat))
+  expect_true(is_relative(pres_zero_mat))
+  expect_true(is_relative(sparse_pres))
 })
