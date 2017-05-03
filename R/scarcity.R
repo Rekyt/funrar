@@ -149,6 +149,12 @@ scarcity = function(pres_matrix) {
 
   scarcity_mat = pres_matrix
 
+  if (!is_relative(pres_matrix)) {
+    warning("Provided object may not contain relative abundances nor ",
+            "presence-absence\n",
+            "Have a look at the make_relative() function if it is the case")
+  }
+
   # Species with no relative abundance get a scarcity of 0
   scarcity_mat[scarcity_mat == 0] = NA
 
