@@ -63,3 +63,38 @@ make_absolute = function(rel_abund_matrix) {
 
   return(abs_matrix)
 }
+
+#' Tell if matrix or data.frame has relative abundances
+#'
+#' From an abundance/presence-absence matrix or data.frame tells if it contains
+#' relative abundances or absolute abundances. Checks if all abundances are
+#' between 1 and 0 but \strong{never checks sum of abundances per community}.
+#'
+#' @param given_obj abundance or presence-absence matrix, with sites in rows and
+#'                  species in columns, or tidy community data frame
+#'
+#' @param abund name of the column of the provided object that contains the
+#'              abundances
+#'
+#' @seealso \code{\link[funrar]{make_relative}} to transform matrix into a
+#'   relative abundance matrix.
+#'
+is_relative = function(given_obj, abund = NULL) {
+
+  is_rel = FALSE
+
+  if (is.matrix(given_obj) | is(given_obj, "sparseMatrix")) {
+    values = na.omit(unique(as.vector(given_obj)))
+  } else if (is.data.frame(given_obj) & !is.null(abund) & is.character(abund)) {
+    values = na.omit(unique(given_obj[[abund]]))
+  }
+
+  max_val = max(values)
+  min_val = min(values)
+
+  if (max_val <= 1 & min_val >= 0) {
+    is_rel = TRUE
+  }
+
+  return(is_rel)
+}

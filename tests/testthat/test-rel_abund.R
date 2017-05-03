@@ -8,7 +8,7 @@ library(Matrix)
 # Common objects ---------------------------------------------------------------
 
 # Abundance Matrix to test
-abs_abund_mat = matrix(c(1, 1, 1, NA,
+abs_abund_mat = matrix(c(4, 1, 1, NA,
                          NA, rep(1, 3),
                          NA, 1, 1, NA,
                          NA, NA, 1, 1),
@@ -38,6 +38,19 @@ pres_zero_mat[is.na(pres_zero_mat)] = 0
 sparse_pres = as(pres_mat, "sparseMatrix")
 
 
+# Corresponding data frames
+dim_names = list(sites = paste0("s", 1:4), species = letters[1:4])
+
+dimnames(abs_abund_mat) = dim_names
+dimnames(rel_abund_mat) = dim_names
+dimnames(pres_zero_mat) = dim_names
+dimnames(pres_mat)      = dim_names
+
+abs_abund_df = matrix_to_tidy(abs_abund_mat)
+rel_abund_df = matrix_to_tidy(rel_abund_mat)
+pres_zero_df = matrix_to_tidy(pres_zero_mat)
+pres_df  = matrix_to_tidy(pres_mat)
+
 # Tests ------------------------------------------------------------------------
 
 test_that("Can convert from absolute to relative abundances matrices", {
@@ -50,19 +63,29 @@ test_that("Can convert from absolute to relative abundances matrices", {
 
 test_that("Convert relative abundances to absolute abundances matrices", {
   # On regular matrices
-  expect_equal(make_absolute(rel_abund_mat), abs_abund_mat)
+  expect_equal(make_absolute(rel_abund_mat), pres_mat)
 
   # On sparse matrices
-  expect_equal(make_absolute(sparse_rel_abund), sparse_abs_abund)
+  expect_equal(make_absolute(sparse_rel_abund), sparse_pres)
 })
 
-test_that("Test if matrix has relative abundances or presence-absence", {
-  expect_warning(is_relative(abs_abund_mat))
-  expect_warning(is_relative(sparse_abund_mat))
+test_that(paste("Test if matrix or data.frame has relative abundances or",
+                "presence-absence"), {
+
+  # Matrices
+  expect_false(is_relative(abs_abund_mat))
+  expect_false(is_relative(sparse_abs_abund))
 
   expect_true(is_relative(rel_abund_mat))
   expect_true(is_relative(sparse_rel_abund))
   expect_true(is_relative(pres_mat))
   expect_true(is_relative(pres_zero_mat))
   expect_true(is_relative(sparse_pres))
+
+  # Data Frames
+  expect_false(is_relative(abs_abund_df, "value"))
+
+  expect_true(is_relative(rel_abund_df, "value"))
+  expect_true(is_relative(pres_zero_df, "value"))
+  expect_true(is_relative(pres_df, "value"))
 })
