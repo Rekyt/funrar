@@ -119,7 +119,6 @@ test_that("Invalid input types do not work", {
 
 test_that("Correct Di computation with different comm. without abundance",{
 
-
   # Good messages and warnings
   expect_message(distinctiveness_stack(com_df, "species", "site",
                                        abund = NULL, dist_mat))
@@ -203,7 +202,6 @@ test_that("Correct Uniqueness computation", {
 
 # Test for Scarcity ------------------------------------------------------------
 
-
 test_that("Correct Scarcity computation", {
 
   # Single community scarcity correct computation
@@ -279,3 +277,21 @@ test_that("Funrar runs smoothly", {
   expect_equal(length(funrar_stack(com_df_ex, "species", "site", "abund",
                                    dist_mat)), 4)
 })
+
+test_that("funrar functions warns if object does not have relative abundances",
+          {
+            abs_mat = valid_mat
+            abs_mat[[1]] = 4
+
+            abs_df = matrix_to_stack(abs_mat)
+
+            expect_warning(distinctiveness(abs_mat, dist_mat),
+                           "^Provided object may not contain relative abund.*")
+
+            expect_warning(distinctiveness_stack(abs_df, "species", "site",
+                                                 "value", dist_mat),
+                           "^Provided object may not contain relative abund.*")
+
+            expect_warning(scarcity(abs_mat),
+                           "^Provided object may not contain relative abund.*")
+          })
