@@ -9,7 +9,7 @@
 
 `funrar` is a package to compute functional rarity indices, it quantifies how species are rare both from a functional and an extent point of view. Following the different facets of rarity proposed by Rabinowitz 1981. See this reference for more details on Functional Rarity indices:
 
-> Violle C., Thuiller W., Mouquet N., Munoz F., Kraft NJ., Cadotte MW., Livingstone SW., Mouillot D., Functional rarity: the ecology of outliers. *Trends in Ecology and Evolution* **accepted**
+> Violle C., Thuiller W., Mouquet N., Munoz F., Kraft NJB, Cadotte MW, Livingstone SW, Mouillot D., Functional Rarity: The Ecology of Outliers, *Trends in Ecology & Evolution*, Volume 32, Issue 5, May 2017, Pages 356-367, ISSN 0169-5347, https://doi.org/10.1016/j.tree.2017.02.002.
 
 
 ## Installation
