@@ -1,6 +1,6 @@
 Package: funrar
 Title: Functional Rarity Indices Computation
-Version: 1.0.2
+Version: 1.0.3
 Authors@R: c(
   person("Matthias", "Grenié", email = "matthias.grenie@gmail.com", role = c("aut", "cre")),
   person("Pierre", "Denelle", email = "pierre.denelle@cefe.cnrs.fr", role = "aut"),
@@ -21,7 +21,7 @@ Imports:
     stats
 URL: https://github.com/Rekyt/funrar
 BugReports: https://github.com/Rekyt/funrar/issues
-RoxygenNote: 6.0.0
+RoxygenNote: 6.0.1
 Suggests:
     ade4,
     ggplot2,
