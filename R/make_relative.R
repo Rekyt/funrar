@@ -79,6 +79,7 @@ make_absolute = function(rel_abund_matrix) {
 #' @seealso \code{\link[funrar]{make_relative}} to transform matrix into a
 #'   relative abundance matrix.
 #'
+#' @importFrom stats na.omit
 is_relative = function(given_obj, abund = NULL) {
 
   is_rel = FALSE

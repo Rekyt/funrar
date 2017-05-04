@@ -62,7 +62,8 @@ na_mat["d", "s4"] = NA
 test_that("Conversion from tidy data.frame to matrix works", {
 
   expect_equivalent(stack_to_matrix(com_df, "species", "site"), valid_mat)
-  expect_equivalent(stack_to_matrix(abund_df, "species", "site", "val"), abund_mat)
+  expect_equivalent(stack_to_matrix(abund_df, "species", "site", "val"),
+                    abund_mat)
 
   expect_error(stack_to_matrix(com_df, "speies", "site"),
                label = "Column 'speies' is not in data.frame")

@@ -58,18 +58,15 @@ test_that("Messages show up with wrong input", {
   # Bigger site-species matrix
   expect_message(
     check_bigger_pres(pres_mat, dist_mat[1:2, 1:2]),
-    regexp = paste("More species in site-species matrix than in distance matrix\n",
-                   "Taking subset of site-species matrix", sep = "")
+    regexp = "^More species in site-species matrix than in distance.*"
   )
   expect_message(
     check_bigger_pres(pres_mat, dist_mat[1:2,]),
-    regexp = paste("More species in site-species matrix than in distance matrix\n",
-                   "Taking subset of site-species matrix", sep = "")
+    regexp = "^More species in site-species matrix than in distance.*"
   )
   expect_message(
     check_bigger_pres(pres_mat, dist_mat[, 1:2]),
-    regexp = paste("More species in site-species matrix than in distance matrix\n",
-                   "Taking subset of site-species matrix", sep = "")
+    regexp = "^More species in site-species matrix than in distance matrix.*"
   )
 
 })
@@ -141,13 +138,12 @@ test_that("Check for _stack() and _com() functions", {
   # Check number of species between distance matrix and community data.frame
   expect_message(
     check_n_sp_df(com_df, "species", dist_mat[1:2,]),
-    regexp = paste("More species in community data.frame than in distance matrix\n",
-                   "Taking subset of community data.frame", sep = "")
+    regexp = "^More species in community data.frame than in distance matrix.*"
   )
   expect_message(
     check_n_sp_df(com_df[1:2,], "species", dist_mat),
-    regexp = paste("More species in distance matrix than in community data.frame",
-                   "Taking subset of distance matrix", sep = "\n")
+    regexp = paste0("More species in distance matrix than in community data",
+                    ".frame\n", "Taking subset of distance matrix")
   )
 })
 
@@ -158,7 +154,8 @@ test_that("Full checks work", {
   expect_silent(full_df_checks(com_df, "species", "site"))
   expect_silent(full_df_checks(com_df, "species", "site", "pres"))
   expect_silent(full_df_checks(com_df, "species", "site", "pres", dist_mat))
-  expect_silent(full_df_checks(com_df, "species", "site", dist_matrix =  dist_mat))
+  expect_silent(full_df_checks(com_df, "species", "site",
+                               dist_matrix = dist_mat))
 
   expect_error(full_matrix_checks("", dist_mat))
   expect_error(full_matrix_checks(pres_mat, ""))

@@ -176,11 +176,11 @@ check_n_sp_df = function(com_df, sp_col, dist_matrix) {
                length(unique(rownames(dist_matrix))))
 
   if (df_sp > mat_sp) {
-    message(paste("More species in community data.frame than in distance matrix\n",
-                  "Taking subset of community data.frame", sep = ""))
+    message("More species in community data.frame than in distance matrix\n",
+            "Taking subset of community data.frame")
   } else if (df_sp < mat_sp) {
-    message(paste("More species in distance matrix than in community data.frame",
-          "Taking subset of distance matrix", sep = "\n"))
+    message("More species in distance matrix than in community data.frame\n",
+            "Taking subset of distance matrix")
   }
 }
 
