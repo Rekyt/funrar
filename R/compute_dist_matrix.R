@@ -22,17 +22,32 @@
 #'
 #' @return
 #' A functional distance matrix, \strong{column} and \strong{row} names follow
-#' \strong{species name} from \code{trait_table} row names.
+#' \strong{species name} from \code{traits_table} row names.
 #'
 #'
 #' @details The functional distance matrix can be computed using any type of
 #'     distance metric. When traits are both quantitative and qualitative Gower's
-#'     distance can be used. Otherwise, any other distance metric (Euclidean,
-#'     Manhattan, Minkowski) can be used - as long as the rows and the columns
-#'     are named following the species.
+#'     (Gower, 1971; Podani, 1999) distance can be used. Otherwise, any other
+#'     distance metric (Euclidean, Manhattan, Minkowski) can be used - as long
+#'     as the rows and the columns are named following the species. When using
+#'     mixed data consider also Gower's distance extension by Pavoine et al.
+#'     (2009).
 #'
-#' @seealso \code{\link[cluster]{daisy}} which this function wraps,
-#'     \code{\link[stats]{dist}}
+#' @references
+#'     Gower, J.C. (1971) A general coefficient of similarity and some of its
+#'     properties. Biometrics, 857–871.
+#'
+#'     Podani, J. (1999) Extending Gower’s general coefficient of similarity
+#'     to ordinal characters. Taxon, 331–340.
+#'
+#'     Pavoine, S., Vallet, J., Dufour, A.-B., Gachet, S., & Daniel, H. (2009)
+#'     On the challenge of treating various types of variables: application for
+#'     improving the measurement of functional diversity. Oikos, 118, 391–402.
+#'
+#'
+#' @seealso \code{\link[cluster]{daisy}} which this function wraps, base
+#'     \code{\link[stats]{dist}} or \code{\link[ade4]{dist.ktab}} for Pavoine et
+#'     al. (2009) extension of Gower's distance.
 #'
 #' @examples
 #' set.seed(1)  # For reproducibility
