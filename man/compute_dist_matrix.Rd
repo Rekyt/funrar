@@ -5,7 +5,8 @@
 \alias{distance_matrix}
 \title{Functional Distance Matrix}
 \usage{
-compute_dist_matrix(traits_table, metric = "gower")
+compute_dist_matrix(traits_table, metric = "gower", center = FALSE,
+  scale = FALSE)
 }
 \arguments{
 \item{traits_table}{a data.sframe of traits with species in row and traits in
@@ -13,7 +14,13 @@ columns, \strong{row names} should be \strong{species names},}
 
 \item{metric}{character vector in list \code{'gower'}, \code{'manhattan'},
 \code{'euclidean'} defining the type of distance to use (see \code{\link[cluster]{daisy}}),
-see Details section.}
+see Details section,}
+
+\item{center}{logical that defines if traits should be centered (only in the
+case of \code{'euclidean'} distance)}
+
+\item{scale}{logical that defines if traits should be scaled (only in the
+case of \code{'euclidean'} distance)}
 }
 \value{
 A functional distance matrix, \strong{column} and \strong{row} names follow

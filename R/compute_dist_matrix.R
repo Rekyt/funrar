@@ -11,7 +11,13 @@
 #'
 #' @param metric character vector in list \code{'gower'}, \code{'manhattan'},
 #' \code{'euclidean'} defining the type of distance to use (see \code{\link[cluster]{daisy}}),
-#' see Details section.
+#' see Details section,
+#'
+#' @param center logical that defines if traits should be centered (only in the
+#'               case of \code{'euclidean'} distance)
+#'
+#' @param scale logical that defines if traits should be scaled (only in the
+#'              case of \code{'euclidean'} distance)
 #'
 #'
 #' @return
@@ -42,7 +48,8 @@
 #' @aliases distance_matrix
 #' @importFrom dplyr %>%
 #' @export
-compute_dist_matrix = function(traits_table, metric = "gower") {
+compute_dist_matrix = function(traits_table, metric = "gower", center = FALSE,
+                               scale = FALSE) {
 
   if (is.null(rownames(traits_table)) ||
               rownames(traits_table) == as.character(seq_len(
@@ -52,7 +59,17 @@ compute_dist_matrix = function(traits_table, metric = "gower") {
                   sep = "\n"))
   }
 
-  # Use Gower's distance to compute traits distance
+  if (metric == "euclidean" & (center | scale)) {
+    if (all(vapply(traits_table, is.numeric, TRUE))) {
+      traits_table = scale(traits_table, center, scale)
+    } else {
+      stop("Non-numeric traits provided cannot scale nor center")
+    }
+  } else if (metric != "euclidean" & (center | scale)) {
+    stop("'", metric, "' distance cannot be scaled nor centered")
+  }
+
+  # Use given distance to compute traits distance
   dist_matrix = cluster::daisy(traits_table, metric = metric) %>%
     as.matrix()
 

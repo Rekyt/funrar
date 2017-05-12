@@ -99,3 +99,56 @@ test_that("Different distances method give consistent results", {
   expect_equal(def_mat, gow_mat)
   expect_equal(gow_mat, other_gow_dist)
 })
+
+test_that("Scaling works with continuous traits", {
+
+  trait_df = data.frame(trait1 = c(rep(1, 2), rep(2, 2)),
+                        trait2 = c(rep(-1, 2), rep(-2, 2)))
+
+  rownames(trait_df) = paste0("sp", 1:4)
+
+  center_scale_dist = as.matrix(dist(scale(trait_df, TRUE, TRUE)))
+  center_dist       = as.matrix(dist(scale(trait_df, TRUE, FALSE)))
+  scale_dist        = as.matrix(dist(scale(trait_df, FALSE, TRUE)))
+
+  expect_equivalent(compute_dist_matrix(trait_df, center = TRUE, scale = TRUE,
+                                        metric = "euclidean"),
+                    center_scale_dist)
+
+  expect_equivalent(compute_dist_matrix(trait_df, center = TRUE, scale = FALSE,
+                                        metric = "euclidean"),
+                    center_dist)
+
+  expect_equivalent(compute_dist_matrix(trait_df, center = TRUE, scale = TRUE,
+                                        metric = "euclidean"),
+                    center_scale_dist)
+
+  trait_df2 = trait_df
+  trait_df2$trait3 = letters[1:4]
+
+  # Non-gower distance for centering and scaling
+  expect_error(compute_dist_matrix(trait_df, center = TRUE, scale = TRUE),
+               "'gower' distance cannot be scaled nor centered", fixed = TRUE)
+
+  expect_error(compute_dist_matrix(trait_df, center = FALSE, scale = TRUE),
+               "'gower' distance cannot be scaled nor centered", fixed = TRUE)
+
+  expect_error(compute_dist_matrix(trait_df, center = TRUE, scale = FALSE),
+               "'gower' distance cannot be scaled nor centered", fixed = TRUE)
+
+  # Non-numeric distance matrices scaled
+  expect_error(compute_dist_matrix(trait_df2, center = TRUE, scale = TRUE,
+                                   metric = "euclidean"),
+               "Non-numeric traits provided cannot scale nor center",
+               fixed = TRUE)
+
+  expect_error(compute_dist_matrix(trait_df2, center = FALSE, scale = TRUE,
+                                   metric = "euclidean"),
+               "Non-numeric traits provided cannot scale nor center",
+               fixed = TRUE)
+
+  expect_error(compute_dist_matrix(trait_df2, center = TRUE, scale = FALSE,
+                                   metric = "euclidean"),
+               "Non-numeric traits provided cannot scale nor center",
+               fixed = TRUE)
+})
