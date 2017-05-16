@@ -116,6 +116,13 @@ uniqueness_stack = function(com_df, sp_col, dist_matrix) {
 #' ui = uniqueness(mat, dist_mat)
 #' head(ui)
 #'
+#' # Computing uniqueness for each community
+#' com_ui = apply(mat, 1,
+#'                 function(x, dist_m) {
+#'                     smaller_com = x[x > 0 & !is.na(x)]
+#'                     uniqueness(t(as.matrix(smaller_com)), dist_m)
+#'                 }, dist_m = dist_mat)
+#'
 #' @export
 uniqueness = function(pres_matrix, dist_matrix) {
 
