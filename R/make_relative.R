@@ -32,38 +32,6 @@ make_relative = function(abund_matrix) {
   return(rel_abund_matrix)
 }
 
-#' Abundance matrix from relative abundances matrix
-#'
-#' Convert the input relative abundances matrix to an abundance matrix
-#'
-#' @param rel_abund_matrix a relative abundance matrix (proportion of individuals
-#'                         of a given species at a given site)
-#'
-#' @seealso \code{\link[funrar]{make_relative}} for the reverse operation
-#'
-#' @export
-make_absolute = function(rel_abund_matrix) {
-
-  # Compute absolute matrix
-  if (requireNamespace("Matrix", quietly = TRUE) &
-      is(rel_abund_matrix, "sparseMatrix")) {
-
-    sites_abund = Matrix::rowSums((rel_abund_matrix != 0) &
-                                    (!is.na(rel_abund_matrix)), na.rm = TRUE)
-
-    abs_matrix = rel_abund_matrix * sites_abund
-  } else {
-    # Compute total site abundances
-    sites_abund = rowSums((rel_abund_matrix != 0) &
-                            (!is.na(rel_abund_matrix)), na.rm = TRUE)
-
-    # Divide each individual abundace by total site abundance
-    abs_matrix = sweep(rel_abund_matrix, 1, sites_abund, "*")
-  }
-
-  return(abs_matrix)
-}
-
 #' Tell if matrix or data.frame has relative abundances
 #'
 #' From an abundance/presence-absence matrix or data.frame tells if it contains
