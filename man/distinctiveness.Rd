@@ -64,4 +64,12 @@ dist_mat = compute_dist_matrix(tra)
 di = distinctiveness(pres_matrix = mat, dist_matrix = dist_mat)
 di[1:5, 1:5]
 
+# Compute distinctiveness for all species in the regional pool
+# i.e., with all the species in all the communities
+reg_pool = matrix(1, ncol = ncol(mat))
+colnames(reg_pool) = colnames(mat)
+row.names(reg_pool) = c("Regional_pool")
+
+reg_di = distinctiveness(reg_pool, dist_mat)
+
 }

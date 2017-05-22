@@ -6,8 +6,6 @@
 #'
 #' @param abund_matrix abundance matrix, with sites in rows and species in columns
 #'
-#' @seealso \code{\link[funrar]{make_absolute}} for the reverse operation
-#'
 #' @export
 make_relative = function(abund_matrix) {
 

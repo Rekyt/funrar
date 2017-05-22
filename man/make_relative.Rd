@@ -14,14 +14,3 @@ From an abundance matrix (numbers of individuals of a given species at a site)
 returns a relative abundance matrix (proportion of individuals of a given species
 at a given site). This function works also with sparse matrices.
 }
-\seealso{
-\code{\link[funrar]{make_absolute}} for the reverse operation
-}
-\examples{
-data("aravo", package = "ade4")
-# Site-species matrix
-mat = as.matrix(aravo$spe)
-# Converting abundances into relative abundances
-rel_mat = make_relative(mat)
-
-}

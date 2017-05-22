@@ -61,14 +61,6 @@ test_that("Can convert from absolute to relative abundances matrices", {
   expect_equal(make_relative(sparse_abs_abund), sparse_rel_abund)
 })
 
-test_that("Convert relative abundances to absolute abundances matrices", {
-  # On regular matrices
-  expect_equal(make_absolute(rel_abund_mat), pres_mat)
-
-  # On sparse matrices
-  expect_equal(make_absolute(sparse_rel_abund), sparse_pres)
-})
-
 test_that(paste("Test if matrix or data.frame has relative abundances or",
                 "presence-absence"), {
 
