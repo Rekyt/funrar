@@ -4,7 +4,17 @@
 #' returns a relative abundance matrix (proportion of individuals of a given species
 #' at a given site). This function works also with sparse matrices.
 #'
-#' @param abund_matrix abundance matrix, with sites in rows and species in columns
+#' @param abund_matrix abundance matrix, with sites in rows and species in
+#'                     columns.
+#'
+#' @examples
+#' data("aravo", package = "ade4")
+#'
+#' # Site-species matrix
+#' mat = as.matrix(aravo$spe)
+#' head(mat)[, 1:5]  # Has absolute abundances
+#' rel_mat = make_relative(mat)
+#' head(rel_mat)  # Relative abundances
 #'
 #' @export
 make_relative = function(abund_matrix) {
@@ -44,6 +54,18 @@ make_relative = function(abund_matrix) {
 #'
 #' @seealso \code{\link[funrar]{make_relative}} to transform matrix into a
 #'   relative abundance matrix.
+#'
+#' @examples
+#' data("aravo", package = "ade4")
+#'
+#'
+#' # Site-species matrix
+#' mat = as.matrix(aravo$spe)
+#' head(mat)[, 1:5]  # Has absolute abundances
+#' rel_mat = make_relative(mat)
+#' head(rel_mat)  # Relative abundances
+#' is_relative(mat)      # FALSE
+#' is_relative(rel_mat)  # TRUE
 #'
 #' @importFrom stats na.omit
 is_relative = function(given_obj, abund = NULL) {

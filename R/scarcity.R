@@ -25,10 +25,16 @@
 #' @return the same data.frame with the additional \strong{Si} column giving
 #'    scarcity values for each species
 #'
+#' @section Caution:
+#' This function is meant for internal uses mostly, thus it does not include any
+#' tests on inputs and may fail unexpectedly. Please use
+#' \code{\link[funrar]{scarcity_stack}} to avoid input errors.
+#'
 #' @seealso \code{\link[funrar]{scarcity}} and
 #' \code{vignette("rarity_indices", package = "funrar")} for details on the
 #' scarcity metric;
-#' \code{\link[funrar]{distinctiveness_com}}
+#' \code{\link[funrar]{distinctiveness_com}} to compute distinctiveness on a
+#' single community
 #'
 #' @export
 scarcity_com = function(com_df, sp_col, abund) {
@@ -70,7 +76,9 @@ scarcity_com = function(com_df, sp_col, abund) {
 #' data("aravo", package = "ade4")
 #'
 #' # Site-species matrix converted into data.frame
-#' mat = as.matrix(aravo$spe); dat = matrix_to_stack(mat, "value", "site", "species")
+#' mat = as.matrix(aravo$spe)
+#' mat = make_relative(mat)
+#' dat = matrix_to_stack(mat, "value", "site", "species")
 #' dat$site = as.character(dat$site)
 #' dat$species = as.character(dat$species)
 #'
@@ -137,6 +145,7 @@ scarcity_stack = function(com_df, sp_col, com, abund) {
 #' data("aravo", package = "ade4")
 #' # Site-species matrix
 #' mat = as.matrix(aravo$spe)
+#' mat = make_relative(mat)
 #'
 #' si = scarcity(pres_matrix = mat)
 #' si[1:5, 1:5]

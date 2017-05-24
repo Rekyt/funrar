@@ -29,9 +29,17 @@ vignette included in the package
 (type \code{vignette("rarity_indices", package = "funrar")}) for details
 about the index.
 }
+\section{Caution}{
+
+This function is meant for internal uses mostly, thus it does not include any
+tests on inputs and may fail unexpectedly. Please use
+\code{\link[funrar]{scarcity_stack}} to avoid input errors.
+}
+
 \seealso{
 \code{\link[funrar]{scarcity}} and
 \code{vignette("rarity_indices", package = "funrar")} for details on the
 scarcity metric;
-\code{\link[funrar]{distinctiveness_com}}
+\code{\link[funrar]{distinctiveness_com}} to compute distinctiveness on a
+single community
 }

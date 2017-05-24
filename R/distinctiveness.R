@@ -109,6 +109,7 @@ distinctiveness_com = function(com_df, sp_col, abund = NULL, dist_matrix) {
 #'
 #' # Site-species matrix converted into data.frame
 #' mat = as.matrix(aravo$spe)
+#' mat = make_relative(mat)
 #' dat = matrix_to_stack(mat, "value", "site", "species")
 #' dat$site = as.character(dat$site)
 #' dat$species = as.character(dat$species)
@@ -202,6 +203,9 @@ distinctiveness_stack = function(com_df, sp_col, com, abund = NULL,
 #' # Site-species matrix
 #' mat = as.matrix(aravo$spe)
 #'
+#' # Compute relative abundances
+#' mat = make_relative(mat)
+#'
 #' # Example of trait table
 #' tra = aravo$traits[, c("Height", "SLA", "N_mass")]
 #' # Distance matrix
@@ -212,6 +216,7 @@ distinctiveness_stack = function(com_df, sp_col, com, abund = NULL,
 #'
 #' # Compute distinctiveness for all species in the regional pool
 #' # i.e., with all the species in all the communities
+#' # Here considering each species present evenly in the regional pool
 #' reg_pool = matrix(1, ncol = ncol(mat))
 #' colnames(reg_pool) = colnames(mat)
 #' row.names(reg_pool) = c("Regional_pool")

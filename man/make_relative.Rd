@@ -7,10 +7,21 @@
 make_relative(abund_matrix)
 }
 \arguments{
-\item{abund_matrix}{abundance matrix, with sites in rows and species in columns}
+\item{abund_matrix}{abundance matrix, with sites in rows and species in
+columns.}
 }
 \description{
 From an abundance matrix (numbers of individuals of a given species at a site)
 returns a relative abundance matrix (proportion of individuals of a given species
 at a given site). This function works also with sparse matrices.
+}
+\examples{
+data("aravo", package = "ade4")
+
+# Site-species matrix
+mat = as.matrix(aravo$spe)
+head(mat)[, 1:5]  # Has absolute abundances
+rel_mat = make_relative(mat)
+head(rel_mat)  # Relative abundances
+
 }
