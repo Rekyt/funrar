@@ -16,12 +16,12 @@ matrix_to_stack(my_mat, value_col = "value",
 (default: 'value')}
 
 \item{row_to_col}{(optional) character vector used for name of column in
-data.frame corresponding to rows in matrix (default: corresponding
-dimension name)}
+data.frame corresponding to rows in matrix (default:
+corresponding dimension name)}
 
 \item{col_to_col}{(optional) character vector used for name of column in
-data.frame corresponding to columns in matrix (default: corresponding
-dimension name)}
+data.frame corresponding to columns in matrix (default:
+corresponding dimension name)}
 }
 \value{
 a stacked (= tidy) data.frame with, a column for row names, one for
@@ -42,5 +42,5 @@ str(dat)
 
 }
 \seealso{
-\code{\link[funrar]{stack_to_matrix}} for the reverse operation
+\code{\link[=stack_to_matrix]{stack_to_matrix()}} for the reverse operation
 }

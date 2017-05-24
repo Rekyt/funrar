@@ -14,9 +14,9 @@ restrictedness_stack(com_df, sp_col, com)
 \item{com}{a character vector indicating the name of the community column}
 }
 \value{
-A stacked data.frame containing species' names and their restrictedness
-   value in the \strong{Ri} column, similar to what
-   \code{\link[funrar]{uniqueness_stack}} returns.
+A stacked data.frame containing species' names and their
+restrictedness value in the \strong{Ri} column, similar to what
+\code{\link[=uniqueness_stack]{uniqueness_stack()}} returns.
 }
 \description{
 Compute the geographical restrictedness for each species present in the
@@ -24,13 +24,15 @@ stacked data.frame. Geographical restrictedness is an index related to the
 extent of a species in a given dataset, it is close to 1 when the species is
 present in only a single site of the dataset (restricted) and close to 0 when
 the species is present at all sites. It estimates the geographical extent of
-a species in a dataset. See \code{\link[funrar]{restrictedness}} for details
+a species in a dataset. See \code{\link[=restrictedness]{restrictedness()}} for details
 on restrictedness computation.
 }
 \examples{
 data("aravo", package = "ade4")
+
 # Site-species matrix converted into data.frame
-mat = as.matrix(aravo$spe); dat = matrix_to_stack(mat, "value", "site", "species")
+mat = as.matrix(aravo$spe)
+dat = matrix_to_stack(mat, "value", "site", "species")
 dat$site = as.character(dat$site)
 dat$species = as.character(dat$species)
 ri_df = restrictedness_stack(dat, "species", "site")
@@ -38,6 +40,5 @@ head(ri_df)
 
 }
 \seealso{
-\code{\link[funrar]{restrictedness}},
-\code{\link[funrar]{uniqueness_stack}}
+\code{\link[=restrictedness]{restrictedness()}}, \code{\link[=uniqueness_stack]{uniqueness_stack()}}
 }

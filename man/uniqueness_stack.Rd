@@ -16,20 +16,21 @@ in the \code{com_df} data frame}
 }
 \value{
 A data.frame with uniqueness value per species, with one column with
-    provided species column name and the \strong{Ui} column with the uniqueness
-    values.
+provided species column name and the \strong{Ui} column with the uniqueness
+values.
 }
 \description{
 Computes functional uniqueness values over a given regional pool. Functional
-uniqueness gives the functional distance to the nearest-neighbor of a given species
-in the provided distance matrix. See \code{\link[funrar]{uniqueness}}
-function for details on computation.
+uniqueness gives the functional distance to the nearest-neighbor of a given
+species in the provided distance matrix. See \code{\link[=uniqueness]{uniqueness()}} function for
+details on computation.
 }
 \examples{
 data("aravo", package = "ade4")
 
 # Site-species matrix converted into data.frame
-mat = as.matrix(aravo$spe); dat = matrix_to_stack(mat, "value", "site", "species")
+mat = as.matrix(aravo$spe)
+dat = matrix_to_stack(mat, "value", "site", "species")
 dat$site = as.character(dat$site)
 dat$species = as.character(dat$species)
 
@@ -43,10 +44,7 @@ head(ui_df)
 
 }
 \seealso{
-\code{\link[funrar]{uniqueness}} and
-\code{vignette("rarity_indices", package = "funrar")} for details on the
-uniqueness metric;
-\code{\link[funrar]{distinctiveness_stack}},
-\code{\link[funrar]{restrictedness_stack}},
-\code{\link[funrar]{scarcity_stack}}
+\code{\link[=uniqueness]{uniqueness()}} and \code{vignette("rarity_indices", package = "funrar")} for
+details on the uniqueness metric; \code{\link[=distinctiveness_stack]{distinctiveness_stack()}},
+\code{\link[=restrictedness_stack]{restrictedness_stack()}}, \code{\link[=scarcity_stack]{scarcity_stack()}}
 }

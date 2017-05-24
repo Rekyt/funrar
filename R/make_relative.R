@@ -44,7 +44,7 @@ make_relative = function(abund_matrix) {
 #'
 #' From an abundance/presence-absence matrix or data.frame tells if it contains
 #' relative abundances or absolute abundances. Checks if all abundances are
-#' between 1 and 0 but \strong{never checks sum of abundances per community}.
+#' between 1 and 0 but **never checks sum of abundances per community**.
 #'
 #' @param given_obj abundance or presence-absence matrix, with sites in rows and
 #'                  species in columns, or tidy community data frame
@@ -52,12 +52,11 @@ make_relative = function(abund_matrix) {
 #' @param abund name of the column of the provided object that contains the
 #'              abundances
 #'
-#' @seealso \code{\link[funrar]{make_relative}} to transform matrix into a
-#'   relative abundance matrix.
+#' @seealso [make_relative()] to transform matrix into a relative abundance
+#'          matrix.
 #'
 #' @examples
 #' data("aravo", package = "ade4")
-#'
 #'
 #' # Site-species matrix
 #' mat = as.matrix(aravo$spe)

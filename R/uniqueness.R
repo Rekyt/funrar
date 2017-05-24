@@ -6,34 +6,32 @@
 #' Functional Uniqueness on stacked data.frame
 #'
 #' Computes functional uniqueness values over a given regional pool. Functional
-#' uniqueness gives the functional distance to the nearest-neighbor of a given species
-#' in the provided distance matrix. See \code{\link[funrar]{uniqueness}}
-#' function for details on computation.
+#' uniqueness gives the functional distance to the nearest-neighbor of a given
+#' species in the provided distance matrix. See [uniqueness()] function for
+#' details on computation.
 #'
 #' @param com_df a data frame of the species in the regional pool.
 #'
 #' @param sp_col a character vector indicating the name of the species column
-#'     in the \code{com_df} data frame
+#'     in the `com_df` data frame
 #'
 #' @param dist_matrix a functional distance matrix
 #'
 #' @return A data.frame with uniqueness value per species, with one column with
-#'     provided species column name and the \strong{Ui} column with the uniqueness
+#'     provided species column name and the **Ui** column with the uniqueness
 #'     values.
 #'
 #' @seealso
-#' \code{\link[funrar]{uniqueness}} and
-#' \code{vignette("rarity_indices", package = "funrar")} for details on the
-#' uniqueness metric;
-#' \code{\link[funrar]{distinctiveness_stack}},
-#' \code{\link[funrar]{restrictedness_stack}},
-#' \code{\link[funrar]{scarcity_stack}}
+#' [uniqueness()] and `vignette("rarity_indices", package = "funrar")` for
+#' details on the uniqueness metric; [distinctiveness_stack()],
+#' [restrictedness_stack()], [scarcity_stack()]
 #'
 #' @examples
 #' data("aravo", package = "ade4")
 #'
 #' # Site-species matrix converted into data.frame
-#' mat = as.matrix(aravo$spe); dat = matrix_to_stack(mat, "value", "site", "species")
+#' mat = as.matrix(aravo$spe)
+#' dat = matrix_to_stack(mat, "value", "site", "species")
 #' dat$site = as.character(dat$site)
 #' dat$species = as.character(dat$species)
 #'
@@ -76,10 +74,10 @@ uniqueness_stack = function(com_df, sp_col, dist_matrix) {
 #' Computes the functional uniqueness from a site-species matrix with the
 #' provided functional distance matrix. Functional Uniqueness represents how
 #' "isolated" is a species in the global species pool, it is the functional
-#' distance to the nearest neighbor of the species of interest (see \code{Details}
-#' section for the formula). The sites-species matrix should have \strong{sites}
-#' in \strong{rows} and \strong{species} in \strong{columns}, similar to
-#' \pkg{vegan} package defaults.
+#' distance to the nearest neighbor of the species of interest (see `Details`
+#' section for the formula). The sites-species matrix should have **sites**
+#' in **rows** and **species** in **columns**, similar to \pkg{vegan} package
+#' defaults.
 #'
 #' @inheritParams distinctiveness
 #'
@@ -94,12 +92,11 @@ uniqueness_stack = function(com_df, sp_col, dist_matrix) {
 #' the functional distance between species \eqn{i} and species \eqn{j}
 #'
 #' @return A data.frame with functional uniqueness values per species, with one
-#'     column with provided species column name and the \strong{Ui} column with
+#'     column with provided species column name and the **Ui** column with
 #'     functional uniqueness values.
 #'
 #' @seealso
-#' \code{\link[funrar]{distinctiveness}}, \code{\link[funrar]{restrictedness}},
-#' \code{\link[funrar]{scarcity}}
+#' [distinctiveness()], [restrictedness()], [scarcity()]
 #'
 #' @examples
 #' data("aravo", package = "ade4")

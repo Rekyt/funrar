@@ -18,18 +18,18 @@ presence-absence data (default = \code{FALSE})}
 }
 \value{
 A list of 3 objects (or 4 if \code{rel_abund = TRUE}):
-   \describe{
-     \item{\strong{Ui}}{a vector containing uniqueness values per species,}
-     \item{\strong{Di}}{a site-species matrix with functional distinctiveness
-       values per species per site,}
-     \item{\strong{Ri}}{a vector containing geographical restrictedness values
-       per species,}
-   }
-   and if \code{rel_abund = TRUE},
-   \describe{
-     \item{\strong{Si}}{a site-species matrix with scarcity values per
-       species per site.}
-   }
+\describe{
+\item{\strong{Ui}}{a vector containing uniqueness values per species,}
+\item{\strong{Di}}{a site-species matrix with functional distinctiveness
+values per species per site,}
+\item{\strong{Ri}}{a vector containing geographical restrictedness values
+per species,}
+}
+and if \code{rel_abund = TRUE},
+\describe{
+\item{\strong{Si}}{a site-species matrix with scarcity values per species
+per site.}
+}
 }
 \description{
 From a site-species matrix and functional distance matrix compute all indices
@@ -40,8 +40,6 @@ only be computed if relative abundances are provided in the site-species
 matrix.
 }
 \seealso{
-\code{\link[funrar]{uniqueness}},
-   \code{\link[funrar]{distinctiveness}},
-   \code{\link[funrar]{restrictedness}},
-   \code{\link[funrar]{scarcity}}
+\code{\link[=uniqueness]{uniqueness()}}, \code{\link[=distinctiveness]{distinctiveness()}}, \code{\link[=restrictedness]{restrictedness()}},
+\code{\link[=scarcity]{scarcity()}}
 }

@@ -21,7 +21,6 @@ between 1 and 0 but \strong{never checks sum of abundances per community}.
 \examples{
 data("aravo", package = "ade4")
 
-
 # Site-species matrix
 mat = as.matrix(aravo$spe)
 head(mat)[, 1:5]  # Has absolute abundances
@@ -32,6 +31,6 @@ is_relative(rel_mat)  # TRUE
 
 }
 \seealso{
-\code{\link[funrar]{make_relative}} to transform matrix into a
-  relative abundance matrix.
+\code{\link[=make_relative]{make_relative()}} to transform matrix into a relative abundance
+matrix.
 }

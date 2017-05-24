@@ -7,34 +7,33 @@
 funrar_stack(com_df, sp_col, com, abund = NULL, dist_matrix)
 }
 \arguments{
-\item{com_df}{a stacked (= tidy) data.frame from a single community with
-each row representing a species in a community}
+\item{com_df}{a stacked (= tidy) data.frame from a single community with each
+row representing a species in a community}
 
-\item{sp_col}{a character vector, the name of the species column in
-\code{com_df}}
+\item{sp_col}{a character vector, the name of the species column in \code{com_df}}
 
 \item{com}{a character vector, the column name for communities names}
 
-\item{abund}{a character vector, the name of the column containing
-relative abundances values}
+\item{abund}{a character vector, the name of the column containing relative
+abundances values}
 
 \item{dist_matrix}{a functional distance matrix as given by
 \code{compute_dist_matrix()}, with species name as row and column names}
 }
 \value{
 A list of 3 objects (or 4 if \code{abund} is not \code{NULL}):
-   \describe{
-     \item{\strong{Ui}}{a vector containing uniqueness values per species,}
-     \item{\strong{Di}}{a site-species matrix with functional distinctiveness
-       values per species per site,}
-     \item{\strong{Ri}}{a vector containing geographical restrictedness values
-       per species,}
-   }
-   and if \code{abund} is not \code{NULL},
-   \describe{
-     \item{\strong{Si}}{a site-species matrix with scarcity values per
-       species per site.}
-   }
+\describe{
+\item{\strong{Ui}}{a vector containing uniqueness values per species,}
+\item{\strong{Di}}{a site-species matrix with functional distinctiveness
+values per species per site,}
+\item{\strong{Ri}}{a vector containing geographical restrictedness values
+per species,}
+}
+and if \code{abund} is not \code{NULL},
+\describe{
+\item{\strong{Si}}{a site-species matrix with scarcity values per
+species per site.}
+}
 }
 \description{
 From a stacked (= tidy) data.frame and functional distance matrix compute
@@ -45,8 +44,6 @@ restrictedness (regional, extent), scarcity (local, abundance).
 provided in the data.frame.
 }
 \seealso{
-\code{\link[funrar]{uniqueness_stack}},
-   \code{\link[funrar]{distinctiveness_stack}},
-   \code{\link[funrar]{restrictedness_stack}},
-   \code{\link[funrar]{scarcity_stack}}
+\code{\link[=uniqueness_stack]{uniqueness_stack()}}, \code{\link[=distinctiveness_stack]{distinctiveness_stack()}},
+\code{\link[=restrictedness_stack]{restrictedness_stack()}}, \code{\link[=scarcity_stack]{scarcity_stack()}}
 }

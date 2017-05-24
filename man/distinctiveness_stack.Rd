@@ -7,23 +7,22 @@
 distinctiveness_stack(com_df, sp_col, com, abund = NULL, dist_matrix)
 }
 \arguments{
-\item{com_df}{a stacked (= tidy) data.frame from a single community with
-each row representing a species in a community}
+\item{com_df}{a stacked (= tidy) data.frame from a single community with each
+row representing a species in a community}
 
-\item{sp_col}{a character vector, the name of the species column in
-\code{com_df}}
+\item{sp_col}{a character vector, the name of the species column in \code{com_df}}
 
 \item{com}{a character vector, the column name for communities names}
 
-\item{abund}{a character vector, the name of the column containing
-relative abundances values}
+\item{abund}{a character vector, the name of the column containing relative
+abundances values}
 
 \item{dist_matrix}{a functional distance matrix as given by
 \code{compute_dist_matrix()}, with species name as row and column names}
 }
 \value{
 the same data.frame with the additional \strong{Di} column giving
-   functional distinctiveness values for each species
+functional distinctiveness values for each species
 }
 \description{
 Compute Functional Distinctiveness for several communities, from a stacked
@@ -32,7 +31,7 @@ one for community identity and an optional one for relative abundances. Also
 needs a species functional distances matrix. Functional distinctiveness
 relates to the functional "originality" of a species in a community. The
 closer to 1 the more the species is functionally distinct from the rest of
-the community. See \code{\link[funrar]{distinctiveness}} function or the
+the community. See \code{\link[=distinctiveness]{distinctiveness()}} function or the
 functional rarity indices vignette included in the package
 (type \code{vignette("rarity_indices", package = "funrar")}), for more details
 on the metric.
@@ -57,8 +56,8 @@ head(di_df)
 
 }
 \seealso{
-\code{\link[funrar]{scarcity_stack}},
-\code{\link[funrar]{uniqueness_stack}},
-\code{\link[funrar]{restrictedness_stack}};
-\code{\link[funrar]{distinctiveness}} Details section for detail on the index
+\code{\link[=scarcity_stack]{scarcity_stack()}},
+\code{\link[=uniqueness_stack]{uniqueness_stack()}},
+\code{\link[=restrictedness_stack]{restrictedness_stack()}};
+\code{\link[=distinctiveness]{distinctiveness()}} Details section for detail on the index
 }

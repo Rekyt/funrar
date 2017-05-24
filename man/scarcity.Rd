@@ -11,29 +11,29 @@ scarcity(pres_matrix)
 in columns, containing \strong{relative abundances} values}
 }
 \value{
-a similar matrix to \code{pres_matrix} with scarcity values in lieu
-     of relative abundances.
+a similar matrix to \code{pres_matrix} with scarcity values in \emph{lieu}
+of relative abundances.
 }
 \description{
 Computes scarcity from a relative abundance matrix of species. Scarcity is
 close to 1 when a species is rare in a community and close to 0 when it is
 abundant. It requires a site-species matrix with relative abundances. See
 \code{Details} section for the formula. The sites-species matrix should have
-\strong{sites} in \strong{rows} and \strong{species} in \strong{columns},
-similar to \pkg{vegan} package defaults.
+\strong{sites} in \strong{rows} and \strong{species} in \strong{columns}, similar to \pkg{vegan}
+package defaults.
 }
 \details{
 The scarcity of species is computed as follow:
-    \deqn{
+\deqn{
      S_i = \exp{-N \log{2} A_i},
     }{%
      S_i = exp^(-N*ln2*A_i),
      } with \eqn{S_i} the scarcity of species \eqn{i}, \eqn{N} the total
-    number of species in the community and \eqn{A_i} the relative abundance
-    of species \eqn{i} in the community. Scarcity is thus a measure of the
-    \strong{local} rarity in terms of abundances. If \eqn{S_i} is close to 1
-    the species has a very low abundances while if it's close to 0, it is
-    quite abundant in the community.
+number of species in the community and \eqn{A_i} the relative abundance
+of species \eqn{i} in the community. Scarcity is thus a measure of the
+\strong{local} rarity in terms of abundances. If \eqn{S_i} is close to 1
+the species has a very low abundances while if it's close to 0, it is
+quite abundant in the community.
 }
 \examples{
 data("aravo", package = "ade4")
@@ -46,9 +46,6 @@ si[1:5, 1:5]
 
 }
 \seealso{
-\code{vignette("rarity_indices", package = "funrar")} for details
-on the scarcity metric;
-\code{\link[funrar]{distinctiveness}},
-\code{\link[funrar]{restrictedness}},
-\code{\link[funrar]{uniqueness}}
+\code{vignette("rarity_indices", package = "funrar")} for details on the
+scarcity metric; \code{\link[=distinctiveness]{distinctiveness()}}, \code{\link[=restrictedness]{restrictedness()}}, \code{\link[=uniqueness]{uniqueness()}}
 }

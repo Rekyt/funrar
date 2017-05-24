@@ -14,8 +14,8 @@ abundances), with sites in rows and species in columns}
 }
 \value{
 a similar matrix from provided \code{pres_matrix} with Distinctiveness
-   values in lieu of presences or relative abundances, species absent from
-   communities will have an \code{NA} value (see \code{Note} section)
+values in lieu of presences or relative abundances, species absent from
+communities will have an \code{NA} value (see \code{Note} section)
 }
 \description{
 Computes functional distinctiveness from a site-species matrix (containing
@@ -26,29 +26,29 @@ distance matrix. The sites-species matrix should have \strong{sites} in
 }
 \details{
 The Functional Distinctiveness of a species is the average functional
-   distance from a species to all the other in the given community. It is
-   computed as such:
-   \deqn{
+distance from a species to all the other in the given community. It is
+computed as such:
+\deqn{
    D_i = \frac{\sum_{j = 0, i \neq j}^N d_{ij}}{N-1},
    }{%
    D_i = ( \Sigma_(j = 0, i != j)^N d_ij) / (N - 1),
    }
-   with \eqn{D_i} the functional distinctiveness of species \eqn{i}, \eqn{N}
-   the total number of species in the community and \eqn{d_{ij}}{d_ij} the
-   functional distance between species \eqn{i} and species \eqn{j}.
+with \eqn{D_i} the functional distinctiveness of species \eqn{i}, \eqn{N}
+the total number of species in the community and \eqn{d_{ij}}{d_ij} the
+functional distance between species \eqn{i} and species \eqn{j}.
 }
 \section{Note}{
 
-   Absent species should be coded by \code{0} or \code{NA} in input matrices.
+Absent species should be coded by \code{0} or \code{NA} in input matrices.
 
-   When a species is alone in its community the functional distinctiveness
-   cannot be computed (denominator = 0 in formula), and its value is assigned
-   as \code{NaN}.
+When a species is alone in its community the functional distinctiveness
+cannot be computed (denominator = 0 in formula), and its value is assigned
+as \code{NaN}.
 
-   For speed and memory efficiency sparse matrices can be used as input of
-   the function using \code{as(pres_matrix, "sparseMatrix")} from the
-   \code{Matrix} package.
-   (see \code{vignette("sparse_matrices", package = "funrar")})
+For speed and memory efficiency sparse matrices can be used as input of
+the function using \code{as(pres_matrix, "sparseMatrix")} from the
+\code{Matrix} package.
+(see \code{vignette("sparse_matrices", package = "funrar")})
 }
 
 \examples{

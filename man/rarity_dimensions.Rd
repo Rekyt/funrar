@@ -8,18 +8,17 @@ rarity_dimensions(pres_matrix, traits_table, ...)
 }
 \arguments{
 \item{pres_matrix}{a site-species matrix, with species in rows and sites
-in columns, containing \strong{relative abundances} values}
+in columns, containing presence-absence, relative abundances or
+abundances values}
 
 \item{traits_table}{a stacked (= tidy) data.frame of communities}
 
-\item{...}{additional arguments supplied to
-\code{\link[funrar]{compute_dist_matrix}}}
+\item{...}{additional arguments supplied to \code{\link[=compute_dist_matrix]{compute_dist_matrix()}}}
 }
 \value{
 A stacked data.frame containing species' names and their uniqueness
-   values for each traits (\strong{Ui_X} column for trait \strong{X}),
-   as well as a column for the uniqueness value for all traits
-   (\strong{Ui_all} column).
+values for each traits (\strong{Ui_X} column for trait \strong{X}), as well as a
+column for the uniqueness value for all traits (\strong{Ui_all} column).
 }
 \description{
 From a trait table and a site-species matrix compute uniqueness values
@@ -39,7 +38,6 @@ ui_dim = rarity_dimensions(mat, tra)
 
 }
 \seealso{
-\code{\link[funrar]{uniqueness}},
-   \code{\link[funrar]{uniqueness_stack}} and
-   \code{\link[funrar]{compute_dist_matrix}} for additional arguments
+\code{\link[=uniqueness]{uniqueness()}}, \code{\link[=uniqueness_stack]{uniqueness_stack()}} and \code{\link[=compute_dist_matrix]{compute_dist_matrix()}} for
+additional arguments
 }

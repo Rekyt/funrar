@@ -8,12 +8,13 @@ restrictedness(pres_matrix)
 }
 \arguments{
 \item{pres_matrix}{a site-species matrix, with species in rows and sites
-in columns, containing \strong{relative abundances} values}
+in columns, containing presence-absence, relative abundances or
+abundances values}
 }
 \value{
-A stacked data.frame containing species' names and their restrictedness
-   value in the \strong{Ri} column, similar to what
-   \code{\link[funrar]{uniqueness}} returns.
+A stacked data.frame containing species' names and their
+restrictedness value in the \strong{Ri} column, similar to what
+\code{\link[=uniqueness]{uniqueness()}} returns.
 }
 \description{
 Computes geographical restrictedness from a site-species matrix.
@@ -23,8 +24,8 @@ single site of the dataset (restricted) and close to 0 when the species is
 present at all sites. It estimates the geographical extent of a species in a
 dataset. See \code{Details} section to have details on the formula used for
 the computation. The sites-species matrix should have \strong{sites}
-in \strong{rows} and \strong{species} in \strong{columns}, similar to
-\pkg{vegan} package defaults.
+in \strong{rows} and \strong{species} in \strong{columns}, similar to \pkg{vegan} package
+defaults.
 }
 \details{
 Geographical Restrictedness aims to measure the regional extent of a species

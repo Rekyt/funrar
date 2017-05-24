@@ -7,39 +7,35 @@
 scarcity_com(com_df, sp_col, abund)
 }
 \arguments{
-\item{com_df}{a stacked (= tidy) data.frame from a single community with
-each row representing a species in a community}
+\item{com_df}{a stacked (= tidy) data.frame from a single community with each
+row representing a species in a community}
 
-\item{sp_col}{a character vector, the name of the species column in
-\code{com_df}}
+\item{sp_col}{a character vector, the name of the species column in \code{com_df}}
 
-\item{abund}{a character vector, the name of the column containing
-relative abundances values}
+\item{abund}{a character vector, the name of the column containing relative
+abundances values}
 }
 \value{
-the same data.frame with the additional \strong{Si} column giving
-   scarcity values for each species
+the same data.frame with the additional \strong{Si} column giving scarcity
+values for each species
 }
 \description{
 Given a stacked data.frame compute species scarcity. Scarcity measures how
 abundant is a species locally. Scarcity is close to 1 when a species is rare
-in a community and close to 0 when it is abundant. See
-\code{\link[funrar]{scarcity}} function or the functional rarity indices
-vignette included in the package
-(type \code{vignette("rarity_indices", package = "funrar")}) for details
-about the index.
+in a community and close to 0 when it is abundant. See \code{\link[=scarcity]{scarcity()}} function
+or the functional rarity indices vignette included in the package (type
+\code{vignette("rarity_indices", package = "funrar")}) for details about the
+index.
 }
 \section{Caution}{
 
 This function is meant for internal uses mostly, thus it does not include any
-tests on inputs and may fail unexpectedly. Please use
-\code{\link[funrar]{scarcity_stack}} to avoid input errors.
+tests on inputs and may fail unexpectedly. Please use \code{\link[=scarcity_stack]{scarcity_stack()}} to
+avoid input errors.
 }
 
 \seealso{
-\code{\link[funrar]{scarcity}} and
-\code{vignette("rarity_indices", package = "funrar")} for details on the
-scarcity metric;
-\code{\link[funrar]{distinctiveness_com}} to compute distinctiveness on a
-single community
+\code{\link[=scarcity]{scarcity()}} and \code{vignette("rarity_indices", package = "funrar")}
+for details on the scarcity metric; \code{\link[=distinctiveness_com]{distinctiveness_com()}} to compute
+distinctiveness on a single community
 }

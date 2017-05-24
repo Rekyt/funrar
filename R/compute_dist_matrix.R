@@ -1,28 +1,28 @@
 #' Functional Distance Matrix
 #'
-#' Wrapper for \code{\link[cluster]{daisy}} function in \code{cluster} package,
+#' Wrapper for [cluster::daisy()] function in `cluster` package,
 #' to compute distance matrix of trait between each pair of species present in
-#' given \code{traits_table}, each row represents a species and each column
-#' a trait. To be able to compute other metrics \code{traits_table} must have
+#' given `traits_table`, each row represents a species and each column
+#' a trait. To be able to compute other metrics `traits_table` must have
 #' species name as row names.
 #'
 #' @param traits_table a data.sframe of traits with species in row and traits in
-#'     columns, \strong{row names} should be \strong{species names},
+#'     columns, **row names** should be **species names**,
 #'
-#' @param metric character vector in list \code{'gower'}, \code{'manhattan'},
-#' \code{'euclidean'} defining the type of distance to use (see \code{\link[cluster]{daisy}}),
+#' @param metric character vector in list `'gower'`, `'manhattan'`,
+#' `'euclidean'` defining the type of distance to use (see [cluster::daisy()]),
 #' see Details section,
 #'
 #' @param center logical that defines if traits should be centered (only in the
-#'               case of \code{'euclidean'} distance)
+#'               case of `'euclidean'` distance)
 #'
 #' @param scale logical that defines if traits should be scaled (only in the
-#'              case of \code{'euclidean'} distance)
+#'              case of `'euclidean'` distance)
 #'
 #'
 #' @return
-#' A functional distance matrix, \strong{column} and \strong{row} names follow
-#' \strong{species name} from \code{traits_table} row names.
+#' A functional distance matrix, **column** and **row** names follow
+#' **species name** from `traits_table` row names.
 #'
 #'
 #' @details The functional distance matrix can be computed using any type of
@@ -45,9 +45,9 @@
 #'     improving the measurement of functional diversity. Oikos, 118, 391–402.
 #'
 #'
-#' @seealso \code{\link[cluster]{daisy}} which this function wraps, base
-#'     \code{\link[stats]{dist}} or \code{\link[ade4]{dist.ktab}} for Pavoine et
-#'     al. (2009) extension of Gower's distance.
+#' @seealso [cluster::daisy()] which this function wraps, base [stats::dist()]
+#' or [ade4::dist.ktab()] for Pavoine et al. (2009) extension of Gower's
+#' distance.
 #'
 #' @examples
 #' set.seed(1)  # For reproducibility

@@ -8,17 +8,14 @@
 #'
 #' @param traits_table a stacked (= tidy) data.frame of communities
 #'
-#' @param ... additional arguments supplied to
-#'    \code{\link[funrar]{compute_dist_matrix}}
+#' @param ... additional arguments supplied to [compute_dist_matrix()]
 #'
 #' @return A stacked data.frame containing species' names and their uniqueness
-#'    values for each traits (\strong{Ui_X} column for trait \strong{X}),
-#'    as well as a column for the uniqueness value for all traits
-#'    (\strong{Ui_all} column).
+#'    values for each traits (**Ui_X** column for trait **X**), as well as a
+#'    column for the uniqueness value for all traits (**Ui_all** column).
 #'
-#' @seealso \code{\link[funrar]{uniqueness}},
-#'    \code{\link[funrar]{uniqueness_stack}} and
-#'    \code{\link[funrar]{compute_dist_matrix}} for additional arguments
+#' @seealso [uniqueness()], [uniqueness_stack()] and [compute_dist_matrix()] for
+#'          additional arguments
 #'
 #' @examples
 #' data("aravo", package = "ade4")

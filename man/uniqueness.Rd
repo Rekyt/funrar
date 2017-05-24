@@ -14,8 +14,8 @@ abundances), with sites in rows and species in columns}
 }
 \value{
 A data.frame with functional uniqueness values per species, with one
-    column with provided species column name and the \strong{Ui} column with
-    functional uniqueness values.
+column with provided species column name and the \strong{Ui} column with
+functional uniqueness values.
 }
 \description{
 Computes the functional uniqueness from a site-species matrix with the
@@ -23,8 +23,8 @@ provided functional distance matrix. Functional Uniqueness represents how
 "isolated" is a species in the global species pool, it is the functional
 distance to the nearest neighbor of the species of interest (see \code{Details}
 section for the formula). The sites-species matrix should have \strong{sites}
-in \strong{rows} and \strong{species} in \strong{columns}, similar to
-\pkg{vegan} package defaults.
+in \strong{rows} and \strong{species} in \strong{columns}, similar to \pkg{vegan} package
+defaults.
 }
 \details{
 Functional Uniqueness \eqn{U_i} is computed as follow:
@@ -60,6 +60,5 @@ com_ui = apply(mat, 1,
 
 }
 \seealso{
-\code{\link[funrar]{distinctiveness}}, \code{\link[funrar]{restrictedness}},
-\code{\link[funrar]{scarcity}}
+\code{\link[=distinctiveness]{distinctiveness()}}, \code{\link[=restrictedness]{restrictedness()}}, \code{\link[=scarcity]{scarcity()}}
 }

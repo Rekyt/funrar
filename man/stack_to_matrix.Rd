@@ -20,14 +20,13 @@ want to be as columns in matrix}
 coding the values that will be put in the matrix}
 }
 \value{
-a matrix with given \code{col_to_row} column in rows and
-\code{col_to_col} column in columns. If some cells are not present in the
-data.frame (e.g. some species not present at some sites), the matrix will have
-a \code{NA}.
+a matrix with given \code{col_to_row} column in rows and \code{col_to_col}
+column in columns. If some cells are not present in the data.frame (e.g. some
+species not present at some sites), the matrix will have a \code{NA} value.
 }
 \description{
-Passes from a stacked (= tidy) data.frame to a matrix.
-\code{tidy_to_matrix()} is an alias of this function.
+Passes from a stacked (= tidy) data.frame to a matrix. \code{tidy_to_matrix()} is
+an alias of this function.
 }
 \examples{
 example = data.frame("sites" = c(rep("1", 3), rep("2", 2)),
@@ -39,5 +38,5 @@ mat
 
 }
 \seealso{
-\code{\link[funrar]{matrix_to_stack}} for the reverse operation
+\code{\link[=matrix_to_stack]{matrix_to_stack()}} for the reverse operation
 }
