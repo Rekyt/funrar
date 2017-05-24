@@ -26,8 +26,10 @@ mat = as.matrix(aravo$spe)
 head(mat)[, 1:5]  # Has absolute abundances
 rel_mat = make_relative(mat)
 head(rel_mat)  # Relative abundances
-is_relative(mat)      # FALSE
-is_relative(rel_mat)  # TRUE
+
+# Forced to use ':::' becasue function is not exported
+funrar:::is_relative(mat)      # FALSE
+funrar:::is_relative(rel_mat)  # TRUE
 
 }
 \seealso{
