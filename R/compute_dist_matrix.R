@@ -6,7 +6,7 @@
 #' a trait. To be able to compute other metrics `traits_table` must have
 #' species name as row names.
 #'
-#' @param traits_table a data.sframe of traits with species in row and traits in
+#' @param traits_table a data.frame of traits with species in row and traits in
 #'     columns, **row names** should be **species names**,
 #'
 #' @param metric character vector in list `'gower'`, `'manhattan'`,

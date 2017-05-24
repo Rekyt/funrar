@@ -69,7 +69,7 @@ uniqueness_stack = function(com_df, sp_col, dist_matrix) {
   return(u_df)
 }
 
-#' Functional Uniqueness for site-sepcies matrix matrix
+#' Functional Uniqueness for site-species matrix matrix
 #'
 #' Computes the functional uniqueness from a site-species matrix with the
 #' provided functional distance matrix. Functional Uniqueness represents how
@@ -88,7 +88,7 @@ uniqueness_stack = function(com_df, sp_col, dist_matrix) {
 #' }{
 #'  U_i = min(d_ij),
 #' }
-#' with \eqn{U_i} the functional uniqueness of speices \eqn{i}, and \eqn{d_ij}
+#' with \eqn{U_i} the functional uniqueness of species \eqn{i}, and \eqn{d_ij}
 #' the functional distance between species \eqn{i} and species \eqn{j}
 #'
 #' @return A data.frame with functional uniqueness values per species, with one

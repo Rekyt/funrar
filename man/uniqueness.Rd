@@ -2,7 +2,7 @@
 % Please edit documentation in R/uniqueness.R
 \name{uniqueness}
 \alias{uniqueness}
-\title{Functional Uniqueness for site-sepcies matrix matrix}
+\title{Functional Uniqueness for site-species matrix matrix}
 \usage{
 uniqueness(pres_matrix, dist_matrix)
 }
@@ -33,7 +33,7 @@ Functional Uniqueness \eqn{U_i} is computed as follow:
 }{
  U_i = min(d_ij),
 }
-with \eqn{U_i} the functional uniqueness of speices \eqn{i}, and \eqn{d_ij}
+with \eqn{U_i} the functional uniqueness of species \eqn{i}, and \eqn{d_ij}
 the functional distance between species \eqn{i} and species \eqn{j}
 }
 \examples{

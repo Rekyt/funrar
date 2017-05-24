@@ -9,7 +9,7 @@ compute_dist_matrix(traits_table, metric = "gower", center = FALSE,
   scale = FALSE)
 }
 \arguments{
-\item{traits_table}{a data.sframe of traits with species in row and traits in
+\item{traits_table}{a data.frame of traits with species in row and traits in
 columns, \strong{row names} should be \strong{species names},}
 
 \item{metric}{character vector in list \code{'gower'}, \code{'manhattan'},
