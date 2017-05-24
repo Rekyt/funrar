@@ -1,3 +1,11 @@
+# funrar 1.1.0
+
+* Made `make_absolute()` defunct because it was based on false assumptions and would not give back matrices of relative abundances;
+* Improved examples of `make_relative()`, `uniqueness()`, `distinctiveness()` to compute across single communities or regional pools;
+* Add `rarity_dimensions()` function to measure the different facets of rarity according to the trait;
+* Add `center` and `scale` arguments in `compute_dist_matrix()` to scale traits before computing distance, these arguments are sensitive to the specific distance metric used;
+* Use markdown with `roxygen2` to generates documentation.
+
 # funrar 1.0.3
 
 * Corrected bug so that dense matrices can be transformed to stack data frame using ` matrix_to_stack()` (#19),
