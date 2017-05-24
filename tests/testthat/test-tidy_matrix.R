@@ -15,11 +15,14 @@ colnames(valid_mat) = paste0("s", 1:4)
 rownames(valid_mat) = letters[1:4]
 
 log_mat = (valid_mat == 1 & !is.na(valid_mat))
-com_df = lapply(colnames(log_mat), function(x) {
-  species = rownames(valid_mat)[log_mat[, x]]
-  data.frame(site = rep(x, length(species)), species = species)
-}) %>%
-  bind_rows()
+
+suppressWarnings({
+  com_df = lapply(colnames(log_mat), function(x) {
+    species = rownames(valid_mat)[log_mat[, x]]
+    data.frame(site = rep(x, length(species)), species = species)
+  }) %>%
+    bind_rows()
+})
 
 com_df$site = factor(com_df$site)
 
@@ -38,12 +41,14 @@ dimnames(abund_mat) = list("species" = letters[1:4],
 
 abund_diff = (abund_mat > 0 & !is.na(abund_mat))
 
-abund_df = lapply(colnames(abund_mat), function(x) {
-  values = abund_mat[abund_diff[, x], x]
-  cbind(site = rep(x, length(values)), data.frame(species = names(values),
-                                                  val = values))
+suppressWarnings({
+  abund_df = lapply(colnames(abund_mat), function(x) {
+    values = abund_mat[abund_diff[, x], x]
+    cbind(site = rep(x, length(values)), data.frame(species = names(values),
+                                                    val = values))
   }) %>%
-  bind_rows()
+    bind_rows()
+})
 
 abund_df$species = as.factor(abund_df$species)
 

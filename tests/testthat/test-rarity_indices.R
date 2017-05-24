@@ -21,11 +21,14 @@ dimnames(valid_mat) = list("site" = paste0("s", 1:4), "species" = letters[1:4])
 # Community Table
 log_mat = (valid_mat == 1)
 
-com_df = lapply(rownames(log_mat), function(x) {
-  species = colnames(valid_mat)[log_mat[x, ]]
-  data.frame(site = rep(x, length(species)), species = species)
-}) %>%
-  bind_rows()
+suppressWarnings({
+  com_df = lapply(rownames(log_mat), function(x) {
+    species = colnames(valid_mat)[log_mat[x, ]]
+    data.frame(site = rep(x, length(species)), species = species)
+  }) %>%
+    bind_rows()
+})
+
 
 # Traits df
 trait_df = data.frame(tr1 = c("A", "A", "B", "B"), tr2 = c(rep(0, 3), 1),
@@ -76,7 +79,9 @@ undef_dist_mat[which(undef_dist_mat == 0)] = NA_real_
 
 undef_dist_mat[which(undef_dist_mat == 1)] = undef_dist$Di
 
-undef_test = distinctiveness(small_mat, dist_mat)
+suppressWarnings({
+  undef_test = distinctiveness(small_mat, dist_mat)
+})
 
 
 # Scarcity data ----------------------------------------------------------------
