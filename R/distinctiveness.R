@@ -261,8 +261,8 @@ distinctiveness = function(pres_matrix, dist_matrix) {
 
   # Test if there is NaN in the table for species alone in their community
   if (any(vapply(index_matrix, function(x) is.nan(x), logical(1)))) {
-    warning(paste0("Some communities had a single species in them",
-                   "Computed value assigned to 'NaN'", sep = "\n"))
+    warning("Some communities had a single species in them\n",
+            "Computed value assigned to 'NaN'")
   }
 
 
