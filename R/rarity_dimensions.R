@@ -10,9 +10,19 @@
 #'
 #' @param ... additional arguments supplied to [compute_dist_matrix()]
 #'
-#' @return A stacked data.frame containing species' names and their uniqueness
-#'    values for each traits (**Ui_X** column for trait **X**), as well as a
-#'    column for the uniqueness value for all traits (**Ui_all** column).
+#' @return A list with a data.frame for Uniqueness and a list for
+#'    Distinctiveness, computing Uniqueness and Distinctiveness for each trait
+#'    and all traits taken together:
+#'    \describe{
+#'      \item{**Ui**}{a data.frame containing species' names and their
+#'                    uniqueness values for each traits (**Ui_X** column for
+#'                    trait **X**), as well as a column for the uniqueness value
+#'                    for all traits (**Ui_all** column)}
+#'      \item{**Di**}{a  list of site-species matrix with functional
+#'                    distinctiveness values per species per site, with elements
+#'                    **Di_X** for distinctiveness computed on trait **X** and
+#'                    **Di_all** for distinctiveness computed on all traits}
+#'      }
 #'
 #' @seealso [uniqueness()], [uniqueness_stack()] and [compute_dist_matrix()] for
 #'          additional arguments
@@ -22,11 +32,12 @@
 #'
 #' # Site-species matrix
 #' mat = as.matrix(aravo$spe)
+#' rel_mat = make_relative(mat)
 #'
 #' # Example of trait table
 #' tra = aravo$traits[, c("Height", "SLA", "N_mass")]
 #'
-#' ui_dim = rarity_dimensions(mat, tra)
+#' ui_dim = rarity_dimensions(rel_mat, tra)
 #'
 #' @export
 rarity_dimensions = function(pres_matrix, traits_table, ...) {
@@ -51,8 +62,9 @@ rarity_dimensions = function(pres_matrix, traits_table, ...) {
   # Add full distance matrix (all traits)
   dist_matrices[["all"]] = compute_dist_matrix(traits_table, ...)
 
+  ## Compute Uniqueness
   # Compute uniqueness data frame for all computed distance matrices
-  functional_indices = lapply(
+  functional_uniqueness = lapply(
     names(dist_matrices), function(x, matrices = dist_matrices) {
       Ui = uniqueness(pres_matrix, matrices[[x]])
 
@@ -63,7 +75,19 @@ rarity_dimensions = function(pres_matrix, traits_table, ...) {
       return(Ui)
     })
 
-  # Join all data.frames
-  Reduce(function(x, y) dplyr::inner_join(x, y, by = "species"),
-         functional_indices)
+  # Join all data.frames for Uniqueness
+  Ui = Reduce(function(x, y) dplyr::inner_join(x, y, by = "species"),
+              functional_uniqueness)
+
+  ## Compute Distinctiveness
+  functional_distinctiveness = lapply(
+    names(dist_matrices), function(x, matrices = dist_matrices) {
+      Di = distinctiveness(pres_matrix, matrices[[x]])
+
+      return(Di)
+    })
+
+  names(functional_distinctiveness) = paste0("Di_", names(dist_matrices))
+
+  return(list(Ui = Ui, Di = functional_distinctiveness))
 }
