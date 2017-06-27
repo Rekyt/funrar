@@ -27,10 +27,7 @@ Suggests:
     ggplot2,
     knitr,
     Matrix,
-    microbenchmark,
-    reshape2,
     rmarkdown,
-    StatMatch,
     testthat
 VignetteBuilder: knitr
 Encoding: UTF-8

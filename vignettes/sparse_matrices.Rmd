@@ -86,7 +86,7 @@ sparse matrices reduce the amount of RAM necessary to store them. The more zeros
 
 We can now compare the performances of the algorithms in rarity indices computation between a sparse matrix and a regular one, using the popular [`microbenchmark`](https://cran.r-project.org/package=microbenchmark) R package:
 
-```{r microBenchDist}
+```{r microBenchDist, eval = FALSE}
 library(funrar)
 
 # Get a table of traits
