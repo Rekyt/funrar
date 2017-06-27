@@ -1,7 +1,7 @@
 # funrar 1.1.1
 
 * Add tests for `rarity_dimensions()`;
-* `rarity_dimensions()` now comprises both Uniqueness and Distinctiveness
+* `rarity_dimensions()` now comprises both Uniqueness and Distinctiveness.
 
 # funrar 1.1.0
 
