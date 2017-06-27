@@ -1,3 +1,8 @@
+# funrar 1.1.1
+
+* Add tests for `rarity_dimensions()`;
+* `rarity_dimensions()` now comprises both Uniqueness and Distinctiveness
+
 # funrar 1.1.0
 
 * Made `make_absolute()` defunct because it was based on false assumptions and would not give back matrices of relative abundances;
