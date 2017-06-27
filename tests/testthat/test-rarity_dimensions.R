@@ -72,7 +72,8 @@ test_that("'rarity_dimensions()' works with sparse matrices", {
 
   ## On Ui element
   expect_s3_class(sparse_rar_dim$Ui, "data.frame")
-  expect_named(sparse_rar_dim$Ui, c("species", paste0("Ui_", trait_names), "Ui_all"))
+  expect_named(sparse_rar_dim$Ui, c("species", paste0("Ui_", trait_names),
+                                    "Ui_all"))
   expect_equal(dim(sparse_rar_dim$Ui), c(3, 5))
 
   ## On Di element
