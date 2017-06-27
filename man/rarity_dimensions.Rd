@@ -16,9 +16,19 @@ abundances values}
 \item{...}{additional arguments supplied to \code{\link[=compute_dist_matrix]{compute_dist_matrix()}}}
 }
 \value{
-A stacked data.frame containing species' names and their uniqueness
-values for each traits (\strong{Ui_X} column for trait \strong{X}), as well as a
-column for the uniqueness value for all traits (\strong{Ui_all} column).
+A list with a data.frame for Uniqueness and a list for
+Distinctiveness, computing Uniqueness and Distinctiveness for each trait
+and all traits taken together:
+\describe{
+\item{\strong{Ui}}{a data.frame containing species' names and their
+uniqueness values for each traits (\strong{Ui_X} column for
+trait \strong{X}), as well as a column for the uniqueness value
+for all traits (\strong{Ui_all} column)}
+\item{\strong{Di}}{a  list of site-species matrix with functional
+distinctiveness values per species per site, with elements
+\strong{Di_X} for distinctiveness computed on trait \strong{X} and
+\strong{Di_all} for distinctiveness computed on all traits}
+}
 }
 \description{
 From a trait table and a site-species matrix compute uniqueness values
@@ -30,11 +40,12 @@ data("aravo", package = "ade4")
 
 # Site-species matrix
 mat = as.matrix(aravo$spe)
+rel_mat = make_relative(mat)
 
 # Example of trait table
 tra = aravo$traits[, c("Height", "SLA", "N_mass")]
 
-ui_dim = rarity_dimensions(mat, tra)
+ui_dim = rarity_dimensions(rel_mat, tra)
 
 }
 \seealso{
