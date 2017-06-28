@@ -91,3 +91,67 @@ rarity_dimensions = function(pres_matrix, traits_table, ...) {
 
   return(list(Ui = Ui, Di = functional_distinctiveness))
 }
+
+uniqueness_dimensions = function(pres_matrix, traits_table, ...) {
+
+  dist_matrices = combination_trait_dist(traits_table, ...)
+
+  ## Compute Uniqueness
+  # Compute uniqueness data frame for all computed distance matrices
+  functional_uniqueness = lapply(
+    names(dist_matrices), function(x, matrices = dist_matrices) {
+      Ui = uniqueness(pres_matrix, matrices[[x]])
+
+      # Rename Ui column with trait name
+      Ui_name = paste0("Ui_", x)
+      colnames(Ui)[2] = Ui_name
+
+      return(Ui)
+    })
+
+  # Join all data.frames for Uniqueness
+  Ui = Reduce(function(x, y) dplyr::inner_join(x, y, by = "species"),
+              functional_uniqueness)
+
+  return(Ui)
+}
+
+distinctiveness_dimensions = function(pres_matrix, trait_table, ...) {
+  dist_matrices = combination_trait_dist(traits_table, ...)
+
+  Di_list = lapply(
+    names(dist_matrices), function(x, matrices = dist_matrices) {
+      Di = distinctiveness(pres_matrix, matrices[[x]])
+
+      return(Di)
+    })
+
+  names(Di_list) = paste0("Di_", names(dist_matrices))
+
+  return(Di_list)
+}
+
+
+combination_trait_dist = function(trait_table, ...) {
+  # Other arguments to compute distance matrix
+  dots = list(...)
+
+  # Compute distance matrices for each trait
+  dist_matrices = lapply(
+    seq_along(traits_table),
+    function(x, trait = traits_table, other_args = dots) {
+
+      # Call 'compute_dist_matrix()' with supplementary arguments
+      do.call("compute_dist_matrix",
+              c(list(traits_table = trait[, x, drop = FALSE]), other_args)
+      )
+    })
+
+  # Rename matrices with trait names
+  names(dist_matrices) = colnames(traits_table)
+
+  # Add full distance matrix (all traits)
+  dist_matrices[["all"]] = compute_dist_matrix(traits_table, ...)
+
+  return(dist_matrices)
+}
