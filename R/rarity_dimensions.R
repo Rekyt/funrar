@@ -1,31 +1,20 @@
 #' Uniqueness dimensions
 #'
-#' From a trait table and a site-species matrix compute uniqueness values
+#' From a trait table and a site-species matrix compute Uniqueness
 #' (nearest functional distance) for each species and each trait, plus computes
 #' it for all the traits.
 #'
 #' @inheritParams restrictedness
 #'
-#' @param traits_table a stacked (= tidy) data.frame of communities
+#' @inheritParams combination_trait_dist
+#' @inheritDotParams combination_trait_dist
 #'
-#' @param ... additional arguments supplied to [compute_dist_matrix()]
+#' @return a data.frame containing species' names and their uniqueness values
+#'         for each traits (**Ui_X** column for trait **X**), as well as a
+#'         column for the uniqueness value for all traits (**Ui_all** column)
 #'
-#' @return A list with a data.frame for Uniqueness and a list for
-#'    Distinctiveness, computing Uniqueness and Distinctiveness for each trait
-#'    and all traits taken together:
-#'    \describe{
-#'      \item{**Ui**}{a data.frame containing species' names and their
-#'                    uniqueness values for each traits (**Ui_X** column for
-#'                    trait **X**), as well as a column for the uniqueness value
-#'                    for all traits (**Ui_all** column)}
-#'      \item{**Di**}{a  list of site-species matrix with functional
-#'                    distinctiveness values per species per site, with elements
-#'                    **Di_X** for distinctiveness computed on trait **X** and
-#'                    **Di_all** for distinctiveness computed on all traits}
-#'      }
-#'
-#' @seealso [uniqueness()], [uniqueness_stack()] and [compute_dist_matrix()] for
-#'          additional arguments
+#' @seealso [distinctiveness_dimensions()], [uniqueness()], [uniqueness_stack()]
+#'          and [compute_dist_matrix()] for additional arguments
 #'
 #' @examples
 #' data("aravo", package = "ade4")
@@ -37,61 +26,9 @@
 #' # Example of trait table
 #' tra = aravo$traits[, c("Height", "SLA", "N_mass")]
 #'
-#' ui_dim = rarity_dimensions(rel_mat, tra)
+#' ui_dim = uniqueness_dimensions(rel_mat, tra)
 #'
 #' @export
-rarity_dimensions = function(pres_matrix, traits_table, ...) {
-
-  # Other arguments to compute distance matrix
-  dots = list(...)
-
-  # Compute distance matrices for each trait
-  dist_matrices = lapply(
-    seq_along(traits_table),
-    function(x, trait = traits_table, other_args = dots) {
-
-      # Call 'compute_dist_matrix()' with supplementary arguments
-      do.call("compute_dist_matrix",
-              c(list(traits_table = trait[, x, drop = FALSE]), other_args)
-      )
-    })
-
-  # Rename matrices with trait names
-  names(dist_matrices) = colnames(traits_table)
-
-  # Add full distance matrix (all traits)
-  dist_matrices[["all"]] = compute_dist_matrix(traits_table, ...)
-
-  ## Compute Uniqueness
-  # Compute uniqueness data frame for all computed distance matrices
-  functional_uniqueness = lapply(
-    names(dist_matrices), function(x, matrices = dist_matrices) {
-      Ui = uniqueness(pres_matrix, matrices[[x]])
-
-      # Rename Ui column with trait name
-      Ui_name = paste0("Ui_", x)
-      colnames(Ui)[2] = Ui_name
-
-      return(Ui)
-    })
-
-  # Join all data.frames for Uniqueness
-  Ui = Reduce(function(x, y) dplyr::inner_join(x, y, by = "species"),
-              functional_uniqueness)
-
-  ## Compute Distinctiveness
-  functional_distinctiveness = lapply(
-    names(dist_matrices), function(x, matrices = dist_matrices) {
-      Di = distinctiveness(pres_matrix, matrices[[x]])
-
-      return(Di)
-    })
-
-  names(functional_distinctiveness) = paste0("Di_", names(dist_matrices))
-
-  return(list(Ui = Ui, Di = functional_distinctiveness))
-}
-
 uniqueness_dimensions = function(pres_matrix, traits_table, ...) {
 
   dist_matrices = combination_trait_dist(traits_table, ...)
@@ -116,6 +53,36 @@ uniqueness_dimensions = function(pres_matrix, traits_table, ...) {
   return(Ui)
 }
 
+#' Distinctiveness dimensions
+#'
+#' From a trait datA.frame and a site-species matrix compute Distinctiveness
+#' (average pairwise functional distance) for each species in each community
+#' on each provided trait and on all traits taken altogether.
+#'
+#' @inheritParams uniqueness_dimensions
+#'
+#' @return a list of site-species matrix with functional distinctiveness values
+#'         per species per site, with elements **Di_X** for distinctiveness
+#'         computed on trait **X** and **Di_all** for distinctiveness computed
+#'         on all traits.
+#'
+#' @seealso [uniqueness_dimensions()], [distinctiveness()],
+#'          [distinctiveness_stack()] and [compute_dist_matrix()] for additional
+#'          arguments
+#'
+#' @examples
+#' data("aravo", package = "ade4")
+#'
+#' # Site-species matrix
+#' mat = as.matrix(aravo$spe)
+#' rel_mat = make_relative(mat)
+#'
+#' # Example of trait table
+#' tra = aravo$traits[, c("Height", "SLA", "N_mass")]
+#'
+#' di_dim = distinctiveness_dimensions(rel_mat, tra)
+#'
+#' @export
 distinctiveness_dimensions = function(pres_matrix, trait_table, ...) {
   dist_matrices = combination_trait_dist(traits_table, ...)
 
@@ -132,6 +99,19 @@ distinctiveness_dimensions = function(pres_matrix, trait_table, ...) {
 }
 
 
+#' Multiple distance matrix
+#'
+#' Internal function to compute combinations of distance matrices from a
+#' data.frame of traits, using [compute_dist_matrix()].
+#'
+#' @return A list of functional distance matrices, one for each provided trait
+#'         plus an additional matrix for all traits taken altogether
+#'
+#' @param traits_table a data.frame (or matrix) with traits in columns and
+#'                     species as row names.
+#'
+#' @param ... additional arguments supplied to [compute_dist_matrix()]
+#'
 combination_trait_dist = function(trait_table, ...) {
   # Other arguments to compute distance matrix
   dots = list(...)
