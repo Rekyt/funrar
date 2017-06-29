@@ -1,3 +1,9 @@
+# funrar 1.2.0
+
+* Split `rarity_dimensions()` in two more explicit functions: `uniqueness_dimensions()` and `distinctiveness_dimensions()` split corresponding tests;
+* Add internal function to compute multiple functional distance matrix using a single trait table (`combination_trait_dist()`);
+* `distinctiveness()` now fully conserve the dimnames of the provided site-species matrix.
+
 # funrar 1.1.1
 
 * Add tests for `rarity_dimensions()`;
