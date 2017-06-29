@@ -270,6 +270,7 @@ distinctiveness = function(pres_matrix, dist_matrix) {
             "Computed value assigned to 'NaN'")
   }
 
+  dimnames(index_matrix) = dimnames(pres_matrix)
 
   return(index_matrix)
 }

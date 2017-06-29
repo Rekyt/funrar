@@ -80,7 +80,9 @@ undef_dist_mat[which(undef_dist_mat == 0)] = NA_real_
 undef_dist_mat[which(undef_dist_mat == 1)] = undef_dist$Di
 
 suppressWarnings({
-  undef_test = distinctiveness(small_mat, dist_mat)
+  suppressMessages({
+    undef_test = distinctiveness(small_mat, dist_mat)
+  })
 })
 
 
@@ -132,6 +134,9 @@ test_that("Correct Di computation with different comm. without abundance",{
 
   expect_message(distinctiveness(valid_mat[2:3, 1:4], dist_mat[-1, -1]))
 
+  # Conservation of dimensions names of indices matrix
+  expect_identical(dimnames(distinctiveness(valid_mat, dist_mat)),
+                   dimnames(valid_mat))
 
   # Good Distinctiveness computations without abundances
   c_dist = distinctiveness_stack(com_df, "species", "site", abund = NULL,
@@ -151,6 +156,7 @@ test_that("Correct Di computation with different comm. without abundance",{
   # Distinctiveness with abundances
   expect_equal(distinctiveness_com(abund_com[, -4], "species", "abund",
                                         dist_mat), abund_com)
+
 })
 
 
