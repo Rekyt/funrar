@@ -109,3 +109,26 @@ test_that("'distinctiveness_dimensions()' works with sparse matrices", {
                 as.logical() %>%
                 all())
 })
+
+test_that("'*_dimensions()' functions outputs the right computations", {
+  simple_mat = matrix(rep(1, 4), ncol = 2)
+
+  simple_trait = data.frame(tr1 = c(0, 1))
+  rownames(simple_trait) = c("a", "b")
+
+  dimnames(simple_mat) = list(sites = c("s1", "s2"), species = c("a", "b"))
+
+  simple_ui_dim = uniqueness_dimensions(simple_mat, simple_trait)
+  simple_di_dim = distinctiveness_dimensions(simple_mat, simple_trait)
+
+  expected_ui = data.frame(species = c("a", "b"),
+                           Ui_tr1  = c(1, 1),
+                           Ui_all  = c(1, 1))
+
+  expected_single_di = matrix(1, ncol = 2, nrow = 2)
+  dimnames(expected_single_di) = dimnames(simple_mat)
+  expected_di = list(Di_tr1 = expected_single_di, Di_all = expected_single_di)
+
+  expect_identical(simple_ui_dim, expected_ui)
+  expect_identical(simple_di_dim, expected_di)
+})
