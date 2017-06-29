@@ -15,12 +15,6 @@ abundances values}
 columns, \strong{row names} should be \strong{species names},}
 
 \item{...}{additional arguments supplied to \code{\link[=compute_dist_matrix]{compute_dist_matrix()}}}
-
-\item{...}{Arguments passed on to \code{combination_trait_dist}
-\describe{
-  \item{traits_table}{a data.frame of traits with species in row and traits in
-columns, \strong{row names} should be \strong{species names},}
-}}
 }
 \value{
 a data.frame containing species' names and their uniqueness values

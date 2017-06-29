@@ -7,7 +7,6 @@
 #' @inheritParams restrictedness
 #'
 #' @inheritParams combination_trait_dist
-#' @inheritDotParams combination_trait_dist
 #'
 #' @return a data.frame containing species' names and their uniqueness values
 #'         for each traits (**Ui_X** column for trait **X**), as well as a
