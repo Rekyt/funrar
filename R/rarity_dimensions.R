@@ -83,7 +83,7 @@ uniqueness_dimensions = function(pres_matrix, traits_table, ...) {
 #' di_dim = distinctiveness_dimensions(rel_mat, tra)
 #'
 #' @export
-distinctiveness_dimensions = function(pres_matrix, trait_table, ...) {
+distinctiveness_dimensions = function(pres_matrix, traits_table, ...) {
   dist_matrices = combination_trait_dist(traits_table, ...)
 
   Di_list = lapply(
@@ -99,7 +99,7 @@ distinctiveness_dimensions = function(pres_matrix, trait_table, ...) {
 }
 
 
-#' Multiple distance matrix
+#' Multiple distance matrices
 #'
 #' Internal function to compute combinations of distance matrices from a
 #' data.frame of traits, using [compute_dist_matrix()].
@@ -107,12 +107,11 @@ distinctiveness_dimensions = function(pres_matrix, trait_table, ...) {
 #' @return A list of functional distance matrices, one for each provided trait
 #'         plus an additional matrix for all traits taken altogether
 #'
-#' @param traits_table a data.frame (or matrix) with traits in columns and
-#'                     species as row names.
+#' @inheritParams compute_dist_matrix
 #'
 #' @param ... additional arguments supplied to [compute_dist_matrix()]
 #'
-combination_trait_dist = function(trait_table, ...) {
+combination_trait_dist = function(traits_table, ...) {
   # Other arguments to compute distance matrix
   dots = list(...)
 
@@ -123,7 +122,8 @@ combination_trait_dist = function(trait_table, ...) {
 
       # Call 'compute_dist_matrix()' with supplementary arguments
       do.call("compute_dist_matrix",
-              c(list(traits_table = trait[, x, drop = FALSE]), other_args)
+              c(list(traits_table = traits_table[, x, drop = FALSE]),
+                other_args)
       )
     })
 
