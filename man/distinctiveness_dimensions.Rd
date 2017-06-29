@@ -23,7 +23,7 @@ computed on trait \strong{X} and \strong{Di_all} for distinctiveness computed
 on all traits.
 }
 \description{
-From a trait datA.frame and a site-species matrix compute Distinctiveness
+From a trait data.frame and a site-species matrix compute Distinctiveness
 (average pairwise functional distance) for each species in each community
 on each provided trait and on all traits taken altogether.
 }

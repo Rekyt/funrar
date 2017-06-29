@@ -54,7 +54,7 @@ uniqueness_dimensions = function(pres_matrix, traits_table, ...) {
 
 #' Distinctiveness dimensions
 #'
-#' From a trait datA.frame and a site-species matrix compute Distinctiveness
+#' From a trait data.frame and a site-species matrix compute Distinctiveness
 #' (average pairwise functional distance) for each species in each community
 #' on each provided trait and on all traits taken altogether.
 #'
