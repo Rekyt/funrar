@@ -1,0 +1,23 @@
+citHeader("To cite funrar in publications use the reference article or the second reference specifying the package version number")
+
+bibentry(
+  bibtype = "Article",
+  title   = "funrar: {An} {R} package to characterize functional rarity",
+  journal = "Diversity and Distributions",
+  author  = c(person("Matthias Grenié"), person("Pierre Denelle"),
+              person("Caroline M. Tucker"), person("François Munoz"),
+              person("Cyrille Violle")),
+  year    = "2017",
+  url     = "http://onlinelibrary.wiley.com/doi/10.1111/ddi.12629/abstract",
+  doi     = "10.1111/ddi.12629")
+
+bibentry(
+  bibtype = "Manual",
+  title   = "funrar: {An} {R} package to characterize functional rarity",
+  author  = c(person("Matthias Grenié"), person("Pierre Denelle"),
+              person("Caroline M. Tucker"), person("François Munoz"),
+              person("Cyrille Violle")),
+  year    = "2017",
+  note    = "R package version 1.2.0",
+  url     = "https://cran.r-project.org/package=funrar"
+)
