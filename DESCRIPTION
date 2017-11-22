@@ -1,6 +1,6 @@
 Package: funrar
 Title: Functional Rarity Indices Computation
-Version: 1.2.0
+Version: 1.2.0.9999
 Authors@R: c(
   person("Matthias", "Grenié", email = "matthias.grenie@gmail.com",
          role = c("aut", "cre"), comment = c(ORCID = "0000-0002-4659-7522")),
