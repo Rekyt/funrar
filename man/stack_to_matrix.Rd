@@ -5,7 +5,8 @@
 \alias{tidy_to_matrix}
 \title{Stacked (= tidy) data.frame to matrix}
 \usage{
-stack_to_matrix(my_df, col_to_row, col_to_col, col_value = NULL)
+stack_to_matrix(my_df, col_to_row, col_to_col, col_value = NULL,
+  sparse = FALSE)
 }
 \arguments{
 \item{my_df}{data.frame you want to transform in matrix}
@@ -16,8 +17,14 @@ want to put into matrix rows}
 \item{col_to_col}{character vector of the name of the data.frame column you
 want to be as columns in matrix}
 
-\item{col_value}{(optional) character vector indicating the name of a column
-coding the values that will be put in the matrix}
+\item{col_value}{(optional, default = `NULL``) character vector indicating
+the name of a column coding the values that will be put in
+the matrix}
+
+\item{sparse}{(optional, default = \code{FALSE}) logical indicating whether to
+return a sparse matrix (if \code{TRUE} requires
+\href{https://cran.r-project.org/package=tidytext}{tidytext}
+package)}
 }
 \value{
 a matrix with given \code{col_to_row} column in rows and \code{col_to_col}
