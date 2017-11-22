@@ -14,8 +14,14 @@
 #' @param col_to_col character vector of the name of the data.frame column you
 #'                   want to be as columns in matrix
 #'
-#' @param col_value (optional) character vector indicating the name of a column
-#'                  coding the values that will be put in the matrix
+#' @param col_value (optional, default = `NULL``) character vector indicating
+#'                  the name of a column coding the values that will be put in
+#'                  the matrix
+#'
+#' @param sparse    (optional, default = `FALSE`) logical indicating whether to
+#'                  return a sparse matrix (if `TRUE` requires
+#'                  [`tidytext`](https://cran.r-project.org/package=tidytext)
+#'                  package)
 #'
 #' @return a matrix with given `col_to_row` column in rows and `col_to_col`
 #' column in columns. If some cells are not present in the data.frame (e.g. some
@@ -33,8 +39,9 @@
 #'
 #' @export
 stack_to_matrix = tidy_to_matrix = function(my_df, col_to_row, col_to_col,
-                                            col_value = NULL) {
+                                            col_value = NULL, sparse = FALSE) {
 
+  # Check if column names are in specified df
   col_names = colnames(my_df)
 
   assign_col = c(col_to_row, col_to_col)
@@ -56,14 +63,33 @@ stack_to_matrix = tidy_to_matrix = function(my_df, col_to_row, col_to_col,
 
   }
 
-  if (is.null(col_value)) {
-    my_mat = tapply(rep(1, nrow(my_df)), list(my_df[[col_to_row]],
-                                                  my_df[[col_to_col]]), sum)
+  # Build matrix
+  if (sparse) {
+    # Sparse Matrix
+    if (requireNamespace("tidytext", quietly = TRUE)) {
+      if (is.null(col_value)) {
+        my_mat = tidytext::cast_sparse_(my_df, col_to_row, col_to_col)
+      } else {
+        my_mat = tidytext::cast_sparse_(my_df, col_to_row, col_to_col,
+                                        col_value)
+      }
+    } else {
+      stop("The tidytext package need to be installed to get a sparse matrix")
+    }
+
   } else {
-    my_mat = tapply(my_df[[col_value]], list(my_df[[col_to_row]],
-                                         my_df[[col_to_col]]), sum)
+    # Dense Matrix
+    # When value column is not specified add a 1 at each found position
+    if (is.null(col_value)) {
+      my_mat = tapply(rep(1, nrow(my_df)), list(my_df[[col_to_row]],
+                                                my_df[[col_to_col]]), sum)
+    } else {
+      my_mat = tapply(my_df[[col_value]], list(my_df[[col_to_row]],
+                                               my_df[[col_to_col]]), sum)
+    }
   }
 
+  # Name dimensions according to provided columns
   names(dimnames(my_mat)) = assign_col
 
   return(my_mat)

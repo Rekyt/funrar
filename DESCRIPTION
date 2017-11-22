@@ -32,7 +32,8 @@ Suggests:
     knitr,
     Matrix,
     rmarkdown,
-    testthat
+    testthat,
+    tidytext
 VignetteBuilder: knitr
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)

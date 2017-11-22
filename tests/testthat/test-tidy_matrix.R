@@ -146,6 +146,35 @@ test_that("Conversion from sparse & dense matrices to tidy data.frame", {
                "col")
 })
 
+test_that("Conversion from tidy data.frame to sparse & dense matrices", {
+  library(Matrix)
+
+  ## Presence-absence matrices
+  # Replace NAs with zero
+  valid_zero = valid_mat
+  valid_zero[is.na(valid_zero)] = 0
+  # Target matrices
+  valid_sparse = as(valid_zero, "sparseMatrix")
+  names(dimnames(valid_sparse)) = c("species", "site")
+
+  expect_equal(stack_to_matrix(com_df, "species", "site", sparse = TRUE),
+               valid_sparse)
+
+
+  ## Matrices with abundances
+  # Replace NAs with zero
+  abund_zero = abund_mat
+  abund_zero[is.na(abund_zero)] = 0
+  # Target matrices
+  abund_sparse = as(abund_zero, "sparseMatrix")
+  names(dimnames(abund_sparse)) = c("species", "site")
+
+
+  expect_equal(stack_to_matrix(abund_df, "species", "site", "val",
+                               sparse = TRUE), abund_sparse)
+
+})
+
 test_that("Conversion works only for matrices or coercible objects",{
 
   valid_df = as.data.frame(valid_mat)
