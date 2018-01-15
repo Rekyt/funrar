@@ -40,7 +40,8 @@ distance metric. When traits are both quantitative and qualitative Gower's
 distance metric (Euclidean, Manhattan, Minkowski) can be used - as long
 as the rows and the columns are named following the species. When using
 mixed data consider also Gower's distance extension by Pavoine et al.
-(2009).
+(2009). \strong{IMPORTANT NOTE}: in order to get functional rarity indices
+between 0 and 1, the distance metric has to be scaled between 0 and 1.
 }
 \examples{
 set.seed(1)  # For reproducibility

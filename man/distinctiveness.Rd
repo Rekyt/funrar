@@ -36,6 +36,8 @@ computed as such:
 with \eqn{D_i} the functional distinctiveness of species \eqn{i}, \eqn{N}
 the total number of species in the community and \eqn{d_{ij}}{d_ij} the
 functional distance between species \eqn{i} and species \eqn{j}.
+\strong{IMPORTANT NOTE}: in order to get functional rarity indices between 0
+and 1, the distance metric has to be scaled between 0 and 1.
 }
 \section{Note}{
 

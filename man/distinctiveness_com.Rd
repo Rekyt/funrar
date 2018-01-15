@@ -30,7 +30,8 @@ more the species is functionally distinct from the rest of the community. See
 \code{\link[=distinctiveness]{distinctiveness()}} function or the functional rarity
 indices vignette included in the package
 (type \code{vignette("rarity_indices", package = "funrar")}), for more details
-on the metric.
+on the metric. \strong{IMPORTANT NOTE}: in order to get functional rarity indices
+between 0 and 1, the distance metric has to be scaled between 0 and 1.
 }
 \section{Caution}{
 

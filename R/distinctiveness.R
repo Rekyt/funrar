@@ -13,7 +13,8 @@
 #' [distinctiveness()] function or the functional rarity
 #' indices vignette included in the package
 #' (type `vignette("rarity_indices", package = "funrar")`), for more details
-#' on the metric.
+#' on the metric. **IMPORTANT NOTE**: in order to get functional rarity indices
+#' between 0 and 1, the distance metric has to be scaled between 0 and 1.
 #'
 #' @inheritParams scarcity_com
 #'
@@ -85,7 +86,8 @@ distinctiveness_com = function(com_df, sp_col, abund = NULL, dist_matrix) {
 #' the community. See [distinctiveness()] function or the
 #' functional rarity indices vignette included in the package
 #' (type `vignette("rarity_indices", package = "funrar")`), for more details
-#' on the metric.
+#' on the metric. **IMPORTANT NOTE**: in order to get functional rarity indices
+#' between 0 and 1, the distance metric has to be scaled between 0 and 1.
 #'
 #' @inheritParams distinctiveness_com
 #'
@@ -194,6 +196,8 @@ distinctiveness_stack = function(com_df, sp_col, com, abund = NULL,
 #'    with \eqn{D_i} the functional distinctiveness of species \eqn{i}, \eqn{N}
 #'    the total number of species in the community and \eqn{d_{ij}}{d_ij} the
 #'    functional distance between species \eqn{i} and species \eqn{j}.
+#'    **IMPORTANT NOTE**: in order to get functional rarity indices between 0
+#'    and 1, the distance metric has to be scaled between 0 and 1.
 #'
 #' @importFrom dplyr %>% bind_rows
 #' @importFrom methods is
