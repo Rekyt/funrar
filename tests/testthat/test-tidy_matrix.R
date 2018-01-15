@@ -157,6 +157,11 @@ test_that("Conversion from tidy data.frame to sparse & dense matrices", {
   valid_sparse = as(valid_zero, "sparseMatrix")
   names(dimnames(valid_sparse)) = c("species", "site")
 
+  if (!requireNamespace("tidytext", quietly = TRUE)) {
+    expect_error(stack_to_matrix(com_df, "species", "site", sparse = TRUE),
+                 "The tidytext package need to be installed to get a sparse matrix")
+  }
+
   expect_equal(stack_to_matrix(com_df, "species", "site", sparse = TRUE),
                valid_sparse)
 
