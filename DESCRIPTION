@@ -7,7 +7,11 @@ Authors@R: c(
   person("Pierre", "Denelle", email = "pierre.denelle@cefe.cnrs.fr",
          role = "aut", comment = c(ORCID = "0000-0001-5037-2281")),
   person("Caroline", "Tucker", email = "carolinemtucker@gmail.com",
-         role = "aut", comment = c(ORCID = "0000-0002-4871-2010"))
+         role = "aut", comment = c(ORCID = "0000-0002-4871-2010")),
+  person("François", "Munoz", email = "fmunoz@univ-grenoble-alpes.fr",
+         role = "ths", comment = c(ORCID = "0000-0001-8776-4705")),
+  person("Cyrille", "Violle", email = "cyrille.violle@cefe.cnrs.fr",
+         role = "ths", comment = c(ORCID = "0000-0002-2471-9226"))
   )
 Description: Computes functional rarity indices as proposed by Violle et al.
     (2017) <doi:10.1016/j.tree.2017.02.002>. Various indices can be computed
