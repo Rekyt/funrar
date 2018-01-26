@@ -22,7 +22,8 @@ sparse_mat = as(pres_mat, "sparseMatrix")
 
 # Tests ------------------------------------------------------------------------
 test_that("'uniqueness_dimensions()' outputs good objects", {
-  ui_dim = uniqueness_dimensions(pres_mat, given_traits)
+  ui_dim = uniqueness_dimensions(pres_mat, given_traits,
+                                 metric = "euclidean")
 
   expect_s3_class(ui_dim, "data.frame")
   expect_named(ui_dim, c("species", paste0("Ui_", trait_names), "Ui_all"))
@@ -30,7 +31,8 @@ test_that("'uniqueness_dimensions()' outputs good objects", {
 })
 
 test_that("'distinctiveness_dimensions()' outputs good objects", {
-  di_dim = distinctiveness_dimensions(pres_mat, given_traits)
+  di_dim = distinctiveness_dimensions(pres_mat, given_traits,
+                                      metric = "euclidean")
 
   # General check
   expect_type(di_dim, "list")
@@ -66,9 +68,13 @@ test_that("'distinctiveness_dimensions()' outputs good objects", {
 })
 
 test_that("'uniqueness_dimensions()' works with sparse matrices", {
-  expect_silent(uniqueness_dimensions(sparse_mat, given_traits))
+  expect_warning(uniqueness_dimensions(sparse_mat, given_traits),
+                 paste0("Only numeric traits provided, consider using ",
+                        "euclidean distance."),
+                 fixed = TRUE)
 
-  sparse_ui_dim = uniqueness_dimensions(sparse_mat, given_traits)
+  sparse_ui_dim = uniqueness_dimensions(sparse_mat, given_traits,
+                                        metric = "euclidean")
 
   expect_s3_class(sparse_ui_dim, "data.frame")
   expect_named(sparse_ui_dim, c("species", paste0("Ui_", trait_names),
@@ -77,7 +83,8 @@ test_that("'uniqueness_dimensions()' works with sparse matrices", {
 })
 
 test_that("'distinctiveness_dimensions()' works with sparse matrices", {
-  sparse_di_dim = distinctiveness_dimensions(sparse_mat, given_traits)
+  sparse_di_dim = distinctiveness_dimensions(sparse_mat, given_traits,
+                                             metric = "euclidean")
 
   # General checks
   expect_type(sparse_di_dim, "list")
@@ -118,8 +125,10 @@ test_that("'*_dimensions()' functions outputs the right computations", {
 
   dimnames(simple_mat) = list(sites = c("s1", "s2"), species = c("a", "b"))
 
-  simple_ui_dim = uniqueness_dimensions(simple_mat, simple_trait)
-  simple_di_dim = distinctiveness_dimensions(simple_mat, simple_trait)
+  simple_ui_dim = uniqueness_dimensions(simple_mat, simple_trait,
+                                        metric = "euclidean")
+  simple_di_dim = distinctiveness_dimensions(simple_mat, simple_trait,
+                                             metric = "euclidean")
 
   expected_ui = data.frame(species = c("a", "b"),
                            Ui_tr1  = c(1, 1),
