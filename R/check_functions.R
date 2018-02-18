@@ -15,7 +15,7 @@
 check_matrix = function(given_matrix, message = NULL) {
 
   if (!is.matrix(given_matrix) & !is(given_matrix, "sparseMatrix")) {
-    stop(paste0("Provided ", message, " matrix is not a matrix"))
+    stop("Provided ", message, " matrix is not a matrix")
   }
 }
 
@@ -30,12 +30,10 @@ check_matrix = function(given_matrix, message = NULL) {
 #   nothing, shows a message
 check_bigger_dist = function(pres_matrix, dist_matrix) {
 
-  mess = paste("Distance matrix bigger than site-species matrix",
-               "Taking subset of distance matrix", sep = "\n")
-
   if ((ncol(dist_matrix) > ncol(pres_matrix)) |
       (nrow(dist_matrix) > ncol(pres_matrix))) {
-    message(mess)
+    message("Distance matrix bigger than site-species matrix\n",
+            "Taking subset of distance matrix")
   }
 
 }
@@ -52,12 +50,11 @@ check_bigger_dist = function(pres_matrix, dist_matrix) {
 # Returns:
 #   nothing, shows a message
 check_bigger_pres = function(pres_matrix, dist_matrix) {
-  mess = paste("More species in site-species matrix than in distance matrix\n",
-          "Taking subset of site-species matrix", sep = "")
 
   if ((ncol(pres_matrix) > nrow(dist_matrix)) |
       (ncol(pres_matrix) > ncol(dist_matrix))) {
-    message(mess)
+    message("More species in site-species matrix than in distance matrix\n",
+            "Taking subset of site-species matrix")
   }
 }
 
@@ -151,7 +148,7 @@ check_df = function(com_df) {
 #   nothing, shows an error message if column is not in provided data.frame
 check_col_in_df = function(com_df, given_col) {
   if (!(given_col %in% colnames(com_df))) {
-    stop(paste0("'", given_col,"' column not in provided data.frame"))
+    stop("'", given_col,"' column not in provided data.frame")
   }
 }
 

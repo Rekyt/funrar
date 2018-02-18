@@ -52,12 +52,12 @@ stack_to_matrix = tidy_to_matrix = function(my_df, col_to_row, col_to_col,
 
     if (length(absent) == 1) {
 
-      stop(paste0("Column '", absent, "' is not in data.frame"))
+      stop("Column '", absent, "' is not in data.frame")
 
     } else {
 
-      stop(paste0("Columns '", absent[1], "' and '", absent[2],
-                  "' are not in data.frame"))
+      stop("Columns '", absent[1], "' and '", absent[2],
+           "' are not in data.frame")
 
     }
 
