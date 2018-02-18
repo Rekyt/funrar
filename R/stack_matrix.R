@@ -14,7 +14,7 @@
 #' @param col_to_col character vector of the name of the data.frame column you
 #'                   want to be as columns in matrix
 #'
-#' @param col_value (optional, default = `NULL``) character vector indicating
+#' @param col_value (optional, default = `NULL`) character vector indicating
 #'                  the name of a column coding the values that will be put in
 #'                  the matrix
 #'

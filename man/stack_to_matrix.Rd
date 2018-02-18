@@ -17,7 +17,7 @@ want to put into matrix rows}
 \item{col_to_col}{character vector of the name of the data.frame column you
 want to be as columns in matrix}
 
-\item{col_value}{(optional, default = `NULL``) character vector indicating
+\item{col_value}{(optional, default = \code{NULL}) character vector indicating
 the name of a column coding the values that will be put in
 the matrix}
 
