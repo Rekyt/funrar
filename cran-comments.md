@@ -1,10 +1,14 @@
 ## Test environments
-* local Mac OSX 10.10.5 install, R 3.3.3;
-* ubuntu 12.04 (on travis-ci), R 3.4.0;
-* win-builder (devel and release);
-* Fedora Linux, R-devel, clang, gfortran (r-hub);
-* Ubuntu Linux 16.04 LTS, R-release, GCC (r-hub);
-* Debian Linux, R-release, GCC (r-hub);
+* local Mac OSX 10.12 install, R 3.4.3;
+* ubuntu 14.04.5 (on travis-ci), R 3.4.2;
+* Rhub
+  + x86_64-apple-darwin15.6.0 (64-bit), R 3.4.1;
+  + Centos, R 3.4.3 (error with tidytext);
+  + Fedora Linux, Rdevel;
+  + Debian Linux, R 3.4.3;
+  + Ubuntu Linux 16.04 LTS, R 3.4.3, R devel;
+  + Windows, R 3.3.3, R 3.4.3.
+* win-builder R devel – 1 Note for mispelling;
 * Windows Server 2008 R2 SP1, R-devel, 32/64 bit (r-hub).
 
 ## R CMD check results
