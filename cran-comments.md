@@ -27,5 +27,10 @@ Maintainer: 'Matthias Grenié <matthias.grenie@gmail.com>'
 
 Possibly mis-spelled words in DESCRIPTION:
   Grenié (20:28)
+  Indices (2:26)
+  Violle (16:64)
+  al (16:74, 20:38)
+  et (16:71, 20:35)
   funrar (20:5)
+  indices (16:41, 17:54)
 ```
