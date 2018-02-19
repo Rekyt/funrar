@@ -25,12 +25,7 @@ one NOTE on win-builder & r-hub:
 * checking CRAN incoming feasibility ... NOTE
 Maintainer: 'Matthias Grenié <matthias.grenie@gmail.com>'
 
-Days since last update: 2
-
 Possibly mis-spelled words in DESCRIPTION:
-  Indices (2:26)
-  Violle (9:64)
-  al (9:74)
-  et (9:71)
-  indices (9:41, 10:54)
+  Grenié (20:28)
+  funrar (20:5)
 ```
