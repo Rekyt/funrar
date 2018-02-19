@@ -1,5 +1,6 @@
 ## Test environments
 * local Mac OSX 10.12 install, R 3.4.3;
+* local Windows 8, R 3.4.3;
 * ubuntu 14.04.5 (on travis-ci), R 3.4.2;
 * Rhub
   + x86_64-apple-darwin15.6.0 (64-bit), R 3.4.1;
