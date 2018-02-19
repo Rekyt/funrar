@@ -1,3 +1,12 @@
+# funrar 1.2.1
+
+* Add Authors' ORCID and all contributors;
+* funrar paper is now included in DESCRIPTION, README.md and has a proper CITATIONq file;
+* Fix typos in documentation;
+* Transformation from tidy data.frame to sparse matrix is now possible using `stack_to_matrix(x, sparse = TRUE)` (#25);
+* Add a warning message when using only continuous traits with function `comput_dist_matrix()`, as it defaults to Gower's distance (#27);
+* Specification in help that functional distances need to be scaled between 0 and 1 prior to distinctiveness computation (#26).
+
 # funrar 1.2.0
 
 * Split `rarity_dimensions()` in two more explicit functions: `uniqueness_dimensions()` and `distinctiveness_dimensions()` split corresponding tests;
