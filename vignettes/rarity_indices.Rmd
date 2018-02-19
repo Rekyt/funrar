@@ -1,10 +1,10 @@
 ---
-title: "How to use funrar, an example with plant communities dataset."
+title: "How to use `funrar`, an example with plant communities dataset."
 author: "Denelle Pierre & Greni\u00e9 Matthias"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{How to use funrar, an example with plant communities dataset}
+  %\VignetteIndexEntry{How to use 'funrar', an example with plant communities dataset}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---

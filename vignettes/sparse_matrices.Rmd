@@ -1,10 +1,10 @@
 ---
-title: "Sparse Marices with funrar"
+title: "Sparse Marices with `funrar`"
 author: "Matthias Greni\u00e9"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Sparse Marices with funrar}
+  %\VignetteIndexEntry{Sparse Marices with 'funrar'}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
