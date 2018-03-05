@@ -1,3 +1,7 @@
+# funrar 1.2.2
+
+* Fix a bug in the test of `distinctiveness_dimensions()` that generated errors on cran server.
+
 # funrar 1.2.1
 
 * Add Authors' ORCID and all contributors;
