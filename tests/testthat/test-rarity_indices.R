@@ -185,7 +185,7 @@ test_that("Di is undefined for a community with a single species", {
 
   expect_equal(distinctiveness_stack(small_df, "col", "row", "value", dist_mat),
                data.frame(col   = rep(c("a", "b"), 2),
-                          row   = rep(c("s1", "s2"), 2, each = TRUE),
+                          row   = rep(c("s1", "s2"), each = 2),
                           value = c(1, 0, 0, 1),
                           Di    = c(NaN, NA, NA, NaN)))
 })

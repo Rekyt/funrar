@@ -36,6 +36,7 @@
 #' @export
 distinctiveness_com = function(com_df, sp_col, abund = NULL, dist_matrix) {
 
+  # Find species in common between community df and distance matrix
   common = species_in_common_df(com_df, sp_col, dist_matrix)
 
   com_df = subset(com_df, com_df[[sp_col]] %in% common)
@@ -71,6 +72,10 @@ distinctiveness_com = function(com_df, sp_col, abund = NULL, dist_matrix) {
     com_df[, "Di"] = NaN
   }
 
+  # Replaces computed Di values by NA for species absent from communities
+  if (!is.null(abund)) {
+    com_df[com_df[[abund]] == 0, "Di"] = NA
+  }
 
   return(com_df)
 }
