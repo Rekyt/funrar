@@ -2,9 +2,12 @@
 % Please edit documentation in R/restrictedness.R
 \name{restrictedness_stack}
 \alias{restrictedness_stack}
+\alias{restrictedness_tidy}
 \title{Geographical Restrictedness for stacked data.frame}
 \usage{
 restrictedness_stack(com_df, sp_col, com)
+
+restrictedness_tidy(com_df, sp_col, com)
 }
 \arguments{
 \item{com_df}{a stacked (= tidy) data.frame of communities}
@@ -25,7 +28,8 @@ extent of a species in a given dataset, it is close to 1 when the species is
 present in only a single site of the dataset (restricted) and close to 0 when
 the species is present at all sites. It estimates the geographical extent of
 a species in a dataset. See \code{\link[=restrictedness]{restrictedness()}} for details
-on restrictedness computation.
+on restrictedness computation. You can either use \code{_stack()} or \code{_tidy()}
+functions as they are aliases of one another.
 }
 \examples{
 data("aravo", package = "ade4")

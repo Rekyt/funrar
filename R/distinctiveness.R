@@ -88,6 +88,8 @@ distinctiveness_com = function(com_df, sp_col, abund = NULL, dist_matrix) {
 #' (type `vignette("rarity_indices", package = "funrar")`), for more details
 #' on the metric. **IMPORTANT NOTE**: in order to get functional rarity indices
 #' between 0 and 1, the distance metric has to be scaled between 0 and 1.
+#' You can either use `_stack()` or `_tidy()` functions as they are aliases of
+#' one another.
 #'
 #' @inheritParams distinctiveness_com
 #'
@@ -154,6 +156,12 @@ distinctiveness_stack = function(com_df, sp_col, com, abund = NULL,
 
   return(com_distinctiveness)
 }
+
+# Distinctiveness tidy alias
+#' @export
+#' @rdname distinctiveness_stack
+distinctiveness_tidy = distinctiveness_stack
+
 
 #' Functional Distinctiveness on site-species matrix
 #'

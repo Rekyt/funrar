@@ -50,7 +50,8 @@ scarcity_com = function(com_df, sp_col, abund) {
 #' in a community and close to 0 when it is abundant. See [scarcity()] function
 #' or the functional rarity indices vignette included in the package (type
 #' `vignette("rarity_indices", package = "funrar")`) for details about the
-#' index.
+#' index. You can either use `_stack()` or `_tidy()` functions as they are
+#' aliases of one another.
 #'
 #' @inheritParams scarcity_com
 #'
@@ -99,6 +100,12 @@ scarcity_stack = function(com_df, sp_col, com, abund) {
 
   return(com_scarcity)
 }
+
+# Scarcity tidy alias
+#' @export
+#' @rdname scarcity_stack
+scarcity_tidy = scarcity_stack
+
 
 #' Scarcity on site-species matrix
 #'

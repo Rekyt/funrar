@@ -2,9 +2,12 @@
 % Please edit documentation in R/uniqueness.R
 \name{uniqueness_stack}
 \alias{uniqueness_stack}
+\alias{uniqueness_tidy}
 \title{Functional Uniqueness on stacked data.frame}
 \usage{
 uniqueness_stack(com_df, sp_col, dist_matrix)
+
+uniqueness_tidy(com_df, sp_col, dist_matrix)
 }
 \arguments{
 \item{com_df}{a data frame of the species in the regional pool.}
@@ -23,7 +26,8 @@ values.
 Computes functional uniqueness values over a given regional pool. Functional
 uniqueness gives the functional distance to the nearest-neighbor of a given
 species in the provided distance matrix. See \code{\link[=uniqueness]{uniqueness()}} function for
-details on computation.
+details on computation. You can either use \code{_stack()} or \code{_tidy()} functions
+as they are aliases of one another.
 }
 \examples{
 data("aravo", package = "ade4")

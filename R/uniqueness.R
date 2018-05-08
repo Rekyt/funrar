@@ -8,7 +8,8 @@
 #' Computes functional uniqueness values over a given regional pool. Functional
 #' uniqueness gives the functional distance to the nearest-neighbor of a given
 #' species in the provided distance matrix. See [uniqueness()] function for
-#' details on computation.
+#' details on computation. You can either use `_stack()` or `_tidy()` functions
+#' as they are aliases of one another.
 #'
 #' @param com_df a data frame of the species in the regional pool.
 #'
@@ -68,6 +69,11 @@ uniqueness_stack = function(com_df, sp_col, dist_matrix) {
 
   return(u_df)
 }
+
+# Uniqueness tidy alias
+#' @export
+#' @rdname uniqueness_stack
+uniqueness_tidy = uniqueness_stack
 
 #' Functional Uniqueness for site-species matrix matrix
 #'

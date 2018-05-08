@@ -1,3 +1,7 @@
+# funrar 1.2.2.9000
+
+* Add `_tidy()` aliases for each `_stack()` function for easier reading (fix #29).
+
 # funrar 1.2.2
 
 * Fix a bug in the test of `distinctiveness_dimensions()` that generated errors on cran server.
@@ -5,7 +9,7 @@
 # funrar 1.2.1
 
 * Add Authors' ORCID and all contributors;
-* funrar paper is now included in DESCRIPTION, README.md and has a proper CITATIONq file;
+* funrar paper is now included in DESCRIPTION, README.md and has a proper CITATION file;
 * Fix typos in documentation;
 * Transformation from tidy data.frame to sparse matrix is now possible using `stack_to_matrix(x, sparse = TRUE)` (#25);
 * Add a warning message when using only continuous traits with function `comput_dist_matrix()`, as it defaults to Gower's distance (#27);

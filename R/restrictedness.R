@@ -12,7 +12,8 @@
 #' present in only a single site of the dataset (restricted) and close to 0 when
 #' the species is present at all sites. It estimates the geographical extent of
 #' a species in a dataset. See [restrictedness()] for details
-#' on restrictedness computation.
+#' on restrictedness computation. You can either use `_stack()` or `_tidy()`
+#' functions as they are aliases of one another.
 #'
 #' @param com_df a stacked (= tidy) data.frame of communities
 #'
@@ -58,6 +59,12 @@ restrictedness_stack = function(com_df, sp_col, com) {
 
   return(occupancy)
 }
+
+# Restrictedness tidy alias
+#' @export
+#' @rdname restrictedness_stack
+restrictedness_tidy = restrictedness_stack
+
 
 
 #' Geographical Restrictedness on site-species matrix
