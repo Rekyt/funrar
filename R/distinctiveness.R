@@ -159,6 +159,12 @@ distinctiveness_stack = function(com_df, sp_col, com, abund = NULL,
 
   com_distinctiveness = dplyr::bind_rows(com_split)
 
+  if(any(vapply(com_distinctiveness[["Di"]], function(x) is.nan(x),
+                logical(1)))) {
+    warning("Some communities had a single species in them\n",
+            "Computed value assigned to 'NaN'")
+  }
+
   return(com_distinctiveness)
 }
 

@@ -180,14 +180,20 @@ test_that("Di is undefined for a community with a single species", {
                  regexp = paste0("Some communities had a single species in ",
                                  "them\nComputed value assigned to 'NaN'"))
 
-  expect_equal(distinctiveness_stack(undef_dist[, 1:2], "species", "site",
-                                     dist_matrix = dist_mat), undef_dist)
+  expect_equal(
+    suppressWarnings(
+      distinctiveness_stack(undef_dist[, 1:2], "species", "site",
+                            dist_matrix = dist_mat)),
+    undef_dist
+  )
 
-  expect_equal(distinctiveness_stack(small_df, "col", "row", "value", dist_mat),
-               data.frame(col   = rep(c("a", "b"), 2),
-                          row   = rep(c("s1", "s2"), each = 2),
-                          value = c(1, 0, 0, 1),
-                          Di    = c(NaN, NA, NA, NaN)))
+  expect_equal(
+    suppressWarnings(
+      distinctiveness_stack(small_df, "col", "row", "value", dist_mat)),
+    data.frame(col   = rep(c("a", "b"), 2),
+               row   = rep(c("s1", "s2"), each = 2),
+               value = c(1, 0, 0, 1),
+               Di    = c(NaN, NA, NA, NaN)))
 })
 
 
