@@ -65,14 +65,18 @@ correct_dist_mat[which(correct_dist_mat == 1)] = correct_dist$Di
 correct_dist_ab = correct_dist
 
 
-# Undefined Distinctiveness
+# Undefined Distinctiveness site-species matrix
 small_mat = matrix(c(1, 0, 0, 1), nrow = 2)
 colnames(small_mat) = letters[1:2]
 rownames(small_mat) = c("s1", "s2")
 
+small_df = matrix_to_tidy(small_mat)
+
+# Distinctiveness final data.frame
 undef_dist = data_frame(site = c("s1", "s2"), species = c("a", "b"),
                         Di = rep(NaN, 2))
 
+# Final distinctiveness matrix
 undef_dist_mat = table(undef_dist$site, undef_dist$species)
 
 undef_dist_mat[which(undef_dist_mat == 0)] = NA_real_
@@ -162,12 +166,28 @@ test_that("Correct Di computation with different comm. without abundance",{
 
 test_that("Di is undefined for a community with a single species", {
 
-
-
-  expect_equivalent(t(undef_dist_mat), as.table(undef_test))
+  ## Test for matrix version of distinctiveness
+  expect_equivalent(as(undef_dist_mat, "matrix"), undef_test)
 
   # Check warning for NaN created in the matrix
-  expect_warning(distinctiveness(small_mat, dist_mat))
+  expect_warning(distinctiveness(small_mat, dist_mat),
+                 regexp = paste0("Some communities had a single species in ",
+                                 "them\nComputed value assigned to 'NaN'"))
+
+  ## Test for data.frame version of distinctiveness
+  expect_warning(distinctiveness_stack(small_df, "col", "row",
+                                       "value", dist_mat),
+                 regexp = paste0("Some communities had a single species in ",
+                                 "them\nComputed value assigned to 'NaN'"))
+
+  expect_equal(distinctiveness_stack(undef_dist[, 1:2], "species", "site",
+                                     dist_matrix = dist_mat), undef_dist)
+
+  expect_equal(distinctiveness_stack(small_df, "col", "row", "value", dist_mat),
+               data.frame(col   = rep(c("a", "b"), 2),
+                          row   = rep(c("s1", "s2"), 2, each = TRUE),
+                          value = c(1, 0, 0, 1),
+                          Di    = c(NaN, NA, NA, NaN)))
 })
 
 
