@@ -283,6 +283,8 @@ test_that("Scarcity errors with bad input", {
 # Tests for Restrictedness -----------------------------------------------------
 
 test_that("Restrictedness computations work", {
+
+  # Regular Restrictedness
   expect_equal(restrictedness_stack(com_df, "species", "site"),
                data.frame("species" = letters[1:4],
                           "Ri" = c(3/4, 1/4, 1/4, 1/2)))
@@ -290,6 +292,16 @@ test_that("Restrictedness computations work", {
   expect_equal(restrictedness(valid_mat),
                data.frame("species" = letters[1:4],
                           "Ri" = c(3/4, 1/4, 1/4, 1/2)))
+
+
+  # Other type Restrictedness
+  expect_equal(restrictedness_stack(com_df, "species", "site", relative = TRUE),
+               data.frame(species = letters[1:4],
+                          Ri = c(1, 1/3, 1/3, 2/3)))
+
+  expect_equal(restrictedness(valid_mat, relative = TRUE),
+               data.frame(species = letters[1:4],
+                          Ri = c(1, 1/3, 1/3, 2/3)))
 })
 
 test_that("Restrictedness works with sparse matrices", {
@@ -301,6 +313,10 @@ test_that("Restrictedness works with sparse matrices", {
   expect_equivalent(restrictedness(sparse_mat),
                     data.frame("species" = letters[1:4],
                                "Ri" = c(3/4, 1/4, 1/4, 1/2)))
+
+  expect_equivalent(restrictedness(sparse_mat, relative = TRUE),
+                    data.frame(species = letters[1:4],
+                               Ri = c(1, 1/3, 1/3, 2/3)))
 })
 
 # Tests for Combined function --------------------------------------------------

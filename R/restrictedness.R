@@ -21,6 +21,10 @@
 #'
 #' @param com a character vector indicating the name of the community column
 #'
+#' @param relative a logical (default = FALSE), indicating if restrictedness
+#'      should be computed relative to restrictedness from a species occupying a
+#'      single site
+#'
 #' @return A stacked data.frame containing species' names and their
 #'         restrictedness value in the **Ri** column, similar to what
 #'         [uniqueness_stack()] returns.
@@ -39,7 +43,7 @@
 #' head(ri_df)
 #'
 #' @export
-restrictedness_stack = function(com_df, sp_col, com) {
+restrictedness_stack = function(com_df, sp_col, com, relative = FALSE) {
 
   # Test to be sure of inputs
   full_df_checks(com_df, sp_col, com)
@@ -56,6 +60,15 @@ restrictedness_stack = function(com_df, sp_col, com) {
   colnames(occupancy)[1] = sp_col
 
   occupancy$Ri = 1 - occupancy$Ri
+
+  # Standardize if suggested by R_i of species present in a single site
+  if (!relative) {
+    r_one = 1
+  } else {
+    r_one = 1 - 1/n_com
+  }
+
+  occupancy$Ri = occupancy$Ri / r_one
 
   return(occupancy)
 }
@@ -82,6 +95,10 @@ restrictedness_tidy = restrictedness_stack
 #' @param pres_matrix a site-species matrix, with species in rows and sites
 #'      in columns, containing presence-absence, relative abundances or
 #'      abundances values
+#'
+#' @param relative a logical (default = FALSE), indicating if restrictedness
+#'      should be computed relative to restrictedness from a species occupying a
+#'      single site
 #'
 #' @return A stacked data.frame containing species' names and their
 #'         restrictedness value in the **Ri** column, similar to what
@@ -113,7 +130,7 @@ restrictedness_tidy = restrictedness_stack
 #' head(ri)
 #'
 #' @export
-restrictedness = function(pres_matrix) {
+restrictedness = function(pres_matrix, relative = FALSE) {
 
   # Check site-species matrix type
   check_matrix(pres_matrix, "site-species")
@@ -135,10 +152,15 @@ restrictedness = function(pres_matrix) {
 
     occupancy = 1 - (Matrix::colSums(pres_matrix, na.rm = TRUE) / n_com)
   }
+  if (!relative) {
+    r_one = 1
+  } else {
+    r_one = 1 - 1/n_com
+  }
 
   # Format occupancy in data.frame
   occupancy = data.frame("species" = names(occupancy),
-                         "Ri" = as.numeric(occupancy))
+                         "Ri" = as.numeric(occupancy) / r_one)
 
   return(occupancy)
 }
