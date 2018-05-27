@@ -5,9 +5,9 @@
 \alias{restrictedness_tidy}
 \title{Geographical Restrictedness for stacked data.frame}
 \usage{
-restrictedness_stack(com_df, sp_col, com)
+restrictedness_stack(com_df, sp_col, com, relative = FALSE)
 
-restrictedness_tidy(com_df, sp_col, com)
+restrictedness_tidy(com_df, sp_col, com, relative = FALSE)
 }
 \arguments{
 \item{com_df}{a stacked (= tidy) data.frame of communities}
@@ -15,6 +15,10 @@ restrictedness_tidy(com_df, sp_col, com)
 \item{sp_col}{a character vector indicating the name of the species column}
 
 \item{com}{a character vector indicating the name of the community column}
+
+\item{relative}{a logical (default = FALSE), indicating if restrictedness
+should be computed relative to restrictedness from a species occupying a
+single site}
 }
 \value{
 A stacked data.frame containing species' names and their

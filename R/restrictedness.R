@@ -118,6 +118,23 @@ restrictedness_tidy = restrictedness_stack
 #' where \eqn{R_i} is the geographical restrictedness value, \eqn{N_i} the total
 #' number of sites where species \eqn{i} occur and \eqn{N_tot} the total number
 #' of sites in the dataset.
+#' When `relative = TRUE`, restrictedness is computed relatively to the
+#' restrictedness of a species present in a single site:
+#' \deqn{
+#'  R_i = \frac{R_i}{R_one}
+#' }{
+#'  R_i = R_i / R_one
+#' }
+#' \deqn{
+#'  R_i = \frac{1 - \frac{K_i}{K_tot}}{1 - \frac{1}{K_tot}}
+#' }{
+#'  R_i = (1 - K_i/K_tot)(1 - 1/K_tot)
+#' }
+#' \deqn{
+#'  R_i = \frac{K_tot - K_i}{K_tot - 1}
+#' }{
+#'  R_i = (K_tot - K_i)(K_tot - 1)
+#' }
 #' Other approaches can be used to measure the geographical extent (convex hulls,
 #' occupancy models, etc.) but for the sake of simplicity only the counting
 #' method is implemented in \pkg{funrar}.

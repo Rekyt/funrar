@@ -4,12 +4,16 @@
 \alias{restrictedness}
 \title{Geographical Restrictedness on site-species matrix}
 \usage{
-restrictedness(pres_matrix)
+restrictedness(pres_matrix, relative = FALSE)
 }
 \arguments{
 \item{pres_matrix}{a site-species matrix, with species in rows and sites
 in columns, containing presence-absence, relative abundances or
 abundances values}
+
+\item{relative}{a logical (default = FALSE), indicating if restrictedness
+should be computed relative to restrictedness from a species occupying a
+single site}
 }
 \value{
 A stacked data.frame containing species' names and their
@@ -41,6 +45,23 @@ represents how restricted a species is:
 where \eqn{R_i} is the geographical restrictedness value, \eqn{N_i} the total
 number of sites where species \eqn{i} occur and \eqn{N_tot} the total number
 of sites in the dataset.
+When \code{relative = TRUE}, restrictedness is computed relatively to the
+restrictedness of a species present in a single site:
+\deqn{
+ R_i = \frac{R_i}{R_one}
+}{
+ R_i = R_i / R_one
+}
+\deqn{
+ R_i = \frac{1 - \frac{K_i}{K_tot}}{1 - \frac{1}{K_tot}}
+}{
+ R_i =(1 - K_i/K_tot)(1 - 1/K_tot)
+}
+\deqn{
+ R_i = \frac{K_tot - K_i}{K_tot - 1}
+}{
+ R_i = (K_tot - K_i)(K_tot - 1)
+}
 Other approaches can be used to measure the geographical extent (convex hulls,
 occupancy models, etc.) but for the sake of simplicity only the counting
 method is implemented in \pkg{funrar}.
