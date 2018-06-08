@@ -1,4 +1,5 @@
 context("Test Distinctiveness")
+library("dplyr")
 
 # General data -----------------------------------------------------------------
 
@@ -51,7 +52,7 @@ correct_dist = structure(list(site = c("s1", "s1", "s2", "s2", "s2", "s3",
                          row.names = c(NA, -9L), class = c("tbl_df", "tbl",
                                                            "data.frame")) %>%
   # Forced to arrange by species to specify for distinctiveness matrix
-  arrange(species)
+  dplyr::arrange(species)
 
 correct_dist_mat = table(correct_dist$site, correct_dist$species)
 
