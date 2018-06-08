@@ -1,6 +1,4 @@
-library(dplyr)
-context("Functional Rarity Indices")
-
+context("Test Distinctiveness")
 
 # General data -----------------------------------------------------------------
 
@@ -32,7 +30,7 @@ suppressWarnings({
 
 # Traits df
 trait_df = data.frame(tr1 = c("A", "A", "B", "B"), tr2 = c(rep(0, 3), 1),
-                       tr3 = seq(4, 16, 4))
+                      tr3 = seq(4, 16, 4))
 
 rownames(trait_df) = letters[1:4]
 
@@ -89,11 +87,9 @@ suppressWarnings({
   })
 })
 
-
-# Scarcity data ----------------------------------------------------------------
 com_df_ex = bind_cols(com_df, data.frame(abund = c(0.3, 0.7, 0.2, 0.6,
-                                                         0.2, 0.5, 0.5, 0.2,
-                                                         0.8)))
+                                                   0.2, 0.5, 0.5, 0.2,
+                                                   0.8)))
 abund_mat = valid_mat
 abund_mat[abund_mat == 1] = com_df_ex %>%
   arrange(species) %>%
@@ -159,7 +155,7 @@ test_that("Correct Di computation with different comm. without abundance",{
 
   # Distinctiveness with abundances
   expect_equal(distinctiveness_com(abund_com[, -4], "species", "abund",
-                                        dist_mat), abund_com)
+                                   dist_mat), abund_com)
 
 })
 
@@ -208,130 +204,3 @@ test_that("Distinctiveness works with sparse matrices", {
 
   expect_equivalent(distinctiveness(sparse_mat, dist_mat), dist_sparse_mat)
 })
-
-# Test for Uniqueness ---------------------------------------------------------
-
-test_that("Correct Uniqueness computation", {
-
-  valid_ui = data.frame(species = c("a", "b"), Ui = c(1/9, 1/9))
-
-  all_ui = data.frame(species = letters[1:4],
-                      Ui = c(1/9, 1/9, 4/9, 4/9))
-
-  expect_equivalent(uniqueness_stack(com_df[1:2, ], "species", dist_mat),
-                    valid_ui)
-
-  expect_error(uniqueness_stack(com_df[1:2, ], "NOT_IN_TABLE", dist_mat),
-    regexp = "'NOT_IN_TABLE' column not in provided data.frame")
-
-  expect_message(
-    uniqueness_stack(com_df, "species", dist_mat[1:2,]),
-    regexp = "^More species in community data.frame than in distance matrix.*"
-  )
-
-  expect_equivalent(uniqueness_stack(com_df, "species", dist_mat), all_ui)
-
-  expect_equal(uniqueness(valid_mat, dist_mat), all_ui)
-})
-
-
-
-# Test for Scarcity ------------------------------------------------------------
-
-test_that("Correct Scarcity computation", {
-
-  # Single community scarcity correct computation
-  expect_equal(filter(com_scarcity, site == "s1"),
-               scarcity_com(com_df_ex %>%
-                                 filter(site == "s1") %>%
-                                 as.data.frame(),
-                               "species", "abund"))
-
-  # Scarcity correct computation over many communities
-  expect_equal(com_scarcity, scarcity_stack(as.data.frame(com_df_ex),
-                                            "species", "site", "abund"))
-
-  # Correct Sparseness computation for a site-species matrix
-  expect_equal(scarcity_mat, scarcity(abund_mat))
-})
-
-
-test_that("Scarcity errors with bad input", {
-  expect_error(scarcity_stack(as.data.frame(com_df_ex),
-                              "species", "SITE_NOT_IN_TABLE", "abund"),
-               regexp = "'SITE_NOT_IN_TABLE' column not in provided data.frame")
-
-  expect_error(scarcity_stack(as.data.frame(com_df_ex),
-                              "SPECIES_NOT_IN_TABLE", "site", "abund"),
-               regexp = paste0("'SPECIES_NOT_IN_TABLE' column not in ",
-                               "provided data.frame"))
-
-  expect_error(scarcity_stack(as.data.frame(com_df_ex), "species", "site",
-                              NULL),
-               regexp = "No relative abundance provided")
-
-  com_df_ab = com_df_ex
-
-  com_df_ab$abund = as.character(com_df_ex$abund)
-
-  expect_error(scarcity_stack(as.data.frame(com_df_ab), "species", "site",
-                              "abund"),
-               regexp = "Provided abundances are not numeric")
-})
-
-
-# Tests for Restrictedness -----------------------------------------------------
-
-test_that("Restrictedness computations work", {
-  expect_equal(restrictedness_stack(com_df, "species", "site"),
-               data.frame("species" = letters[1:4],
-                          "Ri" = c(3/4, 1/4, 1/4, 1/2)))
-
-  expect_equal(restrictedness(valid_mat),
-               data.frame("species" = letters[1:4],
-                          "Ri" = c(3/4, 1/4, 1/4, 1/2)))
-})
-
-test_that("Restrictedness works with sparse matrices", {
-  library(Matrix)
-  sparse_mat = as(valid_mat, "sparseMatrix")
-
-  expect_silent(restrictedness(sparse_mat))
-
-  expect_equivalent(restrictedness(sparse_mat),
-                    data.frame("species" = letters[1:4],
-                               "Ri" = c(3/4, 1/4, 1/4, 1/2)))
-})
-
-# Tests for Combined function --------------------------------------------------
-
-test_that("Funrar runs smoothly", {
-  expect_silent(funrar(valid_mat, dist_mat))
-  expect_silent(funrar_stack(com_df_ex, "species", "site", "abund", dist_mat))
-
-  expect_equal(length(funrar(valid_mat, dist_mat)), 3)
-  expect_equal(length(funrar(abund_mat, dist_mat, rel_abund = TRUE)), 4)
-
-  expect_equal(length(funrar_stack(com_df, "species", "site",
-                                   dist_matrix = dist_mat)), 3)
-  expect_equal(length(funrar_stack(com_df_ex, "species", "site", "abund",
-                                   dist_mat)), 4)
-})
-
-test_that("funrar functions warns if object does not have relative abundances",
-          {
-            abs_mat = valid_mat
-            abs_mat[[1]] = 4
-
-            abs_df = matrix_to_stack(abs_mat)
-
-            expect_warning(distinctiveness(abs_mat, dist_mat),
-                           "^Provided object may not contain relative abund.*")
-
-            expect_warning(distinctiveness_stack(abs_df, "species", "site",
-                                                 "value", dist_mat),
-                           "^Provided object may not contain relative abund.*")
-
-            expect_warning(scarcity(abs_mat),
-                           "^Provided object may not contain relative abund.*")
-          })
