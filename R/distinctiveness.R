@@ -21,6 +21,10 @@
 #' @param dist_matrix a functional distance matrix as given by
 #'    `compute_dist_matrix()`, with species name as row and column names
 #'
+#' @param relative a logical indicating if distinctiveness should be scaled
+#'                 relatively to the community (scaled by max functional
+#'                 distance among the species of the targeted community)
+#'
 #' @return the same data.frame with the additional **Di** column giving
 #'    functional distinctiveness values for each species
 #'
@@ -34,7 +38,14 @@
 #' [distinctiveness()] Details section for detail on the index
 #'
 #' @export
-distinctiveness_com = function(com_df, sp_col, abund = NULL, dist_matrix) {
+distinctiveness_com = function(com_df, sp_col, abund = NULL, dist_matrix,
+                               relative = FALSE) {
+
+
+  # Test relative argument
+  if (!is.logical(relative) | is.na(relative) | length(relative) != 1) {
+    stop("'relative' argument should be either TRUE or FALSE")
+  }
 
   # Find species in common between community df and distance matrix
   common = species_in_common_df(com_df, sp_col, dist_matrix)
@@ -43,6 +54,12 @@ distinctiveness_com = function(com_df, sp_col, abund = NULL, dist_matrix) {
 
   # Get functional distance matrix of species in communities
   com_dist = dist_matrix[common, common]
+
+  # Maxmimum functional distance among the community
+  max_dist = 1
+  if (relative) {
+    max_dist = max(com_dist)
+  }
 
   if (!is.null(dim(com_dist))) {
     if (is.null(abund)) {
@@ -65,9 +82,9 @@ distinctiveness_com = function(com_df, sp_col, abund = NULL, dist_matrix) {
 
   # Computes distinctiveness by species
   if (length(denom) > 1) {
-    com_df[, "Di"] = as.numeric(num / denom)
+    com_df[, "Di"] = as.numeric(num / denom) / max_dist
   } else if (length(denom) == 1 & denom != 0) {
-    com_df[, "Di"] = as.numeric(num / denom)
+    com_df[, "Di"] = as.numeric(num / denom) / max_dist
   } else {
     com_df[, "Di"] = NaN
   }
@@ -128,7 +145,7 @@ distinctiveness_com = function(com_df, sp_col, abund = NULL, dist_matrix) {
 #'
 #' @export
 distinctiveness_stack = function(com_df, sp_col, com, abund = NULL,
-                                 dist_matrix) {
+                                 dist_matrix, relative = FALSE) {
 
   # Test to be sure of inputs
   full_df_checks(com_df, sp_col, com, abund, dist_matrix)
@@ -142,6 +159,7 @@ distinctiveness_stack = function(com_df, sp_col, com, abund = NULL,
             "Have a look at the make_relative() function if it is the case")
   }
 
+
   # Take subsets of species if needed between distance matrix and community
   common = species_in_common_df(com_df, sp_col, dist_matrix)
 
@@ -154,9 +172,8 @@ distinctiveness_stack = function(com_df, sp_col, com, abund = NULL,
 
   com_split = lapply(com_split,
                       function(one_com)
-                        distinctiveness_com(one_com, sp_col, abund, dist_matrix)
-  )
-
+                        distinctiveness_com(one_com, sp_col, abund, dist_matrix,
+                                            relative = relative))
   com_distinctiveness = dplyr::bind_rows(com_split)
 
   if(any(vapply(com_distinctiveness[["Di"]], function(x) is.nan(x),
@@ -183,9 +200,13 @@ distinctiveness_tidy = distinctiveness_stack
 #' \pkg{vegan} package defaults.
 #'
 #' @param pres_matrix a site-species matrix (presence-absence or relative
-#' abundances), with sites in rows and species in columns
+#'                    abundances), with sites in rows and species in columns
 #'
 #' @param dist_matrix a species functional distance matrix
+#'
+#' @param relative a logical indicating if distinctiveness should be scaled
+#'                 relatively to the community (scaled by max functional
+#'                 distance among the species of the targeted community)
 #'
 #' @return a similar matrix from provided `pres_matrix` with Distinctiveness
 #'    values in lieu of presences or relative abundances, species absent from
@@ -247,9 +268,14 @@ distinctiveness_tidy = distinctiveness_stack
 #' reg_di = distinctiveness(reg_pool, dist_mat)
 #'
 #' @export
-distinctiveness = function(pres_matrix, dist_matrix) {
+distinctiveness = function(pres_matrix, dist_matrix, relative = FALSE) {
 
   full_matrix_checks(pres_matrix, dist_matrix)
+
+  # Test relative argument
+  if (!is.logical(relative) | is.na(relative) | length(relative) != 1) {
+    stop("'relative' argument should be either TRUE or FALSE")
+  }
 
   common = species_in_common(pres_matrix, dist_matrix)
 
@@ -264,7 +290,6 @@ distinctiveness = function(pres_matrix, dist_matrix) {
 
   # Matrix product of distance matrix and presence absence matrix
   index_matrix = pres_matrix %*% dist_matrix
-
 
 
   # Compute sum of relative abundances
@@ -285,7 +310,21 @@ distinctiveness = function(pres_matrix, dist_matrix) {
   # /!\ need to Transpose because applying function to row tranposes matrix
   denom_matrix = apply(pres_matrix, 2, function(x) total_sites - x)
 
-  index_matrix = index_matrix / denom_matrix
+  # Define maximum functional distance per site to standardize
+  max_dist = 1
+  if (relative) {
+    max_dist = apply(pres_matrix, 1, function(row, d_mat = dist_matrix) {
+      non_null_sp = names(row[row != 0])  # Select present species in community
+
+      # Community distance matrix
+      non_null_dist = d_mat[non_null_sp, non_null_sp]
+
+      # Maximum functional distance
+      max(non_null_dist)
+    })
+  }
+
+  index_matrix = (index_matrix / denom_matrix) / max_dist
 
   # Test if there is NaN in the table for species alone in their community
   if (any(vapply(index_matrix, function(x) is.nan(x), logical(1)))) {
