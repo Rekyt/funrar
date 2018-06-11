@@ -4,7 +4,8 @@
 \alias{distinctiveness_com}
 \title{Functional Distinctiveness for a single community}
 \usage{
-distinctiveness_com(com_df, sp_col, abund = NULL, dist_matrix)
+distinctiveness_com(com_df, sp_col, abund = NULL, dist_matrix,
+  relative = FALSE)
 }
 \arguments{
 \item{com_df}{a stacked (= tidy) data.frame from a single community with each
@@ -17,6 +18,10 @@ abundances values}
 
 \item{dist_matrix}{a functional distance matrix as given by
 \code{compute_dist_matrix()}, with species name as row and column names}
+
+\item{relative}{a logical indicating if distinctiveness should be scaled
+relatively to the community (scaled by max functional
+distance among the species of the targeted community)}
 }
 \value{
 the same data.frame with the additional \strong{Di} column giving

@@ -55,7 +55,7 @@ restrictedness of a species present in a single site:
 \deqn{
  R_i = \frac{1 - \frac{K_i}{K_tot}}{1 - \frac{1}{K_tot}}
 }{
- R_i =(1 - K_i/K_tot)(1 - 1/K_tot)
+ R_i = (1 - K_i/K_tot)(1 - 1/K_tot)
 }
 \deqn{
  R_i = \frac{K_tot - K_i}{K_tot - 1}

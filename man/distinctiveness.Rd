@@ -4,13 +4,17 @@
 \alias{distinctiveness}
 \title{Functional Distinctiveness on site-species matrix}
 \usage{
-distinctiveness(pres_matrix, dist_matrix)
+distinctiveness(pres_matrix, dist_matrix, relative = FALSE)
 }
 \arguments{
 \item{pres_matrix}{a site-species matrix (presence-absence or relative
 abundances), with sites in rows and species in columns}
 
 \item{dist_matrix}{a species functional distance matrix}
+
+\item{relative}{a logical indicating if distinctiveness should be scaled
+relatively to the community (scaled by max functional
+distance among the species of the targeted community)}
 }
 \value{
 a similar matrix from provided \code{pres_matrix} with Distinctiveness
