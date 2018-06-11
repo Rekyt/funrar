@@ -1,8 +1,7 @@
 context("Test Distinctiveness")
 library("dplyr")
 
-# General data -----------------------------------------------------------------
-
+# Initial data -----------------------------------------------------------------
 # Empty Matrix
 empty_mat = matrix(rep(0, 4), ncol = 2)
 rownames(empty_mat) = paste0("s", 1:2)
@@ -17,7 +16,7 @@ valid_mat = matrix(c(1, 0, 0, 0,
 
 dimnames(valid_mat) = list("site" = paste0("s", 1:4), "species" = letters[1:4])
 
-# Community Table
+# Community df
 log_mat = (valid_mat == 1)
 
 suppressWarnings({
@@ -39,8 +38,8 @@ rownames(trait_df) = letters[1:4]
 dist_mat = compute_dist_matrix(trait_df)
 
 
-# Distinctiveness data --------------------------------------------------------
 
+## Correct Distinctiveness -----------------------------------------------------
 # Final distinctiveness table for all communities
 correct_dist = structure(list(site = c("s1", "s1", "s2", "s2", "s2", "s3",
                                        "s3", "s4", "s4"),
@@ -64,6 +63,7 @@ correct_dist_mat[which(correct_dist_mat == 1)] = correct_dist$Di
 correct_dist_ab = correct_dist
 
 
+## Undefined Di ----------------------------------------------------------------
 # Undefined Distinctiveness site-species matrix
 small_mat = matrix(c(1, 0, 0, 1), nrow = 2)
 colnames(small_mat) = letters[1:2]
@@ -71,11 +71,11 @@ rownames(small_mat) = c("s1", "s2")
 
 small_df = matrix_to_tidy(small_mat)
 
-# Distinctiveness final data.frame
+# Small tidy df with undefined Di
 undef_dist = data_frame(site = c("s1", "s2"), species = c("a", "b"),
                         Di = rep(NaN, 2))
 
-# Final distinctiveness matrix
+# Small matrix with undefined Di
 undef_dist_mat = table(undef_dist$site, undef_dist$species)
 
 undef_dist_mat[which(undef_dist_mat == 0)] = NA_real_
@@ -88,25 +88,20 @@ suppressWarnings({
   })
 })
 
+
+
+## Abundances ------------------------------------------------------------------
+# Define Abundance Matrix
 com_df_ex = bind_cols(com_df, data.frame(abund = c(0.3, 0.7, 0.2, 0.6,
                                                    0.2, 0.5, 0.5, 0.2,
                                                    0.8)))
+
 abund_mat = valid_mat
 abund_mat[abund_mat == 1] = com_df_ex %>%
   arrange(species) %>%
   .$abund
 
-scarcity_mat = apply(abund_mat, 1, function(x) {
-  ifelse(x != 0, exp(-sum(x != 0)*log(2)*x), NA)
-}) %>% t()
-
-com_scarcity = com_df_ex %>%
-  group_by(site) %>%
-  summarise(N_sp = n()) %>%
-  right_join(com_df_ex, by = "site") %>%
-  mutate(Si = exp(-N_sp*log(2)*abund)) %>%
-  select(-N_sp)
-
+# Define Abundance tidy table
 abund_com = abund_mat %>%
   matrix_to_stack(value_col = "abund", row_to_col = "site",
                   col_to_col = "species") %>%
@@ -114,8 +109,42 @@ abund_com = abund_mat %>%
 abund_com$Di = c(4/9, 4/9)
 
 
+## Sparse Matrices -------------------------------------------------------------
+library(Matrix)
+sparse_mat = as(valid_mat, "sparseMatrix")
 
-# Test for Distinctiveness ----------------------------------------------------
+dist_sparse_mat = as(correct_dist_mat, "sparseMatrix") %>%
+  as("dgeMatrix")
+
+
+## Relative distinctiveness ----------------------------------------------------
+# Define relative distinctiveness matrix
+correct_rel_di = correct_dist_mat
+correct_rel_di[1,] = correct_rel_di[1,] / (1/9)
+correct_rel_di[2,] = correct_rel_di[2,] / (8/9)
+correct_rel_di[3,] = correct_rel_di[3,] / (4/9)
+correct_rel_di[4,] = correct_rel_di[4,] / (4/9)
+
+# Relative Di df
+correct_rel_di_df = structure(list(site = c("s1", "s1", "s2", "s2", "s2", "s3",
+                                            "s3", "s4", "s4"),
+                                   species = c("a", "b", "b", "c", "d","b", "c",
+                                               "c", "d"),
+                                   Di = c(1, 1, 3/4, 1/2, 3/4, 1, 1, 1, 1)),
+                              .Names = c("site", "species", "Di"),
+                              row.names = c(NA, -9L), class = c("tbl_df", "tbl",
+                                                                "data.frame"))
+
+correct_rel_di_df = arrange(correct_rel_di_df, species)
+
+# Relative Di sparse
+dist_sparse_mat_rel = dist_sparse_mat
+dist_sparse_mat_rel[1,] = dist_sparse_mat_rel[1,] / (1/9)
+dist_sparse_mat_rel[2,] = dist_sparse_mat_rel[2,] / (8/9)
+dist_sparse_mat_rel[3,] = dist_sparse_mat_rel[3,] / (4/9)
+dist_sparse_mat_rel[4,] = dist_sparse_mat_rel[4,] / (4/9)
+
+# Tests for Distinctiveness ----------------------------------------------------
 
 test_that("Invalid input types do not work", {
 
@@ -195,13 +224,100 @@ test_that("Di is undefined for a community with a single species", {
 
 
 test_that("Distinctiveness works with sparse matrices", {
-  library(Matrix)
-  sparse_mat = as(valid_mat, "sparseMatrix")
-
-  dist_sparse_mat = as(correct_dist_mat, "sparseMatrix") %>%
-    as("dgeMatrix")
-
   expect_silent(distinctiveness(sparse_mat, dist_mat))
 
   expect_equivalent(distinctiveness(sparse_mat, dist_mat), dist_sparse_mat)
 })
+
+
+# Test for relative distinctiveness --------------------------------------------
+
+test_that("Relative distinctiveness argument should be logical", {
+
+  # Character argument
+  expect_error(distinctiveness(valid_mat, dist_mat, relative = "a"))
+  expect_error(distinctiveness_tidy(com_df, "species", "site",
+                                    dist_matrix = dist_mat, relative = "a"))
+  expect_error(distinctiveness_com(com_df, "species", "site",
+                                   dist_matrix = dist_mat, relative = "a"))
+
+  # Numeric argument
+  expect_error(distinctiveness(valid_mat, dist_mat, relative = 12))
+  expect_error(distinctiveness_tidy(com_df, "species", "site", dist_mat,
+                                    relative = 12))
+  expect_error(distinctiveness_com(com_df, "species", "site", dist_mat,
+                                   relative = 12))
+  expect_error(distinctiveness(valid_mat, dist_mat, relative = 1))
+  expect_error(distinctiveness_tidy(com_df, "species", "site",
+                                    dist_matrix = dist_mat, relative = 1))
+  expect_error(distinctiveness_com(com_df, "species", "site",
+                                   dist_matrix = dist_mat, relative = 1))
+  expect_error(distinctiveness(valid_mat, dist_mat, relative = 0))
+  expect_error(distinctiveness_tidy(com_df, "species", "site",
+                                    dist_matrix = dist_mat, relative = 0))
+  expect_error(distinctiveness_com(com_df, "species", "site",
+                                   dist_matrix = dist_mat, relative = 0))
+
+  # NA argument
+  expect_error(distinctiveness(valid_mat, dist_mat, relative = NA))
+  expect_error(distinctiveness_tidy(com_df, "species", "site",
+                                    dist_matrix = dist_mat, relative = NA))
+  expect_error(distinctiveness_com(com_df, "species", "site",
+                                   dist_matrix = dist_mat, relative = NA))
+
+  # NaN argument
+  expect_error(distinctiveness(valid_mat, dist_mat, relative = NaN))
+  expect_error(distinctiveness_tidy(com_df, "species", "site",
+                                    dist_matrix = dist_mat, relative = NaN))
+  expect_error(distinctiveness_com(com_df, "species", "site",
+                                   dist_matrix = dist_mat, relative = NaN))
+
+
+  # Logical argument
+  expect_silent(distinctiveness(valid_mat, dist_mat, relative = TRUE))
+  expect_silent(distinctiveness_tidy(com_df, "species", "site",
+                                     dist_matrix = dist_mat, relative = TRUE))
+  expect_silent(distinctiveness_com(com_df, "species", "site",
+                                    dist_matrix = dist_mat, relative = TRUE))
+
+  expect_silent(distinctiveness(valid_mat, dist_mat, relative = FALSE))
+  expect_silent(distinctiveness_tidy(com_df, "species", "site",
+                                     dist_matrix = dist_mat, relative = FALSE))
+
+  expect_silent(distinctiveness_com(com_df, "species", "site",
+                                    dist_matrix = dist_mat, relative = FALSE))
+
+})
+
+test_that("Relative distinctiveness can be computed", {
+
+
+
+
+  ## Only presence-absences
+  # Matrix
+  expect_equal(distinctiveness(valid_mat, dist_mat, relative = TRUE),
+               correct_rel_di)
+  # Df
+  expect_equal(distinctiveness_tidy(com_df, "species", "site",
+                                    dist_matrix = dist_mat, relative = TRUE),
+               correct_rel_di_df)
+  # Sparse mat
+  expect_equivalent(distinctiveness(sparse_mat, dist_mat, relative = TRUE),
+                    dist_sparse_mat_rel)
+
+  # Single community
+  expect_equal(distinctiveness_com(com_df[1:2, ], "species",
+                                   dist_matrix = dist_mat, relative = TRUE),
+               correct_rel_di_df[1:2, ])
+
+  ## With abundances
+  # Matrix
+
+  # Df
+
+  # Sparse mat
+})
+
+
+
