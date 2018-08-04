@@ -1,0 +1,111 @@
+---
+title: "Alternative Distinctiveness definition"
+author: "Rekyt"
+date: "04/08/2018"
+header-includes:
+  - \usepackage{mathtools}
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+The current definition of functional distinctiveness standardizes compared to all the species considered in the species pool. However, especially when investigating on trait competition and hierarchy, it can be important to scale this distinctiveness relatively to the species present in the community.
+
+## Presence-Absence
+
+Thus an alternative definition of functional distinctiveness can be given, scaled relatively to a given trait range considered (what matters for species are the species within this trait range, not beyond). Our new distinctiveness measure is $D_i(T)$, with $T$ the trait range to consider.
+
+We can imagine three species in a given community positioned on a trait axis:
+```{r}
+species_df = data.frame(
+  species =     c("a", "b", "c"),
+  trait_value = c(-1, 0, 0.5)
+)
+
+species_distance = dist(c(a = -1, b = 0, c =0.5))
+
+plot(species_df)
+species_distance
+```
+Species $b$ is closer to species $c$ than to species $a$. The greatest distance is observed between species $a$ and species $c$.
+
+$T$ can value from 0 to the maximum observed functional distance among considered species.
+
+The proposed formula for $D_i(T)$ is:
+
+$$
+D_{i} (T) = 
+  \begin{dcases}
+    1 & if~~T < \text{min}(d_{ij}) \quad \text{(trait range smaller than distance to closest neighbor)}\\
+    \frac{\sum\limits_{
+          \substack{
+                j = 1 \\
+                j \neq i \\
+                d_{ij} \leq T}}^S d_{ij}}{
+          \sum\limits_{\substack{
+                j = 1 \\
+                j \neq i \\
+                d_{ij} \leq T}}^S 1}
+                 & if~~T \geq \text{min}(d_{ij}) \quad (\text{there is one or more species close to focal species within range of T})
+  \end{dcases} 
+$$
+This would given the following formula for the distinctiveness of species $b$, in the community with species $a$ and $c$:
+
+$$
+D_b(T) =
+  \begin{dcases}
+    1                         & if ~~ T < d_{bc} = 0.5 \\
+    d_{bc}                    & if ~~ d_{bc} = 0.5 \leq T < d_{ba} = 1 \\
+    \frac{d_{bc} + d_{ba}}{2} & if ~~ T \geq d_{ba} = 1 
+  \end{dcases}
+$$
+
+Implementing this version of distinctiveness would give:
+
+```{r new_distinctiveness}
+presence_matrix = matrix(rep(1, 3), nrow = 1, ncol = 3,
+                         dimnames = list(site = "s1",
+                                         species = c("a", "b", "c")))
+alternative_distinctiveness = function(pres_mat, distance_obj, given_T) {
+  dist_mat = as.matrix(distance_obj)
+  
+  # Truncate distance matrix
+  apply(dist_mat, 2, function(given_dist_col) {
+    # Find species within range
+    kept_species = names(given_dist_col[given_dist_col <= given_T])
+    
+    di_mat = funrar::distinctiveness(pres_mat[, kept_species, drop = FALSE],
+                                     dist_mat)
+    funrar::matrix_to_stack(di_mat, "Di", "Site", "Species")
+  })
+}
+```
+Here we truncate the distance matrix in order to "nullify" the effect of species that are not in specified range.
+
+```{r}
+# Test over a ragne of possible T values
+all_T = lapply(seq(0.5, 1.5, length.out = 50),
+       function(given_number) alternative_distinctiveness(species_distance,
+                                                          given_number))
+
+all_T = do.call(rbind, all_T)
+```
+
+We can visualize those relationships:
+```{r}
+library(ggplot2)
+
+ggplot(all_T, aes(T_value, Di, color = species)) +
+  geom_line() +
+  xlim(0, 1.5) +
+  ylim(0, 1.5) +
+  labs(x = "Fixed T range",
+       y = "Functional Distinctiveness",
+       color = "Species")
+```
+
+
+## Considering Abundance
+
