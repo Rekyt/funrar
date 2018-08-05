@@ -33,6 +33,8 @@ Species $b$ is closer to species $c$ than to species $a$. The greatest distance 
 
 $T$ can value from 0 to the maximum observed functional distance among considered species.
 
+### Theoretical definition
+
 The proposed formula for $D_i(T)$ is:
 
 $$
@@ -62,35 +64,43 @@ D_b(T) =
   \end{dcases}
 $$
 
+
+### Implementation
+
 Implementing this version of distinctiveness would give:
 
 ```{r new_distinctiveness}
-presence_matrix = matrix(rep(1, 3), nrow = 1, ncol = 3,
-                         dimnames = list(site = "s1",
-                                         species = c("a", "b", "c")))
 alternative_distinctiveness = function(pres_mat, distance_obj, given_T) {
   dist_mat = as.matrix(distance_obj)
   
-  # Truncate distance matrix
-  apply(dist_mat, 2, function(given_dist_col) {
-    # Find species within range
-    kept_species = names(given_dist_col[given_dist_col <= given_T])
-    
-    di_mat = funrar::distinctiveness(pres_mat[, kept_species, drop = FALSE],
-                                     dist_mat)
-    funrar::matrix_to_stack(di_mat, "Di", "Site", "Species")
-  })
+  kept_sp = funrar:::species_in_common(pres_mat, dist_mat)
+  dist_mat = dist_mat[kept_sp, kept_sp, drop = FALSE]
+  
+  # Correspondance matrix (tracking which species we want to keep)
+  corr_dist = dist_mat
+  corr_dist[dist_mat > given_T] = 0
+  corr_dist[dist_mat <= given_T] = 1
+  diag(corr_dist) = 0
+  
+  di_mat = diag(dist_mat %*% corr_dist) / rowSums(corr_dist)
+  
+  dplyr::mutate(tibble::enframe(di_mat, "species", "Di"), T_value = given_T)
 }
 ```
 Here we truncate the distance matrix in order to "nullify" the effect of species that are not in specified range.
 
 ```{r}
+presence_matrix = matrix(rep(1, 3), nrow = 1, ncol = 3,
+                         dimnames = list(site = "s1",
+                                         species = c("a", "b", "c")))
+
 # Test over a ragne of possible T values
 all_T = lapply(seq(0.5, 1.5, length.out = 50),
-       function(given_number) alternative_distinctiveness(species_distance,
+       function(given_number) alternative_distinctiveness(presence_matrix,
+                                                          species_distance,
                                                           given_number))
 
-all_T = do.call(rbind, all_T)
+all_T = dplyr::bind_rows(all_T)
 ```
 
 We can visualize those relationships:
@@ -98,13 +108,16 @@ We can visualize those relationships:
 library(ggplot2)
 
 ggplot(all_T, aes(T_value, Di, color = species)) +
-  geom_line() +
+  geom_line(size = 2) +
   xlim(0, 1.5) +
   ylim(0, 1.5) +
   labs(x = "Fixed T range",
        y = "Functional Distinctiveness",
        color = "Species")
 ```
+
+
+### Using real data
 
 
 ## Considering Abundance
