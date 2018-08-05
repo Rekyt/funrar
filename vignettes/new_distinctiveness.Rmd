@@ -64,7 +64,6 @@ D_b(T) =
   \end{dcases}
 $$
 
-
 ### Implementation
 
 Implementing this version of distinctiveness would give:
@@ -83,6 +82,7 @@ alternative_distinctiveness = function(pres_mat, distance_obj, given_T) {
   diag(corr_dist) = 0
   
   di_mat = diag(dist_mat %*% corr_dist) / rowSums(corr_dist)
+  di_mat[rowSums(corr_dist) == 0] = 1
   
   dplyr::mutate(tibble::enframe(di_mat, "species", "Di"), T_value = given_T)
 }
@@ -119,6 +119,105 @@ ggplot(all_T, aes(T_value, Di, color = species)) +
 
 ### Using real data
 
+We'll be using the dataset `aravo` from the `ade4` package.
+
+```{r aravo_new_distinct}
+library("funrar")
+
+data("aravo", package = "ade4")
+# Site-species matrix
+mat = as.matrix(aravo$spe)
+
+# Convert matrix to presence-absence matrix
+mat[mat > 0] = 1
+
+# Example of trait table
+tra = aravo$traits[, c("Height", "SLA", "N_mass")]
+# Distance matrix
+dist_mat = compute_dist_matrix(tra, metric = "gower")
+dist_mat = (dist_mat - min(dist_mat))/diff(range(dist_mat))
+
+# Compute different values of distinctiveness using various ranges
+all_ranges = lapply(seq(0, 1, length.out = 50), function(given_range) {
+  alternative_distinctiveness(mat, as.dist(dist_mat), given_range)
+})
+
+all_ranges = dplyr::bind_rows(all_ranges)
+```
+
+Now we can visualize the influence of the trait range value
+
+```{r}
+ggplot(all_ranges, aes(T_value, Di, group = species)) +
+  geom_line(alpha = 1/3) +
+  labs(x = "Minimum Distance Range Considered\n(Trait Range)",
+       y = "Functional Distinctiveness")
+```
+
+We see that species have close neighbors at different distances (leap from top left to bottom left of the graph). This shows the closet neighbors for each species.
+
+As proposed we can also distinctiveness relative to trait range and see what it changes:
+```{r scaled_range}
+all_ranges = dplyr::mutate(all_ranges, scaled_Di = ifelse(Di != 1, Di / T_value, Di))
+
+ggplot(all_ranges, aes(T_value, scaled_Di, group = species)) +
+  geom_line(alpha = 1/4) +
+  labs(x = "Considered Trait Range\n(Functional Distance)",
+       y = "Scaled Functional Distinctiveness\n(over trait range)")
+```
+
+This reflects the relative (in terms of trait range considered) distinctiveness. Meaning that close species in a small range brings similar distinctiveness than further apart species in larger ranges.
 
 ## Considering Abundance
+
+Now that we have a version with presence and absences we can try to think about a alternative version of distinctiveness using abundances.
+
+We need the index to behave the following way: an rare species in trait range should be more distinct than a common species in that range. A species close to a rare species in a trait range but far from a common species should be more distinct than a species close to a common species and far away from a rare one.
+
+The current definition of functional distinctiveness with relative abundances is:
+
+$$
+
+\widetilde{D_i} = \frac{
+  \sum\limits_{
+      \substack{j = 1 \\
+                j \neq i}}^S d_{ij}
+  \times Ab_j}{
+  \sum\limits_{
+      \substack{j = 1 \\
+                j \neq i}}^S
+  Ab_j}
+
+$$
+with $Ab_j$ the relative abundance of species $j$ in given community.
+
+### Theoretical definition
+
+If we try to consider the constraints above we can write the index as follow
+
+$$
+D_i(T) =
+  \begin{dcases}
+  1 & if \\
+  \left( \frac{
+    \sum\limits_{
+      \substack{j = 1 \\
+                j \neq i \\
+                d_{ij} \leq T}}^S d_{ij} \times Ab_j
+  }{
+    \sum\limits_{
+      \substack{j = 1 \\
+                j \neq i \\
+                d_{ij} \leq T}}^S Ab_j
+  } \right) \times \left(1 - \frac{
+    \sum\limits_{
+      \substack{j = 1 \\
+                j \neq i \\
+                d_{ij} \leq T}}^S Ab_j
+  }{
+    N
+  } \right) & if
+  \end{dcases}
+$$
+
 
