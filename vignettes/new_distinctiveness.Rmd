@@ -177,8 +177,7 @@ We need the index to behave the following way: an rare species in trait range sh
 The current definition of functional distinctiveness with relative abundances is:
 
 $$
-
-\widetilde{D_i} = \frac{
+\tilde{D_i} = \frac{
   \sum\limits_{
       \substack{j = 1 \\
                 j \neq i}}^S d_{ij}
@@ -187,7 +186,6 @@ $$
       \substack{j = 1 \\
                 j \neq i}}^S
   Ab_j}
-
 $$
 with $Ab_j$ the relative abundance of species $j$ in given community.
 
@@ -196,7 +194,7 @@ with $Ab_j$ the relative abundance of species $j$ in given community.
 If we try to consider the constraints above we can write the index as follow
 
 $$
-D_i(T) =
+D_i (T) =
   \begin{dcases}
   1 & if \\
   \left( \frac{
