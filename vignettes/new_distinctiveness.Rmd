@@ -4,6 +4,7 @@ author: "Rekyt"
 date: "04/08/2018"
 header-includes:
   - \usepackage{mathtools}
+  - \usepackage{cancel}
 output: pdf_document
 ---
 
@@ -166,7 +167,7 @@ ggplot(all_ranges, aes(T_value, scaled_Di, group = species)) +
        y = "Scaled Functional Distinctiveness\n(over trait range)")
 ```
 
-This reflects the relative (in terms of trait range considered) distinctiveness. Meaning that close species in a small range brings similar distinctiveness than further apart species in larger ranges.
+This reflects the relative (in terms of trait range considered) distinctiveness. Meaning that close species in a small range have similar distinctiveness than further apart species in larger ranges.
 
 ## Considering Abundance
 
@@ -196,7 +197,7 @@ If we try to consider the constraints above we can write the index as follow
 $$
 D_i (T) =
   \begin{dcases}
-  1 & if \\
+  1 & if ~~ T < \text{min}(d_{ij})\\
   \left( \frac{
     \sum\limits_{
       \substack{j = 1 \\
@@ -214,8 +215,115 @@ D_i (T) =
                 d_{ij} \leq T}}^S Ab_j
   }{
     N
-  } \right) & if
+  } \right) & if ~~ T \geq \text{min}(d_{ij})
+  \end{dcases}
+$$
+with $S$ the number of species in the considered community, $Ab_j$ the relative abundance of species $j$ in the community and $N$ the total number of individual in the community.
+
+The problem here is the term on the right:
+$$\frac{ \sum\limits_{\substack{j = 1 \\
+                j \neq i \\
+                d_{ij} \leq T}}^S Ab_j
+  }{
+    N
+  }
+$$
+
+As $Ab_j = \frac{N_j}{N}$ the term rather be:
+$$
+\sum\limits_{\substack{j = 1 \\
+                       j \neq i \\
+                       d_{ij} \leq T}}^S
+  Ab_j$$
+
+#### Definitive formula
+
+which gives the following definition in the end:
+$$
+D_i (T) =
+  \begin{dcases}
+  1 & if ~~ T < \text{min}(d_{ij})\\
+  \left( \frac{
+    \sum\limits_{
+      \substack{j = 1 \\
+                j \neq i \\
+                d_{ij} \leq T}}^S d_{ij} \times Ab_j
+  }{
+    \sum\limits_{
+      \substack{j = 1 \\
+                j \neq i \\
+                d_{ij} \leq T}}^S Ab_j
+  } \right) \times \left(1 -
+    \sum\limits_{
+      \substack{j = 1 \\
+                j \neq i \\
+                d_{ij} \leq T}}^S Ab_j
+   \right) & if ~~ T \geq \text{min}(d_{ij})
   \end{dcases}
 $$
 
+#### Reconciling with presence-absence definition
 
+We can also check how this definition differs from the previous one by saying that $Ab_j = \frac{1}{N}$ and $N = S$ (one individual per species in each community) this gives us:
+
+\begin{align}
+D_i (T) & = \frac{
+    \sum\limits_{
+      \substack{j = 1 \\
+                j \neq i \\
+                d_{ij} \leq T}}^S d_{ij} \times Ab_j
+  }{
+    \sum\limits_{
+      \substack{j = 1 \\
+                j \neq i \\
+                d_{ij} \leq T}}^S Ab_j
+  } \times \left(1 -
+    \sum\limits_{
+      \substack{j = 1 \\
+                j \neq i \\
+                d_{ij} \leq T}}^S Ab_j
+   \right) \label{eq:diabdef} \\
+   & = \frac{
+    \sum\limits_{
+      \substack{j = 1 \\
+                j \neq i \\
+                d_{ij} \leq T}}^S d_{ij} \times \frac{1}{N}
+  }{
+    \sum\limits_{
+      \substack{j = 1 \\
+                j \neq i \\
+                d_{ij} \leq T}}^S \frac{1}{N}
+  } \times \left(1 -
+    \sum\limits_{
+      \substack{j = 1 \\
+                j \neq i \\
+                d_{ij} \leq T}}^S \frac{1}{N}
+   \right) \nonumber \\
+   & = \frac{\cancel{\frac{1}{N}} \sum\limits^S d_{ij}}{
+             \cancel{\frac{1}{N}} \sum\limits^S 1
+   } \times \left(1 - \frac{1}{N} \sum\limits^S 1 \right) \nonumber \\
+   & = \frac{\sum\limits^S d_{ij}}{
+             \sum\limits^S 1} - 
+       \frac{\sum\limits^S d_{ij} \times \cancel{\sum\limits^S 1}}{
+             N \times \cancel{\sum\limits^S 1}} \nonumber \\
+   & = \frac{\sum\limits^S d_{ij}}{
+             \sum\limits^S 1} - \frac{\sum\limits^S d_{ij}}{S}
+             \label{eq:diabsimp1} \\
+   & = \sum\limits^S d_{ij} \left(\frac{1}{\sum\limits^S 1} -
+                                  \frac{1}{S}\right) \label{eq:diabsimp2}
+\end{align}
+
+From \eqref{eq:diabsimp1} we find back the definition of $D_i(T)$ with presence and absences only. However there is an additional that resembles to a mean distance. It's the sum of all the distances to species within range of the focal species over the total number of species in the community. This term depends on the number of species in the community.
+
+From \eqref{eq:diabsimp2} we see that as the range comprises more species the term between parenthesis approaches zero and thus we observe a (near-)zero distinctiveness for all the species in the community whatever the functional distances between species.
+
+In the end, this definition does not seem to reconcile well with the presence-absence definition.
+
+
+### Implementation
+
+Similar to the strategy we can implement this definition of functional distinctiveness by using a correspondance matrix in which we nullify the importance of species that are further away than the given threshold:
+
+```{r new_distinctiveness_ab}
+
+```
