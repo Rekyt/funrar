@@ -90,9 +90,6 @@ abund_com$Di = c(4/9, 4/9)
 library(Matrix)
 sparse_mat = as(valid_mat, "sparseMatrix")
 
-dist_sparse_mat = as(correct_dist_mat, "sparseMatrix") %>%
-  as("dgeMatrix")
-
 # Tests for Distinctiveness ----------------------------------------------------
 
 test_that("Bad input generates error", {
