@@ -28,7 +28,8 @@ communities will have an \code{NA} value (see \code{Note} section)
 \description{
 Computes functional distinctiveness from a site-species matrix (containing
 presence-absence or relative abundances) of species with provided functional
-distance matrix. The sites-species matrix should have \strong{sites} in
+distance matrix \strong{considering only species within a given range in the
+functional space}. The sites-species matrix should have \strong{sites} in
 \strong{rows} and \strong{species} in \strong{columns}, similar to
 \pkg{vegan} package defaults.
 }
@@ -37,13 +38,43 @@ The Functional Distinctiveness of a species is the average functional
 distance from a species to all the other in the given community. It is
 computed as such:
 \deqn{
-   D_i = \frac{\sum_{j = 0, i \neq j}^N d_{ij}}{N-1},
+   D_i(T) = 1 ~~ if ~~ T < \text{min}(d_{ij}), \\
+   D_i(T) =
+              \left( \frac{
+                \sum\limits_{
+                  \substack{j = 1 \\
+                  j \neq i \\
+                  d_{ij} \leq T}}^S d_{ij} \times Ab_j
+              }{
+                \sum\limits_{
+                  \substack{j = 1 \\
+                  j \neq i \\
+                  d_{ij} \leq T}}^S Ab_j
+              } \right) \times \left(1 - \frac{
+                \sum\limits_{
+                  \substack{j = 1 \\
+                  j \neq i \\
+                  d_{ij} \leq T}}^S Ab_j
+              }{
+                N
+              } \right) ~~ if ~~ T \geq \text{min}(d_{ij}),
    }{%
-   D_i = ( \Sigma_(j = 0, i != j)^N d_ij) / (N - 1),
+   D_i (T) = ((\Sigma_(j = 0, j != i, T â‰¥ min(d_ij))^N d_ij * Ab_j) /
+             (\Sigma_(j = 0, j != i, T â‰¥ min(d_ij))^N Ab_j)) *
+             (1 - \Sigma_(j = 0, j != i, T â‰¥ min(d_ij))^N Ab_j),
    }
-with \eqn{D_i} the functional distinctiveness of species \eqn{i}, \eqn{N}
+   with \eqn{D_i} the functional distinctiveness of species \eqn{i}, \eqn{N}
 the total number of species in the community and \eqn{d_{ij}}{d_ij} the
-functional distance between species \eqn{i} and species \eqn{j}.
+functional distance between species \eqn{i} and species \eqn{j}. \eqn{T}
+is the chosen maximal range considered. When presence-absence are used
+\eqn{Ab_j = 1/N} and the term \eqn{ \left(1 - \frac{
+                \sum\limits_{
+                  \substack{j = 1 \\
+                  j \neq i \\
+                  d_{ij} \leq T}}^S Ab_j
+              }{
+                N
+              } \right)} is replaced by 1.
 \strong{IMPORTANT NOTE}: in order to get functional rarity indices between 0
 and 1, the distance metric has to be scaled between 0 and 1.
 }

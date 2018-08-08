@@ -1,11 +1,15 @@
 ---
 title: "Alternative Distinctiveness definition"
 author: "Rekyt"
-date: "04/08/2018"
+date: "`r Sys.Date()`"
 header-includes:
   - \usepackage{mathtools}
   - \usepackage{cancel}
-output: pdf_document
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{How to use 'funrar', an example with plant communities dataset}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
 ---
 
 ```{r setup, include=FALSE}

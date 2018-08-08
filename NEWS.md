@@ -2,7 +2,8 @@
 
 * Add `_tidy()` aliases for each `_stack()` function for easier reading (fix #29).
 * Warning when distinctiveness equals `NaN` in `distinctiveness_stack()` (#30).
-* `distinctiveness_stack()` returns `NA` as distinctiveness values for absent species (#30)
+* `distinctiveness_stack()` returns `NA` as distinctiveness values for absent species (#30).
+* New definition of functional distinctiveness based on range see `distinctiveness_range()`.
 
 # funrar 1.2.2
 
