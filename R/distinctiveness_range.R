@@ -137,7 +137,14 @@ distinctiveness_range = function(pres_matrix, dist_matrix, given_range, relative
     })
   }
 
-  index_matrix = (index_matrix / denom_matrix) / max_dist
+  # Define right term in the equation of abundance weighted range Di
+  right_term = 1
+  if (is_relative(pres_matrix) & !all(unique(as.vector(pres_matrix)) %in%
+                                      c(1, 0))) {
+    right_term = 1 - denom_matrix
+  }
+
+  index_matrix = ((index_matrix / denom_matrix) * right_term) / max_dist
   index_matrix[denom_matrix == 0 & pres_matrix != 0] = 1
 
   dimnames(index_matrix) = dimnames(pres_matrix)

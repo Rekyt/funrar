@@ -85,10 +85,37 @@ abund_com = abund_mat %>%
   filter(abund > 0, site == "s3")
 abund_com$Di = c(4/9, 4/9)
 
+# Range-dependent good distinctiveness matrices
+good_di_0.1_ab = good_di_0.1
+good_di_0.4_ab = matrix(c(1/30, 7/90, NA, NA,
+                          NA,   1,    1,  1,
+                          NA,   1,    1,  NA,
+                          NA,   NA,   1,  1),
+                        nrow = 4, ncol = 4, byrow = TRUE,
+                        dimnames = list("site" = paste0("s", 1:4),
+                                        "species" = letters[1:4]))
+good_di_0.6_ab = matrix(c(1/30, 7/90, NA,   NA,
+                          NA,   8/45, 4/15, 8/45,
+                          NA,   2/9,  2/9,  NA,
+                          NA,   NA,   4/45, 16/45),
+                        nrow = 4, ncol = 4, byrow = TRUE,
+                        dimnames = list("site" = paste0("s", 1:4),
+                                        "species" = letters[1:4]))
+
+good_di_0.9_ab = matrix(c(1/30, 7/90, NA,   NA,
+                          NA,   1/9,  4/15, 1/9,
+                          NA,   2/9,  2/9,  NA,
+                          NA,   NA,   4/45, 16/45),
+                        nrow = 4, ncol = 4, byrow = TRUE,
+                        dimnames = list("site" = paste0("s", 1:4),
+                                        "species" = letters[1:4]))
+
+
 
 ## Sparse Matrices -------------------------------------------------------------
 library(Matrix)
 sparse_mat = as(valid_mat, "sparseMatrix")
+sparse_ab_mat = as(abund_mat, "sparseMatrix")
 
 # Tests for Distinctiveness ----------------------------------------------------
 
@@ -97,7 +124,7 @@ test_that("Bad input generates error", {
                "'given_range' argument should be non-null and numeric")
 })
 
-test_that("Correct Di computation with different comm. without abundance",{
+test_that("Correct Di computation without abundance",{
 
   # Conservation of dimensions names of indices matrix
   expect_identical(dimnames(distinctiveness_range(valid_mat, dist_mat, 0.1)),
@@ -121,6 +148,30 @@ test_that("Correct Di computation with different comm. without abundance",{
                     good_di_0.9)
 })
 
+test_that("Correct Di computation with abundance",{
+
+  # Conservation of dimensions names of indices matrix
+  expect_identical(dimnames(distinctiveness_range(abund_mat, dist_mat, 0.1)),
+                   dimnames(abund_mat))
+
+  # Check computation equal
+  # When T < 1/9
+  expect_equivalent(distinctiveness_range(abund_mat, dist_mat, 0.1),
+                    good_di_0.1_ab)
+
+  # 1/9 ≤ T < 4/9
+  expect_equivalent(distinctiveness_range(abund_mat, dist_mat, 0.4),
+                    good_di_0.4_ab)
+
+  # 4/9 ≤ T < 8/9
+  expect_equivalent(distinctiveness_range(abund_mat, dist_mat, 0.6),
+                    good_di_0.6_ab)
+
+  #  T ≥ 8/9
+  expect_equivalent(distinctiveness_range(abund_mat, dist_mat, 0.9),
+                    good_di_0.9_ab)
+})
+
 test_that("Distinctiveness works with sparse matrices", {
   expect_silent(distinctiveness_range(sparse_mat, dist_mat, 0.1))
 
@@ -140,6 +191,23 @@ test_that("Distinctiveness works with sparse matrices", {
   #  T ≥ 8/9
   expect_equivalent(distinctiveness_range(sparse_mat, dist_mat, 0.9),
                     as(good_di_0.9, "dgeMatrix"))
+
+  ## Abundances
+  # When T < 1/9
+  expect_equivalent(distinctiveness_range(sparse_ab_mat, dist_mat, 0.1),
+                    as(good_di_0.1_ab, "dgeMatrix"))
+
+  # 1/9 ≤ T < 4/9
+  expect_equivalent(distinctiveness_range(sparse_ab_mat, dist_mat, 0.4),
+                    as(good_di_0.4_ab, "dgeMatrix"))
+
+  # 4/9 ≤ T < 8/9
+  expect_equivalent(distinctiveness_range(sparse_ab_mat, dist_mat, 0.6),
+                    as(good_di_0.6_ab, "dgeMatrix"))
+
+  #  T ≥ 8/9
+  expect_equivalent(distinctiveness_range(sparse_ab_mat, dist_mat, 0.9),
+                    as(good_di_0.9_ab, "dgeMatrix"))
 })
 
 
