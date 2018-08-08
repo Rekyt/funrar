@@ -100,6 +100,7 @@ distinctiveness_range = function(pres_matrix, dist_matrix, given_range, relative
   corr_matrix = dist_matrix
   corr_matrix[dist_matrix > given_range] = 0
   corr_matrix[dist_matrix <= given_range] = 1
+  diag(corr_matrix) = 0
 
   # Matrix product of distance matrix and presence absence matrix
   index_matrix = pres_matrix %*% (dist_matrix * corr_matrix)
@@ -137,13 +138,7 @@ distinctiveness_range = function(pres_matrix, dist_matrix, given_range, relative
   }
 
   index_matrix = (index_matrix / denom_matrix) / max_dist
-  index_matrix[is.nan(index_matrix)] = 1
-
-  # Test if there is NaN in the table for species alone in their community
-  if (any(vapply(index_matrix, function(x) is.nan(x), logical(1)))) {
-    warning("Some communities had a single species in them\n",
-            "Computed value assigned to 'NaN'")
-  }
+  index_matrix[denom_matrix == 0 & pres_matrix != 0] = 1
 
   dimnames(index_matrix) = dimnames(pres_matrix)
 
