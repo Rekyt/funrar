@@ -341,8 +341,65 @@ In the end, this definition does not seem to reconcile well with the presence-ab
 
 ### Implementation
 
-Similar to the strategy we can implement this definition of functional distinctiveness by using a correspondance matrix in which we nullify the importance of species that are further away than the given threshold:
+Similar to the strategy we can implement this definition of functional distinctiveness by using a correspondance matrix in which we nullify the importance of species that are further away than the given threshold. In order to test the behavior of the metric we design an abundance matrix with the same species again a, b, and c:
 
 ```{r new_distinctiveness_ab}
+ab_mat = matrix(c(rep(1/3, 3), 1/6, 1/6, 4/6, 4/6, 1/6, 1/6), nrow = 3, ncol = 3,
+                         dimnames = list(site = c("s1", "s2", "s3"),
+                                         species = c("a", "b", "c")),
+                byrow = TRUE)
 
+alternative_distinctiveness_abundance = function(abund_mat, dist_matrix,
+                                                 given_range) {
+  
+  dist_mat = dist_matrix
+  
+  kept_sp = funrar:::species_in_common(abund_mat, dist_mat)
+  dist_mat = dist_mat[kept_sp, kept_sp, drop = FALSE]
+  
+  
+  # Correspondance matrix (tracking which species we want to keep)
+  corr_dist = dist_mat
+  corr_dist[dist_mat > given_range] = 0
+  corr_dist[dist_mat <= given_range] = 1
+  diag(corr_dist) = 0
+  
+  # Across sites
+  # given_pres is a vector of presences per site
+  di_mat = apply(abund_mat, 1, function(given_ab) {
+    index_mat = given_ab %*% (dist_mat * corr_dist)  # Sum of distances per species
+    denom_mat = given_ab %*% corr_dist  # Number of distances considered per species
+    index_mat = (index_mat / denom_mat) * (1 - denom_mat)
+    index_mat[given_ab == 0 | is.na(given_ab)] = NA
+    index_mat[is.nan(index_mat)] = 1
+    
+    return(index_mat)
+  })
+  
+  di_mat = t(di_mat)
+  dimnames(di_mat) = dimnames(abund_mat)
+  
+  dplyr::mutate(funrar::matrix_to_stack(di_mat, "Di"),
+                given_range = given_range)
+}
 ```
+
+Which gives the following results for or situation:
+```{r}
+ab_di_all_ranges = lapply(seq(0, 1.5, length.out = 50),
+       function(given_number) alternative_distinctiveness_abundance(ab_mat,
+                                                          as.matrix(species_distance),
+                                                          given_number))
+
+ab_di_all_ranges = dplyr::bind_rows(ab_di_all_ranges)
+
+ggplot(ab_di_all_ranges, aes(given_range, Di, color = species)) +
+  geom_line(size = 1) +
+  facet_wrap(~site, labeller = as_labeller(c(s1 = "s1 (1/3 rel. abund each)",
+                                             s2 = "s2 (a=1/6, b=1/6, c=4/6)",
+                                             s3 = "s3 (a=4/6, b=1/6, c=1/6)"))) +
+  labs(x = "Considered Range",
+       y = "Functional Distinctiveness")
+```
+
+We clearly see the difference between s2 and s3 comparing species b and c. In s3, when c has the same relative abundance as b, both species share the same distinctiveness until the range equals 1 (distance between A & B).
