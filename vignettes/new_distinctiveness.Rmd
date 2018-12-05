@@ -7,7 +7,7 @@ header-includes:
   - \usepackage{cancel}
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{How to use 'funrar', an example with plant communities dataset}
+  %\VignetteIndexEntry{Alternative definition of distinctiveness}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
