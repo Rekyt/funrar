@@ -1,10 +1,18 @@
 # Sample .travis.yml for R projects
-
 language: r
 cache: packages
 warnings_are_errors: true
 sudo: required
-r_github_packages:
-  - jimhester/covr
+packages:
+  - covr
+  - pkgdown
+  - spelling
+
 after_success:
   - Rscript -e 'library(covr);codecov()'
+  - Rscript -e 'spelling::spell_check_package(vignettes = TRUE)'
+
+deploy:
+provider: script
+script: Rscript -e 'pkgdown::deploy_site_github()'
+skip_cleanup: true
