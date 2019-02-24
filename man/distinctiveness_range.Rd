@@ -38,7 +38,7 @@ The Functional Distinctiveness of a species is the average functional
 distance from a species to all the other in the given community. It is
 computed as such:
 \deqn{
-   D_i(T) = 1 ~~ if ~~ T < \text{min}(d_{ij}), \\
+   D_i(T) = 1 ~~ if ~~ T < min(d_{ij}), \\
    D_i(T) =
               \left( \frac{
                 \sum\limits_{j = 1 ~,
@@ -56,7 +56,7 @@ computed as such:
                   d_{ij} \leq T}^S Ab_j
               }{
                 N
-              } \right) ~~ if ~~ T \geq \text{min}(d_{ij}),
+              } \right) ~~ if ~~ T \geq min(d_{ij}),
    }{%
    D_i (T) = ((\Sigma_(j = 0, j != i, T ≥ min(d_ij))^N d_ij * Ab_j) /
              (\Sigma_(j = 0, j != i, T ≥ min(d_ij))^N Ab_j)) *
