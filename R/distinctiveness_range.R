@@ -36,20 +36,19 @@
 #'    D_i(T) = 1 ~~ if ~~ T < \text{min}(d_{ij}), \\
 #'    D_i(T) =
 #'               \left( \frac{
-#'                 \sum\limits_{
-#'                   \substack{j = 1 \\
-#'                   j \neq i \\
-#'                   d_{ij} \leq T}}^S d_{ij} \times Ab_j
+#'                 \sum\limits_{j = 1 ~,
+#'                   j \neq i ~,
+#'                   d_{ij} \leq T}^S d_{ij} \times Ab_j
 #'               }{
 #'                 \sum\limits_{
-#'                   \substack{j = 1 \\
-#'                   j \neq i \\
-#'                   d_{ij} \leq T}}^S Ab_j
+#'                   j = 1 ~,
+#'                   j \neq i ~,
+#'                   d_{ij} \leq T}^S Ab_j
 #'               } \right) \times \left(1 - \frac{
 #'                 \sum\limits_{
-#'                   \substack{j = 1 \\
-#'                   j \neq i \\
-#'                   d_{ij} \leq T}}^S Ab_j
+#'                   j = 1 ~,
+#'                   j \neq i ~,
+#'                   d_{ij} \leq T}^S Ab_j
 #'               }{
 #'                 N
 #'               } \right) ~~ if ~~ T \geq \text{min}(d_{ij}),
@@ -64,9 +63,9 @@
 #'    is the chosen maximal range considered. When presence-absence are used
 #'    \eqn{Ab_j = 1/N} and the term \eqn{ \left(1 - \frac{
 #'                 \sum\limits_{
-#'                   \substack{j = 1 \\
-#'                   j \neq i \\
-#'                   d_{ij} \leq T}}^S Ab_j
+#'                   j = 1 ~,
+#'                   j \neq i ~,
+#'                   d_{ij} \leq T}^S Ab_j
 #'               }{
 #'                 N
 #'               } \right)} is replaced by 1.
