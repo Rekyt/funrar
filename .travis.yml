@@ -3,7 +3,7 @@ language: r
 cache: packages
 warnings_are_errors: true
 sudo: required
-packages:
+r_packages:
   - covr
   - pkgdown
   - spelling
