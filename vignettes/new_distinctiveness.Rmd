@@ -5,6 +5,7 @@ date: "`r Sys.Date()`"
 header-includes:
   - \usepackage{mathtools}
   - \usepackage{cancel}
+  - \usepackage{amsmath}
 output: rmarkdown::html_vignette
 vignette: >
   %\VignetteIndexEntry{Alternative definition of distinctiveness}
