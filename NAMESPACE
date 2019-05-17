@@ -2,6 +2,7 @@
 
 export(compute_dist_matrix)
 export(distinctiveness)
+export(distinctiveness_alt)
 export(distinctiveness_com)
 export(distinctiveness_dimensions)
 export(distinctiveness_range)
