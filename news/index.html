@@ -60,7 +60,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">funrar</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.2.3</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.0</span>
       </span>
     </div>
 
@@ -99,12 +99,7 @@
       </ul>
       
       <ul class="nav navbar-nav navbar-right">
-        <li>
-  <a href="https://github.com/Rekyt/funrar">
-    <span class="fa fa-github fa-lg"></span>
-     
-  </a>
-</li>
+        
       </ul>
       
     </div><!--/.nav-collapse -->
@@ -118,20 +113,20 @@
   <div class="col-md-9 contents">
     <div class="page-header">
       <h1>Changelog <small></small></h1>
-      <small>Source: <a href='https://github.com/Rekyt/funrar/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
+      
     </div>
 
-    <div id="funrar-1-2-3" class="section level1">
+    <div id="funrar-1-3-0" class="section level1">
 <h1 class="page-header">
-<a href="#funrar-1-2-3" class="anchor"></a>funrar 1.2.3<small> Unreleased </small>
+<a href="#funrar-1-3-0" class="anchor"></a>funrar 1.3.0<small> Unreleased </small>
 </h1>
 <div id="new-features" class="section level2">
 <h2 class="hasAnchor">
 <a href="#new-features" class="anchor"></a>NEW FEATURES</h2>
 <ul>
-<li>Add <code>_tidy()</code> aliases for each <code>_stack()</code> function for easier reading (fix <a href='https://github.com/Rekyt/funrar/issues/29'>#29</a>).</li>
+<li>Add <code>_tidy()</code> aliases for each <code>_stack()</code> function for easier reading (fix #29).</li>
 <li>
-<code><a href="../reference/distinctiveness_stack.html">distinctiveness_stack()</a></code> returns <code>NA</code> as distinctiveness values for absent species (<a href='https://github.com/Rekyt/funrar/issues/30'>#30</a>).</li>
+<code><a href="../reference/distinctiveness_stack.html">distinctiveness_stack()</a></code> returns <code>NA</code> as distinctiveness values for absent species (#30).</li>
 <li>New definition of functional distinctiveness based on range see <code><a href="../reference/distinctiveness_range.html">distinctiveness_range()</a></code>.</li>
 <li>New definition of functional distinctiveness based on range with different formula see <code><a href="../reference/distinctiveness_alt.html">distinctiveness_alt()</a></code>.</li>
 </ul>
@@ -140,7 +135,7 @@
 <h2 class="hasAnchor">
 <a href="#bug-fix" class="anchor"></a>BUG FIX</h2>
 <ul>
-<li>Warning when distinctiveness equals <code>NaN</code> in <code><a href="../reference/distinctiveness_stack.html">distinctiveness_stack()</a></code> (<a href='https://github.com/Rekyt/funrar/issues/30'>#30</a>).</li>
+<li>Warning when distinctiveness equals <code>NaN</code> in <code><a href="../reference/distinctiveness_stack.html">distinctiveness_stack()</a></code> (#30).</li>
 </ul>
 </div>
 </div>
@@ -160,9 +155,9 @@
 <li>Add Authors’ ORCID and all contributors;</li>
 <li>funrar paper is now included in DESCRIPTION, README.md and has a proper CITATION file;</li>
 <li>Fix typos in documentation;</li>
-<li>Transformation from tidy data.frame to sparse matrix is now possible using <code><a href="../reference/stack_to_matrix.html">stack_to_matrix(x, sparse = TRUE)</a></code> (<a href='https://github.com/Rekyt/funrar/issues/25'>#25</a>);</li>
-<li>Add a warning message when using only continuous traits with function <code>comput_dist_matrix()</code>, as it defaults to Gower’s distance (<a href='https://github.com/Rekyt/funrar/issues/27'>#27</a>);</li>
-<li>Specification in help that functional distances need to be scaled between 0 and 1 prior to distinctiveness computation (<a href='https://github.com/Rekyt/funrar/issues/26'>#26</a>).</li>
+<li>Transformation from tidy data.frame to sparse matrix is now possible using <code><a href="../reference/stack_to_matrix.html">stack_to_matrix(x, sparse = TRUE)</a></code> (#25);</li>
+<li>Add a warning message when using only continuous traits with function <code>comput_dist_matrix()</code>, as it defaults to Gower’s distance (#27);</li>
+<li>Specification in help that functional distances need to be scaled between 0 and 1 prior to distinctiveness computation (#26).</li>
 </ul>
 </div>
     <div id="funrar-1-2-0" class="section level1">
@@ -204,10 +199,10 @@
 <a href="#funrar-1-0-3" class="anchor"></a>funrar 1.0.3<small> 2017-05-05 </small>
 </h1>
 <ul>
-<li>Corrected bug so that dense matrices can be transformed to stack data frame using <code><a href="../reference/matrix_to_stack.html">matrix_to_stack()</a></code> (<a href='https://github.com/Rekyt/funrar/issues/19'>#19</a>),</li>
+<li>Corrected bug so that dense matrices can be transformed to stack data frame using <code><a href="../reference/matrix_to_stack.html">matrix_to_stack()</a></code> (#19),</li>
 <li>Updated citation for Violle et al. 2017,</li>
 <li>Use package <a href="https://github.com/MangoTheCat/goodpractice"><code>goodpractice</code></a> to enforce better code style,</li>
-<li>Add <code><a href="../reference/is_relative.html">is_relative()</a></code> function to test if matrix contains relative abundances, <code><a href="../reference/scarcity.html">scarcity()</a></code> and <code><a href="../reference/distinctiveness.html">distinctiveness()</a></code> now warns if it is not the case (<a href='https://github.com/Rekyt/funrar/issues/21'>#21</a>),</li>
+<li>Add <code><a href="../reference/is_relative.html">is_relative()</a></code> function to test if matrix contains relative abundances, <code><a href="../reference/scarcity.html">scarcity()</a></code> and <code><a href="../reference/distinctiveness.html">distinctiveness()</a></code> now warns if it is not the case (#21),</li>
 <li>Conditionnally use <a href="https://cran.r-project.org/package=microbenchmark"><code>microbenchmark</code></a> following CRAN advices.</li>
 </ul>
 </div>
@@ -226,7 +221,7 @@
     <div id="tocnav">
       <h2>Contents</h2>
       <ul class="nav nav-pills nav-stacked">
-        <li><a href="#funrar-1-2-3">1.2.3</a></li>
+        <li><a href="#funrar-1-3-0">1.3.0</a></li>
         <li><a href="#funrar-1-2-2">1.2.2</a></li>
         <li><a href="#funrar-1-2-1">1.2.1</a></li>
         <li><a href="#funrar-1-2-0">1.2.0</a></li>
