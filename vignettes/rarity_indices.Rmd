@@ -213,7 +213,7 @@ with $U_i$ the uniqueness of species $i$, $d_{ij}$ the functional distance betwe
 
 #### Computation
 
-`uniqueness()` follows a similar syntax, but beware that given community table and distance matrix should respresent the **regional species pool**. And the syntax is also similar:
+`uniqueness()` follows a similar syntax, but beware that given community table and distance matrix should represent the **regional species pool**. And the syntax is also similar:
 
 ```{r uniqComp}
 ui = uniqueness(mat, dist_mat)

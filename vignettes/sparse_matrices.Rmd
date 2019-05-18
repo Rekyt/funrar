@@ -1,5 +1,5 @@
 ---
-title: "Sparse Marices with `funrar`"
+title: "Sparse Matrices with `funrar`"
 author: "Matthias Greni\u00e9"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
