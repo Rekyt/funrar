@@ -116,15 +116,15 @@
 <a class="sourceLine" id="cb1-7" data-line-number="7">my_mat[<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">5</span>]</a></code></pre></div>
 <pre><code>##       sp1 sp2 sp3 sp4 sp5
 ## site1   0   0   0   0   0
-## site2   0   0   0   0   0
-## site3   0   0   0   0   0
-## site4   0   0   0   0   0
-## site5   1   0   0   0   0</code></pre>
+## site2   0   0   0   0   1
+## site3   0   0   0   0   1
+## site4   0   1   0   0   0
+## site5   0   0   0   0   0</code></pre>
 <p><code>funrar</code> lets you use sparse matrices directly using a function implemented in the <code>Matrix</code> package. When your matrix is filled with 0s it can be quicker to use sparse matrices. To know if you should use sparse matrices you can compute the filling of your matrix, i.e. the percentage of non-zero cells in your matrix:</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1">filling =<span class="st"> </span><span class="dv">1</span> <span class="op">-</span><span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/sum">sum</a></span>(my_mat <span class="op">==</span><span class="st"> </span><span class="dv">0</span>)<span class="op">/</span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/nrow">ncol</a></span>(my_mat)<span class="op">*</span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/nrow">nrow</a></span>(my_mat))</a>
 <a class="sourceLine" id="cb3-2" data-line-number="2"></a>
 <a class="sourceLine" id="cb3-3" data-line-number="3">filling</a></code></pre></div>
-<pre><code>## [1] 0.142655</code></pre>
+<pre><code>## [1] 0.142345</code></pre>
 <p>To convert from a normal matrix to a sparse matrix you can use <code>as(my_mat, "sparseMatrix")</code>:</p>
 <div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(Matrix)</a>
 <a class="sourceLine" id="cb5-2" data-line-number="2"></a>
@@ -137,7 +137,7 @@
 <p>it completely changes the structure as well as the memory it takes in the RAM:</p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="co"># Regular Matrix</span></a>
 <a class="sourceLine" id="cb9-2" data-line-number="2"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/str">str</a></span>(my_mat)</a></code></pre></div>
-<pre><code>##  num [1:200, 1:1000] 0 0 0 0 1 0 0 0 0 0 ...
+<pre><code>##  num [1:200, 1:1000] 0 0 0 0 0 0 0 0 0 0 ...
 ##  - attr(*, "dimnames")=List of 2
 ##   ..$ : chr [1:200] "site1" "site2" "site3" "site4" ...
 ##   ..$ : chr [1:1000] "sp1" "sp2" "sp3" "sp4" ...</code></pre>
@@ -146,16 +146,16 @@
 <div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" data-line-number="1"><span class="co"># Sparse Matrix from 'Matrix' package</span></a>
 <a class="sourceLine" id="cb13-2" data-line-number="2"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/str">str</a></span>(sparse_mat)</a></code></pre></div>
 <pre><code>## Formal class 'dgCMatrix' [package "Matrix"] with 6 slots
-##   ..@ i       : int [1:28531] 4 12 25 52 58 69 75 90 99 106 ...
-##   ..@ p       : int [1:1001] 0 24 49 80 113 144 182 208 250 279 ...
+##   ..@ i       : int [1:28469] 16 19 23 27 30 42 47 65 67 77 ...
+##   ..@ p       : int [1:1001] 0 30 55 82 108 140 181 208 237 263 ...
 ##   ..@ Dim     : int [1:2] 200 1000
 ##   ..@ Dimnames:List of 2
 ##   .. ..$ : chr [1:200] "site1" "site2" "site3" "site4" ...
 ##   .. ..$ : chr [1:1000] "sp1" "sp2" "sp3" "sp4" ...
-##   ..@ x       : num [1:28531] 1 1 1 1 1 1 1 1 1 1 ...
+##   ..@ x       : num [1:28469] 1 1 1 1 1 1 1 1 1 1 ...
 ##   ..@ factors : list()</code></pre>
 <div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/print">print</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/object.size">object.size</a></span>(sparse_mat), <span class="dt">units =</span> <span class="st">"Kb"</span>)</a></code></pre></div>
-<pre><code>## 414.8 Kb</code></pre>
+<pre><code>## 414.1 Kb</code></pre>
 <p>sparse matrices reduce the amount of RAM necessary to store them. The more zeros there are in a given matrix the more RAM will be spared when turning it into a sparse matrix.</p>
 <div id="benchmark" class="section level2">
 <h2 class="hasAnchor">
@@ -206,7 +206,7 @@
 <a class="sourceLine" id="cb18-25" data-line-number="25"><span class="kw">mat_filling</span>(all_mats<span class="op">$</span><span class="st">`</span><span class="dt">0</span><span class="st">`</span><span class="op">$</span>mat)</a></code></pre></div>
 <pre><code>## [1] 1</code></pre>
 <div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb20-1" data-line-number="1"><span class="kw">mat_filling</span>(all_mats<span class="op">$</span><span class="st">`</span><span class="dt">99</span><span class="st">`</span><span class="op">$</span>mat)</a></code></pre></div>
-<pre><code>## [1] 0.010445</code></pre>
+<pre><code>## [1] 0.01031</code></pre>
 <p>Now we can compare the speed of the algorithms:</p>
 <div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb22-1" data-line-number="1"><span class="cf">if</span> (<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/ns-load">requireNamespace</a></span>(<span class="st">"microbenchmark"</span>, <span class="dt">quietly =</span> <span class="ot">TRUE</span>)) {</a>
 <a class="sourceLine" id="cb22-2" data-line-number="2">  mat_bench =<span class="st"> </span>microbenchmark<span class="op">::</span><span class="kw">microbenchmark</span>(</a>
