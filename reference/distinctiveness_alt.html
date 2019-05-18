@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Multiple distance matrices — combination_trait_dist • funrar</title>
+<title>Other Functional Distinctiveness within range — distinctiveness_alt • funrar</title>
 
 <!-- jquery -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
@@ -30,10 +30,14 @@
 
 
 
-<meta property="og:title" content="Multiple distance matrices — combination_trait_dist" />
+<meta property="og:title" content="Other Functional Distinctiveness within range — distinctiveness_alt" />
 
-<meta property="og:description" content="Internal function to compute combinations of distance matrices from a
-data.frame of traits, using compute_dist_matrix()." />
+<meta property="og:description" content="Computes functional distinctiveness from a site-species matrix (containing
+presence-absence or relative abundances) of species with provided functional
+distance matrix considering only species within a given range in the
+functional space. The sites-species matrix should have sites in
+rows and species in columns, similar to
+vegan package defaults." />
 <meta name="twitter:card" content="summary" />
 
 
@@ -121,38 +125,83 @@ data.frame of traits, using compute_dist_matrix()." />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Multiple distance matrices</h1>
-    <small class="dont-index">Source: <a href='https://github.com/Rekyt/funrar/blob/master/R/rarity_dimensions.R'><code>R/rarity_dimensions.R</code></a></small>
-    <div class="hidden name"><code>combination_trait_dist.Rd</code></div>
+    <h1>Other Functional Distinctiveness within range</h1>
+    <small class="dont-index">Source: <a href='https://github.com/Rekyt/funrar/blob/master/R/distinctiveness_alt.R'><code>R/distinctiveness_alt.R</code></a></small>
+    <div class="hidden name"><code>distinctiveness_alt.Rd</code></div>
     </div>
 
     <div class="ref-description">
     
-    <p>Internal function to compute combinations of distance matrices from a
-data.frame of traits, using <code><a href='compute_dist_matrix.html'>compute_dist_matrix()</a></code>.</p>
+    <p>Computes functional distinctiveness from a site-species matrix (containing
+presence-absence or relative abundances) of species with provided functional
+distance matrix <strong>considering only species within a given range in the
+functional space</strong>. The sites-species matrix should have <strong>sites</strong> in
+<strong>rows</strong> and <strong>species</strong> in <strong>columns</strong>, similar to
+<span class="pkg">vegan</span> package defaults.</p>
     
     </div>
 
-    <pre class="usage"><span class='fu'>combination_trait_dist</span>(<span class='no'>traits_table</span>, <span class='no'>...</span>)</pre>
+    <pre class="usage"><span class='fu'>distinctiveness_alt</span>(<span class='no'>pres_matrix</span>, <span class='no'>dist_matrix</span>, <span class='no'>given_range</span>)</pre>
     
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>traits_table</th>
-      <td><p>a data.frame of traits with species in row and traits in
-columns, <strong>row names</strong> should be <strong>species names</strong>,</p></td>
+      <th>pres_matrix</th>
+      <td><p>a site-species matrix (presence-absence or relative
+abundances), with sites in rows and species in columns</p></td>
     </tr>
     <tr>
-      <th>...</th>
-      <td><p>additional arguments supplied to <code><a href='compute_dist_matrix.html'>compute_dist_matrix()</a></code></p></td>
+      <th>dist_matrix</th>
+      <td><p>a species functional distance matrix</p></td>
+    </tr>
+    <tr>
+      <th>given_range</th>
+      <td><p>a numeric indicating the dissimilarity range at which the
+the other species are considered maximally dissimilar</p></td>
     </tr>
     </table>
     
     <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
-    <p>A list of functional distance matrices, one for each provided trait
-plus an additional matrix for all traits taken altogether</p>
+    <p>a similar matrix from provided <code>pres_matrix</code> with Distinctiveness
+values in lieu of presences or relative abundances, species absent from
+communities will have an <code>NA</code> value (see <code>Note</code> section)</p>
+    
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>The Functional Distinctiveness of a species is the average functional
+distance from a species to all the other in the given community. It is
+computed as such:
+$$
+   D_i(T) = \frac{
+                \sum\limits_{j = 1 ~,j \neq i ~}^S
+                \left[ \frac{d_{ij}}{T} + \theta(d_{ij} - T)
+                  \left(1 - \frac{d_{ij}}{T} \right) \right]
+              }{
+                S - 1
+              }
+   $$
+with \(D_i\) the functional distinctiveness of species \(i\), \(N\)
+the total number of species in the community and \(d_{ij}\) the
+functional distance between species \(i\) and species \(j\). \(T\)
+is the chosen maximal range considered. The function
+\(\theta(d_ij - T)\) is an indicator function that returns 1 when
+\(d_{ij} \geq T\) and 0 when \(d_{ij} &lt; T\).
+<strong>IMPORTANT NOTE</strong>: in order to get functional rarity indices between 0
+and 1, the distance metric has to be scaled between 0 and 1.</p>
+    
+    <h2 class="hasAnchor" id="note"><a class="anchor" href="#note"></a>Note</h2>
+
+    
+    <p>Absent species should be coded by <code>0</code> or <code>NA</code> in input matrices.</p>
+<p>When a species is alone in its community the functional distinctiveness
+cannot be computed (denominator = 0 in formula), and its value is assigned
+as <code>NaN</code>.</p>
+<p>For speed and memory efficiency sparse matrices can be used as input of
+the function using <code>as(pres_matrix, "sparseMatrix")</code> from the
+<code>Matrix</code> package.
+(see <code><a href='../articles/sparse_matrices.html'>vignette("sparse_matrices", package = "funrar")</a></code>)</p>
     
 
   </div>
@@ -162,6 +211,10 @@ plus an additional matrix for all traits taken altogether</p>
       <li><a href="#arguments">Arguments</a></li>
       
       <li><a href="#value">Value</a></li>
+
+      <li><a href="#details">Details</a></li>
+
+      <li><a href="#note">Note</a></li>
           </ul>
 
   </div>

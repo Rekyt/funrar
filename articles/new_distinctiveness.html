@@ -30,7 +30,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">funrar</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.2.2.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.2.3</span>
       </span>
     </div>
 
@@ -89,7 +89,7 @@
       <h1>Alternative Distinctiveness definition</h1>
                         <h4 class="author">Rekyt</h4>
             
-            <h4 class="date">2019-02-24</h4>
+            <h4 class="date">2019-05-18</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/Rekyt/funrar/blob/master/vignettes/new_distinctiveness.Rmd"><code>vignettes/new_distinctiveness.Rmd</code></a></small>
       <div class="hidden name"><code>new_distinctiveness.Rmd</code></div>
@@ -195,64 +195,68 @@ D_b(T) =
 <a class="sourceLine" id="cb5-10" data-line-number="10"></a>
 <a class="sourceLine" id="cb5-11" data-line-number="11">all_T =<span class="st"> </span>dplyr<span class="op">::</span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/bind.html">bind_rows</a></span>(all_T)</a></code></pre></div>
 <p>We can visualize those relationships:</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(ggplot2)</a>
-<a class="sourceLine" id="cb6-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb6-3" data-line-number="3"><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(all_T, <span class="kw"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(given_range, Di, <span class="dt">color =</span> species)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb6-4" data-line-number="4"><span class="st">    </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span>(<span class="dt">size =</span> <span class="dv">1</span>, <span class="dt">alpha =</span> <span class="dv">1</span><span class="op">/</span><span class="dv">2</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb6-5" data-line-number="5"><span class="st">    </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/facet_grid.html">facet_grid</a></span>(<span class="op">~</span>site) <span class="op">+</span></a>
-<a class="sourceLine" id="cb6-6" data-line-number="6"><span class="st">  </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span>(<span class="dt">x =</span> <span class="st">"Fixed distance range"</span>,</a>
-<a class="sourceLine" id="cb6-7" data-line-number="7">       <span class="dt">y =</span> <span class="st">"Functional Distinctiveness"</span>,</a>
-<a class="sourceLine" id="cb6-8" data-line-number="8">       <span class="dt">color =</span> <span class="st">"Species"</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb6-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(ggplot2)</a></code></pre></div>
+<pre><code>## Registered S3 methods overwritten by 'ggplot2':
+##   method         from 
+##   [.quosures     rlang
+##   c.quosures     rlang
+##   print.quosures rlang</code></pre>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb8-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/ggplot">ggplot</a></span>(all_T, <span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/aes">aes</a></span>(given_range, Di, <span class="dt">color =</span> species)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb8-2" data-line-number="2"><span class="st">    </span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/geom_path">geom_line</a></span>(<span class="dt">size =</span> <span class="dv">1</span>, <span class="dt">alpha =</span> <span class="dv">1</span><span class="op">/</span><span class="dv">2</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb8-3" data-line-number="3"><span class="st">    </span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/facet_grid">facet_grid</a></span>(<span class="op">~</span>site) <span class="op">+</span></a>
+<a class="sourceLine" id="cb8-4" data-line-number="4"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/labs">labs</a></span>(<span class="dt">x =</span> <span class="st">"Fixed distance range"</span>,</a>
+<a class="sourceLine" id="cb8-5" data-line-number="5">       <span class="dt">y =</span> <span class="st">"Functional Distinctiveness"</span>,</a>
+<a class="sourceLine" id="cb8-6" data-line-number="6">       <span class="dt">color =</span> <span class="st">"Species"</span>)</a></code></pre></div>
 <p><img src="new_distinctiveness_files/figure-html/unnamed-chunk-3-1.png" width="700"></p>
 </div>
 <div id="using-real-data" class="section level3">
 <h3 class="hasAnchor">
 <a href="#using-real-data" class="anchor"></a>Using real data</h3>
 <p>We’ll be using the dataset <code>aravo</code> from the <code>ade4</code> package.</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(<span class="st">"funrar"</span>)</a>
-<a class="sourceLine" id="cb7-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb7-3" data-line-number="3"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/data">data</a></span>(<span class="st">"aravo"</span>, <span class="dt">package =</span> <span class="st">"ade4"</span>)</a>
-<a class="sourceLine" id="cb7-4" data-line-number="4"><span class="co"># Site-species matrix</span></a>
-<a class="sourceLine" id="cb7-5" data-line-number="5">mat =<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/matrix">as.matrix</a></span>(aravo<span class="op">$</span>spe)</a>
-<a class="sourceLine" id="cb7-6" data-line-number="6"></a>
-<a class="sourceLine" id="cb7-7" data-line-number="7"><span class="co"># Convert matrix to presence-absence matrix</span></a>
-<a class="sourceLine" id="cb7-8" data-line-number="8">mat[mat <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>] =<span class="st"> </span><span class="dv">1</span></a>
-<a class="sourceLine" id="cb7-9" data-line-number="9"></a>
-<a class="sourceLine" id="cb7-10" data-line-number="10"><span class="co"># Example of trait table</span></a>
-<a class="sourceLine" id="cb7-11" data-line-number="11">tra =<span class="st"> </span>aravo<span class="op">$</span>traits[, <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"Height"</span>, <span class="st">"SLA"</span>, <span class="st">"N_mass"</span>)]</a>
-<a class="sourceLine" id="cb7-12" data-line-number="12"><span class="co"># Distance matrix</span></a>
-<a class="sourceLine" id="cb7-13" data-line-number="13">dist_mat =<span class="st"> </span><span class="kw"><a href="../reference/compute_dist_matrix.html">compute_dist_matrix</a></span>(tra, <span class="dt">metric =</span> <span class="st">"gower"</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(<span class="st">"funrar"</span>)</a>
+<a class="sourceLine" id="cb9-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb9-3" data-line-number="3"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/data">data</a></span>(<span class="st">"aravo"</span>, <span class="dt">package =</span> <span class="st">"ade4"</span>)</a>
+<a class="sourceLine" id="cb9-4" data-line-number="4"><span class="co"># Site-species matrix</span></a>
+<a class="sourceLine" id="cb9-5" data-line-number="5">mat =<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/matrix">as.matrix</a></span>(aravo<span class="op">$</span>spe)</a>
+<a class="sourceLine" id="cb9-6" data-line-number="6"></a>
+<a class="sourceLine" id="cb9-7" data-line-number="7"><span class="co"># Convert matrix to presence-absence matrix</span></a>
+<a class="sourceLine" id="cb9-8" data-line-number="8">mat[mat <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>] =<span class="st"> </span><span class="dv">1</span></a>
+<a class="sourceLine" id="cb9-9" data-line-number="9"></a>
+<a class="sourceLine" id="cb9-10" data-line-number="10"><span class="co"># Example of trait table</span></a>
+<a class="sourceLine" id="cb9-11" data-line-number="11">tra =<span class="st"> </span>aravo<span class="op">$</span>traits[, <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"Height"</span>, <span class="st">"SLA"</span>, <span class="st">"N_mass"</span>)]</a>
+<a class="sourceLine" id="cb9-12" data-line-number="12"><span class="co"># Distance matrix</span></a>
+<a class="sourceLine" id="cb9-13" data-line-number="13">dist_mat =<span class="st"> </span><span class="kw"><a href="../reference/compute_dist_matrix.html">compute_dist_matrix</a></span>(tra, <span class="dt">metric =</span> <span class="st">"gower"</span>)</a></code></pre></div>
 <pre><code>## Warning in compute_dist_matrix(tra, metric = "gower"): Only numeric traits
 ## provided, consider using euclidean distance.</code></pre>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1">dist_mat =<span class="st"> </span>(dist_mat <span class="op">-</span><span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/Extremes">min</a></span>(dist_mat))<span class="op">/</span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/diff">diff</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/range">range</a></span>(dist_mat))</a>
-<a class="sourceLine" id="cb9-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb9-3" data-line-number="3"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/names">names</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/dimnames">dimnames</a></span>(mat)) =<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"site"</span>, <span class="st">"species"</span>)</a>
-<a class="sourceLine" id="cb9-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb9-5" data-line-number="5"><span class="co"># Compute different values of distinctiveness using various ranges</span></a>
-<a class="sourceLine" id="cb9-6" data-line-number="6">all_ranges =<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/lapply">lapply</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/seq">seq</a></span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dt">length.out =</span> <span class="dv">50</span>), <span class="cf">function</span>(given_range) {</a>
-<a class="sourceLine" id="cb9-7" data-line-number="7">  <span class="kw">alternative_distinctiveness</span>(mat, <span class="kw"><a href="https://www.rdocumentation.org/packages/stats/topics/dist">as.dist</a></span>(dist_mat), given_range)</a>
-<a class="sourceLine" id="cb9-8" data-line-number="8">})</a>
-<a class="sourceLine" id="cb9-9" data-line-number="9"></a>
-<a class="sourceLine" id="cb9-10" data-line-number="10">all_ranges =<span class="st"> </span>dplyr<span class="op">::</span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/bind.html">bind_rows</a></span>(all_ranges)</a></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1">dist_mat =<span class="st"> </span>(dist_mat <span class="op">-</span><span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/Extremes">min</a></span>(dist_mat))<span class="op">/</span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/diff">diff</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/range">range</a></span>(dist_mat))</a>
+<a class="sourceLine" id="cb11-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb11-3" data-line-number="3"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/names">names</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/dimnames">dimnames</a></span>(mat)) =<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"site"</span>, <span class="st">"species"</span>)</a>
+<a class="sourceLine" id="cb11-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb11-5" data-line-number="5"><span class="co"># Compute different values of distinctiveness using various ranges</span></a>
+<a class="sourceLine" id="cb11-6" data-line-number="6">all_ranges =<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/lapply">lapply</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/seq">seq</a></span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dt">length.out =</span> <span class="dv">50</span>), <span class="cf">function</span>(given_range) {</a>
+<a class="sourceLine" id="cb11-7" data-line-number="7">  <span class="kw">alternative_distinctiveness</span>(mat, <span class="kw"><a href="https://www.rdocumentation.org/packages/stats/topics/dist">as.dist</a></span>(dist_mat), given_range)</a>
+<a class="sourceLine" id="cb11-8" data-line-number="8">})</a>
+<a class="sourceLine" id="cb11-9" data-line-number="9"></a>
+<a class="sourceLine" id="cb11-10" data-line-number="10">all_ranges =<span class="st"> </span>dplyr<span class="op">::</span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/bind.html">bind_rows</a></span>(all_ranges)</a></code></pre></div>
 <p>Now we can visualize the influence of the trait range value</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1"><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/subset">subset</a></span>(all_ranges, site <span class="op">%in%</span><span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"AR07"</span>, <span class="st">"AR51"</span>, <span class="st">"AR02"</span>)),</a>
-<a class="sourceLine" id="cb10-2" data-line-number="2">       <span class="kw"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(given_range, Di, <span class="dt">group =</span> species)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb10-3" data-line-number="3"><span class="st">  </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span>(<span class="dt">alpha =</span> <span class="dv">1</span><span class="op">/</span><span class="dv">3</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb10-4" data-line-number="4"><span class="st">  </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html">facet_wrap</a></span>(<span class="op">~</span>site) <span class="op">+</span></a>
-<a class="sourceLine" id="cb10-5" data-line-number="5"><span class="st">  </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span>(<span class="dt">x =</span> <span class="st">"Maximum Distance Range Considered</span><span class="ch">\n</span><span class="st">(Trait Range)"</span>,</a>
-<a class="sourceLine" id="cb10-6" data-line-number="6">       <span class="dt">y =</span> <span class="st">"Functional Distinctiveness"</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/ggplot">ggplot</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/subset">subset</a></span>(all_ranges, site <span class="op">%in%</span><span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"AR07"</span>, <span class="st">"AR51"</span>, <span class="st">"AR02"</span>)),</a>
+<a class="sourceLine" id="cb12-2" data-line-number="2">       <span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/aes">aes</a></span>(given_range, Di, <span class="dt">group =</span> species)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb12-3" data-line-number="3"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/geom_path">geom_line</a></span>(<span class="dt">alpha =</span> <span class="dv">1</span><span class="op">/</span><span class="dv">3</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb12-4" data-line-number="4"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/facet_wrap">facet_wrap</a></span>(<span class="op">~</span>site) <span class="op">+</span></a>
+<a class="sourceLine" id="cb12-5" data-line-number="5"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/labs">labs</a></span>(<span class="dt">x =</span> <span class="st">"Maximum Distance Range Considered</span><span class="ch">\n</span><span class="st">(Trait Range)"</span>,</a>
+<a class="sourceLine" id="cb12-6" data-line-number="6">       <span class="dt">y =</span> <span class="st">"Functional Distinctiveness"</span>)</a></code></pre></div>
 <p><img src="new_distinctiveness_files/figure-html/unnamed-chunk-4-1.png" width="700"></p>
 <p>We see that species have close neighbors at different distances (leap from top left to bottom left of the graph). This shows the closet neighbors for each species.</p>
 <p>As proposed we can also distinctiveness relative to trait range and see what it changes:</p>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1">all_ranges =<span class="st"> </span>dplyr<span class="op">::</span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(all_ranges, <span class="dt">scaled_Di =</span></a>
-<a class="sourceLine" id="cb11-2" data-line-number="2">                             <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/ifelse">ifelse</a></span>(Di <span class="op">!=</span><span class="st"> </span><span class="dv">1</span>, Di <span class="op">/</span><span class="st"> </span>given_range, Di))</a>
-<a class="sourceLine" id="cb11-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb11-4" data-line-number="4"><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/subset">subset</a></span>(all_ranges, site <span class="op">%in%</span><span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"AR07"</span>, <span class="st">"AR51"</span>, <span class="st">"AR02"</span>)),</a>
-<a class="sourceLine" id="cb11-5" data-line-number="5">       <span class="kw"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(given_range, scaled_Di, <span class="dt">group =</span> species)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb11-6" data-line-number="6"><span class="st">  </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span>(<span class="dt">alpha =</span> <span class="dv">1</span><span class="op">/</span><span class="dv">4</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb11-7" data-line-number="7"><span class="st">  </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html">facet_wrap</a></span>(<span class="op">~</span>site) <span class="op">+</span></a>
-<a class="sourceLine" id="cb11-8" data-line-number="8"><span class="st">  </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span>(<span class="dt">x =</span> <span class="st">"Considered Trait Range</span><span class="ch">\n</span><span class="st">(Functional Distance)"</span>,</a>
-<a class="sourceLine" id="cb11-9" data-line-number="9">       <span class="dt">y =</span> <span class="st">"Scaled Functional Distinctiveness</span><span class="ch">\n</span><span class="st">(over trait range)"</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" data-line-number="1">all_ranges =<span class="st"> </span>dplyr<span class="op">::</span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(all_ranges, <span class="dt">scaled_Di =</span></a>
+<a class="sourceLine" id="cb13-2" data-line-number="2">                             <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/ifelse">ifelse</a></span>(Di <span class="op">!=</span><span class="st"> </span><span class="dv">1</span>, Di <span class="op">/</span><span class="st"> </span>given_range, Di))</a>
+<a class="sourceLine" id="cb13-3" data-line-number="3"></a>
+<a class="sourceLine" id="cb13-4" data-line-number="4"><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/ggplot">ggplot</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/subset">subset</a></span>(all_ranges, site <span class="op">%in%</span><span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"AR07"</span>, <span class="st">"AR51"</span>, <span class="st">"AR02"</span>)),</a>
+<a class="sourceLine" id="cb13-5" data-line-number="5">       <span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/aes">aes</a></span>(given_range, scaled_Di, <span class="dt">group =</span> species)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb13-6" data-line-number="6"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/geom_path">geom_line</a></span>(<span class="dt">alpha =</span> <span class="dv">1</span><span class="op">/</span><span class="dv">4</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb13-7" data-line-number="7"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/facet_wrap">facet_wrap</a></span>(<span class="op">~</span>site) <span class="op">+</span></a>
+<a class="sourceLine" id="cb13-8" data-line-number="8"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/labs">labs</a></span>(<span class="dt">x =</span> <span class="st">"Considered Trait Range</span><span class="ch">\n</span><span class="st">(Functional Distance)"</span>,</a>
+<a class="sourceLine" id="cb13-9" data-line-number="9">       <span class="dt">y =</span> <span class="st">"Scaled Functional Distinctiveness</span><span class="ch">\n</span><span class="st">(over trait range)"</span>)</a></code></pre></div>
 <p><img src="new_distinctiveness_files/figure-html/scaled_range-1.png" width="700"></p>
 <p>This reflects the relative (in terms of trait range considered) distinctiveness. Meaning that close species in a small range have similar distinctiveness than further apart species in larger ranges.</p>
 </div>
@@ -354,59 +358,59 @@ D_i (T) =
 <h3 class="hasAnchor">
 <a href="#implementation-1" class="anchor"></a>Implementation</h3>
 <p>Similar to the strategy we can implement this definition of functional distinctiveness by using a correspondance matrix in which we nullify the importance of species that are further away than the given threshold. In order to test the behavior of the metric we design an abundance matrix with the same species again a, b, and c:</p>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" data-line-number="1">ab_mat =<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/matrix">matrix</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/rep">rep</a></span>(<span class="dv">1</span><span class="op">/</span><span class="dv">3</span>, <span class="dv">3</span>), <span class="dv">1</span><span class="op">/</span><span class="dv">6</span>, <span class="dv">1</span><span class="op">/</span><span class="dv">6</span>, <span class="dv">4</span><span class="op">/</span><span class="dv">6</span>, <span class="dv">4</span><span class="op">/</span><span class="dv">6</span>, <span class="dv">1</span><span class="op">/</span><span class="dv">6</span>, <span class="dv">1</span><span class="op">/</span><span class="dv">6</span>), <span class="dt">nrow =</span> <span class="dv">3</span>, <span class="dt">ncol =</span> <span class="dv">3</span>,</a>
-<a class="sourceLine" id="cb12-2" data-line-number="2">                         <span class="dt">dimnames =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/list">list</a></span>(<span class="dt">site =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"s1"</span>, <span class="st">"s2"</span>, <span class="st">"s3"</span>),</a>
-<a class="sourceLine" id="cb12-3" data-line-number="3">                                         <span class="dt">species =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"a"</span>, <span class="st">"b"</span>, <span class="st">"c"</span>)),</a>
-<a class="sourceLine" id="cb12-4" data-line-number="4">                <span class="dt">byrow =</span> <span class="ot">TRUE</span>)</a>
-<a class="sourceLine" id="cb12-5" data-line-number="5"></a>
-<a class="sourceLine" id="cb12-6" data-line-number="6">alternative_distinctiveness_abundance =<span class="st"> </span><span class="cf">function</span>(abund_mat, dist_matrix,</a>
-<a class="sourceLine" id="cb12-7" data-line-number="7">                                                 given_range) {</a>
-<a class="sourceLine" id="cb12-8" data-line-number="8">  </a>
-<a class="sourceLine" id="cb12-9" data-line-number="9">  dist_mat =<span class="st"> </span>dist_matrix</a>
-<a class="sourceLine" id="cb12-10" data-line-number="10">  </a>
-<a class="sourceLine" id="cb12-11" data-line-number="11">  kept_sp =<span class="st"> </span>funrar<span class="op">:::</span><span class="kw">species_in_common</span>(abund_mat, dist_mat)</a>
-<a class="sourceLine" id="cb12-12" data-line-number="12">  dist_mat =<span class="st"> </span>dist_mat[kept_sp, kept_sp, drop =<span class="st"> </span><span class="ot">FALSE</span>]</a>
-<a class="sourceLine" id="cb12-13" data-line-number="13">  </a>
-<a class="sourceLine" id="cb12-14" data-line-number="14">  </a>
-<a class="sourceLine" id="cb12-15" data-line-number="15">  <span class="co"># Correspondance matrix (tracking which species we want to keep)</span></a>
-<a class="sourceLine" id="cb12-16" data-line-number="16">  corr_dist =<span class="st"> </span>dist_mat</a>
-<a class="sourceLine" id="cb12-17" data-line-number="17">  corr_dist[dist_mat <span class="op">&gt;</span><span class="st"> </span>given_range] =<span class="st"> </span><span class="dv">0</span></a>
-<a class="sourceLine" id="cb12-18" data-line-number="18">  corr_dist[dist_mat <span class="op">&lt;=</span><span class="st"> </span>given_range] =<span class="st"> </span><span class="dv">1</span></a>
-<a class="sourceLine" id="cb12-19" data-line-number="19">  <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/diag">diag</a></span>(corr_dist) =<span class="st"> </span><span class="dv">0</span></a>
-<a class="sourceLine" id="cb12-20" data-line-number="20">  </a>
-<a class="sourceLine" id="cb12-21" data-line-number="21">  <span class="co"># Across sites</span></a>
-<a class="sourceLine" id="cb12-22" data-line-number="22">  <span class="co"># given_pres is a vector of presences per site</span></a>
-<a class="sourceLine" id="cb12-23" data-line-number="23">  di_mat =<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/apply">apply</a></span>(abund_mat, <span class="dv">1</span>, <span class="cf">function</span>(given_ab) {</a>
-<a class="sourceLine" id="cb12-24" data-line-number="24">    index_mat =<span class="st"> </span>given_ab <span class="op">%*%</span><span class="st"> </span>(dist_mat <span class="op">*</span><span class="st"> </span>corr_dist)  <span class="co"># Sum of distances per species</span></a>
-<a class="sourceLine" id="cb12-25" data-line-number="25">    denom_mat =<span class="st"> </span>given_ab <span class="op">%*%</span><span class="st"> </span>corr_dist  <span class="co"># Number of distances considered per species</span></a>
-<a class="sourceLine" id="cb12-26" data-line-number="26">    index_mat =<span class="st"> </span>(index_mat <span class="op">/</span><span class="st"> </span>denom_mat) <span class="op">*</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span>denom_mat)</a>
-<a class="sourceLine" id="cb12-27" data-line-number="27">    index_mat[given_ab <span class="op">==</span><span class="st"> </span><span class="dv">0</span> <span class="op">|</span><span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/NA">is.na</a></span>(given_ab)] =<span class="st"> </span><span class="ot">NA</span></a>
-<a class="sourceLine" id="cb12-28" data-line-number="28">    index_mat[<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/is.finite">is.nan</a></span>(index_mat)] =<span class="st"> </span><span class="dv">1</span></a>
-<a class="sourceLine" id="cb12-29" data-line-number="29">    </a>
-<a class="sourceLine" id="cb12-30" data-line-number="30">    <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/function">return</a></span>(index_mat)</a>
-<a class="sourceLine" id="cb12-31" data-line-number="31">  })</a>
-<a class="sourceLine" id="cb12-32" data-line-number="32">  </a>
-<a class="sourceLine" id="cb12-33" data-line-number="33">  di_mat =<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/t">t</a></span>(di_mat)</a>
-<a class="sourceLine" id="cb12-34" data-line-number="34">  <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/dimnames">dimnames</a></span>(di_mat) =<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/dimnames">dimnames</a></span>(abund_mat)</a>
-<a class="sourceLine" id="cb12-35" data-line-number="35">  </a>
-<a class="sourceLine" id="cb12-36" data-line-number="36">  dplyr<span class="op">::</span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(funrar<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/funrar/topics/matrix_to_stack">matrix_to_stack</a></span>(di_mat, <span class="st">"Di"</span>),</a>
-<a class="sourceLine" id="cb12-37" data-line-number="37">                <span class="dt">given_range =</span> given_range)</a>
-<a class="sourceLine" id="cb12-38" data-line-number="38">}</a></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" data-line-number="1">ab_mat =<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/matrix">matrix</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/rep">rep</a></span>(<span class="dv">1</span><span class="op">/</span><span class="dv">3</span>, <span class="dv">3</span>), <span class="dv">1</span><span class="op">/</span><span class="dv">6</span>, <span class="dv">1</span><span class="op">/</span><span class="dv">6</span>, <span class="dv">4</span><span class="op">/</span><span class="dv">6</span>, <span class="dv">4</span><span class="op">/</span><span class="dv">6</span>, <span class="dv">1</span><span class="op">/</span><span class="dv">6</span>, <span class="dv">1</span><span class="op">/</span><span class="dv">6</span>), <span class="dt">nrow =</span> <span class="dv">3</span>, <span class="dt">ncol =</span> <span class="dv">3</span>,</a>
+<a class="sourceLine" id="cb14-2" data-line-number="2">                         <span class="dt">dimnames =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/list">list</a></span>(<span class="dt">site =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"s1"</span>, <span class="st">"s2"</span>, <span class="st">"s3"</span>),</a>
+<a class="sourceLine" id="cb14-3" data-line-number="3">                                         <span class="dt">species =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"a"</span>, <span class="st">"b"</span>, <span class="st">"c"</span>)),</a>
+<a class="sourceLine" id="cb14-4" data-line-number="4">                <span class="dt">byrow =</span> <span class="ot">TRUE</span>)</a>
+<a class="sourceLine" id="cb14-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb14-6" data-line-number="6">alternative_distinctiveness_abundance =<span class="st"> </span><span class="cf">function</span>(abund_mat, dist_matrix,</a>
+<a class="sourceLine" id="cb14-7" data-line-number="7">                                                 given_range) {</a>
+<a class="sourceLine" id="cb14-8" data-line-number="8">  </a>
+<a class="sourceLine" id="cb14-9" data-line-number="9">  dist_mat =<span class="st"> </span>dist_matrix</a>
+<a class="sourceLine" id="cb14-10" data-line-number="10">  </a>
+<a class="sourceLine" id="cb14-11" data-line-number="11">  kept_sp =<span class="st"> </span>funrar<span class="op">:::</span><span class="kw">species_in_common</span>(abund_mat, dist_mat)</a>
+<a class="sourceLine" id="cb14-12" data-line-number="12">  dist_mat =<span class="st"> </span>dist_mat[kept_sp, kept_sp, drop =<span class="st"> </span><span class="ot">FALSE</span>]</a>
+<a class="sourceLine" id="cb14-13" data-line-number="13">  </a>
+<a class="sourceLine" id="cb14-14" data-line-number="14">  </a>
+<a class="sourceLine" id="cb14-15" data-line-number="15">  <span class="co"># Correspondance matrix (tracking which species we want to keep)</span></a>
+<a class="sourceLine" id="cb14-16" data-line-number="16">  corr_dist =<span class="st"> </span>dist_mat</a>
+<a class="sourceLine" id="cb14-17" data-line-number="17">  corr_dist[dist_mat <span class="op">&gt;</span><span class="st"> </span>given_range] =<span class="st"> </span><span class="dv">0</span></a>
+<a class="sourceLine" id="cb14-18" data-line-number="18">  corr_dist[dist_mat <span class="op">&lt;=</span><span class="st"> </span>given_range] =<span class="st"> </span><span class="dv">1</span></a>
+<a class="sourceLine" id="cb14-19" data-line-number="19">  <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/diag">diag</a></span>(corr_dist) =<span class="st"> </span><span class="dv">0</span></a>
+<a class="sourceLine" id="cb14-20" data-line-number="20">  </a>
+<a class="sourceLine" id="cb14-21" data-line-number="21">  <span class="co"># Across sites</span></a>
+<a class="sourceLine" id="cb14-22" data-line-number="22">  <span class="co"># given_pres is a vector of presences per site</span></a>
+<a class="sourceLine" id="cb14-23" data-line-number="23">  di_mat =<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/apply">apply</a></span>(abund_mat, <span class="dv">1</span>, <span class="cf">function</span>(given_ab) {</a>
+<a class="sourceLine" id="cb14-24" data-line-number="24">    index_mat =<span class="st"> </span>given_ab <span class="op">%*%</span><span class="st"> </span>(dist_mat <span class="op">*</span><span class="st"> </span>corr_dist)  <span class="co"># Sum of distances per species</span></a>
+<a class="sourceLine" id="cb14-25" data-line-number="25">    denom_mat =<span class="st"> </span>given_ab <span class="op">%*%</span><span class="st"> </span>corr_dist  <span class="co"># Number of distances considered per species</span></a>
+<a class="sourceLine" id="cb14-26" data-line-number="26">    index_mat =<span class="st"> </span>(index_mat <span class="op">/</span><span class="st"> </span>denom_mat) <span class="op">*</span><span class="st"> </span>(<span class="dv">1</span> <span class="op">-</span><span class="st"> </span>denom_mat)</a>
+<a class="sourceLine" id="cb14-27" data-line-number="27">    index_mat[given_ab <span class="op">==</span><span class="st"> </span><span class="dv">0</span> <span class="op">|</span><span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/NA">is.na</a></span>(given_ab)] =<span class="st"> </span><span class="ot">NA</span></a>
+<a class="sourceLine" id="cb14-28" data-line-number="28">    index_mat[<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/is.finite">is.nan</a></span>(index_mat)] =<span class="st"> </span><span class="dv">1</span></a>
+<a class="sourceLine" id="cb14-29" data-line-number="29">    </a>
+<a class="sourceLine" id="cb14-30" data-line-number="30">    <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/function">return</a></span>(index_mat)</a>
+<a class="sourceLine" id="cb14-31" data-line-number="31">  })</a>
+<a class="sourceLine" id="cb14-32" data-line-number="32">  </a>
+<a class="sourceLine" id="cb14-33" data-line-number="33">  di_mat =<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/t">t</a></span>(di_mat)</a>
+<a class="sourceLine" id="cb14-34" data-line-number="34">  <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/dimnames">dimnames</a></span>(di_mat) =<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/dimnames">dimnames</a></span>(abund_mat)</a>
+<a class="sourceLine" id="cb14-35" data-line-number="35">  </a>
+<a class="sourceLine" id="cb14-36" data-line-number="36">  dplyr<span class="op">::</span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(funrar<span class="op">::</span><span class="kw"><a href="https://www.rdocumentation.org/packages/funrar/topics/matrix_to_stack">matrix_to_stack</a></span>(di_mat, <span class="st">"Di"</span>),</a>
+<a class="sourceLine" id="cb14-37" data-line-number="37">                <span class="dt">given_range =</span> given_range)</a>
+<a class="sourceLine" id="cb14-38" data-line-number="38">}</a></code></pre></div>
 <p>Which gives the following results for or situation:</p>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" data-line-number="1">ab_di_all_ranges =<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/lapply">lapply</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/seq">seq</a></span>(<span class="dv">0</span>, <span class="fl">1.5</span>, <span class="dt">length.out =</span> <span class="dv">50</span>),</a>
-<a class="sourceLine" id="cb13-2" data-line-number="2">       <span class="cf">function</span>(given_number) <span class="kw">alternative_distinctiveness_abundance</span>(ab_mat,</a>
-<a class="sourceLine" id="cb13-3" data-line-number="3">                                                          <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/matrix">as.matrix</a></span>(species_distance),</a>
-<a class="sourceLine" id="cb13-4" data-line-number="4">                                                          given_number))</a>
-<a class="sourceLine" id="cb13-5" data-line-number="5"></a>
-<a class="sourceLine" id="cb13-6" data-line-number="6">ab_di_all_ranges =<span class="st"> </span>dplyr<span class="op">::</span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/bind.html">bind_rows</a></span>(ab_di_all_ranges)</a>
-<a class="sourceLine" id="cb13-7" data-line-number="7"></a>
-<a class="sourceLine" id="cb13-8" data-line-number="8"><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(ab_di_all_ranges, <span class="kw"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(given_range, Di, <span class="dt">color =</span> species)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb13-9" data-line-number="9"><span class="st">  </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span>(<span class="dt">size =</span> <span class="dv">1</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb13-10" data-line-number="10"><span class="st">  </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html">facet_wrap</a></span>(<span class="op">~</span>site, <span class="dt">labeller =</span> <span class="kw"><a href="https://ggplot2.tidyverse.org/reference/as_labeller.html">as_labeller</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dt">s1 =</span> <span class="st">"s1 (1/3 rel. abund each)"</span>,</a>
-<a class="sourceLine" id="cb13-11" data-line-number="11">                                             <span class="dt">s2 =</span> <span class="st">"s2 (a=1/6, b=1/6, c=4/6)"</span>,</a>
-<a class="sourceLine" id="cb13-12" data-line-number="12">                                             <span class="dt">s3 =</span> <span class="st">"s3 (a=4/6, b=1/6, c=1/6)"</span>))) <span class="op">+</span></a>
-<a class="sourceLine" id="cb13-13" data-line-number="13"><span class="st">  </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span>(<span class="dt">x =</span> <span class="st">"Considered Range"</span>,</a>
-<a class="sourceLine" id="cb13-14" data-line-number="14">       <span class="dt">y =</span> <span class="st">"Functional Distinctiveness"</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" data-line-number="1">ab_di_all_ranges =<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/lapply">lapply</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/seq">seq</a></span>(<span class="dv">0</span>, <span class="fl">1.5</span>, <span class="dt">length.out =</span> <span class="dv">50</span>),</a>
+<a class="sourceLine" id="cb15-2" data-line-number="2">       <span class="cf">function</span>(given_number) <span class="kw">alternative_distinctiveness_abundance</span>(ab_mat,</a>
+<a class="sourceLine" id="cb15-3" data-line-number="3">                                                          <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/matrix">as.matrix</a></span>(species_distance),</a>
+<a class="sourceLine" id="cb15-4" data-line-number="4">                                                          given_number))</a>
+<a class="sourceLine" id="cb15-5" data-line-number="5"></a>
+<a class="sourceLine" id="cb15-6" data-line-number="6">ab_di_all_ranges =<span class="st"> </span>dplyr<span class="op">::</span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/bind.html">bind_rows</a></span>(ab_di_all_ranges)</a>
+<a class="sourceLine" id="cb15-7" data-line-number="7"></a>
+<a class="sourceLine" id="cb15-8" data-line-number="8"><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/ggplot">ggplot</a></span>(ab_di_all_ranges, <span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/aes">aes</a></span>(given_range, Di, <span class="dt">color =</span> species)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb15-9" data-line-number="9"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/geom_path">geom_line</a></span>(<span class="dt">size =</span> <span class="dv">1</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb15-10" data-line-number="10"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/facet_wrap">facet_wrap</a></span>(<span class="op">~</span>site, <span class="dt">labeller =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/as_labeller">as_labeller</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dt">s1 =</span> <span class="st">"s1 (1/3 rel. abund each)"</span>,</a>
+<a class="sourceLine" id="cb15-11" data-line-number="11">                                             <span class="dt">s2 =</span> <span class="st">"s2 (a=1/6, b=1/6, c=4/6)"</span>,</a>
+<a class="sourceLine" id="cb15-12" data-line-number="12">                                             <span class="dt">s3 =</span> <span class="st">"s3 (a=4/6, b=1/6, c=1/6)"</span>))) <span class="op">+</span></a>
+<a class="sourceLine" id="cb15-13" data-line-number="13"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/labs">labs</a></span>(<span class="dt">x =</span> <span class="st">"Considered Range"</span>,</a>
+<a class="sourceLine" id="cb15-14" data-line-number="14">       <span class="dt">y =</span> <span class="st">"Functional Distinctiveness"</span>)</a></code></pre></div>
 <p><img src="new_distinctiveness_files/figure-html/unnamed-chunk-5-1.png" width="700"></p>
 <p>We clearly see the difference between s2 and s3 comparing species b and c. In s3, when c has the same relative abundance as b, both species share the same distinctiveness until the range equals 1 (distance between A &amp; B).</p>
 </div>
