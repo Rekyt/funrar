@@ -31,11 +31,11 @@ The package is on CRAN, you can install it using:
 install.packages("funrar")
 ```
 
-If you want to have the latest development version use `devtools`:
+If you want to have the latest development version use `remotes`:
 
 ```r
-# install.packages("devtools") # If 'devtools' is not installed yet
-devtools::install_github("Rekyt/funrar", build_vignettes = TRUE)
+# install.packages("remotes") # If 'remotes' is not installed yet
+remotes::install_github("Rekyt/funrar", build_vignettes = TRUE)
 ```
 
 ## Dependencies

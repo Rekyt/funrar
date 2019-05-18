@@ -72,7 +72,7 @@ rownames(small_mat) = c("s1", "s2")
 small_df = matrix_to_tidy(small_mat)
 
 # Small tidy df with undefined Di
-undef_dist = data_frame(site = c("s1", "s2"), species = c("a", "b"),
+undef_dist = tibble(site = c("s1", "s2"), species = c("a", "b"),
                         Di = rep(NaN, 2))
 
 # Small matrix with undefined Di

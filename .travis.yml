@@ -3,16 +3,30 @@ language: r
 cache: packages
 warnings_are_errors: true
 sudo: required
-r_packages:
-  - covr
-  - pkgdown
-  - spelling
+
+before_script:
+  - Rscript -e 'remotes::install_cran(c("devtools", "covr", "pkgdown", "spelling"))'
+
+r:
+  - oldrel
+  - devel
+
+matrix:
+  include:
+    - r: release
+      os: osx
+    - r: release
+      os: linux
+      env: DEPLOY=true
 
 after_success:
-  - Rscript -e 'library(covr);codecov()'
+  - Rscript -e 'library(covr); codecov()'
   - Rscript -e 'spelling::spell_check_package(vignettes = TRUE)'
 
 deploy:
-  provider: script
-  script: Rscript -e 'pkgdown::deploy_site_github()'
-  skip_cleanup: true
+  - provider: script
+    script: Rscript -e 'pkgdown::deploy_site_github()'
+    skip_cleanup: true
+    on:
+      branch: master
+      condition: "$DEPLOY = true"

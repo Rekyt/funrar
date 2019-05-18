@@ -6,7 +6,8 @@ header-includes:
   - \usepackage{mathtools}
   - \usepackage{cancel}
   - \usepackage{amsmath}
-output: rmarkdown::html_vignette
+output:
+  - pdf_document
 vignette: >
   %\VignetteIndexEntry{Alternative definition of distinctiveness}
   %\VignetteEngine{knitr::rmarkdown}
