@@ -39,7 +39,9 @@ test_that("'distinctiveness_dimensions()' outputs good objects", {
   expect_named(di_dim, c(paste0("Di_", trait_names), "Di_all"))
 
   # Check that all elements are matrices
-  expect_true(all(vapply(di_dim, class, "char") == "matrix"))
+  lapply(di_dim, function(x) {
+    expect_is(x, "matrix")
+  })
 
   # Check that all elements have good dimension
   expect_true(di_dim %>%
