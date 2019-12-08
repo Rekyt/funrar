@@ -5,11 +5,12 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Sparse Matrices with <code>funrar</code> • funrar</title>
+<title>Sparse Matrices with `funrar` • funrar</title>
 <!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous">
-<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- sticky kit --><script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
-<script src="../pkgdown.js"></script><meta property="og:title" content="Sparse Matrices with &lt;code&gt;funrar&lt;/code&gt;">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous">
+<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
+<script src="../pkgdown.js"></script><meta property="og:title" content="Sparse Matrices with `funrar`">
 <meta property="og:description" content="">
 <meta name="twitter:card" content="summary">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
@@ -38,7 +39,7 @@
       <ul class="nav navbar-nav">
 <li>
   <a href="../index.html">
-    <span class="fa fa-home fa-lg"></span>
+    <span class="fas fa fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -76,6 +77,7 @@
 <!--/.navbar -->
 
       
+
       </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
@@ -83,7 +85,7 @@
 </h1>
                         <h4 class="author">Matthias Grenié</h4>
             
-            <h4 class="date">2019-05-18</h4>
+            <h4 class="date">2019-12-08</h4>
       
       
       <div class="hidden name"><code>sparse_matrices.Rmd</code></div>
@@ -101,25 +103,25 @@
 
 <p>If your site-species matrix is big, it may contain a lot zero because it is very unlikely that all species are present at all sites when looking at thousands of species and hundreds of sites. Thus, the sparse matrix notation would save a good amount of lines (look how <span class="math inline">\(S\)</span> compared to <span class="math inline">\(M\)</span>).</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="co"># Generate a matrix with 1000 species and 200 sites</span></a>
-<a class="sourceLine" id="cb1-2" data-line-number="2">my_mat =<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/matrix">matrix</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/sample">sample</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>), <span class="dt">replace =</span> <span class="ot">TRUE</span>, <span class="dt">size =</span> <span class="dv">200000</span>),</a>
+<a class="sourceLine" id="cb1-2" data-line-number="2">my_mat =<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/sample.html">sample</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">1</span>), <span class="dt">replace =</span> <span class="ot">TRUE</span>, <span class="dt">size =</span> <span class="dv">200000</span>),</a>
 <a class="sourceLine" id="cb1-3" data-line-number="3">                <span class="dt">ncol =</span> <span class="dv">1000</span>, <span class="dt">nrow =</span> <span class="dv">200</span>)</a>
-<a class="sourceLine" id="cb1-4" data-line-number="4"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/colnames">colnames</a></span>(my_mat) =<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/paste">paste0</a></span>(<span class="st">"sp"</span>, <span class="dv">1</span><span class="op">:</span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/nrow">ncol</a></span>(my_mat))</a>
-<a class="sourceLine" id="cb1-5" data-line-number="5"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/colnames">rownames</a></span>(my_mat) =<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/paste">paste0</a></span>(<span class="st">"site"</span>, <span class="dv">1</span><span class="op">:</span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/nrow">nrow</a></span>(my_mat))</a>
+<a class="sourceLine" id="cb1-4" data-line-number="4"><span class="kw"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span>(my_mat) =<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span>(<span class="st">"sp"</span>, <span class="dv">1</span><span class="op">:</span><span class="kw"><a href="https://rdrr.io/r/base/nrow.html">ncol</a></span>(my_mat))</a>
+<a class="sourceLine" id="cb1-5" data-line-number="5"><span class="kw"><a href="https://rdrr.io/r/base/colnames.html">rownames</a></span>(my_mat) =<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span>(<span class="st">"site"</span>, <span class="dv">1</span><span class="op">:</span><span class="kw"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span>(my_mat))</a>
 <a class="sourceLine" id="cb1-6" data-line-number="6"></a>
 <a class="sourceLine" id="cb1-7" data-line-number="7">my_mat[<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">5</span>]</a></code></pre></div>
 <pre><code>##       sp1 sp2 sp3 sp4 sp5
-## site1   0   0   0   0   1
-## site2   0   0   0   1   0
-## site3   1   0   0   0   0
-## site4   1   0   0   0   1
+## site1   0   0   0   0   0
+## site2   0   0   0   0   0
+## site3   0   0   0   0   0
+## site4   0   0   0   0   0
 ## site5   0   0   0   0   0</code></pre>
 <p><code>funrar</code> lets you use sparse matrices directly using a function implemented in the <code>Matrix</code> package. When your matrix is filled with 0s it can be quicker to use sparse matrices. To know if you should use sparse matrices you can compute the filling of your matrix, i.e. the percentage of non-zero cells in your matrix:</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1">filling =<span class="st"> </span><span class="dv">1</span> <span class="op">-</span><span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/sum">sum</a></span>(my_mat <span class="op">==</span><span class="st"> </span><span class="dv">0</span>)<span class="op">/</span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/nrow">ncol</a></span>(my_mat)<span class="op">*</span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/nrow">nrow</a></span>(my_mat))</a>
+<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1">filling =<span class="st"> </span><span class="dv">1</span> <span class="op">-</span><span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/sum.html">sum</a></span>(my_mat <span class="op">==</span><span class="st"> </span><span class="dv">0</span>)<span class="op">/</span>(<span class="kw"><a href="https://rdrr.io/r/base/nrow.html">ncol</a></span>(my_mat)<span class="op">*</span><span class="kw"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span>(my_mat))</a>
 <a class="sourceLine" id="cb3-2" data-line-number="2"></a>
 <a class="sourceLine" id="cb3-3" data-line-number="3">filling</a></code></pre></div>
-<pre><code>## [1] 0.1427</code></pre>
+<pre><code>## [1] 0.14249</code></pre>
 <p>To convert from a normal matrix to a sparse matrix you can use <code>as(my_mat, "sparseMatrix")</code>:</p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(Matrix)</a>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(Matrix)</a>
 <a class="sourceLine" id="cb5-2" data-line-number="2"></a>
 <a class="sourceLine" id="cb5-3" data-line-number="3">sparse_mat =<span class="st"> </span><span class="kw">as</span>(my_mat, <span class="st">"sparseMatrix"</span>)</a>
 <a class="sourceLine" id="cb5-4" data-line-number="4"></a>
@@ -129,41 +131,41 @@
 <pre><code>## [1] TRUE</code></pre>
 <p>it completely changes the structure as well as the memory it takes in the RAM:</p>
 <div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="co"># Regular Matrix</span></a>
-<a class="sourceLine" id="cb9-2" data-line-number="2"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/str">str</a></span>(my_mat)</a></code></pre></div>
-<pre><code>##  num [1:200, 1:1000] 0 0 1 1 0 0 0 0 0 0 ...
+<a class="sourceLine" id="cb9-2" data-line-number="2"><span class="kw"><a href="https://rdrr.io/r/utils/str.html">str</a></span>(my_mat)</a></code></pre></div>
+<pre><code>##  num [1:200, 1:1000] 0 0 0 0 0 0 1 0 0 1 ...
 ##  - attr(*, "dimnames")=List of 2
 ##   ..$ : chr [1:200] "site1" "site2" "site3" "site4" ...
 ##   ..$ : chr [1:1000] "sp1" "sp2" "sp3" "sp4" ...</code></pre>
-<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/print">print</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/object.size">object.size</a></span>(my_mat), <span class="dt">units =</span> <span class="st">"Kb"</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb11-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/print.html">print</a></span>(<span class="kw"><a href="https://rdrr.io/r/utils/object.size.html">object.size</a></span>(my_mat), <span class="dt">units =</span> <span class="st">"Kb"</span>)</a></code></pre></div>
 <pre><code>## 1638 Kb</code></pre>
 <div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb13-1" data-line-number="1"><span class="co"># Sparse Matrix from 'Matrix' package</span></a>
-<a class="sourceLine" id="cb13-2" data-line-number="2"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/str">str</a></span>(sparse_mat)</a></code></pre></div>
+<a class="sourceLine" id="cb13-2" data-line-number="2"><span class="kw"><a href="https://rdrr.io/r/utils/str.html">str</a></span>(sparse_mat)</a></code></pre></div>
 <pre><code>## Formal class 'dgCMatrix' [package "Matrix"] with 6 slots
-##   ..@ i       : int [1:28540] 2 3 12 19 34 53 66 69 71 84 ...
-##   ..@ p       : int [1:1001] 0 24 51 87 122 143 173 202 228 256 ...
+##   ..@ i       : int [1:28498] 6 9 11 13 29 33 35 38 42 44 ...
+##   ..@ p       : int [1:1001] 0 27 59 88 117 151 181 214 240 275 ...
 ##   ..@ Dim     : int [1:2] 200 1000
 ##   ..@ Dimnames:List of 2
 ##   .. ..$ : chr [1:200] "site1" "site2" "site3" "site4" ...
 ##   .. ..$ : chr [1:1000] "sp1" "sp2" "sp3" "sp4" ...
-##   ..@ x       : num [1:28540] 1 1 1 1 1 1 1 1 1 1 ...
+##   ..@ x       : num [1:28498] 1 1 1 1 1 1 1 1 1 1 ...
 ##   ..@ factors : list()</code></pre>
-<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/print">print</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/object.size">object.size</a></span>(sparse_mat), <span class="dt">units =</span> <span class="st">"Kb"</span>)</a></code></pre></div>
-<pre><code>## 414.9 Kb</code></pre>
+<div class="sourceCode" id="cb15"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb15-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/print.html">print</a></span>(<span class="kw"><a href="https://rdrr.io/r/utils/object.size.html">object.size</a></span>(sparse_mat), <span class="dt">units =</span> <span class="st">"Kb"</span>)</a></code></pre></div>
+<pre><code>## 414.4 Kb</code></pre>
 <p>sparse matrices reduce the amount of RAM necessary to store them. The more zeros there are in a given matrix the more RAM will be spared when turning it into a sparse matrix.</p>
 <div id="benchmark" class="section level2">
 <h2 class="hasAnchor">
 <a href="#benchmark" class="anchor"></a>Benchmark</h2>
 <p>We can now compare the performances of the algorithms in rarity indices computation between a sparse matrix and a regular one, using the popular <a href="https://cran.r-project.org/package=microbenchmark"><code>microbenchmark</code></a> R package:</p>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(funrar)</a>
+<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb17-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(funrar)</a>
 <a class="sourceLine" id="cb17-2" data-line-number="2"></a>
 <a class="sourceLine" id="cb17-3" data-line-number="3"><span class="co"># Get a table of traits</span></a>
-<a class="sourceLine" id="cb17-4" data-line-number="4">trait_df =<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/data.frame">data.frame</a></span>(<span class="dt">trait =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/stats/topics/Uniform">runif</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/nrow">ncol</a></span>(my_mat), <span class="dv">0</span>, <span class="dv">1</span>))</a>
-<a class="sourceLine" id="cb17-5" data-line-number="5"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/colnames">rownames</a></span>(trait_df) =<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/paste">paste0</a></span>(<span class="st">"sp"</span>, <span class="dv">1</span><span class="op">:</span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/nrow">ncol</a></span>(my_mat))</a>
+<a class="sourceLine" id="cb17-4" data-line-number="4">trait_df =<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(<span class="dt">trait =</span> <span class="kw"><a href="https://rdrr.io/r/stats/Uniform.html">runif</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/nrow.html">ncol</a></span>(my_mat), <span class="dv">0</span>, <span class="dv">1</span>))</a>
+<a class="sourceLine" id="cb17-5" data-line-number="5"><span class="kw"><a href="https://rdrr.io/r/base/colnames.html">rownames</a></span>(trait_df) =<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span>(<span class="st">"sp"</span>, <span class="dv">1</span><span class="op">:</span><span class="kw"><a href="https://rdrr.io/r/base/nrow.html">ncol</a></span>(my_mat))</a>
 <a class="sourceLine" id="cb17-6" data-line-number="6"></a>
 <a class="sourceLine" id="cb17-7" data-line-number="7"><span class="co"># Compute distance matrix</span></a>
 <a class="sourceLine" id="cb17-8" data-line-number="8">dist_mat =<span class="st"> </span><span class="kw"><a href="../reference/compute_dist_matrix.html">compute_dist_matrix</a></span>(trait_df)</a>
 <a class="sourceLine" id="cb17-9" data-line-number="9"></a>
-<a class="sourceLine" id="cb17-10" data-line-number="10"><span class="cf">if</span> (<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/ns-load">requireNamespace</a></span>(<span class="st">"microbenchmark"</span>, <span class="dt">quietly =</span> <span class="ot">TRUE</span>)) {</a>
+<a class="sourceLine" id="cb17-10" data-line-number="10"><span class="cf">if</span> (<span class="kw"><a href="https://rdrr.io/r/base/ns-load.html">requireNamespace</a></span>(<span class="st">"microbenchmark"</span>, <span class="dt">quietly =</span> <span class="ot">TRUE</span>)) {</a>
 <a class="sourceLine" id="cb17-11" data-line-number="11">  microbenchmark<span class="op">::</span><span class="kw">microbenchmark</span>(</a>
 <a class="sourceLine" id="cb17-12" data-line-number="12">    <span class="dt">regular =</span> <span class="kw"><a href="../reference/distinctiveness.html">distinctiveness</a></span>(my_mat, dist_mat),</a>
 <a class="sourceLine" id="cb17-13" data-line-number="13">    <span class="dt">sparse =</span> <span class="kw"><a href="../reference/distinctiveness.html">distinctiveness</a></span>(sparse_mat, dist_mat))</a>
@@ -173,35 +175,35 @@
 <a href="#systematic-benchmark" class="anchor"></a>Systematic benchmark</h3>
 <p>We generate matrices with different filling rate and compare the speed of regular matrix and sparse matrices computation.</p>
 <div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" data-line-number="1">generate_matrix =<span class="st"> </span><span class="cf">function</span>(<span class="dt">n_zero =</span> <span class="dv">5</span>, <span class="dt">nrow =</span> <span class="dv">200</span>, <span class="dt">ncol =</span> <span class="dv">1000</span>) {</a>
-<a class="sourceLine" id="cb18-2" data-line-number="2">  <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/matrix">matrix</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/sample">sample</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/rep">rep</a></span>(<span class="dv">0</span>, n_zero), <span class="dv">1</span>), <span class="dt">replace =</span> <span class="ot">TRUE</span>, <span class="dt">size =</span> nrow<span class="op">*</span>ncol),</a>
+<a class="sourceLine" id="cb18-2" data-line-number="2">  <span class="kw"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/sample.html">sample</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/rep.html">rep</a></span>(<span class="dv">0</span>, n_zero), <span class="dv">1</span>), <span class="dt">replace =</span> <span class="ot">TRUE</span>, <span class="dt">size =</span> nrow<span class="op">*</span>ncol),</a>
 <a class="sourceLine" id="cb18-3" data-line-number="3">                <span class="dt">ncol =</span> ncol, <span class="dt">nrow =</span> nrow)</a>
 <a class="sourceLine" id="cb18-4" data-line-number="4">}</a>
 <a class="sourceLine" id="cb18-5" data-line-number="5"></a>
 <a class="sourceLine" id="cb18-6" data-line-number="6">mat_filling =<span class="st"> </span><span class="cf">function</span>(my_mat) {</a>
-<a class="sourceLine" id="cb18-7" data-line-number="7">  <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/sum">sum</a></span>(my_mat <span class="op">!=</span><span class="st"> </span><span class="dv">0</span>)<span class="op">/</span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/nrow">ncol</a></span>(my_mat)<span class="op">*</span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/nrow">nrow</a></span>(my_mat))</a>
+<a class="sourceLine" id="cb18-7" data-line-number="7">  <span class="kw"><a href="https://rdrr.io/r/base/sum.html">sum</a></span>(my_mat <span class="op">!=</span><span class="st"> </span><span class="dv">0</span>)<span class="op">/</span>(<span class="kw"><a href="https://rdrr.io/r/base/nrow.html">ncol</a></span>(my_mat)<span class="op">*</span><span class="kw"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span>(my_mat))</a>
 <a class="sourceLine" id="cb18-8" data-line-number="8">}</a>
 <a class="sourceLine" id="cb18-9" data-line-number="9"></a>
 <a class="sourceLine" id="cb18-10" data-line-number="10">sparse_and_mat =<span class="st"> </span><span class="cf">function</span>(n_zero) {</a>
 <a class="sourceLine" id="cb18-11" data-line-number="11">  my_mat =<span class="st"> </span><span class="kw">generate_matrix</span>(n_zero)</a>
-<a class="sourceLine" id="cb18-12" data-line-number="12">  <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/colnames">colnames</a></span>(my_mat) =<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/paste">paste0</a></span>(<span class="st">"sp"</span>, <span class="dv">1</span><span class="op">:</span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/nrow">ncol</a></span>(my_mat))</a>
-<a class="sourceLine" id="cb18-13" data-line-number="13">  <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/colnames">rownames</a></span>(my_mat) =<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/paste">paste0</a></span>(<span class="st">"site"</span>, <span class="dv">1</span><span class="op">:</span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/nrow">nrow</a></span>(my_mat))</a>
+<a class="sourceLine" id="cb18-12" data-line-number="12">  <span class="kw"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span>(my_mat) =<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span>(<span class="st">"sp"</span>, <span class="dv">1</span><span class="op">:</span><span class="kw"><a href="https://rdrr.io/r/base/nrow.html">ncol</a></span>(my_mat))</a>
+<a class="sourceLine" id="cb18-13" data-line-number="13">  <span class="kw"><a href="https://rdrr.io/r/base/colnames.html">rownames</a></span>(my_mat) =<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/paste.html">paste0</a></span>(<span class="st">"site"</span>, <span class="dv">1</span><span class="op">:</span><span class="kw"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span>(my_mat))</a>
 <a class="sourceLine" id="cb18-14" data-line-number="14">  </a>
 <a class="sourceLine" id="cb18-15" data-line-number="15">  sparse_mat =<span class="st"> </span><span class="kw">as</span>(my_mat, <span class="st">"sparseMatrix"</span>)</a>
 <a class="sourceLine" id="cb18-16" data-line-number="16">  </a>
-<a class="sourceLine" id="cb18-17" data-line-number="17">  <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/function">return</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/list">list</a></span>(<span class="dt">mat =</span> my_mat, <span class="dt">sparse =</span> sparse_mat))</a>
+<a class="sourceLine" id="cb18-17" data-line-number="17">  <span class="kw"><a href="https://rdrr.io/r/base/function.html">return</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="dt">mat =</span> my_mat, <span class="dt">sparse =</span> sparse_mat))</a>
 <a class="sourceLine" id="cb18-18" data-line-number="18">}</a>
 <a class="sourceLine" id="cb18-19" data-line-number="19"></a>
-<a class="sourceLine" id="cb18-20" data-line-number="20">n_zero_vector =<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">49</span>, <span class="dv">99</span>)</a>
-<a class="sourceLine" id="cb18-21" data-line-number="21"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/names">names</a></span>(n_zero_vector) =<span class="st"> </span>n_zero_vector</a>
+<a class="sourceLine" id="cb18-20" data-line-number="20">n_zero_vector =<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="dv">2</span>, <span class="dv">49</span>, <span class="dv">99</span>)</a>
+<a class="sourceLine" id="cb18-21" data-line-number="21"><span class="kw"><a href="https://rdrr.io/r/base/names.html">names</a></span>(n_zero_vector) =<span class="st"> </span>n_zero_vector</a>
 <a class="sourceLine" id="cb18-22" data-line-number="22"></a>
-<a class="sourceLine" id="cb18-23" data-line-number="23">all_mats =<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/lapply">lapply</a></span>(n_zero_vector, sparse_and_mat)</a>
+<a class="sourceLine" id="cb18-23" data-line-number="23">all_mats =<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/lapply.html">lapply</a></span>(n_zero_vector, sparse_and_mat)</a>
 <a class="sourceLine" id="cb18-24" data-line-number="24"></a>
 <a class="sourceLine" id="cb18-25" data-line-number="25"><span class="kw">mat_filling</span>(all_mats<span class="op">$</span><span class="st">`</span><span class="dt">0</span><span class="st">`</span><span class="op">$</span>mat)</a></code></pre></div>
 <pre><code>## [1] 1</code></pre>
 <div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb20-1" data-line-number="1"><span class="kw">mat_filling</span>(all_mats<span class="op">$</span><span class="st">`</span><span class="dt">99</span><span class="st">`</span><span class="op">$</span>mat)</a></code></pre></div>
-<pre><code>## [1] 0.009905</code></pre>
+<pre><code>## [1] 0.009675</code></pre>
 <p>Now we can compare the speed of the algorithms:</p>
-<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb22-1" data-line-number="1"><span class="cf">if</span> (<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/ns-load">requireNamespace</a></span>(<span class="st">"microbenchmark"</span>, <span class="dt">quietly =</span> <span class="ot">TRUE</span>)) {</a>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb22-1" data-line-number="1"><span class="cf">if</span> (<span class="kw"><a href="https://rdrr.io/r/base/ns-load.html">requireNamespace</a></span>(<span class="st">"microbenchmark"</span>, <span class="dt">quietly =</span> <span class="ot">TRUE</span>)) {</a>
 <a class="sourceLine" id="cb22-2" data-line-number="2">  mat_bench =<span class="st"> </span>microbenchmark<span class="op">::</span><span class="kw">microbenchmark</span>(</a>
 <a class="sourceLine" id="cb22-3" data-line-number="3">    <span class="dt">mat_0 =</span> <span class="kw"><a href="../reference/distinctiveness.html">distinctiveness</a></span>(all_mats<span class="op">$</span><span class="st">`</span><span class="dt">0</span><span class="st">`</span><span class="op">$</span>mat, dist_mat),</a>
 <a class="sourceLine" id="cb22-4" data-line-number="4">    <span class="dt">sparse_0 =</span> <span class="kw"><a href="../reference/distinctiveness.html">distinctiveness</a></span>(all_mats<span class="op">$</span><span class="st">`</span><span class="dt">0</span><span class="st">`</span><span class="op">$</span>sparse, dist_mat),</a>
@@ -223,6 +225,7 @@
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
+
         <div id="tocnav">
       <h2 class="hasAnchor">
 <a href="#tocnav" class="anchor"></a>Contents</h2>
@@ -239,17 +242,20 @@
 </div>
 
 
+
       <footer><div class="copyright">
   <p>Developed by Matthias Grenié, Pierre Denelle, Caroline Tucker.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
 </div>
+
       </footer>
 </div>
 
   
+
 
   </body>
 </html>

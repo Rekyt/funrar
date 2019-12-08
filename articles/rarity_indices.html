@@ -5,11 +5,12 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>How to use <code>funrar</code>, an example with plant communities dataset. • funrar</title>
+<title>How to use `funrar`, an example with plant communities dataset. • funrar</title>
 <!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous">
-<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- sticky kit --><script src="https://cdnjs.cloudflare.com/ajax/libs/sticky-kit/1.1.3/sticky-kit.min.js" integrity="sha256-c4Rlo1ZozqTPE2RLuvbusY3+SU1pQaJC0TjuhygMipw=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
-<script src="../pkgdown.js"></script><meta property="og:title" content="How to use &lt;code&gt;funrar&lt;/code&gt;, an example with plant communities dataset.">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous">
+<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
+<script src="../pkgdown.js"></script><meta property="og:title" content="How to use `funrar`, an example with plant communities dataset.">
 <meta property="og:description" content="">
 <meta name="twitter:card" content="summary">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
@@ -38,7 +39,7 @@
       <ul class="nav navbar-nav">
 <li>
   <a href="../index.html">
-    <span class="fa fa-home fa-lg"></span>
+    <span class="fas fa fas fa-home fa-lg"></span>
      
   </a>
 </li>
@@ -76,13 +77,14 @@
 <!--/.navbar -->
 
       
+
       </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1>How to use <code>funrar</code>, an example with plant communities dataset.</h1>
                         <h4 class="author">Denelle Pierre &amp; Grenié Matthias</h4>
             
-            <h4 class="date">2019-05-18</h4>
+            <h4 class="date">2019-12-08</h4>
       
       
       <div class="hidden name"><code>rarity_indices.Rmd</code></div>
@@ -110,9 +112,9 @@
 <a href="#dataset-example" class="anchor"></a>Dataset example</h1>
 <p>To illustrate the package, we are using a dataset describing the distribution of 82 species of Alpine plants in 75 sites. This dataset was collected by Choler et al.(2005).</p>
 <p>Species traits and environmental variables are also available.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/data">data</a></span>(<span class="st">"aravo"</span>, <span class="dt">package =</span> <span class="st">"ade4"</span>)</a>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(<span class="st">"aravo"</span>, <span class="dt">package =</span> <span class="st">"ade4"</span>)</a>
 <a class="sourceLine" id="cb1-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb1-3" data-line-number="3"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/str">str</a></span>(aravo)</a></code></pre></div>
+<a class="sourceLine" id="cb1-3" data-line-number="3"><span class="kw"><a href="https://rdrr.io/r/utils/str.html">str</a></span>(aravo)</a></code></pre></div>
 <pre><code>## List of 4
 ##  $ spe      :'data.frame':   75 obs. of  82 variables:
 ##   ..$ Agro.rupe: int [1:75] 0 0 3 0 0 0 2 0 0 3 ...
@@ -224,7 +226,7 @@
 <a href="#inputs-of-functions" class="anchor"></a>Inputs of functions</h2>
 <p>For each metric, the package includes two functions, depending on the input type. Ecologist usually have to deal with site-species matrix, containing sites names as rows, species in columns and either abundances or presence/absence data (see example datasets in <code>vegan</code> or <code>ade4</code> packages for example). Thus, this matrix is needed as an input for each simple function.</p>
 <div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="co"># Site-species matrix stored in aravo$spe</span></a>
-<a class="sourceLine" id="cb3-2" data-line-number="2">mat =<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/matrix">as.matrix</a></span>(aravo<span class="op">$</span>spe)</a>
+<a class="sourceLine" id="cb3-2" data-line-number="2">mat =<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/matrix.html">as.matrix</a></span>(aravo<span class="op">$</span>spe)</a>
 <a class="sourceLine" id="cb3-3" data-line-number="3"></a>
 <a class="sourceLine" id="cb3-4" data-line-number="4">mat[<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">5</span>]</a></code></pre></div>
 <pre><code>##      Agro.rupe Alop.alpi Anth.nipp Heli.sede Aven.vers
@@ -236,10 +238,10 @@
 <p><code>metricname()</code> functions can be used to compute indices directly on site-species matrices.</p>
 <p>Users can also use a stacked (or tidy) data.frame, containing columns for sites, species and abundances. The package contains for each metric another function called <code>metricname_stack()</code> function that can take these stacked data.frames as inputs.</p>
 <p><code>funrar</code> package includes two functions to go from one format to the other: <code><a href="../reference/matrix_to_stack.html">matrix_to_stack()</a></code> and <code><a href="../reference/stack_to_matrix.html">stack_to_matrix()</a></code></p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(funrar)</a>
+<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(funrar)</a>
 <a class="sourceLine" id="cb5-2" data-line-number="2"></a>
 <a class="sourceLine" id="cb5-3" data-line-number="3">dat =<span class="st"> </span><span class="kw"><a href="../reference/matrix_to_stack.html">matrix_to_stack</a></span>(mat, <span class="st">"value"</span>, <span class="st">"site"</span>, <span class="st">"species"</span>)</a>
-<a class="sourceLine" id="cb5-4" data-line-number="4"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/head">head</a></span>(dat)</a></code></pre></div>
+<a class="sourceLine" id="cb5-4" data-line-number="4"><span class="kw"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(dat)</a></code></pre></div>
 <pre><code>##     species site value
 ## 1 Agro.rupe AR07     0
 ## 2 Agro.rupe AR71     0
@@ -248,10 +250,10 @@
 ## 5 Agro.rupe AR60     0
 ## 6 Agro.rupe AR70     0</code></pre>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="co"># The reverse function is provided and gives the same original matrix</span></a>
-<a class="sourceLine" id="cb7-2" data-line-number="2"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/identical">identical</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/numeric">as.numeric</a></span>(<span class="kw"><a href="../reference/stack_to_matrix.html">stack_to_matrix</a></span>(dat, <span class="st">"site"</span>, <span class="st">"species"</span>, <span class="st">"value"</span>)), <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/numeric">as.numeric</a></span>(mat))</a></code></pre></div>
+<a class="sourceLine" id="cb7-2" data-line-number="2"><span class="kw"><a href="https://rdrr.io/r/base/identical.html">identical</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span>(<span class="kw"><a href="../reference/stack_to_matrix.html">stack_to_matrix</a></span>(dat, <span class="st">"site"</span>, <span class="st">"species"</span>, <span class="st">"value"</span>)), <span class="kw"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span>(mat))</a></code></pre></div>
 <pre><code>## [1] TRUE</code></pre>
 <div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="co"># Removal of empty rows</span></a>
-<a class="sourceLine" id="cb9-2" data-line-number="2">dat =<span class="st"> </span>dat[<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/which">which</a></span>(dat<span class="op">$</span>value <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>), ]</a></code></pre></div>
+<a class="sourceLine" id="cb9-2" data-line-number="2">dat =<span class="st"> </span>dat[<span class="kw"><a href="https://rdrr.io/r/base/which.html">which</a></span>(dat<span class="op">$</span>value <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>), ]</a></code></pre></div>
 <p>The package is also able to deal with large matrices with many zeroes by using sparse matrices. For more details, see <code>sparse_matrices</code> vignette.</p>
 </div>
 <div id="indices" class="section level2">
@@ -263,8 +265,8 @@
 <p>The indices rely on the computation of a distance matrix. It represents the functional distance between two species given a particular set of traits. From a species traits matrix you can easily compute a distance matrix using function <code><a href="../reference/compute_dist_matrix.html">compute_dist_matrix()</a></code>.</p>
 <p>In order to compute distance matrix, species names must be specified as <strong>rownames</strong> in the traits table. Further, species names must match between the traits table and distance matrix. Species names must be characters and not factors.</p>
 <p>The function relies on the <code>daisy()</code> function from package <code>cluster</code> and the default metric is Gower’s distance to take into account ordinal, categorical and binary traits:</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1">tra =<span class="st"> </span>aravo<span class="op">$</span>traits[, <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"Height"</span>, <span class="st">"SLA"</span>, <span class="st">"N_mass"</span>)]</a>
-<a class="sourceLine" id="cb10-2" data-line-number="2"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/head">head</a></span>(tra)</a></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1">tra =<span class="st"> </span>aravo<span class="op">$</span>traits[, <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"Height"</span>, <span class="st">"SLA"</span>, <span class="st">"N_mass"</span>)]</a>
+<a class="sourceLine" id="cb10-2" data-line-number="2"><span class="kw"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(tra)</a></code></pre></div>
 <pre><code>##           Height  SLA N_mass
 ## Agro.rupe      6  8.1 218.70
 ## Alop.alpi      5 15.1 203.85
@@ -327,7 +329,7 @@ D_i = \frac{\sum_{\substack{j = 1, \\
 <a href="#computation-with-stacked-data-frame" class="anchor"></a>Computation with stacked data.frame</h4>
 <p>Using <code>funrar</code> distinctiveness values can be computed using function <code><a href="../reference/distinctiveness_stack.html">distinctiveness_stack()</a></code>:</p>
 <div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb20-1" data-line-number="1"><span class="co"># Species should be character</span></a>
-<a class="sourceLine" id="cb20-2" data-line-number="2">dat<span class="op">$</span>species =<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/character">as.character</a></span>(dat<span class="op">$</span>species)</a>
+<a class="sourceLine" id="cb20-2" data-line-number="2">dat<span class="op">$</span>species =<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/character.html">as.character</a></span>(dat<span class="op">$</span>species)</a>
 <a class="sourceLine" id="cb20-3" data-line-number="3"></a>
 <a class="sourceLine" id="cb20-4" data-line-number="4"><span class="co"># Compute distinctiveness for each species on each site</span></a>
 <a class="sourceLine" id="cb20-5" data-line-number="5">di_df =<span class="st"> </span><span class="kw"><a href="../reference/distinctiveness_stack.html">distinctiveness_stack</a></span>(<span class="dt">com_df =</span> dat,  <span class="co"># The site x species table</span></a>
@@ -336,7 +338,7 @@ D_i = \frac{\sum_{\substack{j = 1, \\
 <a class="sourceLine" id="cb20-8" data-line-number="8">                              <span class="dt">abund =</span> <span class="ot">NULL</span>,  <span class="co"># Relative abundances column (facultative)</span></a>
 <a class="sourceLine" id="cb20-9" data-line-number="9">                              <span class="dt">dist_matrix =</span> dist_mat)  <span class="co"># Functional Distance matrix</span></a></code></pre></div>
 <pre><code>## No relative abundance provided, computing Di without it</code></pre>
-<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb22-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/head">head</a></span>(di_df)</a></code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb22-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(di_df)</a></code></pre></div>
 <pre><code>##     species site value        Di
 ## 1 Care.rosa AR07     1 0.3777876
 ## 2 Care.rupe AR07     3 0.1748829
@@ -349,7 +351,7 @@ D_i = \frac{\sum_{\substack{j = 1, \\
 <div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb24-1" data-line-number="1">di_df =<span class="st"> </span><span class="kw"><a href="../reference/distinctiveness_stack.html">distinctiveness_stack</a></span>(dat, <span class="st">"species"</span>, <span class="st">"site"</span>, <span class="st">"value"</span>, dist_mat)</a></code></pre></div>
 <pre><code>## Warning in distinctiveness_stack(dat, "species", "site", "value", dist_mat): Provided object may not contain relative abundances nor presence-absence
 ## Have a look at the make_relative() function if it is the case</code></pre>
-<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb26-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/head">head</a></span>(di_df)</a></code></pre></div>
+<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb26-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(di_df)</a></code></pre></div>
 <pre><code>##     species site value        Di
 ## 1 Care.rosa AR07     1 0.3588528
 ## 2 Care.rupe AR07     3 0.1619372
@@ -387,7 +389,7 @@ S_i = \exp(-NA_i\log2),
 ## AR60           NA        NA           NA           NA           NA</code></pre>
 <div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb32-1" data-line-number="1">si_df =<span class="st"> </span><span class="kw"><a href="../reference/scarcity_stack.html">scarcity_stack</a></span>(dat, <span class="st">"species"</span>, <span class="st">"site"</span>, <span class="st">"value"</span>)</a>
 <a class="sourceLine" id="cb32-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb32-3" data-line-number="3"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/head">head</a></span>(si_df)</a></code></pre></div>
+<a class="sourceLine" id="cb32-3" data-line-number="3"><span class="kw"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(si_df)</a></code></pre></div>
 <pre><code>##     species site value           Si
 ## 1 Care.rosa AR07     1 2.441406e-04
 ## 2 Care.rupe AR07     3 1.455192e-11
@@ -415,7 +417,7 @@ U_i = \text{min}(d_{ij}), \forall j \in [1, N_R], j \neq i,
 <p><code><a href="../reference/uniqueness.html">uniqueness()</a></code> follows a similar syntax, but beware that given community table and distance matrix should represent the <strong>regional species pool</strong>. And the syntax is also similar:</p>
 <div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb34-1" data-line-number="1">ui =<span class="st"> </span><span class="kw"><a href="../reference/uniqueness.html">uniqueness</a></span>(mat, dist_mat)</a>
 <a class="sourceLine" id="cb34-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb34-3" data-line-number="3"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/head">head</a></span>(ui)</a></code></pre></div>
+<a class="sourceLine" id="cb34-3" data-line-number="3"><span class="kw"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(ui)</a></code></pre></div>
 <pre><code>##     species         Ui
 ## 1 Agro.rupe 0.03635369
 ## 2 Alop.alpi 0.03715692
@@ -425,7 +427,7 @@ U_i = \text{min}(d_{ij}), \forall j \in [1, N_R], j \neq i,
 ## 6 Care.rosa 0.15922932</code></pre>
 <div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb36-1" data-line-number="1">ui_df =<span class="st"> </span><span class="kw"><a href="../reference/uniqueness_stack.html">uniqueness_stack</a></span>(dat, <span class="st">"species"</span>, dist_mat)</a>
 <a class="sourceLine" id="cb36-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb36-3" data-line-number="3"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/head">head</a></span>(ui_df)</a></code></pre></div>
+<a class="sourceLine" id="cb36-3" data-line-number="3"><span class="kw"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(ui_df)</a></code></pre></div>
 <pre><code>##     species         Ui
 ## 1 Agro.rupe 0.03635369
 ## 2 Alop.alpi 0.03715692
@@ -433,7 +435,7 @@ U_i = \text{min}(d_{ij}), \forall j \in [1, N_R], j \neq i,
 ## 4 Heli.sede 0.02270997
 ## 5 Aven.vers 0.05675178
 ## 6 Care.rosa 0.15922932</code></pre>
-<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb38-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/dim">dim</a></span>(ui_df[<span class="op">!</span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/duplicated">duplicated</a></span>(ui_df<span class="op">$</span>species), ])</a></code></pre></div>
+<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb38-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/dim.html">dim</a></span>(ui_df[<span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/duplicated.html">duplicated</a></span>(ui_df<span class="op">$</span>species), ])</a></code></pre></div>
 <pre><code>## [1] 82  2</code></pre>
 </div>
 </div>
@@ -454,7 +456,7 @@ R_i = 1 - N_i/N_tot
 <a href="#computation-2" class="anchor"></a>Computation</h4>
 <div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb40-1" data-line-number="1">ri =<span class="st"> </span><span class="kw"><a href="../reference/restrictedness.html">restrictedness</a></span>(mat)</a>
 <a class="sourceLine" id="cb40-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb40-3" data-line-number="3"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/head">head</a></span>(ri)</a></code></pre></div>
+<a class="sourceLine" id="cb40-3" data-line-number="3"><span class="kw"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(ri)</a></code></pre></div>
 <pre><code>##     species        Ri
 ## 1 Agro.rupe 0.6133333
 ## 2 Alop.alpi 0.5066667
@@ -463,11 +465,11 @@ R_i = 1 - N_i/N_tot
 ## 5 Aven.vers 0.8000000
 ## 6 Care.rosa 0.6266667</code></pre>
 <div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb42-1" data-line-number="1"><span class="co"># Species should be character</span></a>
-<a class="sourceLine" id="cb42-2" data-line-number="2">dat<span class="op">$</span>site =<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/character">as.character</a></span>(dat<span class="op">$</span>site)</a>
+<a class="sourceLine" id="cb42-2" data-line-number="2">dat<span class="op">$</span>site =<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/character.html">as.character</a></span>(dat<span class="op">$</span>site)</a>
 <a class="sourceLine" id="cb42-3" data-line-number="3"></a>
 <a class="sourceLine" id="cb42-4" data-line-number="4">ri_df =<span class="st"> </span><span class="kw"><a href="../reference/restrictedness_stack.html">restrictedness_stack</a></span>(dat, <span class="st">"species"</span>, <span class="st">"site"</span>)</a>
 <a class="sourceLine" id="cb42-5" data-line-number="5"></a>
-<a class="sourceLine" id="cb42-6" data-line-number="6"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/head">head</a></span>(ri_df)</a></code></pre></div>
+<a class="sourceLine" id="cb42-6" data-line-number="6"><span class="kw"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(ri_df)</a></code></pre></div>
 <pre><code>##     species        Ri
 ## 1 Agro.rupe 0.6133333
 ## 2 Alch.glau 0.8133333
@@ -486,7 +488,7 @@ R_i = 1 - N_i/N_tot
 ## Have a look at the make_relative() function if it is the case</code></pre>
 <pre><code>## Warning in scarcity(pres_matrix): Provided object may not contain relative abundances nor presence-absence
 ## Have a look at the make_relative() function if it is the case</code></pre>
-<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb47-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/utils/topics/str">str</a></span>(all_ind)</a></code></pre></div>
+<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb47-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/utils/str.html">str</a></span>(all_ind)</a></code></pre></div>
 <pre><code>## List of 4
 ##  $ Ui:'data.frame':  82 obs. of  2 variables:
 ##   ..$ species: Factor w/ 82 levels "Agro.rupe","Alch.glau",..: 1 5 11 36 14 20 18 19 21 22 ...
@@ -502,13 +504,13 @@ R_i = 1 - N_i/N_tot
 ##   ..- attr(*, "dimnames")=List of 2
 ##   .. ..$ : chr [1:75] "AR07" "AR71" "AR26" "AR54" ...
 ##   .. ..$ : chr [1:82] "Agro.rupe" "Alop.alpi" "Anth.nipp" "Heli.sede" ...</code></pre>
-<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb49-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/identical">identical</a></span>(all_ind<span class="op">$</span>Ui, ui)</a></code></pre></div>
+<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb49-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/identical.html">identical</a></span>(all_ind<span class="op">$</span>Ui, ui)</a></code></pre></div>
 <pre><code>## [1] TRUE</code></pre>
-<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb51-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/identical">identical</a></span>(all_ind<span class="op">$</span>Di, di)</a></code></pre></div>
+<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb51-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/identical.html">identical</a></span>(all_ind<span class="op">$</span>Di, di)</a></code></pre></div>
 <pre><code>## [1] TRUE</code></pre>
-<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb53-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/identical">identical</a></span>(all_ind<span class="op">$</span>Ri, ri)</a></code></pre></div>
+<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb53-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/identical.html">identical</a></span>(all_ind<span class="op">$</span>Ri, ri)</a></code></pre></div>
 <pre><code>## [1] TRUE</code></pre>
-<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb55-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/identical">identical</a></span>(all_ind<span class="op">$</span>Si, si)</a></code></pre></div>
+<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb55-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/identical.html">identical</a></span>(all_ind<span class="op">$</span>Si, si)</a></code></pre></div>
 <pre><code>## [1] TRUE</code></pre>
 </div>
 </div>
@@ -517,13 +519,8 @@ R_i = 1 - N_i/N_tot
 <h1 class="hasAnchor">
 <a href="#plots" class="anchor"></a>Plots</h1>
 <p>In this section, some ideas to plot your results are presented. For example the density of the various indices or a matrix visualization of the values of distinctiveness per species.</p>
-<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb57-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(ggplot2)</a></code></pre></div>
-<pre><code>## Registered S3 methods overwritten by 'ggplot2':
-##   method         from 
-##   [.quosures     rlang
-##   c.quosures     rlang
-##   print.quosures rlang</code></pre>
-<div class="sourceCode" id="cb59"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb59-1" data-line-number="1"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/library">library</a></span>(dplyr)</a></code></pre></div>
+<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb57-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(ggplot2)</a>
+<a class="sourceLine" id="cb57-2" data-line-number="2"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(dplyr)</a></code></pre></div>
 <pre><code>## 
 ## Attaching package: 'dplyr'</code></pre>
 <pre><code>## The following objects are masked from 'package:stats':
@@ -532,64 +529,64 @@ R_i = 1 - N_i/N_tot
 <pre><code>## The following objects are masked from 'package:base':
 ## 
 ##     intersect, setdiff, setequal, union</code></pre>
-<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb63-1" data-line-number="1"><span class="co"># Heatmap with distinctiveness values</span></a>
-<a class="sourceLine" id="cb63-2" data-line-number="2"><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/ggplot">ggplot</a></span>(di_df, <span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/aes">aes</a></span>(species, site)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb63-3" data-line-number="3"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/geom_tile">geom_tile</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/aes">aes</a></span>(<span class="dt">fill =</span> Di), <span class="dt">colour =</span> <span class="st">"white"</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb63-4" data-line-number="4"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/scale_gradient">scale_fill_gradient</a></span>(<span class="dt">low =</span> <span class="st">"white"</span>, <span class="dt">high =</span> <span class="st">"steelblue"</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb61-1" data-line-number="1"><span class="co"># Heatmap with distinctiveness values</span></a>
+<a class="sourceLine" id="cb61-2" data-line-number="2"><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(di_df, <span class="kw"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(species, site)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb61-3" data-line-number="3"><span class="st">  </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/geom_tile.html">geom_tile</a></span>(<span class="kw"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="dt">fill =</span> Di), <span class="dt">colour =</span> <span class="st">"white"</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb61-4" data-line-number="4"><span class="st">  </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/scale_gradient.html">scale_fill_gradient</a></span>(<span class="dt">low =</span> <span class="st">"white"</span>, <span class="dt">high =</span> <span class="st">"steelblue"</span>)</a></code></pre></div>
 <p><img src="rarity_indices_files/figure-html/unnamed-chunk-8-1.png" width="700"></p>
-<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb64-1" data-line-number="1"><span class="co"># Density of distinctiveness values</span></a>
-<a class="sourceLine" id="cb64-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb64-3" data-line-number="3">quant =<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/stats/topics/quantile">quantile</a></span>(di_df<span class="op">$</span>Di, <span class="dt">probs =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/seq">seq</a></span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="fl">0.10</span>))</a>
-<a class="sourceLine" id="cb64-4" data-line-number="4">labels_quant =<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/paste">paste</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/names">names</a></span>(quant)[<span class="op">-</span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/length">length</a></span>(quant)], <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/names">names</a></span>(quant)[<span class="op">-</span><span class="dv">1</span>], <span class="dt">sep =</span> <span class="st">"-"</span>)</a>
-<a class="sourceLine" id="cb64-5" data-line-number="5"> </a>
-<a class="sourceLine" id="cb64-6" data-line-number="6">di_density =<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/data.frame">data.frame</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/stats/topics/density">density</a></span>(di_df<span class="op">$</span>Di)[<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"x"</span>, <span class="st">"y"</span>)])</a>
-<a class="sourceLine" id="cb64-7" data-line-number="7">di_density =<span class="st"> </span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span>(di_density, x <span class="op">&gt;=</span><span class="st"> </span>quant[[<span class="dv">1</span>]] <span class="op">&amp;</span><span class="st"> </span>x <span class="op">&lt;=</span><span class="st"> </span>quant[[<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/length">length</a></span>(quant)]])</a>
-<a class="sourceLine" id="cb64-8" data-line-number="8">di_density<span class="op">$</span>quant =<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/cut">cut</a></span>(di_density<span class="op">$</span>x, <span class="dt">breaks =</span> quant)   </a>
-<a class="sourceLine" id="cb64-9" data-line-number="9">quant =<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/stats/topics/quantile">quantile</a></span>(di_df<span class="op">$</span>Di, <span class="dt">probs =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/seq">seq</a></span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="fl">0.10</span>))</a>
-<a class="sourceLine" id="cb64-10" data-line-number="10">labels_quant =<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/paste">paste</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/names">names</a></span>(quant)[<span class="op">-</span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/length">length</a></span>(quant)], <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/names">names</a></span>(quant)[<span class="op">-</span><span class="dv">1</span>], <span class="dt">sep =</span> <span class="st">"-"</span>)</a>
-<a class="sourceLine" id="cb64-11" data-line-number="11"></a>
-<a class="sourceLine" id="cb64-12" data-line-number="12">di_dens =<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/ggplot">ggplot</a></span>(<span class="dt">data =</span> di_density, <span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/aes">aes</a></span>(<span class="dt">x =</span> x, <span class="dt">y =</span> y)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb64-13" data-line-number="13"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/geom_ribbon">geom_area</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/aes">aes</a></span>(<span class="dt">fill =</span> quant)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb64-14" data-line-number="14"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/scale_brewer">scale_fill_brewer</a></span>(<span class="dt">palette =</span> <span class="st">"RdYlBu"</span>, <span class="dt">labels =</span> labels_quant,</a>
-<a class="sourceLine" id="cb64-15" data-line-number="15">                    <span class="dt">name =</span> <span class="st">"Quantile"</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb64-16" data-line-number="16"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/geom_path">geom_line</a></span>(<span class="dt">size =</span> <span class="dv">1</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb64-17" data-line-number="17"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/labs">xlab</a></span>(<span class="st">"Distinctiveness values"</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb64-18" data-line-number="18"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/labs">ylab</a></span>(<span class="st">"Frequency"</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb64-19" data-line-number="19"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/labs">ggtitle</a></span>(<span class="st">"Density of distinctiveness values"</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb64-20" data-line-number="20"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/ggtheme">theme_classic</a></span>()</a>
-<a class="sourceLine" id="cb64-21" data-line-number="21"></a>
-<a class="sourceLine" id="cb64-22" data-line-number="22">di_dens</a></code></pre></div>
+<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb62-1" data-line-number="1"><span class="co"># Density of distinctiveness values</span></a>
+<a class="sourceLine" id="cb62-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb62-3" data-line-number="3">quant =<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/stats/quantile.html">quantile</a></span>(di_df<span class="op">$</span>Di, <span class="dt">probs =</span> <span class="kw"><a href="https://rdrr.io/r/base/seq.html">seq</a></span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="fl">0.10</span>))</a>
+<a class="sourceLine" id="cb62-4" data-line-number="4">labels_quant =<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/paste.html">paste</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/names.html">names</a></span>(quant)[<span class="op">-</span><span class="kw"><a href="https://rdrr.io/r/base/length.html">length</a></span>(quant)], <span class="kw"><a href="https://rdrr.io/r/base/names.html">names</a></span>(quant)[<span class="op">-</span><span class="dv">1</span>], <span class="dt">sep =</span> <span class="st">"-"</span>)</a>
+<a class="sourceLine" id="cb62-5" data-line-number="5"> </a>
+<a class="sourceLine" id="cb62-6" data-line-number="6">di_density =<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(<span class="kw"><a href="https://rdrr.io/r/stats/density.html">density</a></span>(di_df<span class="op">$</span>Di)[<span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"x"</span>, <span class="st">"y"</span>)])</a>
+<a class="sourceLine" id="cb62-7" data-line-number="7">di_density =<span class="st"> </span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span>(di_density, x <span class="op">&gt;=</span><span class="st"> </span>quant[[<span class="dv">1</span>]] <span class="op">&amp;</span><span class="st"> </span>x <span class="op">&lt;=</span><span class="st"> </span>quant[[<span class="kw"><a href="https://rdrr.io/r/base/length.html">length</a></span>(quant)]])</a>
+<a class="sourceLine" id="cb62-8" data-line-number="8">di_density<span class="op">$</span>quant =<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/cut.html">cut</a></span>(di_density<span class="op">$</span>x, <span class="dt">breaks =</span> quant)   </a>
+<a class="sourceLine" id="cb62-9" data-line-number="9">quant =<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/stats/quantile.html">quantile</a></span>(di_df<span class="op">$</span>Di, <span class="dt">probs =</span> <span class="kw"><a href="https://rdrr.io/r/base/seq.html">seq</a></span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="fl">0.10</span>))</a>
+<a class="sourceLine" id="cb62-10" data-line-number="10">labels_quant =<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/paste.html">paste</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/names.html">names</a></span>(quant)[<span class="op">-</span><span class="kw"><a href="https://rdrr.io/r/base/length.html">length</a></span>(quant)], <span class="kw"><a href="https://rdrr.io/r/base/names.html">names</a></span>(quant)[<span class="op">-</span><span class="dv">1</span>], <span class="dt">sep =</span> <span class="st">"-"</span>)</a>
+<a class="sourceLine" id="cb62-11" data-line-number="11"></a>
+<a class="sourceLine" id="cb62-12" data-line-number="12">di_dens =<span class="st"> </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="dt">data =</span> di_density, <span class="kw"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="dt">x =</span> x, <span class="dt">y =</span> y)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb62-13" data-line-number="13"><span class="st">  </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/geom_ribbon.html">geom_area</a></span>(<span class="kw"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="dt">fill =</span> quant)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb62-14" data-line-number="14"><span class="st">  </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/scale_brewer.html">scale_fill_brewer</a></span>(<span class="dt">palette =</span> <span class="st">"RdYlBu"</span>, <span class="dt">labels =</span> labels_quant,</a>
+<a class="sourceLine" id="cb62-15" data-line-number="15">                    <span class="dt">name =</span> <span class="st">"Quantile"</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb62-16" data-line-number="16"><span class="st">  </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span>(<span class="dt">size =</span> <span class="dv">1</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb62-17" data-line-number="17"><span class="st">  </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/labs.html">xlab</a></span>(<span class="st">"Distinctiveness values"</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb62-18" data-line-number="18"><span class="st">  </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ylab</a></span>(<span class="st">"Frequency"</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb62-19" data-line-number="19"><span class="st">  </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ggtitle</a></span>(<span class="st">"Density of distinctiveness values"</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb62-20" data-line-number="20"><span class="st">  </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_classic</a></span>()</a>
+<a class="sourceLine" id="cb62-21" data-line-number="21"></a>
+<a class="sourceLine" id="cb62-22" data-line-number="22">di_dens</a></code></pre></div>
 <p><img src="rarity_indices_files/figure-html/unnamed-chunk-8-2.png" width="700"></p>
-<div class="sourceCode" id="cb65"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb65-1" data-line-number="1"><span class="co"># Density of scarcity values</span></a>
-<a class="sourceLine" id="cb65-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb65-3" data-line-number="3">quant =<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/stats/topics/quantile">quantile</a></span>(si_df<span class="op">$</span>Si, <span class="dt">probs =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/seq">seq</a></span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="fl">0.10</span>))</a>
-<a class="sourceLine" id="cb65-4" data-line-number="4">labels_quant =<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/paste">paste</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/names">names</a></span>(quant)[<span class="op">-</span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/length">length</a></span>(quant)], <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/names">names</a></span>(quant)[<span class="op">-</span><span class="dv">1</span>], <span class="dt">sep =</span> <span class="st">"-"</span>)</a>
-<a class="sourceLine" id="cb65-5" data-line-number="5"> </a>
-<a class="sourceLine" id="cb65-6" data-line-number="6">si_density =<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/data.frame">data.frame</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/stats/topics/density">density</a></span>(si_df<span class="op">$</span>Si)[<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/c">c</a></span>(<span class="st">"x"</span>, <span class="st">"y"</span>)])</a>
-<a class="sourceLine" id="cb65-7" data-line-number="7">si_density =<span class="st"> </span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span>(si_density, x <span class="op">&gt;=</span><span class="st"> </span>quant[[<span class="dv">1</span>]] <span class="op">&amp;</span><span class="st"> </span>x <span class="op">&lt;=</span><span class="st"> </span>quant[[<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/length">length</a></span>(quant)]])</a>
-<a class="sourceLine" id="cb65-8" data-line-number="8">si_density<span class="op">$</span>quant =<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/cut">cut</a></span>(si_density<span class="op">$</span>x, <span class="dt">breaks =</span> quant)   </a>
-<a class="sourceLine" id="cb65-9" data-line-number="9">quant =<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/stats/topics/quantile">quantile</a></span>(si_df<span class="op">$</span>Si, <span class="dt">probs =</span> <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/seq">seq</a></span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="fl">0.10</span>))</a>
-<a class="sourceLine" id="cb65-10" data-line-number="10">labels_quant =<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/paste">paste</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/names">names</a></span>(quant)[<span class="op">-</span><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/length">length</a></span>(quant)], <span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/names">names</a></span>(quant)[<span class="op">-</span><span class="dv">1</span>], <span class="dt">sep =</span> <span class="st">"-"</span>)</a>
-<a class="sourceLine" id="cb65-11" data-line-number="11"></a>
-<a class="sourceLine" id="cb65-12" data-line-number="12">si_dens =<span class="st"> </span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/ggplot">ggplot</a></span>(<span class="dt">data =</span> si_density, <span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/aes">aes</a></span>(<span class="dt">x =</span> x, <span class="dt">y =</span> y)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb65-13" data-line-number="13"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/geom_ribbon">geom_area</a></span>(<span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/aes">aes</a></span>(<span class="dt">fill =</span> quant)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb65-14" data-line-number="14"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/scale_brewer">scale_fill_brewer</a></span>(<span class="dt">palette =</span> <span class="st">"RdYlBu"</span>, <span class="dt">labels =</span> labels_quant,</a>
-<a class="sourceLine" id="cb65-15" data-line-number="15">                    <span class="dt">name =</span> <span class="st">"Quantile"</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb65-16" data-line-number="16"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/geom_path">geom_line</a></span>(<span class="dt">size =</span> <span class="dv">1</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb65-17" data-line-number="17"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/labs">xlab</a></span>(<span class="st">"Scarcity values"</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb65-18" data-line-number="18"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/labs">ylab</a></span>(<span class="st">"Frequency"</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb65-19" data-line-number="19"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/labs">ggtitle</a></span>(<span class="st">"Density of scarcity values"</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb65-20" data-line-number="20"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/ggtheme">theme_classic</a></span>()</a>
-<a class="sourceLine" id="cb65-21" data-line-number="21"></a>
-<a class="sourceLine" id="cb65-22" data-line-number="22">si_dens</a></code></pre></div>
+<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb63-1" data-line-number="1"><span class="co"># Density of scarcity values</span></a>
+<a class="sourceLine" id="cb63-2" data-line-number="2"></a>
+<a class="sourceLine" id="cb63-3" data-line-number="3">quant =<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/stats/quantile.html">quantile</a></span>(si_df<span class="op">$</span>Si, <span class="dt">probs =</span> <span class="kw"><a href="https://rdrr.io/r/base/seq.html">seq</a></span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="fl">0.10</span>))</a>
+<a class="sourceLine" id="cb63-4" data-line-number="4">labels_quant =<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/paste.html">paste</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/names.html">names</a></span>(quant)[<span class="op">-</span><span class="kw"><a href="https://rdrr.io/r/base/length.html">length</a></span>(quant)], <span class="kw"><a href="https://rdrr.io/r/base/names.html">names</a></span>(quant)[<span class="op">-</span><span class="dv">1</span>], <span class="dt">sep =</span> <span class="st">"-"</span>)</a>
+<a class="sourceLine" id="cb63-5" data-line-number="5"> </a>
+<a class="sourceLine" id="cb63-6" data-line-number="6">si_density =<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(<span class="kw"><a href="https://rdrr.io/r/stats/density.html">density</a></span>(si_df<span class="op">$</span>Si)[<span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"x"</span>, <span class="st">"y"</span>)])</a>
+<a class="sourceLine" id="cb63-7" data-line-number="7">si_density =<span class="st"> </span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span>(si_density, x <span class="op">&gt;=</span><span class="st"> </span>quant[[<span class="dv">1</span>]] <span class="op">&amp;</span><span class="st"> </span>x <span class="op">&lt;=</span><span class="st"> </span>quant[[<span class="kw"><a href="https://rdrr.io/r/base/length.html">length</a></span>(quant)]])</a>
+<a class="sourceLine" id="cb63-8" data-line-number="8">si_density<span class="op">$</span>quant =<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/cut.html">cut</a></span>(si_density<span class="op">$</span>x, <span class="dt">breaks =</span> quant)   </a>
+<a class="sourceLine" id="cb63-9" data-line-number="9">quant =<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/stats/quantile.html">quantile</a></span>(si_df<span class="op">$</span>Si, <span class="dt">probs =</span> <span class="kw"><a href="https://rdrr.io/r/base/seq.html">seq</a></span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="fl">0.10</span>))</a>
+<a class="sourceLine" id="cb63-10" data-line-number="10">labels_quant =<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/paste.html">paste</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/names.html">names</a></span>(quant)[<span class="op">-</span><span class="kw"><a href="https://rdrr.io/r/base/length.html">length</a></span>(quant)], <span class="kw"><a href="https://rdrr.io/r/base/names.html">names</a></span>(quant)[<span class="op">-</span><span class="dv">1</span>], <span class="dt">sep =</span> <span class="st">"-"</span>)</a>
+<a class="sourceLine" id="cb63-11" data-line-number="11"></a>
+<a class="sourceLine" id="cb63-12" data-line-number="12">si_dens =<span class="st"> </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="dt">data =</span> si_density, <span class="kw"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="dt">x =</span> x, <span class="dt">y =</span> y)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb63-13" data-line-number="13"><span class="st">  </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/geom_ribbon.html">geom_area</a></span>(<span class="kw"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="dt">fill =</span> quant)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb63-14" data-line-number="14"><span class="st">  </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/scale_brewer.html">scale_fill_brewer</a></span>(<span class="dt">palette =</span> <span class="st">"RdYlBu"</span>, <span class="dt">labels =</span> labels_quant,</a>
+<a class="sourceLine" id="cb63-15" data-line-number="15">                    <span class="dt">name =</span> <span class="st">"Quantile"</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb63-16" data-line-number="16"><span class="st">  </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span>(<span class="dt">size =</span> <span class="dv">1</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb63-17" data-line-number="17"><span class="st">  </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/labs.html">xlab</a></span>(<span class="st">"Scarcity values"</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb63-18" data-line-number="18"><span class="st">  </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ylab</a></span>(<span class="st">"Frequency"</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb63-19" data-line-number="19"><span class="st">  </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ggtitle</a></span>(<span class="st">"Density of scarcity values"</span>) <span class="op">+</span></a>
+<a class="sourceLine" id="cb63-20" data-line-number="20"><span class="st">  </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_classic</a></span>()</a>
+<a class="sourceLine" id="cb63-21" data-line-number="21"></a>
+<a class="sourceLine" id="cb63-22" data-line-number="22">si_dens</a></code></pre></div>
 <p><img src="rarity_indices_files/figure-html/unnamed-chunk-8-3.png" width="700"></p>
-<div class="sourceCode" id="cb66"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb66-1" data-line-number="1"><span class="co"># Regional rarity: restrictedness versus uniqueness</span></a>
-<a class="sourceLine" id="cb66-2" data-line-number="2"><span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/colnames">colnames</a></span>(ri_df)[<span class="kw"><a href="https://www.rdocumentation.org/packages/base/topics/colnames">colnames</a></span>(ri_df) <span class="op">==</span><span class="st"> "sp"</span>] =<span class="st"> "species"</span></a>
-<a class="sourceLine" id="cb66-3" data-line-number="3">ri_ui &lt;-<span class="st"> </span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/join.html">inner_join</a></span>(ri_df, ui_df, <span class="dt">by =</span> <span class="st">"species"</span>)</a>
-<a class="sourceLine" id="cb66-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb66-5" data-line-number="5"><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/ggplot">ggplot</a></span>(ri_ui, <span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/aes">aes</a></span>(Ri, Ui)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb66-6" data-line-number="6"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/geom_point">geom_point</a></span>() <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb66-7" data-line-number="7"><span class="st">  </span><span class="kw"><a href="https://www.rdocumentation.org/packages/ggplot2/topics/ggtheme">theme_classic</a></span>() </a></code></pre></div>
+<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb64-1" data-line-number="1"><span class="co"># Regional rarity: restrictedness versus uniqueness</span></a>
+<a class="sourceLine" id="cb64-2" data-line-number="2"><span class="kw"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span>(ri_df)[<span class="kw"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span>(ri_df) <span class="op">==</span><span class="st"> "sp"</span>] =<span class="st"> "species"</span></a>
+<a class="sourceLine" id="cb64-3" data-line-number="3">ri_ui &lt;-<span class="st"> </span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/join.html">inner_join</a></span>(ri_df, ui_df, <span class="dt">by =</span> <span class="st">"species"</span>)</a>
+<a class="sourceLine" id="cb64-4" data-line-number="4"></a>
+<a class="sourceLine" id="cb64-5" data-line-number="5"><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(ri_ui, <span class="kw"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(Ri, Ui)) <span class="op">+</span></a>
+<a class="sourceLine" id="cb64-6" data-line-number="6"><span class="st">  </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span>() <span class="op">+</span><span class="st"> </span></a>
+<a class="sourceLine" id="cb64-7" data-line-number="7"><span class="st">  </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_classic</a></span>() </a></code></pre></div>
 <p><img src="rarity_indices_files/figure-html/unnamed-chunk-8-4.png" width="700"></p>
 </div>
 <div id="references" class="section level1">
@@ -601,6 +598,7 @@ R_i = 1 - N_i/N_tot
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
+
         <div id="tocnav">
       <h2 class="hasAnchor">
 <a href="#tocnav" class="anchor"></a>Contents</h2>
@@ -623,17 +621,20 @@ R_i = 1 - N_i/N_tot
 </div>
 
 
+
       <footer><div class="copyright">
   <p>Developed by Matthias Grenié, Pierre Denelle, Caroline Tucker.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.3.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
 </div>
+
       </footer>
 </div>
 
   
+
 
   </body>
 </html>
