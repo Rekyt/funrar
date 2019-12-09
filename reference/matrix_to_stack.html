@@ -71,7 +71,7 @@ to matrix first. matrix_to_tidy() is an alias of this function." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">funrar</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.1</span>
       </span>
     </div>
 
@@ -134,9 +134,12 @@ given data.frame. If supplied object is not a matrix, try to coerce object
 to matrix first. <code>matrix_to_tidy()</code> is an alias of this function.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>matrix_to_stack</span>(<span class='no'>my_mat</span>, <span class='kw'>value_col</span> <span class='kw'>=</span> <span class='st'>"value"</span>,
+    <pre class="usage"><span class='fu'>matrix_to_stack</span>(
+  <span class='no'>my_mat</span>,
+  <span class='kw'>value_col</span> <span class='kw'>=</span> <span class='st'>"value"</span>,
   <span class='kw'>row_to_col</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/names.html'>names</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/dimnames.html'>dimnames</a></span>(<span class='no'>my_mat</span>))[<span class='fl'>1</span>],
-  <span class='kw'>col_to_col</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/names.html'>names</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/dimnames.html'>dimnames</a></span>(<span class='no'>my_mat</span>))[<span class='fl'>2</span>])</pre>
+  <span class='kw'>col_to_col</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/names.html'>names</a></span>(<span class='fu'><a href='https://rdrr.io/r/base/dimnames.html'>dimnames</a></span>(<span class='no'>my_mat</span>))[<span class='fl'>2</span>]
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">

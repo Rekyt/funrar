@@ -70,7 +70,7 @@ an alias of this function." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">funrar</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.1</span>
       </span>
     </div>
 
@@ -132,8 +132,13 @@ an alias of this function." />
 an alias of this function.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>stack_to_matrix</span>(<span class='no'>my_df</span>, <span class='no'>col_to_row</span>, <span class='no'>col_to_col</span>, <span class='kw'>col_value</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
-  <span class='kw'>sparse</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>)</pre>
+    <pre class="usage"><span class='fu'>stack_to_matrix</span>(
+  <span class='no'>my_df</span>,
+  <span class='no'>col_to_row</span>,
+  <span class='no'>col_to_col</span>,
+  <span class='kw'>col_value</span> <span class='kw'>=</span> <span class='kw'>NULL</span>,
+  <span class='kw'>sparse</span> <span class='kw'>=</span> <span class='fl'>FALSE</span>
+)</pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -162,7 +167,7 @@ the matrix</p></td>
       <th>sparse</th>
       <td><p>(optional, default = <code>FALSE</code>) logical indicating whether to
 return a sparse matrix (if <code>TRUE</code> requires
-<a href='https://cran.r-project.org/package=tidytext'>tidytext</a>
+<a href='https://cran.r-project.org/package=tidytext'><code>tidytext</code></a>
 package)</p></td>
     </tr>
     </table>
