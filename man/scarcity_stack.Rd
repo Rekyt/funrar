@@ -31,7 +31,7 @@ requires relative abundances. Scarcity is close to 1 when a species is rare
 in a community and close to 0 when it is abundant. See \code{\link[=scarcity]{scarcity()}} function
 or the functional rarity indices vignette included in the package (type
 \code{vignette("rarity_indices", package = "funrar")}) for details about the
-index. You can either use \code{_stack()} or \code{_tidy()} functions as they are
+index. You can either use \verb{_stack()} or \verb{_tidy()} functions as they are
 aliases of one another.
 }
 \examples{

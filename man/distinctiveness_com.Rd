@@ -4,8 +4,13 @@
 \alias{distinctiveness_com}
 \title{Functional Distinctiveness for a single community}
 \usage{
-distinctiveness_com(com_df, sp_col, abund = NULL, dist_matrix,
-  relative = FALSE)
+distinctiveness_com(
+  com_df,
+  sp_col,
+  abund = NULL,
+  dist_matrix,
+  relative = FALSE
+)
 }
 \arguments{
 \item{com_df}{a stacked (= tidy) data.frame from a single community with each

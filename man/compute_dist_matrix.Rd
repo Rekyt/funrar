@@ -5,8 +5,12 @@
 \alias{distance_matrix}
 \title{Functional Distance Matrix}
 \usage{
-compute_dist_matrix(traits_table, metric = "gower", center = FALSE,
-  scale = FALSE)
+compute_dist_matrix(
+  traits_table,
+  metric = "gower",
+  center = FALSE,
+  scale = FALSE
+)
 }
 \arguments{
 \item{traits_table}{a data.frame of traits with species in row and traits in

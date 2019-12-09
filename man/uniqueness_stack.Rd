@@ -26,7 +26,7 @@ values.
 Computes functional uniqueness values over a given regional pool. Functional
 uniqueness gives the functional distance to the nearest-neighbor of a given
 species in the provided distance matrix. See \code{\link[=uniqueness]{uniqueness()}} function for
-details on computation. You can either use \code{_stack()} or \code{_tidy()} functions
+details on computation. You can either use \verb{_stack()} or \verb{_tidy()} functions
 as they are aliases of one another.
 }
 \examples{

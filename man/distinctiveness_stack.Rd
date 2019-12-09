@@ -5,11 +5,23 @@
 \alias{distinctiveness_tidy}
 \title{Functional Distinctiveness on a stacked data.frame}
 \usage{
-distinctiveness_stack(com_df, sp_col, com, abund = NULL, dist_matrix,
-  relative = FALSE)
+distinctiveness_stack(
+  com_df,
+  sp_col,
+  com,
+  abund = NULL,
+  dist_matrix,
+  relative = FALSE
+)
 
-distinctiveness_tidy(com_df, sp_col, com, abund = NULL, dist_matrix,
-  relative = FALSE)
+distinctiveness_tidy(
+  com_df,
+  sp_col,
+  com,
+  abund = NULL,
+  dist_matrix,
+  relative = FALSE
+)
 }
 \arguments{
 \item{com_df}{a stacked (= tidy) data.frame from a single community with each
@@ -45,7 +57,7 @@ functional rarity indices vignette included in the package
 (type \code{vignette("rarity_indices", package = "funrar")}), for more details
 on the metric. \strong{IMPORTANT NOTE}: in order to get functional rarity indices
 between 0 and 1, the distance metric has to be scaled between 0 and 1.
-You can either use \code{_stack()} or \code{_tidy()} functions as they are aliases of
+You can either use \verb{_stack()} or \verb{_tidy()} functions as they are aliases of
 one another.
 }
 \examples{

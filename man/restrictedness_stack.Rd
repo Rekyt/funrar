@@ -32,7 +32,7 @@ extent of a species in a given dataset, it is close to 1 when the species is
 present in only a single site of the dataset (restricted) and close to 0 when
 the species is present at all sites. It estimates the geographical extent of
 a species in a dataset. See \code{\link[=restrictedness]{restrictedness()}} for details
-on restrictedness computation. You can either use \code{_stack()} or \code{_tidy()}
+on restrictedness computation. You can either use \verb{_stack()} or \verb{_tidy()}
 functions as they are aliases of one another.
 }
 \examples{

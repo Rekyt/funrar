@@ -4,8 +4,7 @@
 \alias{distinctiveness_range}
 \title{Functional Distinctiveness within range}
 \usage{
-distinctiveness_range(pres_matrix, dist_matrix, given_range,
-  relative = FALSE)
+distinctiveness_range(pres_matrix, dist_matrix, given_range, relative = FALSE)
 }
 \arguments{
 \item{pres_matrix}{a site-species matrix (presence-absence or relative

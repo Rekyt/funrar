@@ -5,9 +5,12 @@
 \alias{matrix_to_tidy}
 \title{Matrix to stacked (= tidy) data.frame}
 \usage{
-matrix_to_stack(my_mat, value_col = "value",
+matrix_to_stack(
+  my_mat,
+  value_col = "value",
   row_to_col = names(dimnames(my_mat))[1],
-  col_to_col = names(dimnames(my_mat))[2])
+  col_to_col = names(dimnames(my_mat))[2]
+)
 }
 \arguments{
 \item{my_mat}{matrix you want to transform in stacked (= tidy) data.frame}
