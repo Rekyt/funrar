@@ -1,3 +1,9 @@
+# funrar 1.3.1.9000
+
+* Implement `distinctiveness_global()` to compute occurrence based distinctiveness at the global/regional level using only a distance matrix
+
+# funrar 1.3.1
+
 # funrar 1.3.0
 
 ## NEW FEATURES
