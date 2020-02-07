@@ -1,8 +1,14 @@
 # funrar 1.3.1.9000
 
+## NEW FEATURES
+
 * Implement `distinctiveness_global()` to compute occurrence based distinctiveness at the global/regional level using only a distance matrix
 
 # funrar 1.3.1
+
+## BUG FIX
+
+* Test explicitly for matrix type in `rarity_dimensions()` for compatibility with R 4.0.0
 
 # funrar 1.3.0
 
