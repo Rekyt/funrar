@@ -71,7 +71,7 @@ to matrix first. matrix_to_tidy() is an alias of this function." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">funrar</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.1.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.4.0</span>
       </span>
     </div>
 
@@ -182,8 +182,8 @@ column names and a third one for the values.</p>
 <span class='no'>mat</span> <span class='kw'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/matrix.html'>as.matrix</a></span>(<span class='no'>aravo</span>$<span class='no'>spe</span>)
 <span class='no'>dat</span> <span class='kw'>=</span> <span class='fu'>matrix_to_stack</span>(<span class='no'>mat</span>, <span class='st'>"value"</span>, <span class='st'>"site"</span>, <span class='st'>"species"</span>)
 <span class='fu'><a href='https://rdrr.io/r/utils/str.html'>str</a></span>(<span class='no'>dat</span>)</div><div class='output co'>#&gt; 'data.frame':	6150 obs. of  3 variables:
-#&gt;  $ species: Factor w/ 82 levels "Agro.rupe","Alop.alpi",..: 1 1 1 1 1 1 1 1 1 1 ...
-#&gt;  $ site   : Factor w/ 75 levels "AR07","AR71",..: 1 2 3 4 5 6 7 8 9 10 ...
+#&gt;  $ species: chr  "Agro.rupe" "Agro.rupe" "Agro.rupe" "Agro.rupe" ...
+#&gt;  $ site   : chr  "AR07" "AR71" "AR26" "AR54" ...
 #&gt;  $ value  : int  0 0 3 0 0 0 2 0 0 3 ...</div><div class='input'>
 </div></pre>
   </div>

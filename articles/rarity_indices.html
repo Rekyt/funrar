@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">funrar</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.3.1.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.4.0</span>
       </span>
     </div>
 
@@ -84,7 +84,7 @@
       <h1>How to use <code>funrar</code>, an example with plant communities dataset.</h1>
                         <h4 class="author">Denelle Pierre &amp; Grenié Matthias</h4>
             
-            <h4 class="date">2020-02-07</h4>
+            <h4 class="date">2020-03-05</h4>
       
       
       <div class="hidden name"><code>rarity_indices.Rmd</code></div>
@@ -251,7 +251,7 @@
 ## 6 Agro.rupe AR70     0</code></pre>
 <div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="co"># The reverse function is provided and gives the same original matrix</span></a>
 <a class="sourceLine" id="cb7-2" data-line-number="2"><span class="kw"><a href="https://rdrr.io/r/base/identical.html">identical</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span>(<span class="kw"><a href="../reference/stack_to_matrix.html">stack_to_matrix</a></span>(dat, <span class="st">"site"</span>, <span class="st">"species"</span>, <span class="st">"value"</span>)), <span class="kw"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span>(mat))</a></code></pre></div>
-<pre><code>## [1] TRUE</code></pre>
+<pre><code>## [1] FALSE</code></pre>
 <div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="co"># Removal of empty rows</span></a>
 <a class="sourceLine" id="cb9-2" data-line-number="2">dat =<span class="st"> </span>dat[<span class="kw"><a href="https://rdrr.io/r/base/which.html">which</a></span>(dat<span class="op">$</span>value <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>), ]</a></code></pre></div>
 <p>The package is also able to deal with large matrices with many zeroes by using sparse matrices. For more details, see <code>sparse_matrices</code> vignette.</p>
@@ -340,12 +340,12 @@ D_i = \frac{\sum_{\substack{j = 1, \\
 <pre><code>## No relative abundance provided, computing Di without it</code></pre>
 <div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb22-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(di_df)</a></code></pre></div>
 <pre><code>##     species site value        Di
-## 1 Care.rosa AR07     1 0.3777876
-## 2 Care.rupe AR07     3 0.1748829
-## 3 Fest.quad AR07     2 0.1709311
-## 4 Kobr.myos AR07     1 0.2358800
-## 5  Poa.alpi AR07     1 0.1647911
-## 6 Minu.sedo AR07     1 0.2271418</code></pre>
+## 1 Agro.rupe AR01     1 0.1661127
+## 2 Heli.sede AR01     2 0.1828906
+## 3 Care.parv AR01     1 0.3057277
+## 4 Care.rupe AR01     3 0.1805076
+## 5 Fest.laev AR01     1 0.3093468
+## 6 Fest.viol AR01     1 0.1907347</code></pre>
 <p>The syntax for <code><a href="../reference/distinctiveness_stack.html">distinctiveness_stack()</a></code> is first the table, then the name of the species column, then the name of the community column, then the name of the relative abundance column and finally the distance matrix. The function add a <code>Di</code> column giving the species distinctiveness in each species per site combination.</p>
 <p>For abundance weighted distinctiveness you need to have a column containing relative abundances in your data frame as such:</p>
 <div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb24-1" data-line-number="1">di_df =<span class="st"> </span><span class="kw"><a href="../reference/distinctiveness_stack.html">distinctiveness_stack</a></span>(dat, <span class="st">"species"</span>, <span class="st">"site"</span>, <span class="st">"value"</span>, dist_mat)</a></code></pre></div>
@@ -353,12 +353,12 @@ D_i = \frac{\sum_{\substack{j = 1, \\
 ## Have a look at the make_relative() function if it is the case</code></pre>
 <div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb26-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(di_df)</a></code></pre></div>
 <pre><code>##     species site value        Di
-## 1 Care.rosa AR07     1 0.3588528
-## 2 Care.rupe AR07     3 0.1619372
-## 3 Fest.quad AR07     2 0.1476393
-## 4 Kobr.myos AR07     1 0.2150834
-## 5  Poa.alpi AR07     1 0.1399526
-## 6 Minu.sedo AR07     1 0.2107469</code></pre>
+## 1 Agro.rupe AR01     1 0.1569403
+## 2 Heli.sede AR01     2 0.1924531
+## 3 Care.parv AR01     1 0.2837640
+## 4 Care.rupe AR01     3 0.1761766
+## 5 Fest.laev AR01     1 0.2828495
+## 6 Fest.viol AR01     1 0.1918732</code></pre>
 </div>
 </div>
 <div id="scarcity" class="section level3">
@@ -391,12 +391,12 @@ S_i = \exp(-NA_i\log2),
 <a class="sourceLine" id="cb32-2" data-line-number="2"></a>
 <a class="sourceLine" id="cb32-3" data-line-number="3"><span class="kw"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(si_df)</a></code></pre></div>
 <pre><code>##     species site value           Si
-## 1 Care.rosa AR07     1 2.441406e-04
-## 2 Care.rupe AR07     3 1.455192e-11
-## 3 Fest.quad AR07     2 5.960464e-08
-## 4 Kobr.myos AR07     1 2.441406e-04
-## 5  Poa.alpi AR07     1 2.441406e-04
-## 6 Minu.sedo AR07     1 2.441406e-04</code></pre>
+## 1 Agro.rupe AR01     1 1.192093e-07
+## 2 Heli.sede AR01     2 1.421085e-14
+## 3 Care.parv AR01     1 1.192093e-07
+## 4 Care.rupe AR01     3 1.694066e-21
+## 5 Fest.laev AR01     1 1.192093e-07
+## 6 Fest.viol AR01     1 1.192093e-07</code></pre>
 </div>
 </div>
 <div id="uniqueness" class="section level3">
