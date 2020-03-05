@@ -23,7 +23,7 @@ argument.`
 }
 \description{
 Given a distance (or dissimilarity) matrix or \code{dist()} objects compute
-regional/global level ditinctiveness as if all species were present in the
+regional/global level distinctiveness as if all species were present in the
 same community.
 }
 \seealso{

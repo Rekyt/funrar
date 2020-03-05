@@ -1,7 +1,7 @@
 #' Global/Regional Functional Distinctiveness from dissimilarity matrix
 #'
 #' Given a distance (or dissimilarity) matrix or `dist()` objects compute
-#' regional/global level ditinctiveness as if all species were present in the
+#' regional/global level distinctiveness as if all species were present in the
 #' same community.
 #'
 #' @param dist_obj a functional distance matrix as given by

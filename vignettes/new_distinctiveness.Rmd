@@ -346,7 +346,7 @@ In the end, this definition does not seem to reconcile well with the presence-ab
 
 ### Implementation
 
-Similar to the strategy we can implement this definition of functional distinctiveness by using a correspondance matrix in which we nullify the importance of species that are further away than the given threshold. In order to test the behavior of the metric we design an abundance matrix with the same species again a, b, and c:
+Similar to the strategy we can implement this definition of functional distinctiveness by using a correspondence matrix in which we nullify the importance of species that are further away than the given threshold. In order to test the behavior of the metric we design an abundance matrix with the same species again a, b, and c:
 
 ```{r new_distinctiveness_ab}
 ab_mat = matrix(c(rep(1/3, 3), 1/6, 1/6, 4/6, 4/6, 1/6, 1/6), nrow = 3, ncol = 3,
@@ -363,7 +363,7 @@ alternative_distinctiveness_abundance = function(abund_mat, dist_matrix,
   dist_mat = dist_mat[kept_sp, kept_sp, drop = FALSE]
   
   
-  # Correspondance matrix (tracking which species we want to keep)
+  # Correspondence matrix (tracking which species we want to keep)
   corr_dist = dist_mat
   corr_dist[dist_mat > given_range] = 0
   corr_dist[dist_mat <= given_range] = 1
