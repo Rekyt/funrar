@@ -1,5 +1,4 @@
 ## Test environments
-* local Mac OSX 10.12 install, R-release,
 * local Windows 8, R-release,
 * Travis CI
   + Ubuntu 14.04.5, R-oldrelease, R-release, R-devel,
