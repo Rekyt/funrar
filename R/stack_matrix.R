@@ -146,7 +146,8 @@ matrix_to_stack = matrix_to_tidy = function(my_mat, value_col = "value",
   if (is.matrix(my_mat)) {
 
     # Tidy data frame from contingency table
-    tidy_df = as.data.frame(as.table(my_mat))
+    tidy_df = as.data.frame(as.table(my_mat),
+                            stringsAsFactors = FALSE)
 
   } else if (is(my_mat, "sparseMatrix")) {
     # If input matrix is a sparse matrix need to get the data.frame of non-zero
@@ -155,18 +156,21 @@ matrix_to_stack = matrix_to_tidy = function(my_mat, value_col = "value",
 
     tidy_df = data.frame(rows_index = rownames(my_mat)[summ_df$i],
                          cols_index = colnames(my_mat)[summ_df$j],
-                         val = summ_df$x)
+                         val = summ_df$x,
+                         stringsAsFactors = FALSE)
 
   } else if (is(my_mat, "Matrix")) {
     # If matrix is a dense matrix from Matrix package
-    tidy_df = as.data.frame(as.table(as.matrix(my_mat)))
+    tidy_df = as.data.frame(as.table(as.matrix(my_mat)),
+                            stringsAsFactors = FALSE)
 
   } else {
     # Try coercion if possible
     warning("Object is not a matrix. Coercing it to matrix")
     real_mat = as.matrix(my_mat)
 
-    tidy_df = as.data.frame(as.table(real_mat))
+    tidy_df = as.data.frame(as.table(real_mat),
+                            stringsAsFactors = FALSE)
   }
 
   tidy_df = na.exclude(tidy_df)

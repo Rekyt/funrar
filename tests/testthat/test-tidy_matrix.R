@@ -24,10 +24,6 @@ suppressWarnings({
     bind_rows()
 })
 
-com_df$site = factor(com_df$site)
-
-com_df$species = factor(com_df$species)
-
 
 # Abundance Matrix
 abund_mat = matrix(c(0.5, 0.5, NA, NA,
@@ -49,11 +45,6 @@ suppressWarnings({
   }) %>%
     bind_rows()
 })
-
-abund_df$species = as.factor(abund_df$species)
-
-abund_df$site = as.factor(abund_df$site)
-
 
 # Object with an NA value
 na_df = abund_df

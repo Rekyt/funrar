@@ -30,7 +30,7 @@ suppressWarnings({
 
 # Traits df
 trait_df = data.frame(tr1 = c("A", "A", "B", "B"), tr2 = c(rep(0, 3), 1),
-                      tr3 = seq(4, 16, 4))
+                      tr3 = seq(4, 16, 4), stringsAsFactors = TRUE)
 
 rownames(trait_df) = letters[1:4]
 
@@ -66,6 +66,14 @@ good_di_0.9 = matrix(c(1/9, 1/9, NA,  NA,
                      nrow = 4, ncol = 4, byrow = TRUE,
                      dimnames = list("site" = paste0("s", 1:4),
                                      "species" = letters[1:4]))
+
+good_di_relative_max = matrix(c(1,    1, NA,   NA,
+                                NA, 3/4, 1/2, 3/4,
+                                NA,   1,   1,  NA,
+                                NA,  NA,   1,  1),
+                              nrow = 4, ncol = 4, byrow = TRUE,
+                              dimnames = list("site" = paste0("s", 1:4),
+                                              "species" = letters[1:4]))
 
 ## Abundances ------------------------------------------------------------------
 # Define Abundance Matrix
@@ -122,6 +130,17 @@ sparse_ab_mat = as(abund_mat, "sparseMatrix")
 test_that("Bad input generates error", {
   expect_error(distinctiveness_range(valid_mat, dist_mat, "a"),
                "'given_range' argument should be non-null and numeric")
+
+  expect_error(distinctiveness_range(valid_mat, dist_mat, 0.1, relative = "A"),
+               "'relative' argument should be either TRUE or FALSE")
+
+  expect_warning(
+    distinctiveness_range(valid_mat * 4, dist_mat, 0.1),
+    paste0("Provided object may not contain relative abundances nor ",
+           "presence-absence\n",
+           "Have a look at the make_relative() function if it is the case"),
+    fixed = TRUE
+  )
 })
 
 test_that("Correct Di computation without abundance",{
@@ -146,6 +165,9 @@ test_that("Correct Di computation without abundance",{
   #  T ≥ 8/9
   expect_equivalent(distinctiveness_range(valid_mat, dist_mat, 0.9),
                     good_di_0.9)
+
+  expect_equivalent(distinctiveness_range(valid_mat, dist_mat, 4, TRUE),
+                    good_di_relative_max)
 })
 
 test_that("Correct Di computation with abundance",{

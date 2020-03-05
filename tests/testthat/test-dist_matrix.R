@@ -2,7 +2,9 @@ context("Compute Functional Distance Matrix")
 
 test_that("Returned object is a matrix", {
 
-  trait_df = data.frame(1:5, letters[1:5])
+  trait_df = data.frame(trait1 = 1:5,
+                        trait2 = factor(letters[1:5]),
+                        stringsAsFactors = FALSE)
   rownames(trait_df) = letters[1:5]
 
   # Object is matrix
@@ -12,16 +14,20 @@ test_that("Returned object is a matrix", {
 
 test_that("Names in distance matrix named after rownames", {
   trait = data.frame(sp = paste("sp", 1:5), trait_1 = 1:5,
-                     trait_2 = as.factor(c("A", "A", "A", "B", "B")))
+                     trait_2 = as.factor(c("A", "A", "A", "B", "B")),
+                     stringsAsFactors = FALSE)
 
 
   # No rownames
-  expect_warning(compute_dist_matrix(trait))
+  expect_warning(compute_dist_matrix(trait[,2:3]),
+                 regexp = paste0(
+                   "No row names provided in trait table", "\n",
+                   "Distinctiveness and scarcity won't be computable"))
 
   # With defined rownames
   rownames(trait) = trait$sp
 
-  dist_mat = compute_dist_matrix(trait)
+  dist_mat = compute_dist_matrix(trait[, 2:3])
 
   expect_identical(rownames(dist_mat), rownames(trait))
   expect_identical(colnames(dist_mat), rownames(trait))
@@ -32,12 +38,14 @@ test_that("Names in distance matrix named after rownames", {
 
 test_that("Distance matrix contains good values", {
 
-  trait = data.frame(sp = paste("sp", 1:5), trait_1 = 1:5,
-                     trait_2 = as.factor(c("A", "A", "A", "B", "B")))
+  trait = data.frame(sp = paste("sp", 1:5),
+                     trait_1 = 1:5,
+                     trait_2 = as.factor(c("A", "A", "A", "B", "B")),
+                     stringsAsFactors = FALSE)
 
   rownames(trait) = trait$sp
 
-  t_dist_mat = compute_dist_matrix(trait)
+  t_dist_mat = compute_dist_matrix(trait[,2:3])
 
   other_mat = as.data.frame(matrix(1:16, nrow = 4))
   rownames(other_mat) = paste0("sp", 1:4)

@@ -31,9 +31,8 @@ species_df = data.frame(
   trait_value = c(-1, 0, 0.5)
 )
 
-species_distance = dist(c(a = -1, b = 0, c =0.5))
+species_distance = dist(c(a = -1, b = 0, c = 0.5))
 
-plot(species_df)
 species_distance
 ```
 Species $b$ is closer to species $c$ than to species $a$. The greatest distance is observed between species $a$ and species $c$.

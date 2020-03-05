@@ -20,6 +20,11 @@ testthat::test_that("fails gracefully with bad input", {
                regexp = "Input should be a dist() object or a square matrix",
                fixed = TRUE)
 
+  expect_error(distinctiveness_global(dist(c(1, 0, -1)), 45.3),
+               paste0("Provided column name for regional/global Di should be",
+                      " character"),
+               fixed = TRUE)
+
 })
 
 # Should work with dist or matrix objects

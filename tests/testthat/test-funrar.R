@@ -32,7 +32,7 @@ suppressWarnings({
 
 # Traits df
 trait_df = data.frame(tr1 = c("A", "A", "B", "B"), tr2 = c(rep(0, 3), 1),
-                       tr3 = seq(4, 16, 4))
+                       tr3 = seq(4, 16, 4), stringsAsFactors = TRUE)
 
 rownames(trait_df) = letters[1:4]
 

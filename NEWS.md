@@ -1,8 +1,13 @@
-# funrar 1.3.1.9000
+# funrar 1.4.0
 
 ## NEW FEATURES
 
 * Implement `distinctiveness_global()` to compute occurrence based distinctiveness at the global/regional level using only a distance matrix
+
+## BUG FIX
+
+* Fix tests that used `data.frame()` now with explicit `stringAsFactors` values for compatibility with R 4.0.0
+* Add missing tests on bad inputs for some functions
 
 # funrar 1.3.1
 
