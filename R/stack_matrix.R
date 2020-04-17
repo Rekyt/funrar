@@ -68,10 +68,10 @@ stack_to_matrix = tidy_to_matrix = function(my_df, col_to_row, col_to_col,
     # Sparse Matrix
     if (requireNamespace("tidytext", quietly = TRUE)) {
       if (is.null(col_value)) {
-        my_mat = tidytext::cast_sparse_(my_df, col_to_row, col_to_col)
+        my_mat = tidytext::cast_sparse(my_df, !!col_to_row, !!col_to_col)
       } else {
-        my_mat = tidytext::cast_sparse_(my_df, col_to_row, col_to_col,
-                                        col_value)
+        my_mat = tidytext::cast_sparse(my_df, !!col_to_row, !!col_to_col,
+                                       !!col_value)
       }
     } else {
       stop("The tidytext package need to be installed to get a sparse matrix")

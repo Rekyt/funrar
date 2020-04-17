@@ -73,8 +73,8 @@ rownames(small_mat) = c("s1", "s2")
 small_df = matrix_to_tidy(small_mat)
 
 # Distinctiveness final data.frame
-undef_dist = data_frame(site = c("s1", "s2"), species = c("a", "b"),
-                        Di = rep(NaN, 2))
+undef_dist = tibble(site = c("s1", "s2"), species = c("a", "b"),
+                    Di = rep(NaN, 2))
 
 # Final distinctiveness matrix
 undef_dist_mat = table(undef_dist$site, undef_dist$species)
