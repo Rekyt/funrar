@@ -44,7 +44,6 @@
 #' ui_df = uniqueness_stack(dat, "species", dist_mat)
 #' head(ui_df)
 #'
-#' @importFrom dplyr %>%
 #' @export
 uniqueness_stack = function(com_df, sp_col, dist_matrix) {
 
