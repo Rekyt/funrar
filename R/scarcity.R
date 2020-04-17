@@ -96,7 +96,8 @@ scarcity_stack = function(com_df, sp_col, com, abund) {
                         scarcity_com(one_com, sp_col, abund)
   )
 
-  com_scarcity = do.call(rbind, com_split)
+  com_scarcity = do.call(rbind.data.frame, c(com_split, make.row.names = FALSE,
+                                             stringsAsFactors = FALSE))
 
   return(com_scarcity)
 }
