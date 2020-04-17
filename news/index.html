@@ -10,23 +10,27 @@
 
 
 <!-- jquery -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
 <!-- Bootstrap -->
 
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous" />
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script>
+
+<!-- bootstrap-toc -->
+<link rel="stylesheet" href="../bootstrap-toc.css">
+<script src="../bootstrap-toc.js"></script>
 
 <!-- Font Awesome icons -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous" />
 
 <!-- clipboard.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script>
 
 <!-- headroom.js -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script>
 
 <!-- pkgdown -->
 <link href="../pkgdown.css" rel="stylesheet">
@@ -53,7 +57,7 @@
 
   </head>
 
-  <body>
+  <body data-spy="scroll" data-target="#toc">
     <div class="container template-news">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
@@ -105,7 +109,12 @@
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        
+        <li>
+  <a href="https://github.com/Rekyt/funrar/">
+    <span class="fab fa fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
       </ul>
       
     </div><!--/.nav-collapse -->
@@ -119,13 +128,13 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-      <h1>Changelog <small></small></h1>
-      
+      <h1 data-toc-skip>Changelog <small></small></h1>
+      <small>Source: <a href='https://github.com/Rekyt/funrar/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
     <div id="funrar-1-4-0" class="section level1">
-<h1 class="page-header">
-<a href="#funrar-1-4-0" class="anchor"></a>funrar 1.4.0<small> Unreleased </small>
+<h1 class="page-header" data-toc-text="1.4.0">
+<a href="#funrar-1-4-0" class="anchor"></a>funrar 1.4.0<small> 2020-03-05 </small>
 </h1>
 <div id="new-features" class="section level2">
 <h2 class="hasAnchor">
@@ -144,7 +153,7 @@
 </div>
 </div>
     <div id="funrar-1-3-1" class="section level1">
-<h1 class="page-header">
+<h1 class="page-header" data-toc-text="1.3.1">
 <a href="#funrar-1-3-1" class="anchor"></a>funrar 1.3.1<small> 2019-12-09 </small>
 </h1>
 <div id="bug-fix-1" class="section level2">
@@ -156,16 +165,16 @@
 </div>
 </div>
     <div id="funrar-1-3-0" class="section level1">
-<h1 class="page-header">
+<h1 class="page-header" data-toc-text="1.3.0">
 <a href="#funrar-1-3-0" class="anchor"></a>funrar 1.3.0<small> 2019-05-18 </small>
 </h1>
 <div id="new-features-1" class="section level2">
 <h2 class="hasAnchor">
 <a href="#new-features-1" class="anchor"></a>NEW FEATURES</h2>
 <ul>
-<li>Add <code>_tidy()</code> aliases for each <code>_stack()</code> function for easier reading (fix #29).</li>
+<li>Add <code>_tidy()</code> aliases for each <code>_stack()</code> function for easier reading (fix <a href='https://github.com/Rekyt/funrar/issues/29'>#29</a>).</li>
 <li>
-<code><a href="../reference/distinctiveness_stack.html">distinctiveness_stack()</a></code> returns <code>NA</code> as distinctiveness values for absent species (#30).</li>
+<code><a href="../reference/distinctiveness_stack.html">distinctiveness_stack()</a></code> returns <code>NA</code> as distinctiveness values for absent species (<a href='https://github.com/Rekyt/funrar/issues/30'>#30</a>).</li>
 <li>New definition of functional distinctiveness based on range see <code><a href="../reference/distinctiveness_range.html">distinctiveness_range()</a></code>.</li>
 <li>New definition of functional distinctiveness based on range with different formula see <code><a href="../reference/distinctiveness_alt.html">distinctiveness_alt()</a></code>.</li>
 </ul>
@@ -174,12 +183,12 @@
 <h2 class="hasAnchor">
 <a href="#bug-fix-2" class="anchor"></a>BUG FIX</h2>
 <ul>
-<li>Warning when distinctiveness equals <code>NaN</code> in <code><a href="../reference/distinctiveness_stack.html">distinctiveness_stack()</a></code> (#30).</li>
+<li>Warning when distinctiveness equals <code>NaN</code> in <code><a href="../reference/distinctiveness_stack.html">distinctiveness_stack()</a></code> (<a href='https://github.com/Rekyt/funrar/issues/30'>#30</a>).</li>
 </ul>
 </div>
 </div>
     <div id="funrar-1-2-2" class="section level1">
-<h1 class="page-header">
+<h1 class="page-header" data-toc-text="1.2.2">
 <a href="#funrar-1-2-2" class="anchor"></a>funrar 1.2.2<small> 2018-03-05 </small>
 </h1>
 <ul>
@@ -187,20 +196,20 @@
 </ul>
 </div>
     <div id="funrar-1-2-1" class="section level1">
-<h1 class="page-header">
+<h1 class="page-header" data-toc-text="1.2.1">
 <a href="#funrar-1-2-1" class="anchor"></a>funrar 1.2.1<small> 2018-02-19 </small>
 </h1>
 <ul>
 <li>Add Authors’ ORCID and all contributors;</li>
 <li>funrar paper is now included in DESCRIPTION, README.md and has a proper CITATION file;</li>
 <li>Fix typos in documentation;</li>
-<li>Transformation from tidy data.frame to sparse matrix is now possible using <code><a href="../reference/stack_to_matrix.html">stack_to_matrix(x, sparse = TRUE)</a></code> (#25);</li>
-<li>Add a warning message when using only continuous traits with function <code>comput_dist_matrix()</code>, as it defaults to Gower’s distance (#27);</li>
-<li>Specification in help that functional distances need to be scaled between 0 and 1 prior to distinctiveness computation (#26).</li>
+<li>Transformation from tidy data.frame to sparse matrix is now possible using <code><a href="../reference/stack_to_matrix.html">stack_to_matrix(x, sparse = TRUE)</a></code> (<a href='https://github.com/Rekyt/funrar/issues/25'>#25</a>);</li>
+<li>Add a warning message when using only continuous traits with function <code>comput_dist_matrix()</code>, as it defaults to Gower’s distance (<a href='https://github.com/Rekyt/funrar/issues/27'>#27</a>);</li>
+<li>Specification in help that functional distances need to be scaled between 0 and 1 prior to distinctiveness computation (<a href='https://github.com/Rekyt/funrar/issues/26'>#26</a>).</li>
 </ul>
 </div>
     <div id="funrar-1-2-0" class="section level1">
-<h1 class="page-header">
+<h1 class="page-header" data-toc-text="1.2.0">
 <a href="#funrar-1-2-0" class="anchor"></a>funrar 1.2.0<small> 2017-06-30 </small>
 </h1>
 <ul>
@@ -211,7 +220,7 @@
 </ul>
 </div>
     <div id="funrar-1-1-1" class="section level1">
-<h1 class="page-header">
+<h1 class="page-header" data-toc-text="1.1.1">
 <a href="#funrar-1-1-1" class="anchor"></a>funrar 1.1.1<small> 2017-06-27 </small>
 </h1>
 <ul>
@@ -222,7 +231,7 @@
 </ul>
 </div>
     <div id="funrar-1-1-0" class="section level1">
-<h1 class="page-header">
+<h1 class="page-header" data-toc-text="1.1.0">
 <a href="#funrar-1-1-0" class="anchor"></a>funrar 1.1.0<small> 2017-05-24 </small>
 </h1>
 <ul>
@@ -234,19 +243,19 @@
 </ul>
 </div>
     <div id="funrar-1-0-3" class="section level1">
-<h1 class="page-header">
+<h1 class="page-header" data-toc-text="1.0.3">
 <a href="#funrar-1-0-3" class="anchor"></a>funrar 1.0.3<small> 2017-05-05 </small>
 </h1>
 <ul>
-<li>Corrected bug so that dense matrices can be transformed to stack data frame using <code><a href="../reference/matrix_to_stack.html">matrix_to_stack()</a></code> (#19),</li>
+<li>Corrected bug so that dense matrices can be transformed to stack data frame using <code><a href="../reference/matrix_to_stack.html">matrix_to_stack()</a></code> (<a href='https://github.com/Rekyt/funrar/issues/19'>#19</a>),</li>
 <li>Updated citation for Violle et al. 2017,</li>
 <li>Use package <a href="https://github.com/MangoTheCat/goodpractice"><code>goodpractice</code></a> to enforce better code style,</li>
-<li>Add <code><a href="../reference/is_relative.html">is_relative()</a></code> function to test if matrix contains relative abundances, <code><a href="../reference/scarcity.html">scarcity()</a></code> and <code><a href="../reference/distinctiveness.html">distinctiveness()</a></code> now warns if it is not the case (#21),</li>
+<li>Add <code><a href="../reference/is_relative.html">is_relative()</a></code> function to test if matrix contains relative abundances, <code><a href="../reference/scarcity.html">scarcity()</a></code> and <code><a href="../reference/distinctiveness.html">distinctiveness()</a></code> now warns if it is not the case (<a href='https://github.com/Rekyt/funrar/issues/21'>#21</a>),</li>
 <li>Conditional use <a href="https://cran.r-project.org/package=microbenchmark"><code>microbenchmark</code></a> following CRAN advice.</li>
 </ul>
 </div>
     <div id="funrar-1-0-2" class="section level1">
-<h1 class="page-header">
+<h1 class="page-header" data-toc-text="1.0.2">
 <a href="#funrar-1-0-2" class="anchor"></a>funrar 1.0.2<small> 2016-11-24 </small>
 </h1>
 <ul>
@@ -256,22 +265,10 @@
 </div>
   </div>
 
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
-    <div id="tocnav">
-      <h2>Contents</h2>
-      <ul class="nav nav-pills nav-stacked">
-        <li><a href="#funrar-1-4-0">1.4.0</a></li>
-        <li><a href="#funrar-1-3-1">1.3.1</a></li>
-        <li><a href="#funrar-1-3-0">1.3.0</a></li>
-        <li><a href="#funrar-1-2-2">1.2.2</a></li>
-        <li><a href="#funrar-1-2-1">1.2.1</a></li>
-        <li><a href="#funrar-1-2-0">1.2.0</a></li>
-        <li><a href="#funrar-1-1-1">1.1.1</a></li>
-        <li><a href="#funrar-1-1-0">1.1.0</a></li>
-        <li><a href="#funrar-1-0-3">1.0.3</a></li>
-        <li><a href="#funrar-1-0-2">1.0.2</a></li>
-      </ul>
-    </div>
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
+    <nav id="toc" data-toggle="toc" class="sticky-top">
+      <h2 data-toc-skip>Contents</h2>
+    </nav>
   </div>
 
 </div>
@@ -283,7 +280,7 @@
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
 </div>
 
       </footer>

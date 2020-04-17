@@ -6,19 +6,19 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>How to use `funrar`, an example with plant communities dataset. • funrar</title>
-<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/all.min.css" integrity="sha256-nAmazAk6vS34Xqo0BSrTb+abbtFlgsFK7NKSi6o7Y78=" crossorigin="anonymous">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.7.1/css/v4-shims.min.css" integrity="sha256-6qHlizsOWFskGlwVOKuns+D1nB6ssZrHQrNj1wGplHc=" crossorigin="anonymous">
-<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.4/clipboard.min.js" integrity="sha256-FiZwavyI2V6+EXO1U+xzLG3IKldpiTFf3153ea9zikQ=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/headroom.min.js" integrity="sha256-DJFC1kqIhelURkuza0AvYal5RxMtpzLjFhsnVIeuk+U=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.9.4/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
+<!-- jquery --><script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><!-- Bootstrap --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha256-bZLfwXAP04zRMK2BjiO8iu9pf4FbLqX6zitd+tIvLhE=" crossorigin="anonymous">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha256-nuL8/2cJ5NDSSwnKD8VqreErSWHtnEP9E7AySL+1ev4=" crossorigin="anonymous"></script><!-- bootstrap-toc --><link rel="stylesheet" href="../bootstrap-toc.css">
+<script src="../bootstrap-toc.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
+<!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- pkgdown --><link href="../pkgdown.css" rel="stylesheet">
 <script src="../pkgdown.js"></script><meta property="og:title" content="How to use `funrar`, an example with plant communities dataset.">
-<meta property="og:description" content="">
-<meta name="twitter:card" content="summary">
+<meta property="og:description" content="funrar">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
 <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
 <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 <![endif]-->
 </head>
-<body>
+<body data-spy="scroll" data-target="#toc">
     <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -68,7 +68,14 @@
   <a href="../news/index.html">Changelog</a>
 </li>
       </ul>
-<ul class="nav navbar-nav navbar-right"></ul>
+<ul class="nav navbar-nav navbar-right">
+<li>
+  <a href="https://github.com/Rekyt/funrar/">
+    <span class="fab fa fab fa-github fa-lg"></span>
+     
+  </a>
+</li>
+      </ul>
 </div>
 <!--/.nav-collapse -->
   </div>
@@ -81,12 +88,12 @@
       </header><div class="row">
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
-      <h1>How to use <code>funrar</code>, an example with plant communities dataset.</h1>
+      <h1 data-toc-skip>How to use <code>funrar</code>, an example with plant communities dataset.</h1>
                         <h4 class="author">Denelle Pierre &amp; Grenié Matthias</h4>
             
-            <h4 class="date">2020-03-05</h4>
+            <h4 class="date">2020-04-17</h4>
       
-      
+      <small class="dont-index">Source: <a href="https://github.com/Rekyt/funrar/blob/master/vignettes/rarity_indices.Rmd"><code>vignettes/rarity_indices.Rmd</code></a></small>
       <div class="hidden name"><code>rarity_indices.Rmd</code></div>
 
     </div>
@@ -112,9 +119,9 @@
 <a href="#dataset-example" class="anchor"></a>Dataset example</h1>
 <p>To illustrate the package, we are using a dataset describing the distribution of 82 species of Alpine plants in 75 sites. This dataset was collected by Choler et al.(2005).</p>
 <p>Species traits and environmental variables are also available.</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb1-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(<span class="st">"aravo"</span>, <span class="dt">package =</span> <span class="st">"ade4"</span>)</a>
-<a class="sourceLine" id="cb1-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb1-3" data-line-number="3"><span class="kw"><a href="https://rdrr.io/r/utils/str.html">str</a></span>(aravo)</a></code></pre></div>
+<div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(<span class="st">"aravo"</span>, <span class="kw">package</span> <span class="kw">=</span> <span class="st">"ade4"</span>)
+
+<span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span>(<span class="no">aravo</span>)</pre></body></html></div>
 <pre><code>## List of 4
 ##  $ spe      :'data.frame':   75 obs. of  82 variables:
 ##   ..$ Agro.rupe: int [1:75] 0 0 3 0 0 0 2 0 0 3 ...
@@ -225,10 +232,10 @@
 <h2 class="hasAnchor">
 <a href="#inputs-of-functions" class="anchor"></a>Inputs of functions</h2>
 <p>For each metric, the package includes two functions, depending on the input type. Ecologist usually have to deal with site-species matrix, containing sites names as rows, species in columns and either abundances or presence/absence data (see example datasets in <code>vegan</code> or <code>ade4</code> packages for example). Thus, this matrix is needed as an input for each simple function.</p>
-<div class="sourceCode" id="cb3"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb3-1" data-line-number="1"><span class="co"># Site-species matrix stored in aravo$spe</span></a>
-<a class="sourceLine" id="cb3-2" data-line-number="2">mat =<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/matrix.html">as.matrix</a></span>(aravo<span class="op">$</span>spe)</a>
-<a class="sourceLine" id="cb3-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb3-4" data-line-number="4">mat[<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">5</span>]</a></code></pre></div>
+<div class="sourceCode" id="cb3"><html><body><pre class="r"><span class="co"># Site-species matrix stored in aravo$spe</span>
+<span class="no">mat</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">as.matrix</a></span>(<span class="no">aravo</span>$<span class="no">spe</span>)
+
+<span class="no">mat</span>[<span class="fl">1</span>:<span class="fl">5</span>, <span class="fl">1</span>:<span class="fl">5</span>]</pre></body></html></div>
 <pre><code>##      Agro.rupe Alop.alpi Anth.nipp Heli.sede Aven.vers
 ## AR07         0         0         0         0         0
 ## AR71         0         0         0         0         0
@@ -238,10 +245,10 @@
 <p><code>metricname()</code> functions can be used to compute indices directly on site-species matrices.</p>
 <p>Users can also use a stacked (or tidy) data.frame, containing columns for sites, species and abundances. The package contains for each metric another function called <code>metricname_stack()</code> function that can take these stacked data.frames as inputs.</p>
 <p><code>funrar</code> package includes two functions to go from one format to the other: <code><a href="../reference/matrix_to_stack.html">matrix_to_stack()</a></code> and <code><a href="../reference/stack_to_matrix.html">stack_to_matrix()</a></code></p>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb5-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(funrar)</a>
-<a class="sourceLine" id="cb5-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb5-3" data-line-number="3">dat =<span class="st"> </span><span class="kw"><a href="../reference/matrix_to_stack.html">matrix_to_stack</a></span>(mat, <span class="st">"value"</span>, <span class="st">"site"</span>, <span class="st">"species"</span>)</a>
-<a class="sourceLine" id="cb5-4" data-line-number="4"><span class="kw"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(dat)</a></code></pre></div>
+<div class="sourceCode" id="cb5"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">funrar</span>)
+
+<span class="no">dat</span> <span class="kw">=</span> <span class="fu"><a href="../reference/matrix_to_stack.html">matrix_to_stack</a></span>(<span class="no">mat</span>, <span class="st">"value"</span>, <span class="st">"site"</span>, <span class="st">"species"</span>)
+<span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(<span class="no">dat</span>)</pre></body></html></div>
 <pre><code>##     species site value
 ## 1 Agro.rupe AR07     0
 ## 2 Agro.rupe AR71     0
@@ -249,11 +256,11 @@
 ## 4 Agro.rupe AR54     0
 ## 5 Agro.rupe AR60     0
 ## 6 Agro.rupe AR70     0</code></pre>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb7-1" data-line-number="1"><span class="co"># The reverse function is provided and gives the same original matrix</span></a>
-<a class="sourceLine" id="cb7-2" data-line-number="2"><span class="kw"><a href="https://rdrr.io/r/base/identical.html">identical</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span>(<span class="kw"><a href="../reference/stack_to_matrix.html">stack_to_matrix</a></span>(dat, <span class="st">"site"</span>, <span class="st">"species"</span>, <span class="st">"value"</span>)), <span class="kw"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span>(mat))</a></code></pre></div>
+<div class="sourceCode" id="cb7"><html><body><pre class="r"><span class="co"># The reverse function is provided and gives the same original matrix</span>
+<span class="fu"><a href="https://rdrr.io/r/base/identical.html">identical</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span>(<span class="fu"><a href="../reference/stack_to_matrix.html">stack_to_matrix</a></span>(<span class="no">dat</span>, <span class="st">"site"</span>, <span class="st">"species"</span>, <span class="st">"value"</span>)), <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span>(<span class="no">mat</span>))</pre></body></html></div>
 <pre><code>## [1] FALSE</code></pre>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb9-1" data-line-number="1"><span class="co"># Removal of empty rows</span></a>
-<a class="sourceLine" id="cb9-2" data-line-number="2">dat =<span class="st"> </span>dat[<span class="kw"><a href="https://rdrr.io/r/base/which.html">which</a></span>(dat<span class="op">$</span>value <span class="op">&gt;</span><span class="st"> </span><span class="dv">0</span>), ]</a></code></pre></div>
+<div class="sourceCode" id="cb9"><html><body><pre class="r"><span class="co"># Removal of empty rows</span>
+<span class="no">dat</span> <span class="kw">=</span> <span class="no">dat</span>[<span class="fu"><a href="https://rdrr.io/r/base/which.html">which</a></span>(<span class="no">dat</span>$<span class="no">value</span> <span class="kw">&gt;</span> <span class="fl">0</span>), ]</pre></body></html></div>
 <p>The package is also able to deal with large matrices with many zeroes by using sparse matrices. For more details, see <code>sparse_matrices</code> vignette.</p>
 </div>
 <div id="indices" class="section level2">
@@ -265,8 +272,8 @@
 <p>The indices rely on the computation of a distance matrix. It represents the functional distance between two species given a particular set of traits. From a species traits matrix you can easily compute a distance matrix using function <code><a href="../reference/compute_dist_matrix.html">compute_dist_matrix()</a></code>.</p>
 <p>In order to compute distance matrix, species names must be specified as <strong>rownames</strong> in the traits table. Further, species names must match between the traits table and distance matrix. Species names must be characters and not factors.</p>
 <p>The function relies on the <code>daisy()</code> function from package <code>cluster</code> and the default metric is Gower’s distance to take into account ordinal, categorical and binary traits:</p>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb10-1" data-line-number="1">tra =<span class="st"> </span>aravo<span class="op">$</span>traits[, <span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"Height"</span>, <span class="st">"SLA"</span>, <span class="st">"N_mass"</span>)]</a>
-<a class="sourceLine" id="cb10-2" data-line-number="2"><span class="kw"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(tra)</a></code></pre></div>
+<div class="sourceCode" id="cb10"><html><body><pre class="r"><span class="no">tra</span> <span class="kw">=</span> <span class="no">aravo</span>$<span class="no">traits</span>[, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"Height"</span>, <span class="st">"SLA"</span>, <span class="st">"N_mass"</span>)]
+<span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(<span class="no">tra</span>)</pre></body></html></div>
 <pre><code>##           Height  SLA N_mass
 ## Agro.rupe      6  8.1 218.70
 ## Alop.alpi      5 15.1 203.85
@@ -274,10 +281,10 @@
 ## Heli.sede      0 10.6 233.20
 ## Aven.vers     12 12.5 156.25
 ## Care.rosa     30  6.5 208.65</code></pre>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb12-1" data-line-number="1">dist_mat =<span class="st"> </span><span class="kw"><a href="../reference/compute_dist_matrix.html">compute_dist_matrix</a></span>(tra)</a></code></pre></div>
+<div class="sourceCode" id="cb12"><html><body><pre class="r"><span class="no">dist_mat</span> <span class="kw">=</span> <span class="fu"><a href="../reference/compute_dist_matrix.html">compute_dist_matrix</a></span>(<span class="no">tra</span>)</pre></body></html></div>
 <pre><code>## Warning in compute_dist_matrix(tra): Only numeric traits provided, consider
 ## using euclidean distance.</code></pre>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb14-1" data-line-number="1">dist_mat[<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">5</span>]</a></code></pre></div>
+<div class="sourceCode" id="cb14"><html><body><pre class="r"><span class="no">dist_mat</span>[<span class="fl">1</span>:<span class="fl">5</span>, <span class="fl">1</span>:<span class="fl">5</span>]</pre></body></html></div>
 <pre><code>##           Agro.rupe Alop.alpi Anth.nipp Heli.sede Aven.vers
 ## Agro.rupe 0.0000000 0.1004668 0.2083010 0.1068477 0.1705883
 ## Alop.alpi 0.1004668 0.0000000 0.1567591 0.1308034 0.1488041
@@ -310,12 +317,12 @@ D_i = \frac{\sum_{\substack{j = 1, \\
 <h4 class="hasAnchor">
 <a href="#computation-with-site-species-matrix" class="anchor"></a>Computation with site-species matrix</h4>
 <p>Using <code>funrar</code> functional distinctiveness can be computed using function <code><a href="../reference/distinctiveness.html">distinctiveness()</a></code>:</p>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb16-1" data-line-number="1"><span class="co"># Compute distinctiveness for each species on each site</span></a>
-<a class="sourceLine" id="cb16-2" data-line-number="2">di =<span class="st"> </span><span class="kw"><a href="../reference/distinctiveness.html">distinctiveness</a></span>(<span class="dt">pres_matrix =</span> mat,  <span class="co"># The site x species matrix</span></a>
-<a class="sourceLine" id="cb16-3" data-line-number="3">                     <span class="dt">dist_matrix =</span> dist_mat)  <span class="co"># Functional Distance matrix</span></a></code></pre></div>
+<div class="sourceCode" id="cb16"><html><body><pre class="r"><span class="co"># Compute distinctiveness for each species on each site</span>
+<span class="no">di</span> <span class="kw">=</span> <span class="fu"><a href="../reference/distinctiveness.html">distinctiveness</a></span>(<span class="kw">pres_matrix</span> <span class="kw">=</span> <span class="no">mat</span>,  <span class="co"># The site x species matrix</span>
+                     <span class="kw">dist_matrix</span> <span class="kw">=</span> <span class="no">dist_mat</span>)  <span class="co"># Functional Distance matrix</span></pre></body></html></div>
 <pre><code>## Warning in distinctiveness(pres_matrix = mat, dist_matrix = dist_mat): Provided object may not contain relative abundances nor presence-absence
 ## Have a look at the make_relative() function if it is the case</code></pre>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb18-1" data-line-number="1">di[<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">5</span>]</a></code></pre></div>
+<div class="sourceCode" id="cb18"><html><body><pre class="r"><span class="no">di</span>[<span class="fl">1</span>:<span class="fl">5</span>, <span class="fl">1</span>:<span class="fl">5</span>]</pre></body></html></div>
 <pre><code>##      Agro.rupe Alop.alpi Anth.nipp Heli.sede Aven.vers
 ## AR07        NA        NA        NA        NA        NA
 ## AR71        NA        NA        NA        NA        NA
@@ -328,17 +335,17 @@ D_i = \frac{\sum_{\substack{j = 1, \\
 <h4 class="hasAnchor">
 <a href="#computation-with-stacked-data-frame" class="anchor"></a>Computation with stacked data.frame</h4>
 <p>Using <code>funrar</code> distinctiveness values can be computed using function <code><a href="../reference/distinctiveness_stack.html">distinctiveness_stack()</a></code>:</p>
-<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb20-1" data-line-number="1"><span class="co"># Species should be character</span></a>
-<a class="sourceLine" id="cb20-2" data-line-number="2">dat<span class="op">$</span>species =<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/character.html">as.character</a></span>(dat<span class="op">$</span>species)</a>
-<a class="sourceLine" id="cb20-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb20-4" data-line-number="4"><span class="co"># Compute distinctiveness for each species on each site</span></a>
-<a class="sourceLine" id="cb20-5" data-line-number="5">di_df =<span class="st"> </span><span class="kw"><a href="../reference/distinctiveness_stack.html">distinctiveness_stack</a></span>(<span class="dt">com_df =</span> dat,  <span class="co"># The site x species table</span></a>
-<a class="sourceLine" id="cb20-6" data-line-number="6">                              <span class="dt">sp_col =</span> <span class="st">"species"</span>,  <span class="co"># Name of the species column</span></a>
-<a class="sourceLine" id="cb20-7" data-line-number="7">                              <span class="dt">com =</span> <span class="st">"site"</span>,  <span class="co"># Name of the community column</span></a>
-<a class="sourceLine" id="cb20-8" data-line-number="8">                              <span class="dt">abund =</span> <span class="ot">NULL</span>,  <span class="co"># Relative abundances column (facultative)</span></a>
-<a class="sourceLine" id="cb20-9" data-line-number="9">                              <span class="dt">dist_matrix =</span> dist_mat)  <span class="co"># Functional Distance matrix</span></a></code></pre></div>
+<div class="sourceCode" id="cb20"><html><body><pre class="r"><span class="co"># Species should be character</span>
+<span class="no">dat</span>$<span class="no">species</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html">as.character</a></span>(<span class="no">dat</span>$<span class="no">species</span>)
+
+<span class="co"># Compute distinctiveness for each species on each site</span>
+<span class="no">di_df</span> <span class="kw">=</span> <span class="fu"><a href="../reference/distinctiveness_stack.html">distinctiveness_stack</a></span>(<span class="kw">com_df</span> <span class="kw">=</span> <span class="no">dat</span>,  <span class="co"># The site x species table</span>
+                              <span class="kw">sp_col</span> <span class="kw">=</span> <span class="st">"species"</span>,  <span class="co"># Name of the species column</span>
+                              <span class="kw">com</span> <span class="kw">=</span> <span class="st">"site"</span>,  <span class="co"># Name of the community column</span>
+                              <span class="kw">abund</span> <span class="kw">=</span> <span class="kw">NULL</span>,  <span class="co"># Relative abundances column (facultative)</span>
+                              <span class="kw">dist_matrix</span> <span class="kw">=</span> <span class="no">dist_mat</span>)  <span class="co"># Functional Distance matrix</span></pre></body></html></div>
 <pre><code>## No relative abundance provided, computing Di without it</code></pre>
-<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb22-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(di_df)</a></code></pre></div>
+<div class="sourceCode" id="cb22"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(<span class="no">di_df</span>)</pre></body></html></div>
 <pre><code>##     species site value        Di
 ## 1 Agro.rupe AR01     1 0.1661127
 ## 2 Heli.sede AR01     2 0.1828906
@@ -348,10 +355,10 @@ D_i = \frac{\sum_{\substack{j = 1, \\
 ## 6 Fest.viol AR01     1 0.1907347</code></pre>
 <p>The syntax for <code><a href="../reference/distinctiveness_stack.html">distinctiveness_stack()</a></code> is first the table, then the name of the species column, then the name of the community column, then the name of the relative abundance column and finally the distance matrix. The function add a <code>Di</code> column giving the species distinctiveness in each species per site combination.</p>
 <p>For abundance weighted distinctiveness you need to have a column containing relative abundances in your data frame as such:</p>
-<div class="sourceCode" id="cb24"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb24-1" data-line-number="1">di_df =<span class="st"> </span><span class="kw"><a href="../reference/distinctiveness_stack.html">distinctiveness_stack</a></span>(dat, <span class="st">"species"</span>, <span class="st">"site"</span>, <span class="st">"value"</span>, dist_mat)</a></code></pre></div>
+<div class="sourceCode" id="cb24"><html><body><pre class="r"><span class="no">di_df</span> <span class="kw">=</span> <span class="fu"><a href="../reference/distinctiveness_stack.html">distinctiveness_stack</a></span>(<span class="no">dat</span>, <span class="st">"species"</span>, <span class="st">"site"</span>, <span class="st">"value"</span>, <span class="no">dist_mat</span>)</pre></body></html></div>
 <pre><code>## Warning in distinctiveness_stack(dat, "species", "site", "value", dist_mat): Provided object may not contain relative abundances nor presence-absence
 ## Have a look at the make_relative() function if it is the case</code></pre>
-<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb26-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(di_df)</a></code></pre></div>
+<div class="sourceCode" id="cb26"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(<span class="no">di_df</span>)</pre></body></html></div>
 <pre><code>##     species site value        Di
 ## 1 Agro.rupe AR01     1 0.1569403
 ## 2 Heli.sede AR01     2 0.1924531
@@ -377,19 +384,19 @@ S_i = \exp(-NA_i\log2),
 <h4 class="hasAnchor">
 <a href="#computation" class="anchor"></a>Computation</h4>
 <p>With <code>funrar</code> it can be computed with <code><a href="../reference/scarcity.html">scarcity()</a></code> function with a syntax analog to <code><a href="../reference/distinctiveness.html">distinctiveness()</a></code></p>
-<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb28-1" data-line-number="1">si =<span class="st"> </span><span class="kw"><a href="../reference/scarcity.html">scarcity</a></span>(<span class="dt">pres_matrix =</span> mat)</a></code></pre></div>
+<div class="sourceCode" id="cb28"><html><body><pre class="r"><span class="no">si</span> <span class="kw">=</span> <span class="fu"><a href="../reference/scarcity.html">scarcity</a></span>(<span class="kw">pres_matrix</span> <span class="kw">=</span> <span class="no">mat</span>)</pre></body></html></div>
 <pre><code>## Warning in scarcity(pres_matrix = mat): Provided object may not contain relative abundances nor presence-absence
 ## Have a look at the make_relative() function if it is the case</code></pre>
-<div class="sourceCode" id="cb30"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb30-1" data-line-number="1">si[<span class="dv">1</span><span class="op">:</span><span class="dv">5</span>, <span class="dv">1</span><span class="op">:</span><span class="dv">5</span>]</a></code></pre></div>
+<div class="sourceCode" id="cb30"><html><body><pre class="r"><span class="no">si</span>[<span class="fl">1</span>:<span class="fl">5</span>, <span class="fl">1</span>:<span class="fl">5</span>]</pre></body></html></div>
 <pre><code>##         Agro.rupe Alop.alpi    Anth.nipp    Heli.sede    Aven.vers
 ## AR07           NA        NA           NA           NA           NA
 ## AR71           NA        NA           NA           NA           NA
 ## AR26 3.308722e-24        NA 1.490116e-08           NA 1.490116e-08
 ## AR54           NA        NA           NA 1.455192e-11           NA
 ## AR60           NA        NA           NA           NA           NA</code></pre>
-<div class="sourceCode" id="cb32"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb32-1" data-line-number="1">si_df =<span class="st"> </span><span class="kw"><a href="../reference/scarcity_stack.html">scarcity_stack</a></span>(dat, <span class="st">"species"</span>, <span class="st">"site"</span>, <span class="st">"value"</span>)</a>
-<a class="sourceLine" id="cb32-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb32-3" data-line-number="3"><span class="kw"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(si_df)</a></code></pre></div>
+<div class="sourceCode" id="cb32"><html><body><pre class="r"><span class="no">si_df</span> <span class="kw">=</span> <span class="fu"><a href="../reference/scarcity_stack.html">scarcity_stack</a></span>(<span class="no">dat</span>, <span class="st">"species"</span>, <span class="st">"site"</span>, <span class="st">"value"</span>)
+
+<span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(<span class="no">si_df</span>)</pre></body></html></div>
 <pre><code>##     species site value           Si
 ## 1 Agro.rupe AR01     1 1.192093e-07
 ## 2 Heli.sede AR01     2 1.421085e-14
@@ -415,9 +422,9 @@ U_i = \text{min}(d_{ij}), \forall j \in [1, N_R], j \neq i,
 <h4 class="hasAnchor">
 <a href="#computation-1" class="anchor"></a>Computation</h4>
 <p><code><a href="../reference/uniqueness.html">uniqueness()</a></code> follows a similar syntax, but beware that given community table and distance matrix should represent the <strong>regional species pool</strong>. And the syntax is also similar:</p>
-<div class="sourceCode" id="cb34"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb34-1" data-line-number="1">ui =<span class="st"> </span><span class="kw"><a href="../reference/uniqueness.html">uniqueness</a></span>(mat, dist_mat)</a>
-<a class="sourceLine" id="cb34-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb34-3" data-line-number="3"><span class="kw"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(ui)</a></code></pre></div>
+<div class="sourceCode" id="cb34"><html><body><pre class="r"><span class="no">ui</span> <span class="kw">=</span> <span class="fu"><a href="../reference/uniqueness.html">uniqueness</a></span>(<span class="no">mat</span>, <span class="no">dist_mat</span>)
+
+<span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(<span class="no">ui</span>)</pre></body></html></div>
 <pre><code>##     species         Ui
 ## 1 Agro.rupe 0.03635369
 ## 2 Alop.alpi 0.03715692
@@ -425,9 +432,9 @@ U_i = \text{min}(d_{ij}), \forall j \in [1, N_R], j \neq i,
 ## 4 Heli.sede 0.02270997
 ## 5 Aven.vers 0.05675178
 ## 6 Care.rosa 0.15922932</code></pre>
-<div class="sourceCode" id="cb36"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb36-1" data-line-number="1">ui_df =<span class="st"> </span><span class="kw"><a href="../reference/uniqueness_stack.html">uniqueness_stack</a></span>(dat, <span class="st">"species"</span>, dist_mat)</a>
-<a class="sourceLine" id="cb36-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb36-3" data-line-number="3"><span class="kw"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(ui_df)</a></code></pre></div>
+<div class="sourceCode" id="cb36"><html><body><pre class="r"><span class="no">ui_df</span> <span class="kw">=</span> <span class="fu"><a href="../reference/uniqueness_stack.html">uniqueness_stack</a></span>(<span class="no">dat</span>, <span class="st">"species"</span>, <span class="no">dist_mat</span>)
+
+<span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(<span class="no">ui_df</span>)</pre></body></html></div>
 <pre><code>##     species         Ui
 ## 1 Agro.rupe 0.03635369
 ## 2 Alop.alpi 0.03715692
@@ -435,7 +442,7 @@ U_i = \text{min}(d_{ij}), \forall j \in [1, N_R], j \neq i,
 ## 4 Heli.sede 0.02270997
 ## 5 Aven.vers 0.05675178
 ## 6 Care.rosa 0.15922932</code></pre>
-<div class="sourceCode" id="cb38"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb38-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/dim.html">dim</a></span>(ui_df[<span class="op">!</span><span class="kw"><a href="https://rdrr.io/r/base/duplicated.html">duplicated</a></span>(ui_df<span class="op">$</span>species), ])</a></code></pre></div>
+<div class="sourceCode" id="cb38"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/dim.html">dim</a></span>(<span class="no">ui_df</span>[!<span class="fu"><a href="https://rdrr.io/r/base/duplicated.html">duplicated</a></span>(<span class="no">ui_df</span>$<span class="no">species</span>), ])</pre></body></html></div>
 <pre><code>## [1] 82  2</code></pre>
 </div>
 </div>
@@ -454,9 +461,9 @@ R_i = 1 - N_i/N_tot
 <div id="computation-2" class="section level4">
 <h4 class="hasAnchor">
 <a href="#computation-2" class="anchor"></a>Computation</h4>
-<div class="sourceCode" id="cb40"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb40-1" data-line-number="1">ri =<span class="st"> </span><span class="kw"><a href="../reference/restrictedness.html">restrictedness</a></span>(mat)</a>
-<a class="sourceLine" id="cb40-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb40-3" data-line-number="3"><span class="kw"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(ri)</a></code></pre></div>
+<div class="sourceCode" id="cb40"><html><body><pre class="r"><span class="no">ri</span> <span class="kw">=</span> <span class="fu"><a href="../reference/restrictedness.html">restrictedness</a></span>(<span class="no">mat</span>)
+
+<span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(<span class="no">ri</span>)</pre></body></html></div>
 <pre><code>##     species        Ri
 ## 1 Agro.rupe 0.6133333
 ## 2 Alop.alpi 0.5066667
@@ -464,12 +471,12 @@ R_i = 1 - N_i/N_tot
 ## 4 Heli.sede 0.9466667
 ## 5 Aven.vers 0.8000000
 ## 6 Care.rosa 0.6266667</code></pre>
-<div class="sourceCode" id="cb42"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb42-1" data-line-number="1"><span class="co"># Species should be character</span></a>
-<a class="sourceLine" id="cb42-2" data-line-number="2">dat<span class="op">$</span>site =<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/character.html">as.character</a></span>(dat<span class="op">$</span>site)</a>
-<a class="sourceLine" id="cb42-3" data-line-number="3"></a>
-<a class="sourceLine" id="cb42-4" data-line-number="4">ri_df =<span class="st"> </span><span class="kw"><a href="../reference/restrictedness_stack.html">restrictedness_stack</a></span>(dat, <span class="st">"species"</span>, <span class="st">"site"</span>)</a>
-<a class="sourceLine" id="cb42-5" data-line-number="5"></a>
-<a class="sourceLine" id="cb42-6" data-line-number="6"><span class="kw"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(ri_df)</a></code></pre></div>
+<div class="sourceCode" id="cb42"><html><body><pre class="r"><span class="co"># Species should be character</span>
+<span class="no">dat</span>$<span class="no">site</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html">as.character</a></span>(<span class="no">dat</span>$<span class="no">site</span>)
+
+<span class="no">ri_df</span> <span class="kw">=</span> <span class="fu"><a href="../reference/restrictedness_stack.html">restrictedness_stack</a></span>(<span class="no">dat</span>, <span class="st">"species"</span>, <span class="st">"site"</span>)
+
+<span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(<span class="no">ri_df</span>)</pre></body></html></div>
 <pre><code>##     species        Ri
 ## 1 Agro.rupe 0.6133333
 ## 2 Alch.glau 0.8133333
@@ -483,12 +490,12 @@ R_i = 1 - N_i/N_tot
 <h3 class="hasAnchor">
 <a href="#funrar" class="anchor"></a>funrar</h3>
 <p>This function computes all of the four metrics introduced above.</p>
-<div class="sourceCode" id="cb44"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb44-1" data-line-number="1">all_ind =<span class="st"> </span><span class="kw"><a href="../reference/funrar.html">funrar</a></span>(mat, dist_mat, <span class="dt">rel_abund =</span> <span class="ot">TRUE</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb44"><html><body><pre class="r"><span class="no">all_ind</span> <span class="kw">=</span> <span class="fu"><a href="../reference/funrar.html">funrar</a></span>(<span class="no">mat</span>, <span class="no">dist_mat</span>, <span class="kw">rel_abund</span> <span class="kw">=</span> <span class="fl">TRUE</span>)</pre></body></html></div>
 <pre><code>## Warning in distinctiveness(pres_matrix, dist_matrix): Provided object may not contain relative abundances nor presence-absence
 ## Have a look at the make_relative() function if it is the case</code></pre>
 <pre><code>## Warning in scarcity(pres_matrix): Provided object may not contain relative abundances nor presence-absence
 ## Have a look at the make_relative() function if it is the case</code></pre>
-<div class="sourceCode" id="cb47"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb47-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/utils/str.html">str</a></span>(all_ind)</a></code></pre></div>
+<div class="sourceCode" id="cb47"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span>(<span class="no">all_ind</span>)</pre></body></html></div>
 <pre><code>## List of 4
 ##  $ Ui:'data.frame':  82 obs. of  2 variables:
 ##   ..$ species: Factor w/ 82 levels "Agro.rupe","Alch.glau",..: 1 5 11 36 14 20 18 19 21 22 ...
@@ -504,13 +511,13 @@ R_i = 1 - N_i/N_tot
 ##   ..- attr(*, "dimnames")=List of 2
 ##   .. ..$ : chr [1:75] "AR07" "AR71" "AR26" "AR54" ...
 ##   .. ..$ : chr [1:82] "Agro.rupe" "Alop.alpi" "Anth.nipp" "Heli.sede" ...</code></pre>
-<div class="sourceCode" id="cb49"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb49-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/identical.html">identical</a></span>(all_ind<span class="op">$</span>Ui, ui)</a></code></pre></div>
+<div class="sourceCode" id="cb49"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/identical.html">identical</a></span>(<span class="no">all_ind</span>$<span class="no">Ui</span>, <span class="no">ui</span>)</pre></body></html></div>
 <pre><code>## [1] TRUE</code></pre>
-<div class="sourceCode" id="cb51"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb51-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/identical.html">identical</a></span>(all_ind<span class="op">$</span>Di, di)</a></code></pre></div>
+<div class="sourceCode" id="cb51"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/identical.html">identical</a></span>(<span class="no">all_ind</span>$<span class="no">Di</span>, <span class="no">di</span>)</pre></body></html></div>
 <pre><code>## [1] TRUE</code></pre>
-<div class="sourceCode" id="cb53"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb53-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/identical.html">identical</a></span>(all_ind<span class="op">$</span>Ri, ri)</a></code></pre></div>
+<div class="sourceCode" id="cb53"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/identical.html">identical</a></span>(<span class="no">all_ind</span>$<span class="no">Ri</span>, <span class="no">ri</span>)</pre></body></html></div>
 <pre><code>## [1] TRUE</code></pre>
-<div class="sourceCode" id="cb55"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb55-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/identical.html">identical</a></span>(all_ind<span class="op">$</span>Si, si)</a></code></pre></div>
+<div class="sourceCode" id="cb55"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/identical.html">identical</a></span>(<span class="no">all_ind</span>$<span class="no">Si</span>, <span class="no">si</span>)</pre></body></html></div>
 <pre><code>## [1] TRUE</code></pre>
 </div>
 </div>
@@ -519,8 +526,8 @@ R_i = 1 - N_i/N_tot
 <h1 class="hasAnchor">
 <a href="#plots" class="anchor"></a>Plots</h1>
 <p>In this section, some ideas to plot your results are presented. For example the density of the various indices or a matrix visualization of the values of distinctiveness per species.</p>
-<div class="sourceCode" id="cb57"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb57-1" data-line-number="1"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(ggplot2)</a>
-<a class="sourceLine" id="cb57-2" data-line-number="2"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span>(dplyr)</a></code></pre></div>
+<div class="sourceCode" id="cb57"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">ggplot2</span>)
+<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">dplyr</span>)</pre></body></html></div>
 <pre><code>## 
 ## Attaching package: 'dplyr'</code></pre>
 <pre><code>## The following objects are masked from 'package:stats':
@@ -529,64 +536,64 @@ R_i = 1 - N_i/N_tot
 <pre><code>## The following objects are masked from 'package:base':
 ## 
 ##     intersect, setdiff, setequal, union</code></pre>
-<div class="sourceCode" id="cb61"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb61-1" data-line-number="1"><span class="co"># Heatmap with distinctiveness values</span></a>
-<a class="sourceLine" id="cb61-2" data-line-number="2"><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(di_df, <span class="kw"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(species, site)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb61-3" data-line-number="3"><span class="st">  </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/geom_tile.html">geom_tile</a></span>(<span class="kw"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="dt">fill =</span> Di), <span class="dt">colour =</span> <span class="st">"white"</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb61-4" data-line-number="4"><span class="st">  </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/scale_gradient.html">scale_fill_gradient</a></span>(<span class="dt">low =</span> <span class="st">"white"</span>, <span class="dt">high =</span> <span class="st">"steelblue"</span>)</a></code></pre></div>
+<div class="sourceCode" id="cb61"><html><body><pre class="r"><span class="co"># Heatmap with distinctiveness values</span>
+<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="no">di_df</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="no">species</span>, <span class="no">site</span>)) +
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_tile.html">geom_tile</a></span>(<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="kw">fill</span> <span class="kw">=</span> <span class="no">Di</span>), <span class="kw">colour</span> <span class="kw">=</span> <span class="st">"white"</span>) +
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_gradient.html">scale_fill_gradient</a></span>(<span class="kw">low</span> <span class="kw">=</span> <span class="st">"white"</span>, <span class="kw">high</span> <span class="kw">=</span> <span class="st">"steelblue"</span>)</pre></body></html></div>
 <p><img src="rarity_indices_files/figure-html/unnamed-chunk-8-1.png" width="700"></p>
-<div class="sourceCode" id="cb62"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb62-1" data-line-number="1"><span class="co"># Density of distinctiveness values</span></a>
-<a class="sourceLine" id="cb62-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb62-3" data-line-number="3">quant =<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/stats/quantile.html">quantile</a></span>(di_df<span class="op">$</span>Di, <span class="dt">probs =</span> <span class="kw"><a href="https://rdrr.io/r/base/seq.html">seq</a></span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="fl">0.10</span>))</a>
-<a class="sourceLine" id="cb62-4" data-line-number="4">labels_quant =<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/paste.html">paste</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/names.html">names</a></span>(quant)[<span class="op">-</span><span class="kw"><a href="https://rdrr.io/r/base/length.html">length</a></span>(quant)], <span class="kw"><a href="https://rdrr.io/r/base/names.html">names</a></span>(quant)[<span class="op">-</span><span class="dv">1</span>], <span class="dt">sep =</span> <span class="st">"-"</span>)</a>
-<a class="sourceLine" id="cb62-5" data-line-number="5"> </a>
-<a class="sourceLine" id="cb62-6" data-line-number="6">di_density =<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(<span class="kw"><a href="https://rdrr.io/r/stats/density.html">density</a></span>(di_df<span class="op">$</span>Di)[<span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"x"</span>, <span class="st">"y"</span>)])</a>
-<a class="sourceLine" id="cb62-7" data-line-number="7">di_density =<span class="st"> </span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span>(di_density, x <span class="op">&gt;=</span><span class="st"> </span>quant[[<span class="dv">1</span>]] <span class="op">&amp;</span><span class="st"> </span>x <span class="op">&lt;=</span><span class="st"> </span>quant[[<span class="kw"><a href="https://rdrr.io/r/base/length.html">length</a></span>(quant)]])</a>
-<a class="sourceLine" id="cb62-8" data-line-number="8">di_density<span class="op">$</span>quant =<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/cut.html">cut</a></span>(di_density<span class="op">$</span>x, <span class="dt">breaks =</span> quant)   </a>
-<a class="sourceLine" id="cb62-9" data-line-number="9">quant =<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/stats/quantile.html">quantile</a></span>(di_df<span class="op">$</span>Di, <span class="dt">probs =</span> <span class="kw"><a href="https://rdrr.io/r/base/seq.html">seq</a></span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="fl">0.10</span>))</a>
-<a class="sourceLine" id="cb62-10" data-line-number="10">labels_quant =<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/paste.html">paste</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/names.html">names</a></span>(quant)[<span class="op">-</span><span class="kw"><a href="https://rdrr.io/r/base/length.html">length</a></span>(quant)], <span class="kw"><a href="https://rdrr.io/r/base/names.html">names</a></span>(quant)[<span class="op">-</span><span class="dv">1</span>], <span class="dt">sep =</span> <span class="st">"-"</span>)</a>
-<a class="sourceLine" id="cb62-11" data-line-number="11"></a>
-<a class="sourceLine" id="cb62-12" data-line-number="12">di_dens =<span class="st"> </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="dt">data =</span> di_density, <span class="kw"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="dt">x =</span> x, <span class="dt">y =</span> y)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb62-13" data-line-number="13"><span class="st">  </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/geom_ribbon.html">geom_area</a></span>(<span class="kw"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="dt">fill =</span> quant)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb62-14" data-line-number="14"><span class="st">  </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/scale_brewer.html">scale_fill_brewer</a></span>(<span class="dt">palette =</span> <span class="st">"RdYlBu"</span>, <span class="dt">labels =</span> labels_quant,</a>
-<a class="sourceLine" id="cb62-15" data-line-number="15">                    <span class="dt">name =</span> <span class="st">"Quantile"</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb62-16" data-line-number="16"><span class="st">  </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span>(<span class="dt">size =</span> <span class="dv">1</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb62-17" data-line-number="17"><span class="st">  </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/labs.html">xlab</a></span>(<span class="st">"Distinctiveness values"</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb62-18" data-line-number="18"><span class="st">  </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ylab</a></span>(<span class="st">"Frequency"</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb62-19" data-line-number="19"><span class="st">  </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ggtitle</a></span>(<span class="st">"Density of distinctiveness values"</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb62-20" data-line-number="20"><span class="st">  </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_classic</a></span>()</a>
-<a class="sourceLine" id="cb62-21" data-line-number="21"></a>
-<a class="sourceLine" id="cb62-22" data-line-number="22">di_dens</a></code></pre></div>
+<div class="sourceCode" id="cb62"><html><body><pre class="r"><span class="co"># Density of distinctiveness values</span>
+
+<span class="no">quant</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html">quantile</a></span>(<span class="no">di_df</span>$<span class="no">Di</span>, <span class="kw">probs</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span>(<span class="fl">0</span>, <span class="fl">1</span>, <span class="fl">0.10</span>))
+<span class="no">labels_quant</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span>(<span class="no">quant</span>)[-<span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span>(<span class="no">quant</span>)], <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span>(<span class="no">quant</span>)[-<span class="fl">1</span>], <span class="kw">sep</span> <span class="kw">=</span> <span class="st">"-"</span>)
+
+<span class="no">di_density</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(<span class="fu"><a href="https://rdrr.io/r/stats/density.html">density</a></span>(<span class="no">di_df</span>$<span class="no">Di</span>)[<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"x"</span>, <span class="st">"y"</span>)])
+<span class="no">di_density</span> <span class="kw">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span>(<span class="no">di_density</span>, <span class="no">x</span> <span class="kw">&gt;=</span> <span class="no">quant</span><span class="kw">[[</span><span class="fl">1</span>]] <span class="kw">&amp;</span> <span class="no">x</span> <span class="kw">&lt;=</span> <span class="no">quant</span><span class="kw">[[</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span>(<span class="no">quant</span>)]])
+<span class="no">di_density</span>$<span class="no">quant</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/cut.html">cut</a></span>(<span class="no">di_density</span>$<span class="no">x</span>, <span class="kw">breaks</span> <span class="kw">=</span> <span class="no">quant</span>)
+<span class="no">quant</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html">quantile</a></span>(<span class="no">di_df</span>$<span class="no">Di</span>, <span class="kw">probs</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span>(<span class="fl">0</span>, <span class="fl">1</span>, <span class="fl">0.10</span>))
+<span class="no">labels_quant</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span>(<span class="no">quant</span>)[-<span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span>(<span class="no">quant</span>)], <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span>(<span class="no">quant</span>)[-<span class="fl">1</span>], <span class="kw">sep</span> <span class="kw">=</span> <span class="st">"-"</span>)
+
+<span class="no">di_dens</span> <span class="kw">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="kw">data</span> <span class="kw">=</span> <span class="no">di_density</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">x</span>, <span class="kw">y</span> <span class="kw">=</span> <span class="no">y</span>)) +
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_ribbon.html">geom_area</a></span>(<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="kw">fill</span> <span class="kw">=</span> <span class="no">quant</span>)) +
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_brewer.html">scale_fill_brewer</a></span>(<span class="kw">palette</span> <span class="kw">=</span> <span class="st">"RdYlBu"</span>, <span class="kw">labels</span> <span class="kw">=</span> <span class="no">labels_quant</span>,
+                    <span class="kw">name</span> <span class="kw">=</span> <span class="st">"Quantile"</span>) +
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span>(<span class="kw">size</span> <span class="kw">=</span> <span class="fl">1</span>) +
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">xlab</a></span>(<span class="st">"Distinctiveness values"</span>) +
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ylab</a></span>(<span class="st">"Frequency"</span>) +
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ggtitle</a></span>(<span class="st">"Density of distinctiveness values"</span>) +
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_classic</a></span>()
+
+<span class="no">di_dens</span></pre></body></html></div>
 <p><img src="rarity_indices_files/figure-html/unnamed-chunk-8-2.png" width="700"></p>
-<div class="sourceCode" id="cb63"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb63-1" data-line-number="1"><span class="co"># Density of scarcity values</span></a>
-<a class="sourceLine" id="cb63-2" data-line-number="2"></a>
-<a class="sourceLine" id="cb63-3" data-line-number="3">quant =<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/stats/quantile.html">quantile</a></span>(si_df<span class="op">$</span>Si, <span class="dt">probs =</span> <span class="kw"><a href="https://rdrr.io/r/base/seq.html">seq</a></span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="fl">0.10</span>))</a>
-<a class="sourceLine" id="cb63-4" data-line-number="4">labels_quant =<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/paste.html">paste</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/names.html">names</a></span>(quant)[<span class="op">-</span><span class="kw"><a href="https://rdrr.io/r/base/length.html">length</a></span>(quant)], <span class="kw"><a href="https://rdrr.io/r/base/names.html">names</a></span>(quant)[<span class="op">-</span><span class="dv">1</span>], <span class="dt">sep =</span> <span class="st">"-"</span>)</a>
-<a class="sourceLine" id="cb63-5" data-line-number="5"> </a>
-<a class="sourceLine" id="cb63-6" data-line-number="6">si_density =<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(<span class="kw"><a href="https://rdrr.io/r/stats/density.html">density</a></span>(si_df<span class="op">$</span>Si)[<span class="kw"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"x"</span>, <span class="st">"y"</span>)])</a>
-<a class="sourceLine" id="cb63-7" data-line-number="7">si_density =<span class="st"> </span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span>(si_density, x <span class="op">&gt;=</span><span class="st"> </span>quant[[<span class="dv">1</span>]] <span class="op">&amp;</span><span class="st"> </span>x <span class="op">&lt;=</span><span class="st"> </span>quant[[<span class="kw"><a href="https://rdrr.io/r/base/length.html">length</a></span>(quant)]])</a>
-<a class="sourceLine" id="cb63-8" data-line-number="8">si_density<span class="op">$</span>quant =<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/cut.html">cut</a></span>(si_density<span class="op">$</span>x, <span class="dt">breaks =</span> quant)   </a>
-<a class="sourceLine" id="cb63-9" data-line-number="9">quant =<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/stats/quantile.html">quantile</a></span>(si_df<span class="op">$</span>Si, <span class="dt">probs =</span> <span class="kw"><a href="https://rdrr.io/r/base/seq.html">seq</a></span>(<span class="dv">0</span>, <span class="dv">1</span>, <span class="fl">0.10</span>))</a>
-<a class="sourceLine" id="cb63-10" data-line-number="10">labels_quant =<span class="st"> </span><span class="kw"><a href="https://rdrr.io/r/base/paste.html">paste</a></span>(<span class="kw"><a href="https://rdrr.io/r/base/names.html">names</a></span>(quant)[<span class="op">-</span><span class="kw"><a href="https://rdrr.io/r/base/length.html">length</a></span>(quant)], <span class="kw"><a href="https://rdrr.io/r/base/names.html">names</a></span>(quant)[<span class="op">-</span><span class="dv">1</span>], <span class="dt">sep =</span> <span class="st">"-"</span>)</a>
-<a class="sourceLine" id="cb63-11" data-line-number="11"></a>
-<a class="sourceLine" id="cb63-12" data-line-number="12">si_dens =<span class="st"> </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="dt">data =</span> si_density, <span class="kw"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="dt">x =</span> x, <span class="dt">y =</span> y)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb63-13" data-line-number="13"><span class="st">  </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/geom_ribbon.html">geom_area</a></span>(<span class="kw"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="dt">fill =</span> quant)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb63-14" data-line-number="14"><span class="st">  </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/scale_brewer.html">scale_fill_brewer</a></span>(<span class="dt">palette =</span> <span class="st">"RdYlBu"</span>, <span class="dt">labels =</span> labels_quant,</a>
-<a class="sourceLine" id="cb63-15" data-line-number="15">                    <span class="dt">name =</span> <span class="st">"Quantile"</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb63-16" data-line-number="16"><span class="st">  </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span>(<span class="dt">size =</span> <span class="dv">1</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb63-17" data-line-number="17"><span class="st">  </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/labs.html">xlab</a></span>(<span class="st">"Scarcity values"</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb63-18" data-line-number="18"><span class="st">  </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ylab</a></span>(<span class="st">"Frequency"</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb63-19" data-line-number="19"><span class="st">  </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ggtitle</a></span>(<span class="st">"Density of scarcity values"</span>) <span class="op">+</span></a>
-<a class="sourceLine" id="cb63-20" data-line-number="20"><span class="st">  </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_classic</a></span>()</a>
-<a class="sourceLine" id="cb63-21" data-line-number="21"></a>
-<a class="sourceLine" id="cb63-22" data-line-number="22">si_dens</a></code></pre></div>
+<div class="sourceCode" id="cb63"><html><body><pre class="r"><span class="co"># Density of scarcity values</span>
+
+<span class="no">quant</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html">quantile</a></span>(<span class="no">si_df</span>$<span class="no">Si</span>, <span class="kw">probs</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span>(<span class="fl">0</span>, <span class="fl">1</span>, <span class="fl">0.10</span>))
+<span class="no">labels_quant</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span>(<span class="no">quant</span>)[-<span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span>(<span class="no">quant</span>)], <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span>(<span class="no">quant</span>)[-<span class="fl">1</span>], <span class="kw">sep</span> <span class="kw">=</span> <span class="st">"-"</span>)
+
+<span class="no">si_density</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(<span class="fu"><a href="https://rdrr.io/r/stats/density.html">density</a></span>(<span class="no">si_df</span>$<span class="no">Si</span>)[<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"x"</span>, <span class="st">"y"</span>)])
+<span class="no">si_density</span> <span class="kw">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span>(<span class="no">si_density</span>, <span class="no">x</span> <span class="kw">&gt;=</span> <span class="no">quant</span><span class="kw">[[</span><span class="fl">1</span>]] <span class="kw">&amp;</span> <span class="no">x</span> <span class="kw">&lt;=</span> <span class="no">quant</span><span class="kw">[[</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span>(<span class="no">quant</span>)]])
+<span class="no">si_density</span>$<span class="no">quant</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/cut.html">cut</a></span>(<span class="no">si_density</span>$<span class="no">x</span>, <span class="kw">breaks</span> <span class="kw">=</span> <span class="no">quant</span>)
+<span class="no">quant</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html">quantile</a></span>(<span class="no">si_df</span>$<span class="no">Si</span>, <span class="kw">probs</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span>(<span class="fl">0</span>, <span class="fl">1</span>, <span class="fl">0.10</span>))
+<span class="no">labels_quant</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span>(<span class="no">quant</span>)[-<span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span>(<span class="no">quant</span>)], <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span>(<span class="no">quant</span>)[-<span class="fl">1</span>], <span class="kw">sep</span> <span class="kw">=</span> <span class="st">"-"</span>)
+
+<span class="no">si_dens</span> <span class="kw">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="kw">data</span> <span class="kw">=</span> <span class="no">si_density</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">x</span>, <span class="kw">y</span> <span class="kw">=</span> <span class="no">y</span>)) +
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_ribbon.html">geom_area</a></span>(<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="kw">fill</span> <span class="kw">=</span> <span class="no">quant</span>)) +
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_brewer.html">scale_fill_brewer</a></span>(<span class="kw">palette</span> <span class="kw">=</span> <span class="st">"RdYlBu"</span>, <span class="kw">labels</span> <span class="kw">=</span> <span class="no">labels_quant</span>,
+                    <span class="kw">name</span> <span class="kw">=</span> <span class="st">"Quantile"</span>) +
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span>(<span class="kw">size</span> <span class="kw">=</span> <span class="fl">1</span>) +
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">xlab</a></span>(<span class="st">"Scarcity values"</span>) +
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ylab</a></span>(<span class="st">"Frequency"</span>) +
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ggtitle</a></span>(<span class="st">"Density of scarcity values"</span>) +
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_classic</a></span>()
+
+<span class="no">si_dens</span></pre></body></html></div>
 <p><img src="rarity_indices_files/figure-html/unnamed-chunk-8-3.png" width="700"></p>
-<div class="sourceCode" id="cb64"><pre class="sourceCode r"><code class="sourceCode r"><a class="sourceLine" id="cb64-1" data-line-number="1"><span class="co"># Regional rarity: restrictedness versus uniqueness</span></a>
-<a class="sourceLine" id="cb64-2" data-line-number="2"><span class="kw"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span>(ri_df)[<span class="kw"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span>(ri_df) <span class="op">==</span><span class="st"> "sp"</span>] =<span class="st"> "species"</span></a>
-<a class="sourceLine" id="cb64-3" data-line-number="3">ri_ui &lt;-<span class="st"> </span><span class="kw"><a href="https://dplyr.tidyverse.org/reference/join.html">inner_join</a></span>(ri_df, ui_df, <span class="dt">by =</span> <span class="st">"species"</span>)</a>
-<a class="sourceLine" id="cb64-4" data-line-number="4"></a>
-<a class="sourceLine" id="cb64-5" data-line-number="5"><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(ri_ui, <span class="kw"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(Ri, Ui)) <span class="op">+</span></a>
-<a class="sourceLine" id="cb64-6" data-line-number="6"><span class="st">  </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span>() <span class="op">+</span><span class="st"> </span></a>
-<a class="sourceLine" id="cb64-7" data-line-number="7"><span class="st">  </span><span class="kw"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_classic</a></span>() </a></code></pre></div>
+<div class="sourceCode" id="cb64"><html><body><pre class="r"><span class="co"># Regional rarity: restrictedness versus uniqueness</span>
+<span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span>(<span class="no">ri_df</span>)[<span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span>(<span class="no">ri_df</span>) <span class="kw">==</span> <span class="st">"sp"</span>] <span class="kw">=</span> <span class="st">"species"</span>
+<span class="no">ri_ui</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/join.html">inner_join</a></span>(<span class="no">ri_df</span>, <span class="no">ui_df</span>, <span class="kw">by</span> <span class="kw">=</span> <span class="st">"species"</span>)
+
+<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="no">ri_ui</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="no">Ri</span>, <span class="no">Ui</span>)) +
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span>() +
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_classic</a></span>()</pre></body></html></div>
 <p><img src="rarity_indices_files/figure-html/unnamed-chunk-8-4.png" width="700"></p>
 </div>
 <div id="references" class="section level1">
@@ -597,26 +604,11 @@ R_i = 1 - N_i/N_tot
 </div>
   </div>
 
-  <div class="col-md-3 hidden-xs hidden-sm" id="sidebar">
+  <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
 
-        <div id="tocnav">
-      <h2 class="hasAnchor">
-<a href="#tocnav" class="anchor"></a>Contents</h2>
-      <ul class="nav nav-pills nav-stacked">
-<li><a href="#introduction">Introduction</a></li>
-      <li><a href="#framework">Framework</a></li>
-      <li><a href="#dataset-example">Dataset example</a></li>
-      <li>
-<a href="#functional-rarity-indices">Functional rarity indices</a><ul class="nav nav-pills nav-stacked">
-<li><a href="#inputs-of-functions">Inputs of functions</a></li>
-      <li><a href="#indices">Indices</a></li>
-      </ul>
-</li>
-      <li><a href="#plots">Plots</a></li>
-      <li><a href="#references">References</a></li>
-      </ul>
+        <nav id="toc" data-toggle="toc"><h2 data-toc-skip>Contents</h2>
+    </nav>
 </div>
-      </div>
 
 </div>
 
@@ -627,7 +619,7 @@ R_i = 1 - N_i/N_tot
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.4.1.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
 </div>
 
       </footer>
