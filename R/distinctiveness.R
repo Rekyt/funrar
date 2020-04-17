@@ -174,7 +174,7 @@ distinctiveness_stack = function(com_df, sp_col, com, abund = NULL,
                       function(one_com)
                         distinctiveness_com(one_com, sp_col, abund, dist_matrix,
                                             relative = relative))
-  com_distinctiveness = dplyr::bind_rows(com_split)
+  com_distinctiveness = do.call(rbind.data.frame, c(com_split, make.row.names = FALSE, stringsAsFactors = FALSE))
 
   if(any(vapply(com_distinctiveness[["Di"]], function(x) is.nan(x),
                 logical(1)))) {
@@ -239,7 +239,7 @@ distinctiveness_tidy = distinctiveness_stack
 #'    **IMPORTANT NOTE**: in order to get functional rarity indices between 0
 #'    and 1, the distance metric has to be scaled between 0 and 1.
 #'
-#' @importFrom dplyr %>% bind_rows
+#' @importFrom dplyr %>%
 #' @importFrom methods is
 #'
 #' @examples

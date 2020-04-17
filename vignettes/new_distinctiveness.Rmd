@@ -1,6 +1,6 @@
 ---
 title: "Alternative Distinctiveness definition"
-author: "Rekyt"
+author: "Matthias Grenié"
 date: "`r Sys.Date()`"
 header-includes:
   - \usepackage{mathtools}
@@ -119,7 +119,7 @@ all_T = lapply(seq(0.5, 1.5, length.out = 50),
                                                           species_distance,
                                                           given_number))
 
-all_T = dplyr::bind_rows(all_T)
+all_T = do.call(rbind.data.frame, all_T)
 ```
 
 We can visualize those relationships:
@@ -162,7 +162,7 @@ all_ranges = lapply(seq(0, 1, length.out = 50), function(given_range) {
   alternative_distinctiveness(mat, as.dist(dist_mat), given_range)
 })
 
-all_ranges = dplyr::bind_rows(all_ranges)
+all_ranges = do.call(rbind.data.frame, all_ranges)
 ```
 
 Now we can visualize the influence of the trait range value
@@ -396,7 +396,7 @@ ab_di_all_ranges = lapply(seq(0, 1.5, length.out = 50),
                                                           as.matrix(species_distance),
                                                           given_number))
 
-ab_di_all_ranges = dplyr::bind_rows(ab_di_all_ranges)
+ab_di_all_ranges = do.call(rbind.data.frame, ab_di_all_ranges)
 
 ggplot(ab_di_all_ranges, aes(given_range, Di, color = species)) +
   geom_line(size = 1) +

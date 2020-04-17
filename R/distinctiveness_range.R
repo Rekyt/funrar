@@ -72,7 +72,7 @@
 #'    **IMPORTANT NOTE**: in order to get functional rarity indices between 0
 #'    and 1, the distance metric has to be scaled between 0 and 1.
 #'
-#' @importFrom dplyr %>% bind_rows
+#' @importFrom dplyr %>%
 #' @importFrom methods is
 #'
 #' @examples

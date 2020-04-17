@@ -96,7 +96,7 @@ scarcity_stack = function(com_df, sp_col, com, abund) {
                         scarcity_com(one_com, sp_col, abund)
   )
 
-  com_scarcity = dplyr::bind_rows(com_split)
+  com_scarcity = do.call(rbind, com_split)
 
   return(com_scarcity)
 }

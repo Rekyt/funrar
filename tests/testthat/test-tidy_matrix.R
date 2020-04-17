@@ -19,9 +19,10 @@ log_mat = (valid_mat == 1 & !is.na(valid_mat))
 suppressWarnings({
   com_df = lapply(colnames(log_mat), function(x) {
     species = rownames(valid_mat)[log_mat[, x]]
-    data.frame(site = rep(x, length(species)), species = species)
-  }) %>%
-    bind_rows()
+    data.frame(site = rep(x, length(species)), species = species,
+               stringsAsFactors = FALSE)
+  })
+  com_df = do.call(rbind.data.frame, com_df)
 })
 
 
@@ -41,10 +42,15 @@ suppressWarnings({
   abund_df = lapply(colnames(abund_mat), function(x) {
     values = abund_mat[abund_diff[, x], x]
     cbind(site = rep(x, length(values)), data.frame(species = names(values),
-                                                    val = values))
-  }) %>%
-    bind_rows()
+                                                    val = values,
+                                                    stringsAsFactors = FALSE),
+          stringsAsFactors = FALSE)
+  })
+
+  abund_df = do.call(rbind.data.frame, abund_df)
 })
+
+rownames(abund_df) = NULL
 
 # Object with an NA value
 na_df = abund_df

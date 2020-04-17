@@ -24,9 +24,10 @@ log_mat = (valid_mat == 1)
 suppressWarnings({
   com_df = lapply(rownames(log_mat), function(x) {
     species = colnames(valid_mat)[log_mat[x, ]]
-    data.frame(site = rep(x, length(species)), species = species)
-  }) %>%
-    bind_rows()
+    data.frame(site = rep(x, length(species)), species = species,
+               stringsAsFactors = FALSE)
+  })
+  com_df = do.call(rbind.data.frame, com_df)
 })
 
 
