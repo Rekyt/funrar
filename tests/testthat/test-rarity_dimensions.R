@@ -1,4 +1,3 @@
-library("dplyr")
 library("Matrix")
 context("Measuring Functional Rarity Dimensions")
 
@@ -44,26 +43,38 @@ test_that("'distinctiveness_dimensions()' outputs good objects", {
   })
 
   # Check that all elements have good dimension
-  expect_true(di_dim %>%
-                lapply(dim) %>%  # Get dimensions of each element
-                # Is it the same as input matrix?
-                lapply(function(x) all.equal(x, dim(pres_mat))) %>%
-                as.logical() %>%
-                all())  # Is it the case for all elements?
+  all_dim = lapply(di_dim, dim) # Get dimensions of each element
+  expect_true(# Is it the same as input matrix?
+                all(
+                  as.logical(
+                    lapply(all_dim, function(x) all.equal(x, dim(pres_mat))
+                           )
+                    )
+                  )
+              )  # Is it the case for all elements?
 
   ## Check that all elements are well named
   # Column Names
-  expect_true(di_dim %>%
-                lapply(colnames) %>%
-                lapply(function(x) all.equal(x, colnames(pres_mat))) %>%
-                as.logical() %>%
-                all())
+  all_colnames = lapply(di_dim, colnames) # Get dimensions of each element
+  expect_true(# Is it the same as input matrix?
+    all(
+      as.logical(
+        lapply(all_colnames, function(x) all.equal(x, colnames(pres_mat))
+        )
+      )
+    )
+  )
+
   # Row Names
-  expect_true(di_dim %>%
-                lapply(row.names) %>%
-                lapply(function(x) all.equal(x, row.names(pres_mat))) %>%
-                as.logical() %>%
-                all())
+  all_rownames = lapply(di_dim, rownames)
+  expect_true(# Is it the same as input matrix?
+    all(
+      as.logical(
+        lapply(all_rownames, function(x) all.equal(x, rownames(pres_mat))
+        )
+      )
+    )
+  )
 })
 
 test_that("'uniqueness_dimensions()' works with sparse matrices", {
@@ -93,24 +104,35 @@ test_that("'distinctiveness_dimensions()' works with sparse matrices", {
   expect_true(all(vapply(sparse_di_dim, class, "char") == "dgeMatrix"))
 
   # Check that all elements have good dimension
-  expect_true(sparse_di_dim %>%
-                lapply(dim) %>%  # Get dimensions of each element
-                # Is it the same as input matrix?
-                lapply(function(x) all.equal(x, dim(pres_mat))) %>%
-                as.logical() %>%
-                all())  # Is it the case for all elements?
+  sp_all_dim = lapply(sparse_di_dim, dim) # Get dimensions of each element
+  expect_true(# Is it the same as input matrix?
+    all(
+      as.logical(
+        lapply(sp_all_dim, function(x) all.equal(x, dim(pres_mat))
+        )
+      )
+    )
+  )
 
   # Check that all elements are well named
-  expect_true(sparse_di_dim %>%
-                lapply(colnames) %>%
-                lapply(function(x) all.equal(x, colnames(pres_mat))) %>%
-                as.logical() %>%
-                all())
-  expect_true(sparse_di_dim %>%
-                lapply(row.names) %>%
-                lapply(function(x) all.equal(x, row.names(pres_mat))) %>%
-                as.logical() %>%
-                all())
+  sp_all_colnames = lapply(sparse_di_dim, colnames) # Get dimensions of each element
+  expect_true(# Is it the same as input matrix?
+    all(
+      as.logical(
+        lapply(sp_all_colnames, function(x) all.equal(x, colnames(pres_mat))
+        )
+      )
+    )
+  )
+  sp_all_rownames = lapply(sparse_di_dim, row.names)
+  expect_true(# Is it the same as input matrix?
+    all(
+      as.logical(
+        lapply(sp_all_rownames, function(x) all.equal(x, row.names(pres_mat))
+        )
+      )
+    )
+  )
 })
 
 test_that("'*_dimensions()' functions outputs the right computations", {

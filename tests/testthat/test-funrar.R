@@ -1,4 +1,3 @@
-library(dplyr)
 context("Functional Rarity Indices")
 
 
@@ -91,30 +90,33 @@ suppressWarnings({
 
 
 # Scarcity data ----------------------------------------------------------------
-com_df_ex = bind_cols(com_df, data.frame(abund = c(0.3, 0.7, 0.2, 0.6,
-                                                         0.2, 0.5, 0.5, 0.2,
-                                                         0.8)))
+com_df_ex = cbind(com_df, data.frame(abund = c(0.3, 0.7, 0.2, 0.6,
+                                               0.2, 0.5, 0.5, 0.2,
+                                               0.8)))
 abund_mat = valid_mat
-abund_mat[abund_mat == 1] = com_df_ex %>%
-  arrange(species) %>%
-  .$abund
+abund_mat[abund_mat == 1] = com_df_ex[order(com_df_ex$species), "abund"]
 
 scarcity_mat = apply(abund_mat, 1, function(x) {
   ifelse(x != 0, exp(-sum(x != 0)*log(2)*x), NA)
-}) %>% t()
+})
 
-com_scarcity = com_df_ex %>%
-  group_by(site) %>%
-  summarise(N_sp = n()) %>%
-  right_join(com_df_ex, by = "site") %>%
-  mutate(Si = exp(-N_sp*log(2)*abund)) %>%
-  select(-N_sp)
+scarcity_mat = t(scarcity_mat)
 
-abund_com = abund_mat %>%
-  matrix_to_stack(value_col = "abund", row_to_col = "site",
-                  col_to_col = "species") %>%
-  filter(abund > 0, site == "s3")
+com_scarcity = aggregate(species ~ site, data = com_df_ex,
+                         function(x) sum(x != 0))
+
+colnames(com_scarcity)[2] = "N_sp"
+
+com_scarcity = merge(com_df_ex, com_scarcity, by = "site")
+com_scarcity$Si = exp(-com_scarcity$N_sp*log(2)*com_scarcity$abund)
+com_scarcity = com_scarcity[, c(1:3, 5)]
+rownames(com_scarcity) = NULL
+
+abund_com = matrix_to_stack(abund_mat, value_col = "abund", row_to_col = "site",
+                            col_to_col = "species")
+abund_com = subset(abund_com, abund > 0 & site == "s3")
 abund_com$Di = c(4/9, 4/9)
+
 
 # Tests for Combined function --------------------------------------------------
 

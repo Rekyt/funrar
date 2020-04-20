@@ -63,8 +63,8 @@ rownames(small_mat) = c("s1", "s2")
 small_df = matrix_to_tidy(small_mat)
 
 # Distinctiveness final data.frame
-undef_dist = tibble(site = c("s1", "s2"), species = c("a", "b"),
-                    Di = rep(NaN, 2))
+undef_dist = data.frame(site = c("s1", "s2"), species = c("a", "b"),
+                        Di = rep(NaN, 2), stringsAsFactors = FALSE)
 
 # Final distinctiveness matrix
 undef_dist_mat = table(undef_dist$site, undef_dist$species)
@@ -81,7 +81,7 @@ suppressWarnings({
 
 
 # Scarcity data ----------------------------------------------------------------
-com_df_ex = bind_cols(com_df, data.frame(abund = c(0.3, 0.7, 0.2, 0.6,
+com_df_ex = cbind(com_df, data.frame(abund = c(0.3, 0.7, 0.2, 0.6,
                                                    0.2, 0.5, 0.5, 0.2,
                                                    0.8)))
 abund_mat = valid_mat

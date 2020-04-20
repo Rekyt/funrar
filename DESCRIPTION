@@ -24,7 +24,6 @@ License: GPL (>= 2)
 LazyData: true
 Imports:
     cluster,
-    dplyr (>= 0.4.3),
     methods,
     stats
 URL: https://rekyt.github.io/funrar/

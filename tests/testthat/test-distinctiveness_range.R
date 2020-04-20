@@ -78,7 +78,7 @@ good_di_relative_max = matrix(c(1,    1, NA,   NA,
 
 ## Abundances ------------------------------------------------------------------
 # Define Abundance Matrix
-com_df_ex = bind_cols(com_df, data.frame(abund = c(0.3, 0.7, 0.2, 0.6,
+com_df_ex = cbind(com_df, data.frame(abund = c(0.3, 0.7, 0.2, 0.6,
                                                    0.2, 0.5, 0.5, 0.2,
                                                    0.8)))
 
