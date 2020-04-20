@@ -1,3 +1,10 @@
+# funrar 1.4.1
+
+## BUG FIX
+
+* fix use of `tidytext` for upcoming version (#42, thanks @juliasilge !)
+* remove dependency on dplyr to avoid breaking due to next dplyr release
+
 # funrar 1.4.0
 
 ## NEW FEATURES
