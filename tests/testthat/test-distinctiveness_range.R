@@ -1,5 +1,4 @@
 context("Test Range-based Distinctiveness")
-library("dplyr")
 
 # Initial data -----------------------------------------------------------------
 # Empty Matrix

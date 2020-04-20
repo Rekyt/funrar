@@ -1,5 +1,4 @@
 context("Test Range-based Alternative Distinctiveness")
-library("dplyr")
 
 # Initial data -----------------------------------------------------------------
 # Presence-Absence Matrix

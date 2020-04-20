@@ -46,7 +46,7 @@ uniqueness_dimensions = function(pres_matrix, traits_table, ...) {
     })
 
   # Join all data.frames for Uniqueness
-  Ui = Reduce(function(x, y) dplyr::inner_join(x, y, by = "species"),
+  Ui = Reduce(function(x, y) merge(x, y, by = "species"),
               functional_uniqueness)
 
   return(Ui)
