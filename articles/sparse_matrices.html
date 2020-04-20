@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">funrar</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.4.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.4.1</span>
       </span>
     </div>
 
@@ -92,7 +92,7 @@
 </h1>
                         <h4 class="author">Matthias Grenié</h4>
             
-            <h4 class="date">2020-04-17</h4>
+            <h4 class="date">2020-04-20</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/Rekyt/funrar/blob/master/vignettes/sparse_matrices.Rmd"><code>vignettes/sparse_matrices.Rmd</code></a></small>
       <div class="hidden name"><code>sparse_matrices.Rmd</code></div>
@@ -117,16 +117,16 @@
 
 <span class="no">my_mat</span>[<span class="fl">1</span>:<span class="fl">5</span>, <span class="fl">1</span>:<span class="fl">5</span>]</pre></body></html></div>
 <pre><code>##       sp1 sp2 sp3 sp4 sp5
-## site1   0   0   0   0   1
-## site2   0   0   0   0   0
-## site3   0   0   0   0   0
-## site4   1   0   0   0   0
-## site5   0   0   0   1   0</code></pre>
+## site1   0   1   0   0   1
+## site2   0   1   0   0   0
+## site3   0   0   0   0   1
+## site4   0   0   0   1   0
+## site5   0   0   1   0   0</code></pre>
 <p><code>funrar</code> lets you use sparse matrices directly using a function implemented in the <code>Matrix</code> package. When your matrix is filled with 0s it can be quicker to use sparse matrices. To know if you should use sparse matrices you can compute the filling of your matrix, i.e. the percentage of non-zero cells in your matrix:</p>
 <div class="sourceCode" id="cb3"><html><body><pre class="r"><span class="no">filling</span> <span class="kw">=</span> <span class="fl">1</span> - <span class="fu"><a href="https://rdrr.io/r/base/sum.html">sum</a></span>(<span class="no">my_mat</span> <span class="kw">==</span> <span class="fl">0</span>)/(<span class="fu"><a href="https://rdrr.io/r/base/nrow.html">ncol</a></span>(<span class="no">my_mat</span>)*<span class="fu"><a href="https://rdrr.io/r/base/nrow.html">nrow</a></span>(<span class="no">my_mat</span>))
 
 <span class="no">filling</span></pre></body></html></div>
-<pre><code>## [1] 0.14293</code></pre>
+<pre><code>## [1] 0.142925</code></pre>
 <p>To convert from a normal matrix to a sparse matrix you can use <code>as(my_mat, "sparseMatrix")</code>:</p>
 <div class="sourceCode" id="cb5"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">Matrix</span>)
 
@@ -139,7 +139,7 @@
 <p>it completely changes the structure as well as the memory it takes in the RAM:</p>
 <div class="sourceCode" id="cb9"><html><body><pre class="r"><span class="co"># Regular Matrix</span>
 <span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span>(<span class="no">my_mat</span>)</pre></body></html></div>
-<pre><code>##  num [1:200, 1:1000] 0 0 0 1 0 0 0 0 0 0 ...
+<pre><code>##  num [1:200, 1:1000] 0 0 0 0 0 1 0 0 0 0 ...
 ##  - attr(*, "dimnames")=List of 2
 ##   ..$ : chr [1:200] "site1" "site2" "site3" "site4" ...
 ##   ..$ : chr [1:1000] "sp1" "sp2" "sp3" "sp4" ...</code></pre>
@@ -148,13 +148,13 @@
 <div class="sourceCode" id="cb13"><html><body><pre class="r"><span class="co"># Sparse Matrix from 'Matrix' package</span>
 <span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span>(<span class="no">sparse_mat</span>)</pre></body></html></div>
 <pre><code>## Formal class 'dgCMatrix' [package "Matrix"] with 6 slots
-##   ..@ i       : int [1:28586] 3 17 42 46 51 68 80 83 87 93 ...
-##   ..@ p       : int [1:1001] 0 28 54 79 104 128 161 189 215 246 ...
+##   ..@ i       : int [1:28585] 5 13 16 21 26 27 32 35 37 40 ...
+##   ..@ p       : int [1:1001] 0 35 74 108 140 167 201 236 267 295 ...
 ##   ..@ Dim     : int [1:2] 200 1000
 ##   ..@ Dimnames:List of 2
 ##   .. ..$ : chr [1:200] "site1" "site2" "site3" "site4" ...
 ##   .. ..$ : chr [1:1000] "sp1" "sp2" "sp3" "sp4" ...
-##   ..@ x       : num [1:28586] 1 1 1 1 1 1 1 1 1 1 ...
+##   ..@ x       : num [1:28585] 1 1 1 1 1 1 1 1 1 1 ...
 ##   ..@ factors : list()</code></pre>
 <div class="sourceCode" id="cb15"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/print.html">print</a></span>(<span class="fu"><a href="https://rdrr.io/r/utils/object.size.html">object.size</a></span>(<span class="no">sparse_mat</span>), <span class="kw">units</span> <span class="kw">=</span> <span class="st">"Kb"</span>)</pre></body></html></div>
 <pre><code>## 415.5 Kb</code></pre>
@@ -208,7 +208,7 @@
 <span class="fu">mat_filling</span>(<span class="no">all_mats</span>$<span class="no">`0`</span>$<span class="no">mat</span>)</pre></body></html></div>
 <pre><code>## [1] 1</code></pre>
 <div class="sourceCode" id="cb20"><html><body><pre class="r"><span class="fu">mat_filling</span>(<span class="no">all_mats</span>$<span class="no">`99`</span>$<span class="no">mat</span>)</pre></body></html></div>
-<pre><code>## [1] 0.00995</code></pre>
+<pre><code>## [1] 0.009855</code></pre>
 <p>Now we can compare the speed of the algorithms:</p>
 <div class="sourceCode" id="cb22"><html><body><pre class="r"><span class="kw">if</span> (<span class="fu"><a href="https://rdrr.io/r/base/ns-load.html">requireNamespace</a></span>(<span class="st">"microbenchmark"</span>, <span class="kw">quietly</span> <span class="kw">=</span> <span class="fl">TRUE</span>)) {
   <span class="no">mat_bench</span> <span class="kw">=</span> <span class="kw pkg">microbenchmark</span><span class="kw ns">::</span><span class="fu">microbenchmark</span>(

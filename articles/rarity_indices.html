@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">funrar</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.4.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.4.1</span>
       </span>
     </div>
 
@@ -91,7 +91,7 @@
       <h1 data-toc-skip>How to use <code>funrar</code>, an example with plant communities dataset.</h1>
                         <h4 class="author">Denelle Pierre &amp; Grenié Matthias</h4>
             
-            <h4 class="date">2020-04-17</h4>
+            <h4 class="date">2020-04-20</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/Rekyt/funrar/blob/master/vignettes/rarity_indices.Rmd"><code>vignettes/rarity_indices.Rmd</code></a></small>
       <div class="hidden name"><code>rarity_indices.Rmd</code></div>
@@ -527,27 +527,19 @@ R_i = 1 - N_i/N_tot
 <a href="#plots" class="anchor"></a>Plots</h1>
 <p>In this section, some ideas to plot your results are presented. For example the density of the various indices or a matrix visualization of the values of distinctiveness per species.</p>
 <div class="sourceCode" id="cb57"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">ggplot2</span>)
-<span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">dplyr</span>)</pre></body></html></div>
-<pre><code>## 
-## Attaching package: 'dplyr'</code></pre>
-<pre><code>## The following objects are masked from 'package:stats':
-## 
-##     filter, lag</code></pre>
-<pre><code>## The following objects are masked from 'package:base':
-## 
-##     intersect, setdiff, setequal, union</code></pre>
-<div class="sourceCode" id="cb61"><html><body><pre class="r"><span class="co"># Heatmap with distinctiveness values</span>
+
+<span class="co"># Heatmap with distinctiveness values</span>
 <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="no">di_df</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="no">species</span>, <span class="no">site</span>)) +
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_tile.html">geom_tile</a></span>(<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="kw">fill</span> <span class="kw">=</span> <span class="no">Di</span>), <span class="kw">colour</span> <span class="kw">=</span> <span class="st">"white"</span>) +
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_gradient.html">scale_fill_gradient</a></span>(<span class="kw">low</span> <span class="kw">=</span> <span class="st">"white"</span>, <span class="kw">high</span> <span class="kw">=</span> <span class="st">"steelblue"</span>)</pre></body></html></div>
 <p><img src="rarity_indices_files/figure-html/unnamed-chunk-8-1.png" width="700"></p>
-<div class="sourceCode" id="cb62"><html><body><pre class="r"><span class="co"># Density of distinctiveness values</span>
+<div class="sourceCode" id="cb58"><html><body><pre class="r"><span class="co"># Density of distinctiveness values</span>
 
 <span class="no">quant</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html">quantile</a></span>(<span class="no">di_df</span>$<span class="no">Di</span>, <span class="kw">probs</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span>(<span class="fl">0</span>, <span class="fl">1</span>, <span class="fl">0.10</span>))
 <span class="no">labels_quant</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span>(<span class="no">quant</span>)[-<span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span>(<span class="no">quant</span>)], <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span>(<span class="no">quant</span>)[-<span class="fl">1</span>], <span class="kw">sep</span> <span class="kw">=</span> <span class="st">"-"</span>)
 
 <span class="no">di_density</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(<span class="fu"><a href="https://rdrr.io/r/stats/density.html">density</a></span>(<span class="no">di_df</span>$<span class="no">Di</span>)[<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"x"</span>, <span class="st">"y"</span>)])
-<span class="no">di_density</span> <span class="kw">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span>(<span class="no">di_density</span>, <span class="no">x</span> <span class="kw">&gt;=</span> <span class="no">quant</span><span class="kw">[[</span><span class="fl">1</span>]] <span class="kw">&amp;</span> <span class="no">x</span> <span class="kw">&lt;=</span> <span class="no">quant</span><span class="kw">[[</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span>(<span class="no">quant</span>)]])
+<span class="no">di_density</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/subset.html">subset</a></span>(<span class="no">di_density</span>, <span class="no">x</span> <span class="kw">&gt;=</span> <span class="no">quant</span><span class="kw">[[</span><span class="fl">1</span>]] <span class="kw">&amp;</span> <span class="no">x</span> <span class="kw">&lt;=</span> <span class="no">quant</span><span class="kw">[[</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span>(<span class="no">quant</span>)]])
 <span class="no">di_density</span>$<span class="no">quant</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/cut.html">cut</a></span>(<span class="no">di_density</span>$<span class="no">x</span>, <span class="kw">breaks</span> <span class="kw">=</span> <span class="no">quant</span>)
 <span class="no">quant</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html">quantile</a></span>(<span class="no">di_df</span>$<span class="no">Di</span>, <span class="kw">probs</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span>(<span class="fl">0</span>, <span class="fl">1</span>, <span class="fl">0.10</span>))
 <span class="no">labels_quant</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span>(<span class="no">quant</span>)[-<span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span>(<span class="no">quant</span>)], <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span>(<span class="no">quant</span>)[-<span class="fl">1</span>], <span class="kw">sep</span> <span class="kw">=</span> <span class="st">"-"</span>)
@@ -564,13 +556,13 @@ R_i = 1 - N_i/N_tot
 
 <span class="no">di_dens</span></pre></body></html></div>
 <p><img src="rarity_indices_files/figure-html/unnamed-chunk-8-2.png" width="700"></p>
-<div class="sourceCode" id="cb63"><html><body><pre class="r"><span class="co"># Density of scarcity values</span>
+<div class="sourceCode" id="cb59"><html><body><pre class="r"><span class="co"># Density of scarcity values</span>
 
 <span class="no">quant</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html">quantile</a></span>(<span class="no">si_df</span>$<span class="no">Si</span>, <span class="kw">probs</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span>(<span class="fl">0</span>, <span class="fl">1</span>, <span class="fl">0.10</span>))
 <span class="no">labels_quant</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span>(<span class="no">quant</span>)[-<span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span>(<span class="no">quant</span>)], <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span>(<span class="no">quant</span>)[-<span class="fl">1</span>], <span class="kw">sep</span> <span class="kw">=</span> <span class="st">"-"</span>)
 
 <span class="no">si_density</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(<span class="fu"><a href="https://rdrr.io/r/stats/density.html">density</a></span>(<span class="no">si_df</span>$<span class="no">Si</span>)[<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"x"</span>, <span class="st">"y"</span>)])
-<span class="no">si_density</span> <span class="kw">=</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/filter.html">filter</a></span>(<span class="no">si_density</span>, <span class="no">x</span> <span class="kw">&gt;=</span> <span class="no">quant</span><span class="kw">[[</span><span class="fl">1</span>]] <span class="kw">&amp;</span> <span class="no">x</span> <span class="kw">&lt;=</span> <span class="no">quant</span><span class="kw">[[</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span>(<span class="no">quant</span>)]])
+<span class="no">si_density</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/subset.html">subset</a></span>(<span class="no">si_density</span>, <span class="no">x</span> <span class="kw">&gt;=</span> <span class="no">quant</span><span class="kw">[[</span><span class="fl">1</span>]] <span class="kw">&amp;</span> <span class="no">x</span> <span class="kw">&lt;=</span> <span class="no">quant</span><span class="kw">[[</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span>(<span class="no">quant</span>)]])
 <span class="no">si_density</span>$<span class="no">quant</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/cut.html">cut</a></span>(<span class="no">si_density</span>$<span class="no">x</span>, <span class="kw">breaks</span> <span class="kw">=</span> <span class="no">quant</span>)
 <span class="no">quant</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html">quantile</a></span>(<span class="no">si_df</span>$<span class="no">Si</span>, <span class="kw">probs</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span>(<span class="fl">0</span>, <span class="fl">1</span>, <span class="fl">0.10</span>))
 <span class="no">labels_quant</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span>(<span class="no">quant</span>)[-<span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span>(<span class="no">quant</span>)], <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span>(<span class="no">quant</span>)[-<span class="fl">1</span>], <span class="kw">sep</span> <span class="kw">=</span> <span class="st">"-"</span>)
@@ -587,9 +579,9 @@ R_i = 1 - N_i/N_tot
 
 <span class="no">si_dens</span></pre></body></html></div>
 <p><img src="rarity_indices_files/figure-html/unnamed-chunk-8-3.png" width="700"></p>
-<div class="sourceCode" id="cb64"><html><body><pre class="r"><span class="co"># Regional rarity: restrictedness versus uniqueness</span>
+<div class="sourceCode" id="cb60"><html><body><pre class="r"><span class="co"># Regional rarity: restrictedness versus uniqueness</span>
 <span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span>(<span class="no">ri_df</span>)[<span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span>(<span class="no">ri_df</span>) <span class="kw">==</span> <span class="st">"sp"</span>] <span class="kw">=</span> <span class="st">"species"</span>
-<span class="no">ri_ui</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://dplyr.tidyverse.org/reference/join.html">inner_join</a></span>(<span class="no">ri_df</span>, <span class="no">ui_df</span>, <span class="kw">by</span> <span class="kw">=</span> <span class="st">"species"</span>)
+<span class="no">ri_ui</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/merge.html">merge</a></span>(<span class="no">ri_df</span>, <span class="no">ui_df</span>, <span class="kw">by</span> <span class="kw">=</span> <span class="st">"species"</span>)
 
 <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="no">ri_ui</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="no">Ri</span>, <span class="no">Ui</span>)) +
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span>() +

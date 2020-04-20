@@ -71,7 +71,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">funrar</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.4.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.4.1</span>
       </span>
     </div>
 
@@ -132,6 +132,19 @@
       <small>Source: <a href='https://github.com/Rekyt/funrar/blob/master/NEWS.md'><code>NEWS.md</code></a></small>
     </div>
 
+    <div id="funrar-1-4-1" class="section level1">
+<h1 class="page-header" data-toc-text="1.4.1">
+<a href="#funrar-1-4-1" class="anchor"></a>funrar 1.4.1<small> Unreleased </small>
+</h1>
+<div id="bug-fix" class="section level2">
+<h2 class="hasAnchor">
+<a href="#bug-fix" class="anchor"></a>BUG FIX</h2>
+<ul>
+<li>fix use of <code>tidytext</code> for upcoming version (<a href='https://github.com/Rekyt/funrar/issues/42'>#42</a>, thanks <a href='https://github.com/juliasilge'>@juliasilge</a> !)</li>
+<li>remove dependency on dplyr to avoid breaking due to next dplyr release</li>
+</ul>
+</div>
+</div>
     <div id="funrar-1-4-0" class="section level1">
 <h1 class="page-header" data-toc-text="1.4.0">
 <a href="#funrar-1-4-0" class="anchor"></a>funrar 1.4.0<small> 2020-03-05 </small>
@@ -143,9 +156,9 @@
 <li>Implement <code><a href="../reference/distinctiveness_global.html">distinctiveness_global()</a></code> to compute occurrence based distinctiveness at the global/regional level using only a distance matrix</li>
 </ul>
 </div>
-<div id="bug-fix" class="section level2">
+<div id="bug-fix-1" class="section level2">
 <h2 class="hasAnchor">
-<a href="#bug-fix" class="anchor"></a>BUG FIX</h2>
+<a href="#bug-fix-1" class="anchor"></a>BUG FIX</h2>
 <ul>
 <li>Fix tests that used <code><a href="https://rdrr.io/r/base/data.frame.html">data.frame()</a></code> now with explicit <code>stringAsFactors</code> values for compatibility with R 4.0.0</li>
 <li>Add missing tests on bad inputs for some functions</li>
@@ -156,9 +169,9 @@
 <h1 class="page-header" data-toc-text="1.3.1">
 <a href="#funrar-1-3-1" class="anchor"></a>funrar 1.3.1<small> 2019-12-09 </small>
 </h1>
-<div id="bug-fix-1" class="section level2">
+<div id="bug-fix-2" class="section level2">
 <h2 class="hasAnchor">
-<a href="#bug-fix-1" class="anchor"></a>BUG FIX</h2>
+<a href="#bug-fix-2" class="anchor"></a>BUG FIX</h2>
 <ul>
 <li>Test explicitly for matrix type in <code>rarity_dimensions()</code> for compatibility with R 4.0.0</li>
 </ul>
@@ -179,9 +192,9 @@
 <li>New definition of functional distinctiveness based on range with different formula see <code><a href="../reference/distinctiveness_alt.html">distinctiveness_alt()</a></code>.</li>
 </ul>
 </div>
-<div id="bug-fix-2" class="section level2">
+<div id="bug-fix-3" class="section level2">
 <h2 class="hasAnchor">
-<a href="#bug-fix-2" class="anchor"></a>BUG FIX</h2>
+<a href="#bug-fix-3" class="anchor"></a>BUG FIX</h2>
 <ul>
 <li>Warning when distinctiveness equals <code>NaN</code> in <code><a href="../reference/distinctiveness_stack.html">distinctiveness_stack()</a></code> (<a href='https://github.com/Rekyt/funrar/issues/30'>#30</a>).</li>
 </ul>

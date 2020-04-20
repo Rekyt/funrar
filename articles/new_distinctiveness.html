@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">funrar</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.4.0</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.4.1</span>
       </span>
     </div>
 
@@ -89,9 +89,9 @@
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Alternative Distinctiveness definition</h1>
-                        <h4 class="author">Rekyt</h4>
+                        <h4 class="author">Matthias Grenié</h4>
             
-            <h4 class="date">2020-04-17</h4>
+            <h4 class="date">2020-04-20</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/Rekyt/funrar/blob/master/vignettes/new_distinctiveness.Rmd"><code>vignettes/new_distinctiveness.Rmd</code></a></small>
       <div class="hidden name"><code>new_distinctiveness.Rmd</code></div>
@@ -180,7 +180,10 @@ D_b(T) =
   <span class="no">di_mat</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/t.html">t</a></span>(<span class="no">di_mat</span>)
   <span class="fu"><a href="https://rdrr.io/r/base/dimnames.html">dimnames</a></span>(<span class="no">di_mat</span>) <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/dimnames.html">dimnames</a></span>(<span class="no">pres_mat</span>)
 
-  <span class="kw pkg">dplyr</span><span class="kw ns">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(<span class="kw pkg">funrar</span><span class="kw ns">::</span><span class="fu"><a href="../reference/matrix_to_stack.html">matrix_to_stack</a></span>(<span class="no">di_mat</span>, <span class="st">"Di"</span>), <span class="kw">given_range</span> <span class="kw">=</span> <span class="no">given_T</span>)
+  <span class="no">di_df</span> <span class="kw">=</span> <span class="kw pkg">funrar</span><span class="kw ns">::</span><span class="fu"><a href="../reference/matrix_to_stack.html">matrix_to_stack</a></span>(<span class="no">di_mat</span>, <span class="st">"Di"</span>)
+  <span class="no">di_df</span>$<span class="no">given_range</span> <span class="kw">=</span> <span class="no">given_T</span>
+
+  <span class="fu"><a href="https://rdrr.io/r/base/function.html">return</a></span>(<span class="no">di_df</span>)
 }</pre></body></html></div>
 <p>Here we truncate the distance matrix in order to “nullify” the effect of species that are not in specified range.</p>
 <div class="sourceCode" id="cb4"><html><body><pre class="r"><span class="no">presence_matrix</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span>(<span class="fl">1</span>, <span class="fl">3</span>), <span class="fl">1</span>, <span class="fl">0</span>, <span class="fl">1</span>, <span class="fl">1</span>, <span class="fl">1</span>, <span class="fl">0</span>), <span class="kw">nrow</span> <span class="kw">=</span> <span class="fl">3</span>, <span class="kw">ncol</span> <span class="kw">=</span> <span class="fl">3</span>,
@@ -189,11 +192,12 @@ D_b(T) =
 
 <span class="co"># Test over a ragne of possible T values</span>
 <span class="no">all_T</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">lapply</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span>(<span class="fl">0.5</span>, <span class="fl">1.5</span>, <span class="kw">length.out</span> <span class="kw">=</span> <span class="fl">50</span>),
-       <span class="kw">function</span>(<span class="no">given_number</span>) <span class="fu">alternative_distinctiveness</span>(<span class="no">presence_matrix</span>,
-                                                          <span class="no">species_distance</span>,
-                                                          <span class="no">given_number</span>))
+       <span class="kw">function</span>(<span class="no">given_number</span>)  <span class="fu">alternative_distinctiveness</span>(
+         <span class="no">presence_matrix</span>,
+         <span class="no">species_distance</span>,
+         <span class="no">given_number</span>))
 
-<span class="no">all_T</span> <span class="kw">=</span> <span class="kw pkg">dplyr</span><span class="kw ns">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/bind.html">bind_rows</a></span>(<span class="no">all_T</span>)</pre></body></html></div>
+<span class="no">all_T</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/do.call.html">do.call</a></span>(<span class="no">rbind.data.frame</span>, <span class="no">all_T</span>)</pre></body></html></div>
 <p>We can visualize those relationships:</p>
 <div class="sourceCode" id="cb5"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">ggplot2</span>)
 
@@ -233,7 +237,7 @@ D_b(T) =
   <span class="fu">alternative_distinctiveness</span>(<span class="no">mat</span>, <span class="fu"><a href="https://rdrr.io/r/stats/dist.html">as.dist</a></span>(<span class="no">dist_mat</span>), <span class="no">given_range</span>)
 })
 
-<span class="no">all_ranges</span> <span class="kw">=</span> <span class="kw pkg">dplyr</span><span class="kw ns">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/bind.html">bind_rows</a></span>(<span class="no">all_ranges</span>)</pre></body></html></div>
+<span class="no">all_ranges</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/do.call.html">do.call</a></span>(<span class="no">rbind.data.frame</span>, <span class="no">all_ranges</span>)</pre></body></html></div>
 <p>Now we can visualize the influence of the trait range value</p>
 <div class="sourceCode" id="cb9"><html><body><pre class="r"><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/subset.html">subset</a></span>(<span class="no">all_ranges</span>, <span class="no">site</span> <span class="kw">%in%</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"AR07"</span>, <span class="st">"AR51"</span>, <span class="st">"AR02"</span>)),
        <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="no">given_range</span>, <span class="no">Di</span>, <span class="kw">group</span> <span class="kw">=</span> <span class="no">species</span>)) +
@@ -244,8 +248,10 @@ D_b(T) =
 <p><img src="new_distinctiveness_files/figure-html/unnamed-chunk-4-1.png" width="700"></p>
 <p>We see that species have close neighbors at different distances (leap from top left to bottom left of the graph). This shows the closet neighbors for each species.</p>
 <p>As proposed we can also distinctiveness relative to trait range and see what it changes:</p>
-<div class="sourceCode" id="cb10"><html><body><pre class="r"><span class="no">all_ranges</span> <span class="kw">=</span> <span class="kw pkg">dplyr</span><span class="kw ns">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(<span class="no">all_ranges</span>, <span class="kw">scaled_Di</span> <span class="kw">=</span>
-                             <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span>(<span class="no">Di</span> <span class="kw">!=</span> <span class="fl">1</span>, <span class="no">Di</span> / <span class="no">given_range</span>, <span class="no">Di</span>))
+<div class="sourceCode" id="cb10"><html><body><pre class="r"><span class="no">all_ranges</span>$<span class="no">scaled_Di</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span>(
+  <span class="no">all_ranges</span>$<span class="no">Di</span> <span class="kw">!=</span> <span class="fl">1</span>,
+  <span class="no">all_ranges</span>$<span class="no">Di</span> / <span class="no">all_ranges</span>$<span class="no">given_range</span>,
+  <span class="no">all_ranges</span>$<span class="no">Di</span>)
 
 <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/subset.html">subset</a></span>(<span class="no">all_ranges</span>, <span class="no">site</span> <span class="kw">%in%</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"AR07"</span>, <span class="st">"AR51"</span>, <span class="st">"AR02"</span>)),
        <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="no">given_range</span>, <span class="no">scaled_Di</span>, <span class="kw">group</span> <span class="kw">=</span> <span class="no">species</span>)) +
@@ -389,8 +395,10 @@ D_i (T) =
   <span class="no">di_mat</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/t.html">t</a></span>(<span class="no">di_mat</span>)
   <span class="fu"><a href="https://rdrr.io/r/base/dimnames.html">dimnames</a></span>(<span class="no">di_mat</span>) <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/dimnames.html">dimnames</a></span>(<span class="no">abund_mat</span>)
 
-  <span class="kw pkg">dplyr</span><span class="kw ns">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html">mutate</a></span>(<span class="kw pkg">funrar</span><span class="kw ns">::</span><span class="fu"><a href="../reference/matrix_to_stack.html">matrix_to_stack</a></span>(<span class="no">di_mat</span>, <span class="st">"Di"</span>),
-                <span class="kw">given_range</span> <span class="kw">=</span> <span class="no">given_range</span>)
+  <span class="no">di_df</span> <span class="kw">=</span> <span class="kw pkg">funrar</span><span class="kw ns">::</span><span class="fu"><a href="../reference/matrix_to_stack.html">matrix_to_stack</a></span>(<span class="no">di_mat</span>, <span class="st">"Di"</span>)
+  <span class="no">di_df</span>$<span class="no">given_range</span> <span class="kw">=</span> <span class="no">given_range</span>
+
+  <span class="fu"><a href="https://rdrr.io/r/base/function.html">return</a></span>(<span class="no">di_df</span>)
 }</pre></body></html></div>
 <p>Which gives the following results for or situation:</p>
 <div class="sourceCode" id="cb12"><html><body><pre class="r"><span class="no">ab_di_all_ranges</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">lapply</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span>(<span class="fl">0</span>, <span class="fl">1.5</span>, <span class="kw">length.out</span> <span class="kw">=</span> <span class="fl">50</span>),
@@ -398,7 +406,7 @@ D_i (T) =
                                                           <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">as.matrix</a></span>(<span class="no">species_distance</span>),
                                                           <span class="no">given_number</span>))
 
-<span class="no">ab_di_all_ranges</span> <span class="kw">=</span> <span class="kw pkg">dplyr</span><span class="kw ns">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/bind.html">bind_rows</a></span>(<span class="no">ab_di_all_ranges</span>)
+<span class="no">ab_di_all_ranges</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/do.call.html">do.call</a></span>(<span class="no">rbind.data.frame</span>, <span class="no">ab_di_all_ranges</span>)
 
 <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="no">ab_di_all_ranges</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="no">given_range</span>, <span class="no">Di</span>, <span class="kw">color</span> <span class="kw">=</span> <span class="no">species</span>)) +
   <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span>(<span class="kw">size</span> <span class="kw">=</span> <span class="fl">1</span>) +
