@@ -77,20 +77,20 @@ test_that("Correct Di computation without abundance",{
 
   # Check computation equal
   # T < 1/3
-  expect_equivalent(distinctiveness_alt(valid_mat, dist_mat, 1/10),
-                    good_di_0.1)
+  expect_equal(distinctiveness_alt(valid_mat, dist_mat, 1/10),
+               good_di_0.1)
 
   # 1/3 ≤ T < 1/2
-  expect_equivalent(distinctiveness_alt(valid_mat, dist_mat, 0.4),
-                    good_di_0.4)
+  expect_equal(distinctiveness_alt(valid_mat, dist_mat, 0.4),
+               good_di_0.4)
 
   # 1/2 ≤ T < 1
-  expect_equivalent(distinctiveness_alt(valid_mat, dist_mat, 0.7),
-                    good_di_0.7)
+  expect_equal(distinctiveness_alt(valid_mat, dist_mat, 0.7),
+               good_di_0.7)
 
   # T ≥ 1
-  expect_equivalent(distinctiveness_alt(valid_mat, dist_mat, 1.1),
-                    good_di_1.1)
+  expect_equal(distinctiveness_alt(valid_mat, dist_mat, 1.1),
+               good_di_1.1)
 })
 
 test_that("Correct Di computation with abundance",{
@@ -100,20 +100,20 @@ test_that("Correct Di computation with abundance",{
 
   # Check computation equal
   # T < 1/3
-  expect_equivalent(distinctiveness_alt(abund_mat, dist_mat, 0.1),
-                    good_di_0.1_ab)
+  expect_equal(distinctiveness_alt(abund_mat, dist_mat, 0.1),
+               good_di_0.1_ab)
 
   # 1/3 ≤ T < 1/2
-  expect_equivalent(distinctiveness_alt(abund_mat, dist_mat, 4/10),
-                    good_di_0.4_ab)
+  expect_equal(distinctiveness_alt(abund_mat, dist_mat, 4/10),
+               good_di_0.4_ab)
 
   # 1/2 ≤ T < 1
-  expect_equivalent(distinctiveness_alt(abund_mat, dist_mat, 7/10),
-                    good_di_0.7_ab)
+  expect_equal(distinctiveness_alt(abund_mat, dist_mat, 7/10),
+               good_di_0.7_ab)
 
   # T ≥ 1
-  expect_equivalent(distinctiveness_alt(abund_mat, dist_mat, 11/10),
-                    good_di_1.1_ab)
+  expect_equal(distinctiveness_alt(abund_mat, dist_mat, 11/10),
+               good_di_1.1_ab)
 })
 
 test_that("Distinctiveness works with sparse matrices", {
@@ -122,37 +122,37 @@ test_that("Distinctiveness works with sparse matrices", {
   ## Presence-absence
   # Check computation equal
   # T < 1/3
-  expect_equivalent(distinctiveness_alt(sparse_mat, dist_mat, 1/10),
-                    as(good_di_0.1, "dgeMatrix"))
+  expect_equal(distinctiveness_alt(sparse_mat, dist_mat, 1/10),
+               as(good_di_0.1, "dgeMatrix"))
 
   # 1/3 ≤ T < 1/2
-  expect_equivalent(distinctiveness_alt(sparse_mat, dist_mat, 0.4),
-                    as(good_di_0.4, "dgeMatrix"))
+  expect_equal(distinctiveness_alt(sparse_mat, dist_mat, 0.4),
+               as(good_di_0.4, "dgeMatrix"))
 
   # 1/2 ≤ T < 1
-  expect_equivalent(distinctiveness_alt(sparse_mat, dist_mat, 0.7),
-                    as(good_di_0.7, "dgeMatrix"))
+  expect_equal(distinctiveness_alt(sparse_mat, dist_mat, 0.7),
+               as(good_di_0.7, "dgeMatrix"))
 
   #  T ≥ 1
-  expect_equivalent(distinctiveness_alt(sparse_mat, dist_mat, 1.1),
-                    as(good_di_1.1, "dgeMatrix"))
+  expect_equal(distinctiveness_alt(sparse_mat, dist_mat, 1.1),
+               as(good_di_1.1, "dgeMatrix"))
 
   ## Abundances
   # T < 1/3
-  expect_equivalent(distinctiveness_alt(sparse_ab_mat, dist_mat, 0.1),
-                    as(good_di_0.1_ab, "dgeMatrix"))
+  expect_equal(distinctiveness_alt(sparse_ab_mat, dist_mat, 0.1),
+               as(good_di_0.1_ab, "dgeMatrix"))
 
   # 1/3 ≤ T < 1/2
-  expect_equivalent(distinctiveness_alt(sparse_ab_mat, dist_mat, 4/10),
-                    as(good_di_0.4_ab, "dgeMatrix"))
+  expect_equal(distinctiveness_alt(sparse_ab_mat, dist_mat, 4/10),
+               as(good_di_0.4_ab, "dgeMatrix"))
 
   # 1/2 ≤ T < 1
-  expect_equivalent(distinctiveness_alt(sparse_ab_mat, dist_mat, 7/10),
-                    as(good_di_0.7_ab, "dgeMatrix"))
+  expect_equal(distinctiveness_alt(sparse_ab_mat, dist_mat, 7/10),
+               as(good_di_0.7_ab, "dgeMatrix"))
 
   # T ≥ 1
-  expect_equivalent(distinctiveness_alt(sparse_ab_mat, dist_mat, 11/10),
-                    as(good_di_1.1_ab, "dgeMatrix"))
+  expect_equal(distinctiveness_alt(sparse_ab_mat, dist_mat, 11/10),
+               as(good_di_1.1_ab, "dgeMatrix"))
 })
 
 

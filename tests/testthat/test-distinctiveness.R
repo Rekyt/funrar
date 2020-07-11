@@ -166,10 +166,10 @@ test_that("Correct Di computation with different comm. without abundance",{
   c_dist = distinctiveness_stack(com_df, "species", "site", abund = NULL,
                                  dist_mat)
 
-  expect_equivalent(correct_dist_mat,
-                    as.table(distinctiveness(valid_mat, dist_mat)))
+  expect_equal(correct_dist_mat,
+               as.table(distinctiveness(valid_mat, dist_mat)))
 
-  expect_equivalent(c_dist, correct_dist)
+  expect_equal(c_dist, correct_dist)
 
   # Undefined distinctiveness for species alone in communities
   expect_equal(distinctiveness_com(com_df[1,], "species",
@@ -186,7 +186,7 @@ test_that("Correct Di computation with different comm. without abundance",{
 test_that("Di is undefined for a community with a single species", {
 
   ## Test for matrix version of distinctiveness
-  expect_equivalent(as(undef_dist_mat, "matrix"), undef_test)
+  expect_equal(as(undef_dist_mat, "matrix"), undef_test, ignore_attr = TRUE)
 
   # Check warning for NaN created in the matrix
   expect_warning(distinctiveness(small_mat, dist_mat),
@@ -220,7 +220,7 @@ test_that("Di is undefined for a community with a single species", {
 test_that("Distinctiveness works with sparse matrices", {
   expect_silent(distinctiveness(sparse_mat, dist_mat))
 
-  expect_equivalent(distinctiveness(sparse_mat, dist_mat), dist_sparse_mat)
+  expect_equal(distinctiveness(sparse_mat, dist_mat), dist_sparse_mat)
 })
 
 
@@ -307,20 +307,21 @@ test_that("Relative distinctiveness can be computed", {
 
   ## Only presence-absences
   # Matrix
-  expect_equivalent(distinctiveness(valid_mat, dist_mat, relative = TRUE),
-                    correct_rel_di)
+  expect_equal(distinctiveness(valid_mat, dist_mat, relative = TRUE),
+               correct_rel_di,
+               ignore_attr = TRUE)
   # Df
   expect_equal(distinctiveness_tidy(com_df, "species", "site",
                                     dist_matrix = dist_mat, relative = TRUE),
                correct_rel_di_df)
   # Sparse mat
-  expect_equivalent(distinctiveness(sparse_mat, dist_mat, relative = TRUE),
-                    dist_sparse_mat_rel)
+  expect_equal(distinctiveness(sparse_mat, dist_mat, relative = TRUE),
+               dist_sparse_mat_rel)
 
   # Single community
-  expect_equivalent(distinctiveness_com(com_df[1:2, ], "species",
+  expect_equal(distinctiveness_com(com_df[1:2, ], "species",
                                    dist_matrix = dist_mat, relative = TRUE),
-                    correct_rel_di_df[1:2, ])
+               correct_rel_di_df[1:2, ])
 
   ## With abundances
   # Matrix
