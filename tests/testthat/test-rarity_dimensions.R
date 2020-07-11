@@ -39,7 +39,7 @@ test_that("'distinctiveness_dimensions()' outputs good objects", {
 
   # Check that all elements are matrices
   lapply(di_dim, function(x) {
-    expect_is(x, "matrix")
+    expect_true(inherits(x, "matrix"))
   })
 
   # Check that all elements have good dimension

@@ -8,7 +8,7 @@ test_that("Returned object is a matrix", {
   rownames(trait_df) = letters[1:5]
 
   # Object is matrix
-  expect_is(compute_dist_matrix(trait_df), "matrix")
+  expect_true(inherits(compute_dist_matrix(trait_df), "matrix"))
 })
 
 
