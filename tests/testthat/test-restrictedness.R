@@ -1,4 +1,4 @@
-context("Test Restrictedness")
+# Test Computation of Restrictedness
 
 # Data -------------------------------------------------------------------------
 valid_mat = matrix(c(1, 0, 0, 0,

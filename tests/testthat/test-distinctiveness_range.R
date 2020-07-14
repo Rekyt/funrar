@@ -1,4 +1,4 @@
-context("Test Range-based Distinctiveness")
+# Test Range-based Distinctiveness
 
 # Initial data -----------------------------------------------------------------
 # Empty Matrix

@@ -1,6 +1,4 @@
-context("Functional Rarity Indices")
-
-
+# Functional Rarity Indices
 # General data -----------------------------------------------------------------
 
 # Empty Matrix

@@ -1,5 +1,4 @@
-context("Test Uniqueness")
-
+# Test Functional Uniqueness Computation
 # Valid Presence-Absence Matrix
 valid_mat = matrix(c(1, 0, 0, 0,
                      rep(1, 3), 0,

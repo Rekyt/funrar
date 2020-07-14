@@ -1,4 +1,4 @@
-context("Test global distinctiveness")
+# Test global functional distinctiveness
 
 
 # Should fail if provided object is not dist() nor matrix

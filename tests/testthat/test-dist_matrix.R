@@ -1,5 +1,4 @@
-context("Compute Functional Distance Matrix")
-
+# Compute Functional Distance Matrix
 test_that("Returned object is a matrix", {
 
   trait_df = data.frame(trait1 = 1:5,

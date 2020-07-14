@@ -1,4 +1,4 @@
-context("Test Scarcity")
+# Test Computation of Scarcity
 
 # Valid Presence-Absence Matrix
 valid_mat = matrix(c(1, 0, 0, 0,

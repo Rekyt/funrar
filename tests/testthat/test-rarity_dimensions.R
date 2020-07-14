@@ -1,6 +1,5 @@
 library("Matrix")
-context("Measuring Functional Rarity Dimensions")
-
+# Measuring Functional Rarity Dimensions
 # Common Objects ---------------------------------------------------------------
 given_traits = data.frame(tr1     = 1:3,
                           tr2     = c(1, 1, 0),

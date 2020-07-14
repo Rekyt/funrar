@@ -1,6 +1,4 @@
-context("Test Check Functions")
-
-
+# Test Check Functions
 # Preliminary Data -------------------------------------------------------------
 pres_mat = matrix(1, nrow = 4, ncol = 3)
 

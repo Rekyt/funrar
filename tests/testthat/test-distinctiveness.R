@@ -1,4 +1,4 @@
-context("Test Distinctiveness")
+# Test Functional Distinctiveness
 
 # Initial data -----------------------------------------------------------------
 # Empty Matrix

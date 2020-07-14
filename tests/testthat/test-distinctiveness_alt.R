@@ -1,5 +1,4 @@
-context("Test Range-based Alternative Distinctiveness")
-
+# Test Range-based Alternative Distinctiveness
 # Initial data -----------------------------------------------------------------
 # Presence-Absence Matrix
 valid_mat = matrix(1, ncol = 3, nrow = 1,

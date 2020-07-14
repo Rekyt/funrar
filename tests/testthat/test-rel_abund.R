@@ -1,7 +1,5 @@
 # Test file for function to convert abundance matrix to relative abundances
 # matrix
-context("Convert Absolute and Relative Abund Matrices")
-
 # Packages ---------------------------------------------------------------------
 library(Matrix)
 

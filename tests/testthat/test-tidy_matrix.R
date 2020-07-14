@@ -1,6 +1,4 @@
-context("Tidy Data Frame to Matrix Transformation")
-
-
+# Test Tidy Data Frame to Matrix Transformation
 # Needed objects --------------------------------------------------------------
 
 # Valid Presence-Absence Matrix
