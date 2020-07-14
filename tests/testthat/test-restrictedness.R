@@ -46,8 +46,8 @@ test_that("Restrictedness works with sparse matrices", {
 
   expect_silent(restrictedness(sparse_mat))
 
-  expect_equivalent(restrictedness(sparse_mat),
-                    data.frame("species" = letters[1:4],
-                               "Ri" = c(3/4, 1/4, 1/4, 1/2)))
+  expect_equal(restrictedness(sparse_mat),
+               data.frame("species" = letters[1:4],
+                          "Ri" = c(3/4, 1/4, 1/4, 1/2)))
 })
 

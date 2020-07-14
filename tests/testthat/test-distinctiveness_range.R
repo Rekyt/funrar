@@ -148,23 +148,23 @@ test_that("Correct Di computation without abundance",{
 
   # Check computation equal
   # When T < 1/9
-  expect_equivalent(distinctiveness_range(valid_mat, dist_mat, 0.1),
-                    good_di_0.1)
+  expect_equal(distinctiveness_range(valid_mat, dist_mat, 0.1),
+               good_di_0.1)
 
   # 1/9 ≤ T < 4/9
-  expect_equivalent(distinctiveness_range(valid_mat, dist_mat, 0.4),
-                    good_di_0.4)
+  expect_equal(distinctiveness_range(valid_mat, dist_mat, 0.4),
+               good_di_0.4)
 
   # 4/9 ≤ T < 8/9
-  expect_equivalent(distinctiveness_range(valid_mat, dist_mat, 0.6),
-                    good_di_0.6)
+  expect_equal(distinctiveness_range(valid_mat, dist_mat, 0.6),
+               good_di_0.6)
 
   #  T ≥ 8/9
-  expect_equivalent(distinctiveness_range(valid_mat, dist_mat, 0.9),
-                    good_di_0.9)
+  expect_equal(distinctiveness_range(valid_mat, dist_mat, 0.9),
+               good_di_0.9)
 
-  expect_equivalent(distinctiveness_range(valid_mat, dist_mat, 4, TRUE),
-                    good_di_relative_max)
+  expect_equal(distinctiveness_range(valid_mat, dist_mat, 4, TRUE),
+               good_di_relative_max)
 })
 
 test_that("Correct Di computation with abundance",{
@@ -175,20 +175,20 @@ test_that("Correct Di computation with abundance",{
 
   # Check computation equal
   # When T < 1/9
-  expect_equivalent(distinctiveness_range(abund_mat, dist_mat, 0.1),
-                    good_di_0.1_ab)
+  expect_equal(distinctiveness_range(abund_mat, dist_mat, 0.1),
+               good_di_0.1_ab)
 
   # 1/9 ≤ T < 4/9
-  expect_equivalent(distinctiveness_range(abund_mat, dist_mat, 0.4),
-                    good_di_0.4_ab)
+  expect_equal(distinctiveness_range(abund_mat, dist_mat, 0.4),
+               good_di_0.4_ab)
 
   # 4/9 ≤ T < 8/9
-  expect_equivalent(distinctiveness_range(abund_mat, dist_mat, 0.6),
-                    good_di_0.6_ab)
+  expect_equal(distinctiveness_range(abund_mat, dist_mat, 0.6),
+               good_di_0.6_ab)
 
   #  T ≥ 8/9
-  expect_equivalent(distinctiveness_range(abund_mat, dist_mat, 0.9),
-                    good_di_0.9_ab)
+  expect_equal(distinctiveness_range(abund_mat, dist_mat, 0.9),
+               good_di_0.9_ab)
 })
 
 test_that("Distinctiveness works with sparse matrices", {
@@ -196,37 +196,37 @@ test_that("Distinctiveness works with sparse matrices", {
 
   ## Presence-absence
   # When T < 1/9
-  expect_equivalent(distinctiveness_range(sparse_mat, dist_mat, 0.1),
-                    as(good_di_0.1, "dgeMatrix"))
+  expect_equal(distinctiveness_range(sparse_mat, dist_mat, 0.1),
+               as(good_di_0.1, "dgeMatrix"))
 
   # 1/9 ≤ T < 4/9
-  expect_equivalent(distinctiveness_range(sparse_mat, dist_mat, 0.4),
-                    as(good_di_0.4, "dgeMatrix"))
+  expect_equal(distinctiveness_range(sparse_mat, dist_mat, 0.4),
+               as(good_di_0.4, "dgeMatrix"))
 
   # 4/9 ≤ T < 8/9
-  expect_equivalent(distinctiveness_range(sparse_mat, dist_mat, 0.6),
-                    as(good_di_0.6, "dgeMatrix"))
+  expect_equal(distinctiveness_range(sparse_mat, dist_mat, 0.6),
+               as(good_di_0.6, "dgeMatrix"))
 
   #  T ≥ 8/9
-  expect_equivalent(distinctiveness_range(sparse_mat, dist_mat, 0.9),
-                    as(good_di_0.9, "dgeMatrix"))
+  expect_equal(distinctiveness_range(sparse_mat, dist_mat, 0.9),
+               as(good_di_0.9, "dgeMatrix"))
 
   ## Abundances
   # When T < 1/9
-  expect_equivalent(distinctiveness_range(sparse_ab_mat, dist_mat, 0.1),
-                    as(good_di_0.1_ab, "dgeMatrix"))
+  expect_equal(distinctiveness_range(sparse_ab_mat, dist_mat, 0.1),
+               as(good_di_0.1_ab, "dgeMatrix"))
 
   # 1/9 ≤ T < 4/9
-  expect_equivalent(distinctiveness_range(sparse_ab_mat, dist_mat, 0.4),
-                    as(good_di_0.4_ab, "dgeMatrix"))
+  expect_equal(distinctiveness_range(sparse_ab_mat, dist_mat, 0.4),
+               as(good_di_0.4_ab, "dgeMatrix"))
 
   # 4/9 ≤ T < 8/9
-  expect_equivalent(distinctiveness_range(sparse_ab_mat, dist_mat, 0.6),
-                    as(good_di_0.6_ab, "dgeMatrix"))
+  expect_equal(distinctiveness_range(sparse_ab_mat, dist_mat, 0.6),
+               as(good_di_0.6_ab, "dgeMatrix"))
 
   #  T ≥ 8/9
-  expect_equivalent(distinctiveness_range(sparse_ab_mat, dist_mat, 0.9),
-                    as(good_di_0.9_ab, "dgeMatrix"))
+  expect_equal(distinctiveness_range(sparse_ab_mat, dist_mat, 0.9),
+               as(good_di_0.9_ab, "dgeMatrix"))
 })
 
 
