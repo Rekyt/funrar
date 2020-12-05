@@ -45,7 +45,11 @@ Apart from base packages dependencies, `funrar` depends on `dplyr` and `cluster`
 
 ## Example vignettes
 
-In addition to code example included in help of functions, two vignettes explain how to use the package. The [functional rarity indices](vignettes/rarity_indices.Rmd) vignette explains in details the different indices and function provided; while the [sparse matrices](vignettes/sparse_matrices.Rmd) vignette shows how to use sparse matrices to gain speed in memory when computing functional rarity indices.
+In addition to code example included in help of functions, two vignettes explain how to use the package. The 
+[functional rarity indices](https://rekyt.github.io/funrar/articles/rarity_indices.html) vignette explains 
+in details the different indices and function provided; while the 
+[sparse matrices](https://rekyt.github.io/funrar/articles/sparse_matrices.html) vignette shows how to use 
+sparse matrices to gain speed in memory when computing functional rarity indices.
 
 Access the vignette through R using the `vignette()` function.
 
