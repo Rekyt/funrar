@@ -19,6 +19,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -31,23 +33,17 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">funrar</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.4.1.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.4.1.9000</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
 <li>
-  <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
-<li>
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -70,8 +66,8 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/Rekyt/funrar/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+  <a href="https://github.com/Rekyt/funrar/" class="external-link">
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -89,11 +85,11 @@
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>Alternative Distinctiveness definition</h1>
-                        <h4 class="author">Matthias Grenié</h4>
+                        <h4 data-toc-skip class="author">Matthias Grenié</h4>
             
-            <h4 class="date">2020-07-14</h4>
+            <h4 data-toc-skip class="date">2022-03-18</h4>
       
-      <small class="dont-index">Source: <a href="https://github.com/Rekyt/funrar/blob/master/vignettes/new_distinctiveness.Rmd"><code>vignettes/new_distinctiveness.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/Rekyt/funrar/blob/HEAD/vignettes/new_distinctiveness.Rmd" class="external-link"><code>vignettes/new_distinctiveness.Rmd</code></a></small>
       <div class="hidden name"><code>new_distinctiveness.Rmd</code></div>
 
     </div>
@@ -101,27 +97,28 @@
     
     
 <p>The current definition of functional distinctiveness standardizes compared to all the species considered in the species pool. However, especially when investigating on trait competition and hierarchy, it can be important to scale this distinctiveness relatively to the species present in the community.</p>
-<div id="presence-absence" class="section level2">
-<h2 class="hasAnchor">
-<a href="#presence-absence" class="anchor"></a>Presence-Absence</h2>
+<div class="section level2">
+<h2 id="presence-absence">Presence-Absence<a class="anchor" aria-label="anchor" href="#presence-absence"></a>
+</h2>
 <p>Thus an alternative definition of functional distinctiveness can be given, scaled relatively to a given trait range considered (what matters for species are the species within this trait range, not beyond). Our new distinctiveness measure is <span class="math inline">\(D_i(T)\)</span>, with <span class="math inline">\(T\)</span> the trait range to consider.</p>
 <p>We can imagine three species in a given community positioned on a trait axis:</p>
-<div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="no">species_df</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(
-  <span class="kw">species</span> <span class="kw">=</span>     <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"a"</span>, <span class="st">"b"</span>, <span class="st">"c"</span>),
-  <span class="kw">trait_value</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(-<span class="fl">1</span>, <span class="fl">0</span>, <span class="fl">0.5</span>)
-)
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">species_df</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>
+  species <span class="op">=</span>     <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"a"</span>, <span class="st">"b"</span>, <span class="st">"c"</span><span class="op">)</span>,
+  trait_value <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">1</span>, <span class="fl">0</span>, <span class="fl">0.5</span><span class="op">)</span>
+<span class="op">)</span>
 
-<span class="no">species_distance</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/dist.html">dist</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="kw">a</span> <span class="kw">=</span> -<span class="fl">1</span>, <span class="kw">b</span> <span class="kw">=</span> <span class="fl">0</span>, <span class="kw">c</span> <span class="kw">=</span> <span class="fl">0.5</span>))
+<span class="va">species_distance</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/dist.html" class="external-link">dist</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>a <span class="op">=</span> <span class="op">-</span><span class="fl">1</span>, b <span class="op">=</span> <span class="fl">0</span>, c <span class="op">=</span> <span class="fl">0.5</span><span class="op">)</span><span class="op">)</span>
 
-<span class="no">species_distance</span></pre></body></html></div>
-<pre><code>##     a   b
-## b 1.0    
-## c 1.5 0.5</code></pre>
+<span class="va">species_distance</span></code></pre></div>
+<pre><code><span class="co">##     a   b</span>
+<span class="co">## b 1.0    </span>
+<span class="co">## c 1.5 0.5</span></code></pre>
 <p>Species <span class="math inline">\(b\)</span> is closer to species <span class="math inline">\(c\)</span> than to species <span class="math inline">\(a\)</span>. The greatest distance is observed between species <span class="math inline">\(a\)</span> and species <span class="math inline">\(c\)</span>.</p>
 <p><span class="math inline">\(T\)</span> can value from 0 to the maximum observed functional distance among considered species.</p>
-<div id="theoretical-definition" class="section level3">
-<h3 class="hasAnchor">
-<a href="#theoretical-definition" class="anchor"></a>Theoretical definition</h3>
+<div class="section level3">
+<h3 id="theoretical-definition">Theoretical definition<a class="anchor" aria-label="anchor" href="#theoretical-definition"></a>
+</h3>
 <p>The proposed formula for <span class="math inline">\(D_i(T)\)</span> is:</p>
 <p><span class="math display">\[
 D_{i} (T) = 
@@ -148,124 +145,131 @@ D_b(T) =
   \end{dcases}
 \]</span></p>
 </div>
-<div id="implementation" class="section level3">
-<h3 class="hasAnchor">
-<a href="#implementation" class="anchor"></a>Implementation</h3>
+<div class="section level3">
+<h3 id="implementation">Implementation<a class="anchor" aria-label="anchor" href="#implementation"></a>
+</h3>
 <p>Implementing this version of distinctiveness would give:</p>
-<div class="sourceCode" id="cb3"><html><body><pre class="r"><span class="no">alternative_distinctiveness</span> <span class="kw">=</span> <span class="kw">function</span>(<span class="no">pres_mat</span>, <span class="no">distance_obj</span>, <span class="no">given_T</span>) {
-  <span class="no">dist_mat</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">as.matrix</a></span>(<span class="no">distance_obj</span>)
-
-  <span class="no">kept_sp</span> <span class="kw">=</span> <span class="kw pkg">funrar</span><span class="kw ns">:::</span><span class="fu">species_in_common</span>(<span class="no">pres_mat</span>, <span class="no">dist_mat</span>)
-  <span class="no">dist_mat</span> <span class="kw">=</span> <span class="no">dist_mat</span>[<span class="no">kept_sp</span>, <span class="no">kept_sp</span>, <span class="kw">drop</span> <span class="kw">=</span> <span class="fl">FALSE</span>]
-
-
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">alternative_distinctiveness</span> <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">pres_mat</span>, <span class="va">distance_obj</span>, <span class="va">given_T</span><span class="op">)</span> <span class="op">{</span>
+  <span class="va">dist_mat</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">as.matrix</a></span><span class="op">(</span><span class="va">distance_obj</span><span class="op">)</span>
+  
+  <span class="va">kept_sp</span> <span class="op">=</span> <span class="fu">funrar</span><span class="fu">:::</span><span class="fu">species_in_common</span><span class="op">(</span><span class="va">pres_mat</span>, <span class="va">dist_mat</span><span class="op">)</span>
+  <span class="va">dist_mat</span> <span class="op">=</span> <span class="va">dist_mat</span><span class="op">[</span><span class="va">kept_sp</span>, <span class="va">kept_sp</span>, drop <span class="op">=</span> <span class="cn">FALSE</span><span class="op">]</span>
+  
+  
   <span class="co"># Correspondence matrix (tracking which species we want to keep)</span>
-  <span class="no">corr_dist</span> <span class="kw">=</span> <span class="no">dist_mat</span>
-  <span class="no">corr_dist</span>[<span class="no">dist_mat</span> <span class="kw">&gt;</span> <span class="no">given_T</span>] <span class="kw">=</span> <span class="fl">0</span>
-  <span class="no">corr_dist</span>[<span class="no">dist_mat</span> <span class="kw">&lt;=</span> <span class="no">given_T</span>] <span class="kw">=</span> <span class="fl">1</span>
-  <span class="fu"><a href="https://rdrr.io/r/base/diag.html">diag</a></span>(<span class="no">corr_dist</span>) <span class="kw">=</span> <span class="fl">0</span>
-
+  <span class="va">corr_dist</span> <span class="op">=</span> <span class="va">dist_mat</span>
+  <span class="va">corr_dist</span><span class="op">[</span><span class="va">dist_mat</span> <span class="op">&gt;</span> <span class="va">given_T</span><span class="op">]</span> <span class="op">=</span> <span class="fl">0</span>
+  <span class="va">corr_dist</span><span class="op">[</span><span class="va">dist_mat</span> <span class="op">&lt;=</span> <span class="va">given_T</span><span class="op">]</span> <span class="op">=</span> <span class="fl">1</span>
+  <span class="fu"><a href="https://rdrr.io/r/base/diag.html" class="external-link">diag</a></span><span class="op">(</span><span class="va">corr_dist</span><span class="op">)</span> <span class="op">=</span> <span class="fl">0</span>
+  
   <span class="co"># Across sites</span>
   <span class="co"># given_pres is a vector of presences per site</span>
-  <span class="no">di_mat</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/apply.html">apply</a></span>(<span class="no">pres_mat</span>, <span class="fl">1</span>, <span class="kw">function</span>(<span class="no">given_pres</span>) {
-    <span class="no">index_mat</span> <span class="kw">=</span> <span class="no">given_pres</span> <span class="kw">%*%</span> (<span class="no">dist_mat</span> * <span class="no">corr_dist</span>)  <span class="co"># Sum of distances per species</span>
-    <span class="no">denom_mat</span> <span class="kw">=</span> <span class="no">given_pres</span> <span class="kw">%*%</span> <span class="no">corr_dist</span>  <span class="co"># Number of distances considered per species</span>
-    <span class="no">index_mat</span> <span class="kw">=</span> <span class="no">index_mat</span> / <span class="no">denom_mat</span>
-    <span class="no">index_mat</span>[<span class="no">given_pres</span> <span class="kw">==</span> <span class="fl">0</span>] <span class="kw">=</span> <span class="fl">NA</span>
-    <span class="no">index_mat</span>[<span class="fu"><a href="https://rdrr.io/r/base/is.finite.html">is.nan</a></span>(<span class="no">index_mat</span>)] <span class="kw">=</span> <span class="fl">1</span>
-
-    <span class="fu"><a href="https://rdrr.io/r/base/function.html">return</a></span>(<span class="no">index_mat</span>)
-  })
-
-  <span class="no">di_mat</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/t.html">t</a></span>(<span class="no">di_mat</span>)
-  <span class="fu"><a href="https://rdrr.io/r/base/dimnames.html">dimnames</a></span>(<span class="no">di_mat</span>) <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/dimnames.html">dimnames</a></span>(<span class="no">pres_mat</span>)
-
-  <span class="no">di_df</span> <span class="kw">=</span> <span class="kw pkg">funrar</span><span class="kw ns">::</span><span class="fu"><a href="../reference/matrix_to_stack.html">matrix_to_stack</a></span>(<span class="no">di_mat</span>, <span class="st">"Di"</span>)
-  <span class="no">di_df</span>$<span class="no">given_range</span> <span class="kw">=</span> <span class="no">given_T</span>
-
-  <span class="fu"><a href="https://rdrr.io/r/base/function.html">return</a></span>(<span class="no">di_df</span>)
-}</pre></body></html></div>
+  <span class="va">di_mat</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/apply.html" class="external-link">apply</a></span><span class="op">(</span><span class="va">pres_mat</span>, <span class="fl">1</span>, <span class="kw">function</span><span class="op">(</span><span class="va">given_pres</span><span class="op">)</span> <span class="op">{</span>
+    <span class="va">index_mat</span> <span class="op">=</span> <span class="va">given_pres</span> <span class="op"><a href="https://rdrr.io/r/base/matmult.html" class="external-link">%*%</a></span> <span class="op">(</span><span class="va">dist_mat</span> <span class="op">*</span> <span class="va">corr_dist</span><span class="op">)</span>  <span class="co"># Sum of distances per species</span>
+    <span class="va">denom_mat</span> <span class="op">=</span> <span class="va">given_pres</span> <span class="op"><a href="https://rdrr.io/r/base/matmult.html" class="external-link">%*%</a></span> <span class="va">corr_dist</span>  <span class="co"># Number of distances considered per species</span>
+    <span class="va">index_mat</span> <span class="op">=</span> <span class="va">index_mat</span> <span class="op">/</span> <span class="va">denom_mat</span>
+    <span class="va">index_mat</span><span class="op">[</span><span class="va">given_pres</span> <span class="op">==</span> <span class="fl">0</span><span class="op">]</span> <span class="op">=</span> <span class="cn">NA</span>
+    <span class="va">index_mat</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/is.finite.html" class="external-link">is.nan</a></span><span class="op">(</span><span class="va">index_mat</span><span class="op">)</span><span class="op">]</span> <span class="op">=</span> <span class="fl">1</span>
+    
+    <span class="kw"><a href="https://rdrr.io/r/base/function.html" class="external-link">return</a></span><span class="op">(</span><span class="va">index_mat</span><span class="op">)</span>
+  <span class="op">}</span><span class="op">)</span>
+  
+  <span class="va">di_mat</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/t.html" class="external-link">t</a></span><span class="op">(</span><span class="va">di_mat</span><span class="op">)</span>
+  <span class="fu"><a href="https://rdrr.io/r/base/dimnames.html" class="external-link">dimnames</a></span><span class="op">(</span><span class="va">di_mat</span><span class="op">)</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/dimnames.html" class="external-link">dimnames</a></span><span class="op">(</span><span class="va">pres_mat</span><span class="op">)</span>
+  
+  <span class="va">di_df</span> <span class="op">=</span> <span class="fu">funrar</span><span class="fu">::</span><span class="fu"><a href="../reference/matrix_to_stack.html">matrix_to_stack</a></span><span class="op">(</span><span class="va">di_mat</span>, <span class="st">"Di"</span><span class="op">)</span>
+  <span class="va">di_df</span><span class="op">$</span><span class="va">given_range</span> <span class="op">=</span> <span class="va">given_T</span>
+  
+  <span class="kw"><a href="https://rdrr.io/r/base/function.html" class="external-link">return</a></span><span class="op">(</span><span class="va">di_df</span><span class="op">)</span>
+<span class="op">}</span></code></pre></div>
 <p>Here we truncate the distance matrix in order to “nullify” the effect of species that are not in specified range.</p>
-<div class="sourceCode" id="cb4"><html><body><pre class="r"><span class="no">presence_matrix</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span>(<span class="fl">1</span>, <span class="fl">3</span>), <span class="fl">1</span>, <span class="fl">0</span>, <span class="fl">1</span>, <span class="fl">1</span>, <span class="fl">1</span>, <span class="fl">0</span>), <span class="kw">nrow</span> <span class="kw">=</span> <span class="fl">3</span>, <span class="kw">ncol</span> <span class="kw">=</span> <span class="fl">3</span>,
-                         <span class="kw">dimnames</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="kw">site</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"s1"</span>, <span class="st">"s2"</span>, <span class="st">"s3"</span>),
-                                         <span class="kw">species</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"a"</span>, <span class="st">"b"</span>, <span class="st">"c"</span>)))
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">presence_matrix</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">3</span><span class="op">)</span>, <span class="fl">1</span>, <span class="fl">0</span>, <span class="fl">1</span>, <span class="fl">1</span>, <span class="fl">1</span>, <span class="fl">0</span><span class="op">)</span>, nrow <span class="op">=</span> <span class="fl">3</span>, ncol <span class="op">=</span> <span class="fl">3</span>,
+                         dimnames <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>site <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"s1"</span>, <span class="st">"s2"</span>, <span class="st">"s3"</span><span class="op">)</span>,
+                                         species <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"a"</span>, <span class="st">"b"</span>, <span class="st">"c"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span>
 
 <span class="co"># Test over a ragne of possible T values</span>
-<span class="no">all_T</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">lapply</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span>(<span class="fl">0.5</span>, <span class="fl">1.5</span>, <span class="kw">length.out</span> <span class="kw">=</span> <span class="fl">50</span>),
-       <span class="kw">function</span>(<span class="no">given_number</span>)  <span class="fu">alternative_distinctiveness</span>(
-         <span class="no">presence_matrix</span>,
-         <span class="no">species_distance</span>,
-         <span class="no">given_number</span>))
+<span class="va">all_T</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">lapply</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">0.5</span>, <span class="fl">1.5</span>, length.out <span class="op">=</span> <span class="fl">50</span><span class="op">)</span>,
+       <span class="kw">function</span><span class="op">(</span><span class="va">given_number</span><span class="op">)</span>  <span class="fu">alternative_distinctiveness</span><span class="op">(</span>
+         <span class="va">presence_matrix</span>,
+         <span class="va">species_distance</span>,
+         <span class="va">given_number</span><span class="op">)</span><span class="op">)</span>
 
-<span class="no">all_T</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/do.call.html">do.call</a></span>(<span class="no">rbind.data.frame</span>, <span class="no">all_T</span>)</pre></body></html></div>
+<span class="va">all_T</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/do.call.html" class="external-link">do.call</a></span><span class="op">(</span><span class="va">rbind.data.frame</span>, <span class="va">all_T</span><span class="op">)</span></code></pre></div>
 <p>We can visualize those relationships:</p>
-<div class="sourceCode" id="cb5"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">ggplot2</span>)
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span>
 
-<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="no">all_T</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="no">given_range</span>, <span class="no">Di</span>, <span class="kw">color</span> <span class="kw">=</span> <span class="no">species</span>)) +
-    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span>(<span class="kw">size</span> <span class="kw">=</span> <span class="fl">1</span>, <span class="kw">alpha</span> <span class="kw">=</span> <span class="fl">1</span>/<span class="fl">2</span>) +
-    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_grid.html">facet_grid</a></span>(~<span class="no">site</span>) +
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span>(<span class="kw">x</span> <span class="kw">=</span> <span class="st">"Fixed distance range"</span>,
-       <span class="kw">y</span> <span class="kw">=</span> <span class="st">"Functional Distinctiveness"</span>,
-       <span class="kw">color</span> <span class="kw">=</span> <span class="st">"Species"</span>)</pre></body></html></div>
+<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">all_T</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span><span class="va">given_range</span>, <span class="va">Di</span>, color <span class="op">=</span> <span class="va">species</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html" class="external-link">geom_line</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">1</span>, alpha <span class="op">=</span> <span class="fl">1</span><span class="op">/</span><span class="fl">2</span><span class="op">)</span> <span class="op">+</span>
+    <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_grid.html" class="external-link">facet_grid</a></span><span class="op">(</span><span class="op">~</span><span class="va">site</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Fixed distance range"</span>,
+       y <span class="op">=</span> <span class="st">"Functional Distinctiveness"</span>,
+       color <span class="op">=</span> <span class="st">"Species"</span><span class="op">)</span></code></pre></div>
 <p><img src="new_distinctiveness_files/figure-html/unnamed-chunk-3-1.png" width="700"></p>
 </div>
-<div id="using-real-data" class="section level3">
-<h3 class="hasAnchor">
-<a href="#using-real-data" class="anchor"></a>Using real data</h3>
+<div class="section level3">
+<h3 id="using-real-data">Using real data<a class="anchor" aria-label="anchor" href="#using-real-data"></a>
+</h3>
 <p>We’ll be using the dataset <code>aravo</code> from the <code>ade4</code> package.</p>
-<div class="sourceCode" id="cb6"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="st">"funrar"</span>)
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="st"><a href="https://rekyt.github.io/funrar/" class="external-link">"funrar"</a></span><span class="op">)</span>
 
-<span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(<span class="st">"aravo"</span>, <span class="kw">package</span> <span class="kw">=</span> <span class="st">"ade4"</span>)
+<span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"aravo"</span>, package <span class="op">=</span> <span class="st">"ade4"</span><span class="op">)</span>
 <span class="co"># Site-species matrix</span>
-<span class="no">mat</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">as.matrix</a></span>(<span class="no">aravo</span>$<span class="no">spe</span>)
+<span class="va">mat</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">as.matrix</a></span><span class="op">(</span><span class="va">aravo</span><span class="op">$</span><span class="va">spe</span><span class="op">)</span>
 
 <span class="co"># Convert matrix to presence-absence matrix</span>
-<span class="no">mat</span>[<span class="no">mat</span> <span class="kw">&gt;</span> <span class="fl">0</span>] <span class="kw">=</span> <span class="fl">1</span>
+<span class="va">mat</span><span class="op">[</span><span class="va">mat</span> <span class="op">&gt;</span> <span class="fl">0</span><span class="op">]</span> <span class="op">=</span> <span class="fl">1</span>
 
 <span class="co"># Example of trait table</span>
-<span class="no">tra</span> <span class="kw">=</span> <span class="no">aravo</span>$<span class="no">traits</span>[, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"Height"</span>, <span class="st">"SLA"</span>, <span class="st">"N_mass"</span>)]
+<span class="va">tra</span> <span class="op">=</span> <span class="va">aravo</span><span class="op">$</span><span class="va">traits</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Height"</span>, <span class="st">"SLA"</span>, <span class="st">"N_mass"</span><span class="op">)</span><span class="op">]</span>
 <span class="co"># Distance matrix</span>
-<span class="no">dist_mat</span> <span class="kw">=</span> <span class="fu"><a href="../reference/compute_dist_matrix.html">compute_dist_matrix</a></span>(<span class="no">tra</span>, <span class="kw">metric</span> <span class="kw">=</span> <span class="st">"gower"</span>)</pre></body></html></div>
-<pre><code>## Warning in compute_dist_matrix(tra, metric = "gower"): Only numeric traits
-## provided, consider using euclidean distance.</code></pre>
-<div class="sourceCode" id="cb8"><html><body><pre class="r"><span class="no">dist_mat</span> <span class="kw">=</span> (<span class="no">dist_mat</span> - <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html">min</a></span>(<span class="no">dist_mat</span>))/<span class="fu"><a href="https://rdrr.io/r/base/diff.html">diff</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/range.html">range</a></span>(<span class="no">dist_mat</span>))
+<span class="va">dist_mat</span> <span class="op">=</span> <span class="fu"><a href="../reference/compute_dist_matrix.html">compute_dist_matrix</a></span><span class="op">(</span><span class="va">tra</span>, metric <span class="op">=</span> <span class="st">"gower"</span><span class="op">)</span></code></pre></div>
+<pre><code><span class="co">## Warning in compute_dist_matrix(tra, metric = "gower"): Only numeric traits</span>
+<span class="co">## provided, consider using euclidean distance.</span></code></pre>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">dist_mat</span> <span class="op">=</span> <span class="op">(</span><span class="va">dist_mat</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">min</a></span><span class="op">(</span><span class="va">dist_mat</span><span class="op">)</span><span class="op">)</span><span class="op">/</span><span class="fu"><a href="https://rdrr.io/r/base/diff.html" class="external-link">diff</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/range.html" class="external-link">range</a></span><span class="op">(</span><span class="va">dist_mat</span><span class="op">)</span><span class="op">)</span>
 
-<span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/dimnames.html">dimnames</a></span>(<span class="no">mat</span>)) <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"site"</span>, <span class="st">"species"</span>)
+<span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/dimnames.html" class="external-link">dimnames</a></span><span class="op">(</span><span class="va">mat</span><span class="op">)</span><span class="op">)</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"site"</span>, <span class="st">"species"</span><span class="op">)</span>
 
 <span class="co"># Compute different values of distinctiveness using various ranges</span>
-<span class="no">all_ranges</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">lapply</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span>(<span class="fl">0</span>, <span class="fl">1</span>, <span class="kw">length.out</span> <span class="kw">=</span> <span class="fl">50</span>), <span class="kw">function</span>(<span class="no">given_range</span>) {
-  <span class="fu">alternative_distinctiveness</span>(<span class="no">mat</span>, <span class="fu"><a href="https://rdrr.io/r/stats/dist.html">as.dist</a></span>(<span class="no">dist_mat</span>), <span class="no">given_range</span>)
-})
+<span class="va">all_ranges</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">lapply</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1</span>, length.out <span class="op">=</span> <span class="fl">50</span><span class="op">)</span>, <span class="kw">function</span><span class="op">(</span><span class="va">given_range</span><span class="op">)</span> <span class="op">{</span>
+  <span class="fu">alternative_distinctiveness</span><span class="op">(</span><span class="va">mat</span>, <span class="fu"><a href="https://rdrr.io/r/stats/dist.html" class="external-link">as.dist</a></span><span class="op">(</span><span class="va">dist_mat</span><span class="op">)</span>, <span class="va">given_range</span><span class="op">)</span>
+<span class="op">}</span><span class="op">)</span>
 
-<span class="no">all_ranges</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/do.call.html">do.call</a></span>(<span class="no">rbind.data.frame</span>, <span class="no">all_ranges</span>)</pre></body></html></div>
+<span class="va">all_ranges</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/do.call.html" class="external-link">do.call</a></span><span class="op">(</span><span class="va">rbind.data.frame</span>, <span class="va">all_ranges</span><span class="op">)</span></code></pre></div>
 <p>Now we can visualize the influence of the trait range value</p>
-<div class="sourceCode" id="cb9"><html><body><pre class="r"><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/subset.html">subset</a></span>(<span class="no">all_ranges</span>, <span class="no">site</span> <span class="kw">%in%</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"AR07"</span>, <span class="st">"AR51"</span>, <span class="st">"AR02"</span>)),
-       <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="no">given_range</span>, <span class="no">Di</span>, <span class="kw">group</span> <span class="kw">=</span> <span class="no">species</span>)) +
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span>(<span class="kw">alpha</span> <span class="kw">=</span> <span class="fl">1</span>/<span class="fl">3</span>) +
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html">facet_wrap</a></span>(~<span class="no">site</span>) +
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span>(<span class="kw">x</span> <span class="kw">=</span> <span class="st">"Maximum Distance Range Considered\n(Trait Range)"</span>,
-       <span class="kw">y</span> <span class="kw">=</span> <span class="st">"Functional Distinctiveness"</span>)</pre></body></html></div>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/subset.html" class="external-link">subset</a></span><span class="op">(</span><span class="va">all_ranges</span>, <span class="va">site</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"AR07"</span>, <span class="st">"AR51"</span>, <span class="st">"AR02"</span><span class="op">)</span><span class="op">)</span>,
+       <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span><span class="va">given_range</span>, <span class="va">Di</span>, group <span class="op">=</span> <span class="va">species</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html" class="external-link">geom_line</a></span><span class="op">(</span>alpha <span class="op">=</span> <span class="fl">1</span><span class="op">/</span><span class="fl">3</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html" class="external-link">facet_wrap</a></span><span class="op">(</span><span class="op">~</span><span class="va">site</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Maximum Distance Range Considered\n(Trait Range)"</span>,
+       y <span class="op">=</span> <span class="st">"Functional Distinctiveness"</span><span class="op">)</span></code></pre></div>
 <p><img src="new_distinctiveness_files/figure-html/unnamed-chunk-4-1.png" width="700"></p>
 <p>We see that species have close neighbors at different distances (leap from top left to bottom left of the graph). This shows the closet neighbors for each species.</p>
 <p>As proposed we can also distinctiveness relative to trait range and see what it changes:</p>
-<div class="sourceCode" id="cb10"><html><body><pre class="r"><span class="no">all_ranges</span>$<span class="no">scaled_Di</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html">ifelse</a></span>(
-  <span class="no">all_ranges</span>$<span class="no">Di</span> <span class="kw">!=</span> <span class="fl">1</span>,
-  <span class="no">all_ranges</span>$<span class="no">Di</span> / <span class="no">all_ranges</span>$<span class="no">given_range</span>,
-  <span class="no">all_ranges</span>$<span class="no">Di</span>)
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">all_ranges</span><span class="op">$</span><span class="va">scaled_Di</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/ifelse.html" class="external-link">ifelse</a></span><span class="op">(</span>
+  <span class="va">all_ranges</span><span class="op">$</span><span class="va">Di</span> <span class="op">!=</span> <span class="fl">1</span>,
+  <span class="va">all_ranges</span><span class="op">$</span><span class="va">Di</span> <span class="op">/</span> <span class="va">all_ranges</span><span class="op">$</span><span class="va">given_range</span>,
+  <span class="va">all_ranges</span><span class="op">$</span><span class="va">Di</span><span class="op">)</span>
 
-<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/subset.html">subset</a></span>(<span class="no">all_ranges</span>, <span class="no">site</span> <span class="kw">%in%</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"AR07"</span>, <span class="st">"AR51"</span>, <span class="st">"AR02"</span>)),
-       <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="no">given_range</span>, <span class="no">scaled_Di</span>, <span class="kw">group</span> <span class="kw">=</span> <span class="no">species</span>)) +
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span>(<span class="kw">alpha</span> <span class="kw">=</span> <span class="fl">1</span>/<span class="fl">4</span>) +
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html">facet_wrap</a></span>(~<span class="no">site</span>) +
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span>(<span class="kw">x</span> <span class="kw">=</span> <span class="st">"Considered Trait Range\n(Functional Distance)"</span>,
-       <span class="kw">y</span> <span class="kw">=</span> <span class="st">"Scaled Functional Distinctiveness\n(over trait range)"</span>)</pre></body></html></div>
+<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/subset.html" class="external-link">subset</a></span><span class="op">(</span><span class="va">all_ranges</span>, <span class="va">site</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"AR07"</span>, <span class="st">"AR51"</span>, <span class="st">"AR02"</span><span class="op">)</span><span class="op">)</span>,
+       <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span><span class="va">given_range</span>, <span class="va">scaled_Di</span>, group <span class="op">=</span> <span class="va">species</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html" class="external-link">geom_line</a></span><span class="op">(</span>alpha <span class="op">=</span> <span class="fl">1</span><span class="op">/</span><span class="fl">4</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html" class="external-link">facet_wrap</a></span><span class="op">(</span><span class="op">~</span><span class="va">site</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Considered Trait Range\n(Functional Distance)"</span>,
+       y <span class="op">=</span> <span class="st">"Scaled Functional Distinctiveness\n(over trait range)"</span><span class="op">)</span></code></pre></div>
 <p><img src="new_distinctiveness_files/figure-html/scaled_range-1.png" width="700"></p>
 <p>This reflects the relative (in terms of trait range considered) distinctiveness. Meaning that close species in a small range have similar distinctiveness than further apart species in larger ranges.</p>
 </div>
 </div>
-<div id="considering-abundance" class="section level2">
-<h2 class="hasAnchor">
-<a href="#considering-abundance" class="anchor"></a>Considering Abundance</h2>
+<div class="section level2">
+<h2 id="considering-abundance">Considering Abundance<a class="anchor" aria-label="anchor" href="#considering-abundance"></a>
+</h2>
 <p>Now that we have a version with presence and absences we can try to think about a alternative version of distinctiveness using abundances.</p>
 <p>We need the index to behave the following way: an rare species in trait range should be more distinct than a common species in that range. A species close to a rare species in a trait range but far from a common species should be more distinct than a species close to a common species and far away from a rare one.</p>
 <p>The current definition of functional distinctiveness with relative abundances is:</p>
@@ -280,9 +284,9 @@ D_b(T) =
                 j \neq i}}^S
   Ab_j}
 \]</span> with <span class="math inline">\(Ab_j\)</span> the relative abundance of species <span class="math inline">\(j\)</span> in given community.</p>
-<div id="theoretical-definition-1" class="section level3">
-<h3 class="hasAnchor">
-<a href="#theoretical-definition-1" class="anchor"></a>Theoretical definition</h3>
+<div class="section level3">
+<h3 id="theoretical-definition-1">Theoretical definition<a class="anchor" aria-label="anchor" href="#theoretical-definition-1"></a>
+</h3>
 <p>If we try to consider the constraints above we can write the index as follow</p>
 <p><span class="math display">\[
 D_i (T) =
@@ -320,9 +324,9 @@ D_i (T) =
                        j \neq i \\
                        d_{ij} \leq T}}^S
   Ab_j\]</span></p>
-<div id="definitive-formula" class="section level4">
-<h4 class="hasAnchor">
-<a href="#definitive-formula" class="anchor"></a>Definitive formula</h4>
+<div class="section level4">
+<h4 id="definitive-formula">Definitive formula<a class="anchor" aria-label="anchor" href="#definitive-formula"></a>
+</h4>
 <p>which gives the following definition in the end: <span class="math display">\[
 D_i (T) =
   \begin{dcases}
@@ -346,77 +350,124 @@ D_i (T) =
   \end{dcases}
 \]</span></p>
 </div>
-<div id="reconciling-with-presence-absence-definition" class="section level4">
-<h4 class="hasAnchor">
-<a href="#reconciling-with-presence-absence-definition" class="anchor"></a>Reconciling with presence-absence definition</h4>
+<div class="section level4">
+<h4 id="reconciling-with-presence-absence-definition">Reconciling with presence-absence definition<a class="anchor" aria-label="anchor" href="#reconciling-with-presence-absence-definition"></a>
+</h4>
 <p>We can also check how this definition differs from the previous one by saying that <span class="math inline">\(Ab_j = \frac{1}{N}\)</span> and <span class="math inline">\(N = S\)</span> (one individual per species in each community) this gives us:</p>
-
+<p><span class="math display">\[\begin{align}
+D_i (T) &amp; = \frac{
+    \sum\limits_{
+      \substack{j = 1 \\
+                j \neq i \\
+                d_{ij} \leq T}}^S d_{ij} \times Ab_j
+  }{
+    \sum\limits_{
+      \substack{j = 1 \\
+                j \neq i \\
+                d_{ij} \leq T}}^S Ab_j
+  } \times \left(1 -
+    \sum\limits_{
+      \substack{j = 1 \\
+                j \neq i \\
+                d_{ij} \leq T}}^S Ab_j
+   \right) \label{eq:diabdef} \\
+   &amp; = \frac{
+    \sum\limits_{
+      \substack{j = 1 \\
+                j \neq i \\
+                d_{ij} \leq T}}^S d_{ij} \times \frac{1}{N}
+  }{
+    \sum\limits_{
+      \substack{j = 1 \\
+                j \neq i \\
+                d_{ij} \leq T}}^S \frac{1}{N}
+  } \times \left(1 -
+    \sum\limits_{
+      \substack{j = 1 \\
+                j \neq i \\
+                d_{ij} \leq T}}^S \frac{1}{N}
+   \right) \nonumber \\
+   &amp; = \frac{\cancel{\frac{1}{N}} \sum\limits^S d_{ij}}{
+             \cancel{\frac{1}{N}} \sum\limits^S 1
+   } \times \left(1 - \frac{1}{N} \sum\limits^S 1 \right) \nonumber \\
+   &amp; = \frac{\sum\limits^S d_{ij}}{
+             \sum\limits^S 1} - 
+       \frac{\sum\limits^S d_{ij} \times \cancel{\sum\limits^S 1}}{
+             N \times \cancel{\sum\limits^S 1}} \nonumber \\
+   &amp; = \frac{\sum\limits^S d_{ij}}{
+             \sum\limits^S 1} - \frac{\sum\limits^S d_{ij}}{S}
+             \label{eq:diabsimp1} \\
+   &amp; = \sum\limits^S d_{ij} \left(\frac{1}{\sum\limits^S 1} -
+                                  \frac{1}{S}\right) \label{eq:diabsimp2}
+\end{align}\]</span></p>
 <p>From  we find back the definition of <span class="math inline">\(D_i(T)\)</span> with presence and absences only. However there is an additional that resembles to a mean distance. It’s the sum of all the distances to species within range of the focal species over the total number of species in the community. This term depends on the number of species in the community.</p>
 <p>From  we see that as the range comprises more species the term between parenthesis approaches zero and thus we observe a (near-)zero distinctiveness for all the species in the community whatever the functional distances between species.</p>
 <p>In the end, this definition does not seem to reconcile well with the presence-absence definition.</p>
 </div>
 </div>
-<div id="implementation-1" class="section level3">
-<h3 class="hasAnchor">
-<a href="#implementation-1" class="anchor"></a>Implementation</h3>
+<div class="section level3">
+<h3 id="implementation-1">Implementation<a class="anchor" aria-label="anchor" href="#implementation-1"></a>
+</h3>
 <p>Similar to the strategy we can implement this definition of functional distinctiveness by using a correspondence matrix in which we nullify the importance of species that are further away than the given threshold. In order to test the behavior of the metric we design an abundance matrix with the same species again a, b, and c:</p>
-<div class="sourceCode" id="cb11"><html><body><pre class="r"><span class="no">ab_mat</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">matrix</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/rep.html">rep</a></span>(<span class="fl">1</span>/<span class="fl">3</span>, <span class="fl">3</span>), <span class="fl">1</span>/<span class="fl">6</span>, <span class="fl">1</span>/<span class="fl">6</span>, <span class="fl">4</span>/<span class="fl">6</span>, <span class="fl">4</span>/<span class="fl">6</span>, <span class="fl">1</span>/<span class="fl">6</span>, <span class="fl">1</span>/<span class="fl">6</span>), <span class="kw">nrow</span> <span class="kw">=</span> <span class="fl">3</span>, <span class="kw">ncol</span> <span class="kw">=</span> <span class="fl">3</span>,
-                         <span class="kw">dimnames</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span>(<span class="kw">site</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"s1"</span>, <span class="st">"s2"</span>, <span class="st">"s3"</span>),
-                                         <span class="kw">species</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"a"</span>, <span class="st">"b"</span>, <span class="st">"c"</span>)),
-                <span class="kw">byrow</span> <span class="kw">=</span> <span class="fl">TRUE</span>)
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">ab_mat</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="fl">1</span><span class="op">/</span><span class="fl">3</span>, <span class="fl">3</span><span class="op">)</span>, <span class="fl">1</span><span class="op">/</span><span class="fl">6</span>, <span class="fl">1</span><span class="op">/</span><span class="fl">6</span>, <span class="fl">4</span><span class="op">/</span><span class="fl">6</span>, <span class="fl">4</span><span class="op">/</span><span class="fl">6</span>, <span class="fl">1</span><span class="op">/</span><span class="fl">6</span>, <span class="fl">1</span><span class="op">/</span><span class="fl">6</span><span class="op">)</span>, nrow <span class="op">=</span> <span class="fl">3</span>, ncol <span class="op">=</span> <span class="fl">3</span>,
+                         dimnames <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>site <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"s1"</span>, <span class="st">"s2"</span>, <span class="st">"s3"</span><span class="op">)</span>,
+                                         species <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"a"</span>, <span class="st">"b"</span>, <span class="st">"c"</span><span class="op">)</span><span class="op">)</span>,
+                byrow <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>
 
-<span class="no">alternative_distinctiveness_abundance</span> <span class="kw">=</span> <span class="kw">function</span>(<span class="no">abund_mat</span>, <span class="no">dist_matrix</span>,
-                                                 <span class="no">given_range</span>) {
-
-  <span class="no">dist_mat</span> <span class="kw">=</span> <span class="no">dist_matrix</span>
-
-  <span class="no">kept_sp</span> <span class="kw">=</span> <span class="kw pkg">funrar</span><span class="kw ns">:::</span><span class="fu">species_in_common</span>(<span class="no">abund_mat</span>, <span class="no">dist_mat</span>)
-  <span class="no">dist_mat</span> <span class="kw">=</span> <span class="no">dist_mat</span>[<span class="no">kept_sp</span>, <span class="no">kept_sp</span>, <span class="kw">drop</span> <span class="kw">=</span> <span class="fl">FALSE</span>]
-
-
+<span class="va">alternative_distinctiveness_abundance</span> <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">abund_mat</span>, <span class="va">dist_matrix</span>,
+                                                 <span class="va">given_range</span><span class="op">)</span> <span class="op">{</span>
+  
+  <span class="va">dist_mat</span> <span class="op">=</span> <span class="va">dist_matrix</span>
+  
+  <span class="va">kept_sp</span> <span class="op">=</span> <span class="fu">funrar</span><span class="fu">:::</span><span class="fu">species_in_common</span><span class="op">(</span><span class="va">abund_mat</span>, <span class="va">dist_mat</span><span class="op">)</span>
+  <span class="va">dist_mat</span> <span class="op">=</span> <span class="va">dist_mat</span><span class="op">[</span><span class="va">kept_sp</span>, <span class="va">kept_sp</span>, drop <span class="op">=</span> <span class="cn">FALSE</span><span class="op">]</span>
+  
+  
   <span class="co"># Correspondence matrix (tracking which species we want to keep)</span>
-  <span class="no">corr_dist</span> <span class="kw">=</span> <span class="no">dist_mat</span>
-  <span class="no">corr_dist</span>[<span class="no">dist_mat</span> <span class="kw">&gt;</span> <span class="no">given_range</span>] <span class="kw">=</span> <span class="fl">0</span>
-  <span class="no">corr_dist</span>[<span class="no">dist_mat</span> <span class="kw">&lt;=</span> <span class="no">given_range</span>] <span class="kw">=</span> <span class="fl">1</span>
-  <span class="fu"><a href="https://rdrr.io/r/base/diag.html">diag</a></span>(<span class="no">corr_dist</span>) <span class="kw">=</span> <span class="fl">0</span>
-
+  <span class="va">corr_dist</span> <span class="op">=</span> <span class="va">dist_mat</span>
+  <span class="va">corr_dist</span><span class="op">[</span><span class="va">dist_mat</span> <span class="op">&gt;</span> <span class="va">given_range</span><span class="op">]</span> <span class="op">=</span> <span class="fl">0</span>
+  <span class="va">corr_dist</span><span class="op">[</span><span class="va">dist_mat</span> <span class="op">&lt;=</span> <span class="va">given_range</span><span class="op">]</span> <span class="op">=</span> <span class="fl">1</span>
+  <span class="fu"><a href="https://rdrr.io/r/base/diag.html" class="external-link">diag</a></span><span class="op">(</span><span class="va">corr_dist</span><span class="op">)</span> <span class="op">=</span> <span class="fl">0</span>
+  
   <span class="co"># Across sites</span>
   <span class="co"># given_pres is a vector of presences per site</span>
-  <span class="no">di_mat</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/apply.html">apply</a></span>(<span class="no">abund_mat</span>, <span class="fl">1</span>, <span class="kw">function</span>(<span class="no">given_ab</span>) {
-    <span class="no">index_mat</span> <span class="kw">=</span> <span class="no">given_ab</span> <span class="kw">%*%</span> (<span class="no">dist_mat</span> * <span class="no">corr_dist</span>)  <span class="co"># Sum of distances per species</span>
-    <span class="no">denom_mat</span> <span class="kw">=</span> <span class="no">given_ab</span> <span class="kw">%*%</span> <span class="no">corr_dist</span>  <span class="co"># Number of distances considered per species</span>
-    <span class="no">index_mat</span> <span class="kw">=</span> (<span class="no">index_mat</span> / <span class="no">denom_mat</span>) * (<span class="fl">1</span> - <span class="no">denom_mat</span>)
-    <span class="no">index_mat</span>[<span class="no">given_ab</span> <span class="kw">==</span> <span class="fl">0</span> <span class="kw">|</span> <span class="fu"><a href="https://rdrr.io/r/base/NA.html">is.na</a></span>(<span class="no">given_ab</span>)] <span class="kw">=</span> <span class="fl">NA</span>
-    <span class="no">index_mat</span>[<span class="fu"><a href="https://rdrr.io/r/base/is.finite.html">is.nan</a></span>(<span class="no">index_mat</span>)] <span class="kw">=</span> <span class="fl">1</span>
-
-    <span class="fu"><a href="https://rdrr.io/r/base/function.html">return</a></span>(<span class="no">index_mat</span>)
-  })
-
-  <span class="no">di_mat</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/t.html">t</a></span>(<span class="no">di_mat</span>)
-  <span class="fu"><a href="https://rdrr.io/r/base/dimnames.html">dimnames</a></span>(<span class="no">di_mat</span>) <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/dimnames.html">dimnames</a></span>(<span class="no">abund_mat</span>)
-
-  <span class="no">di_df</span> <span class="kw">=</span> <span class="kw pkg">funrar</span><span class="kw ns">::</span><span class="fu"><a href="../reference/matrix_to_stack.html">matrix_to_stack</a></span>(<span class="no">di_mat</span>, <span class="st">"Di"</span>)
-  <span class="no">di_df</span>$<span class="no">given_range</span> <span class="kw">=</span> <span class="no">given_range</span>
-
-  <span class="fu"><a href="https://rdrr.io/r/base/function.html">return</a></span>(<span class="no">di_df</span>)
-}</pre></body></html></div>
+  <span class="va">di_mat</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/apply.html" class="external-link">apply</a></span><span class="op">(</span><span class="va">abund_mat</span>, <span class="fl">1</span>, <span class="kw">function</span><span class="op">(</span><span class="va">given_ab</span><span class="op">)</span> <span class="op">{</span>
+    <span class="va">index_mat</span> <span class="op">=</span> <span class="va">given_ab</span> <span class="op"><a href="https://rdrr.io/r/base/matmult.html" class="external-link">%*%</a></span> <span class="op">(</span><span class="va">dist_mat</span> <span class="op">*</span> <span class="va">corr_dist</span><span class="op">)</span>  <span class="co"># Sum of distances per species</span>
+    <span class="va">denom_mat</span> <span class="op">=</span> <span class="va">given_ab</span> <span class="op"><a href="https://rdrr.io/r/base/matmult.html" class="external-link">%*%</a></span> <span class="va">corr_dist</span>  <span class="co"># Number of distances considered per species</span>
+    <span class="va">index_mat</span> <span class="op">=</span> <span class="op">(</span><span class="va">index_mat</span> <span class="op">/</span> <span class="va">denom_mat</span><span class="op">)</span> <span class="op">*</span> <span class="op">(</span><span class="fl">1</span> <span class="op">-</span> <span class="va">denom_mat</span><span class="op">)</span>
+    <span class="va">index_mat</span><span class="op">[</span><span class="va">given_ab</span> <span class="op">==</span> <span class="fl">0</span> <span class="op">|</span> <span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="va">given_ab</span><span class="op">)</span><span class="op">]</span> <span class="op">=</span> <span class="cn">NA</span>
+    <span class="va">index_mat</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/is.finite.html" class="external-link">is.nan</a></span><span class="op">(</span><span class="va">index_mat</span><span class="op">)</span><span class="op">]</span> <span class="op">=</span> <span class="fl">1</span>
+    
+    <span class="kw"><a href="https://rdrr.io/r/base/function.html" class="external-link">return</a></span><span class="op">(</span><span class="va">index_mat</span><span class="op">)</span>
+  <span class="op">}</span><span class="op">)</span>
+  
+  <span class="va">di_mat</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/t.html" class="external-link">t</a></span><span class="op">(</span><span class="va">di_mat</span><span class="op">)</span>
+  <span class="fu"><a href="https://rdrr.io/r/base/dimnames.html" class="external-link">dimnames</a></span><span class="op">(</span><span class="va">di_mat</span><span class="op">)</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/dimnames.html" class="external-link">dimnames</a></span><span class="op">(</span><span class="va">abund_mat</span><span class="op">)</span>
+  
+  <span class="va">di_df</span> <span class="op">=</span> <span class="fu">funrar</span><span class="fu">::</span><span class="fu"><a href="../reference/matrix_to_stack.html">matrix_to_stack</a></span><span class="op">(</span><span class="va">di_mat</span>, <span class="st">"Di"</span><span class="op">)</span>
+  <span class="va">di_df</span><span class="op">$</span><span class="va">given_range</span> <span class="op">=</span> <span class="va">given_range</span>
+  
+  <span class="kw"><a href="https://rdrr.io/r/base/function.html" class="external-link">return</a></span><span class="op">(</span><span class="va">di_df</span><span class="op">)</span>
+<span class="op">}</span></code></pre></div>
 <p>Which gives the following results for or situation:</p>
-<div class="sourceCode" id="cb12"><html><body><pre class="r"><span class="no">ab_di_all_ranges</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html">lapply</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span>(<span class="fl">0</span>, <span class="fl">1.5</span>, <span class="kw">length.out</span> <span class="kw">=</span> <span class="fl">50</span>),
-       <span class="kw">function</span>(<span class="no">given_number</span>) <span class="fu">alternative_distinctiveness_abundance</span>(<span class="no">ab_mat</span>,
-                                                          <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">as.matrix</a></span>(<span class="no">species_distance</span>),
-                                                          <span class="no">given_number</span>))
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">ab_di_all_ranges</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">lapply</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1.5</span>, length.out <span class="op">=</span> <span class="fl">50</span><span class="op">)</span>,
+       <span class="kw">function</span><span class="op">(</span><span class="va">given_number</span><span class="op">)</span> <span class="fu">alternative_distinctiveness_abundance</span><span class="op">(</span><span class="va">ab_mat</span>,
+                                                          <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">as.matrix</a></span><span class="op">(</span><span class="va">species_distance</span><span class="op">)</span>,
+                                                          <span class="va">given_number</span><span class="op">)</span><span class="op">)</span>
 
-<span class="no">ab_di_all_ranges</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/do.call.html">do.call</a></span>(<span class="no">rbind.data.frame</span>, <span class="no">ab_di_all_ranges</span>)
+<span class="va">ab_di_all_ranges</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/do.call.html" class="external-link">do.call</a></span><span class="op">(</span><span class="va">rbind.data.frame</span>, <span class="va">ab_di_all_ranges</span><span class="op">)</span>
 
-<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="no">ab_di_all_ranges</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="no">given_range</span>, <span class="no">Di</span>, <span class="kw">color</span> <span class="kw">=</span> <span class="no">species</span>)) +
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span>(<span class="kw">size</span> <span class="kw">=</span> <span class="fl">1</span>) +
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html">facet_wrap</a></span>(~<span class="no">site</span>, <span class="kw">labeller</span> <span class="kw">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/as_labeller.html">as_labeller</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="kw">s1</span> <span class="kw">=</span> <span class="st">"s1 (1/3 rel. abund each)"</span>,
-                                             <span class="kw">s2</span> <span class="kw">=</span> <span class="st">"s2 (a=1/6, b=1/6, c=4/6)"</span>,
-                                             <span class="kw">s3</span> <span class="kw">=</span> <span class="st">"s3 (a=4/6, b=1/6, c=1/6)"</span>))) +
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">labs</a></span>(<span class="kw">x</span> <span class="kw">=</span> <span class="st">"Considered Range"</span>,
-       <span class="kw">y</span> <span class="kw">=</span> <span class="st">"Functional Distinctiveness"</span>)</pre></body></html></div>
+<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">ab_di_all_ranges</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span><span class="va">given_range</span>, <span class="va">Di</span>, color <span class="op">=</span> <span class="va">species</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html" class="external-link">geom_line</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/facet_wrap.html" class="external-link">facet_wrap</a></span><span class="op">(</span><span class="op">~</span><span class="va">site</span>, labeller <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/as_labeller.html" class="external-link">as_labeller</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span>s1 <span class="op">=</span> <span class="st">"s1 (1/3 rel. abund each)"</span>,
+                                             s2 <span class="op">=</span> <span class="st">"s2 (a=1/6, b=1/6, c=4/6)"</span>,
+                                             s3 <span class="op">=</span> <span class="st">"s3 (a=4/6, b=1/6, c=1/6)"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">labs</a></span><span class="op">(</span>x <span class="op">=</span> <span class="st">"Considered Range"</span>,
+       y <span class="op">=</span> <span class="st">"Functional Distinctiveness"</span><span class="op">)</span></code></pre></div>
 <p><img src="new_distinctiveness_files/figure-html/unnamed-chunk-5-1.png" width="700"></p>
-<p>We clearly see the difference between s2 and s3 comparing species b and c. In s3, when c has the same relative abundance as b, both species share the same distinctiveness until the range equals 1 (distance between A &amp; B).</p>
+<p>We clearly see the difference between s2 and s3 comparing species b and c. In s3, when c has the same relative abundance as b, both species share the same distinctiveness until the range equals 1 (distance between A &amp; B).</p>
 </div>
 </div>
   </div>
@@ -432,11 +483,13 @@ D_i (T) =
 
 
       <footer><div class="copyright">
-  <p>Developed by Matthias Grenié, Pierre Denelle, Caroline Tucker.</p>
+  <p></p>
+<p>Developed by Matthias Grenié, Pierre Denelle, Caroline Tucker.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
 </div>
 
       </footer>
@@ -444,6 +497,8 @@ D_i (T) =
 
   
 
+
+  
 
   </body>
 </html>

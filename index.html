@@ -23,6 +23,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-home">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -35,23 +37,17 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">funrar</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.4.1.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.4.1.9000</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
 <li>
-  <a href="index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
-<li>
   <a href="reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -74,8 +70,8 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/Rekyt/funrar/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+  <a href="https://github.com/Rekyt/funrar/" class="external-link">
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -91,48 +87,47 @@
 
       </header><div class="row">
   <div class="contents col-md-9">
-<div id="funrar-package" class="section level1">
-<div class="page-header"><h1 class="hasAnchor">
-<a href="#funrar-package" class="anchor"></a><code>funrar</code> package</h1></div>
+<div class="section level1">
+<div class="page-header"><h1 id="funrar-package">
+<code>funrar</code> package<a class="anchor" aria-label="anchor" href="#funrar-package"></a>
+</h1></div>
+<!-- badges: start -->
 
 <p><code>funrar</code> is a package to compute functional rarity indices, it quantifies how species are rare both from a functional and an extent point of view. Following the different facets of rarity proposed by Rabinowitz (1981). See this reference for more details on Functional Rarity indices:</p>
 <blockquote>
-<p>Violle C., Thuiller W., Mouquet N., Munoz F., Kraft NJB, Cadotte MW, Livingstone SW, Mouillot D., Functional Rarity: The Ecology of Outliers, <em>Trends in Ecology &amp; Evolution</em>, Volume 32, Issue 5, May 2017, Pages 356-367, ISSN 0169-5347, <a href="https://doi.org/10.1016/j.tree.2017.02.002" class="uri">https://doi.org/10.1016/j.tree.2017.02.002</a>.</p>
+<p>Violle C., Thuiller W., Mouquet N., Munoz F., Kraft NJB, Cadotte MW, Livingstone SW, Mouillot D., Functional Rarity: The Ecology of Outliers, <em>Trends in Ecology &amp; Evolution</em>, Volume 32, Issue 5, May 2017, Pages 356-367, ISSN 0169-5347, <a href="https://doi.org/10.1016/j.tree.2017.02.002" class="external-link uri">https://doi.org/10.1016/j.tree.2017.02.002</a>.</p>
 </blockquote>
-<div id="citation" class="section level3">
-<h3 class="hasAnchor">
-<a href="#citation" class="anchor"></a>Citation</h3>
-<p><strong>NEWS: the funrar paper just got published</strong></p>
+<div class="section level2">
+<h2 id="citation">Citation<a class="anchor" aria-label="anchor" href="#citation"></a>
+</h2>
 <p>Please cite the following reference when using <code>funrar</code> in a paper:</p>
 <blockquote>
-<p>Grenié M, Denelle P, Tucker CM, Munoz F, Violle C. funrar: An R package to characterize functional rarity. Divers Distrib. 2017;00:1–7. <a href="https://doi.org/10.1111/ddi.12629" class="uri">https://doi.org/10.1111/ddi.12629</a></p>
+<p>Grenié M, Denelle P, Tucker CM, Munoz F, Violle C. funrar: An R package to characterize functional rarity. Divers Distrib. 2017;00:1–7. <a href="https://doi.org/10.1111/ddi.12629" class="external-link uri">https://doi.org/10.1111/ddi.12629</a></p>
 </blockquote>
 <p>or refer to the <a href="inst/CITATION">CITATION file</a>, using:</p>
-<div class="sourceCode" id="cb1"><pre class="r"><span class="fu"><a href="https://rdrr.io/r/utils/citation.html">citation</a></span>(<span class="kw">package</span> <span class="kw">=</span> <span class="st">"funrar"</span>)</pre></div>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/citation.html" class="external-link">citation</a></span><span class="op">(</span>package <span class="op">=</span> <span class="st">"funrar"</span><span class="op">)</span></code></pre></div>
 </div>
-<div id="installation" class="section level2">
-<h2 class="hasAnchor">
-<a href="#installation" class="anchor"></a>Installation</h2>
+<div class="section level2">
+<h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
+</h2>
 <p>The package is on CRAN, you can install it using:</p>
-<div class="sourceCode" id="cb2"><pre class="r"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span>(<span class="st">"funrar"</span>)</pre></div>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"funrar"</span><span class="op">)</span></code></pre></div>
 <p>If you want to have the latest development version use <code>remotes</code>:</p>
-<div class="sourceCode" id="cb3"><pre class="r"><span class="co"># install.packages("remotes") # If 'remotes' is not installed yet</span>
-<span class="kw pkg">remotes</span><span class="kw ns">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span>(<span class="st">"Rekyt/funrar"</span>, <span class="kw">build_vignettes</span> <span class="kw">=</span> <span class="fl">TRUE</span>)</pre></div>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># install.packages("remotes") # If 'remotes' is not installed yet</span>
+<span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"Rekyt/funrar"</span>, build_vignettes <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
 </div>
-<div id="dependencies" class="section level2">
-<h2 class="hasAnchor">
-<a href="#dependencies" class="anchor"></a>Dependencies</h2>
-<p>Apart from base packages dependencies, <code>funrar</code> depends on <code>dplyr</code> and <code>cluster</code>.</p>
+<div class="section level2">
+<h2 id="example-vignettes">Example vignettes<a class="anchor" aria-label="anchor" href="#example-vignettes"></a>
+</h2>
+<p>In addition to code example included in help of functions, two vignettes explain how to use the package. The <a href="https://rekyt.github.io/funrar/articles/rarity_indices.html" class="external-link">functional rarity indices</a> vignette explains in details the different indices and function provided; while the <a href="https://rekyt.github.io/funrar/articles/sparse_matrices.html" class="external-link">sparse matrices</a> vignette shows how to use sparse matrices to gain speed in memory when computing functional rarity indices.</p>
+<p>Access the vignette through R using the <code><a href="https://rdrr.io/r/utils/vignette.html" class="external-link">vignette()</a></code> abd <code><a href="https://rdrr.io/r/utils/browseVignettes.html" class="external-link">browseVignettes()</a></code> functions.</p>
 </div>
-<div id="example-vignettes" class="section level2">
-<h2 class="hasAnchor">
-<a href="#example-vignettes" class="anchor"></a>Example vignettes</h2>
-<p>In addition to code example included in help of functions, two vignettes explain how to use the package. The <a href="vignettes/rarity_indices.Rmd">functional rarity indices</a> vignette explains in details the different indices and function provided; while the <a href="vignettes/sparse_matrices.Rmd">sparse matrices</a> vignette shows how to use sparse matrices to gain speed in memory when computing functional rarity indices.</p>
-<p>Access the vignette through R using the <code>vignette()</code> function.</p>
-</div>
-<div id="references" class="section level2">
-<h2 class="hasAnchor">
-<a href="#references" class="anchor"></a>References</h2>
+<div class="section level2">
+<h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
+</h2>
 <p>Rabinowitz D., Seven forms of rarity In The Biological Aspects of Rare Plant Conservation (1981), pp. 205-217</p>
 </div>
 </div>
@@ -140,56 +135,61 @@
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <div class="links">
-<h2>Links</h2>
+<h2 data-toc-skip>Links</h2>
 <ul class="list-unstyled">
-<li>Download from CRAN at <br><a href="https://cloud.r-project.org/package=funrar">https://​cloud.r-project.org/​package=funrar</a>
-</li>
-<li>Browse source code at <br><a href="https://github.com/Rekyt/funrar/">https://​github.com/​Rekyt/​funrar/​</a>
-</li>
-<li>Report a bug at <br><a href="https://github.com/Rekyt/funrar/issues">https://​github.com/​Rekyt/​funrar/​issues</a>
-</li>
+<li><a href="https://cloud.r-project.org/package=funrar" class="external-link">View on CRAN</a></li>
+<li><a href="https://github.com/Rekyt/funrar/" class="external-link">Browse source code</a></li>
+<li><a href="https://github.com/Rekyt/funrar/issues" class="external-link">Report a bug</a></li>
 </ul>
 </div>
+
 <div class="license">
-<h2>License</h2>
+<h2 data-toc-skip>License</h2>
 <ul class="list-unstyled">
 <li>GPL (&gt;= 2)</li>
 </ul>
 </div>
+
+
 <div class="citation">
-<h2>Citation</h2>
+<h2 data-toc-skip>Citation</h2>
 <ul class="list-unstyled">
-<li><a href="authors.html">Citing funrar</a></li>
-</ul>
-</div>
-<div class="developers">
-<h2>Developers</h2>
-<ul class="list-unstyled">
-<li>Matthias Grenié <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0002-4659-7522" target="orcid.widget" aria-label="ORCID"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
-<li>Pierre Denelle <br><small class="roles"> Author </small> <a href="https://orcid.org/0000-0001-5037-2281" target="orcid.widget" aria-label="ORCID"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
-<li>Caroline Tucker <br><small class="roles"> Author </small> <a href="https://orcid.org/0000-0002-4871-2010" target="orcid.widget" aria-label="ORCID"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
-<li><a href="authors.html">All authors...</a></li>
+<li><a href="authors.html#citation">Citing funrar</a></li>
 </ul>
 </div>
 
-  <div class="dev-status">
-<h2>Dev status</h2>
+<div class="developers">
+<h2 data-toc-skip>Developers</h2>
 <ul class="list-unstyled">
-<li><a href="https://travis-ci.org/Rekyt/funrar"><img src="https://travis-ci.org/Rekyt/funrar.svg?branch=master" alt="Travis-CI Build Status"></a></li>
-<li><a href="https://codecov.io/github/Rekyt/funrar?branch=master"><img src="https://codecov.io/github/Rekyt/funrar/coverage.svg?branch=master" alt="codecov.io"></a></li>
-<li><a href="https://zenodo.org/badge/latestdoi/47263274"><img src="https://zenodo.org/badge/47263274.svg" alt="DOI"></a></li>
+<li>Matthias Grenié <br><small class="roles"> Author, maintainer </small> <a href="https://orcid.org/0000-0002-4659-7522" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
+<li>Pierre Denelle <br><small class="roles"> Author </small> <a href="https://orcid.org/0000-0001-5037-2281" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
+<li>Caroline Tucker <br><small class="roles"> Author </small> <a href="https://orcid.org/0000-0002-4871-2010" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
+<li><a href="authors.html">More about authors...</a></li>
 </ul>
 </div>
+
+<div class="dev-status">
+<h2 data-toc-skip>Dev status</h2>
+<ul class="list-unstyled">
+<li><a href="https://travis-ci.org/Rekyt/funrar" class="external-link"><img src="https://travis-ci.org/Rekyt/funrar.svg?branch=master" alt="Travis-CI Build Status"></a></li>
+<li><a href="https://codecov.io/github/Rekyt/funrar?branch=master" class="external-link"><img src="https://codecov.io/github/Rekyt/funrar/coverage.svg?branch=master" alt="codecov.io"></a></li>
+<li><a href="https://doi.org/10.5281/zenodo.596011" class="external-link"><img src="https://zenodo.org/badge/DOI/10.5281/zenodo.596011.svg" alt="DOI"></a></li>
+<li><a href="https://github.com/Rekyt/funrar/actions/workflows/R-CMD-check.yaml" class="external-link"><img src="https://github.com/Rekyt/funrar/actions/workflows/R-CMD-check.yaml/badge.svg" alt="R-CMD-check"></a></li>
+</ul>
 </div>
+
+  </div>
 </div>
 
 
       <footer><div class="copyright">
-  <p>Developed by Matthias Grenié, Pierre Denelle, Caroline Tucker.</p>
+  <p></p>
+<p>Developed by Matthias Grenié, Pierre Denelle, Caroline Tucker.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
 </div>
 
       </footer>
@@ -197,6 +197,8 @@
 
   
 
+
+  
 
   </body>
 </html>

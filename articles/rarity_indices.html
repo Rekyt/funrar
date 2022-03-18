@@ -19,6 +19,8 @@
 <![endif]-->
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-article">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -31,23 +33,17 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">funrar</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">1.4.1.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.4.1.9000</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
 <li>
-  <a href="../index.html">
-    <span class="fas fa fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
-<li>
   <a href="../reference/index.html">Reference</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Articles
      
     <span class="caret"></span>
@@ -70,8 +66,8 @@
       </ul>
 <ul class="nav navbar-nav navbar-right">
 <li>
-  <a href="https://github.com/Rekyt/funrar/">
-    <span class="fab fa fab fa-github fa-lg"></span>
+  <a href="https://github.com/Rekyt/funrar/" class="external-link">
+    <span class="fab fa-github fa-lg"></span>
      
   </a>
 </li>
@@ -89,216 +85,224 @@
   <div class="col-md-9 contents">
     <div class="page-header toc-ignore">
       <h1 data-toc-skip>How to use <code>funrar</code>, an example with plant communities dataset.</h1>
-                        <h4 class="author">Denelle Pierre &amp; Grenié Matthias</h4>
+                        <h4 data-toc-skip class="author">Denelle Pierre &amp; Grenié Matthias</h4>
             
-            <h4 class="date">2020-07-14</h4>
+            <h4 data-toc-skip class="date">2022-03-18</h4>
       
-      <small class="dont-index">Source: <a href="https://github.com/Rekyt/funrar/blob/master/vignettes/rarity_indices.Rmd"><code>vignettes/rarity_indices.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/Rekyt/funrar/blob/HEAD/vignettes/rarity_indices.Rmd" class="external-link"><code>vignettes/rarity_indices.Rmd</code></a></small>
       <div class="hidden name"><code>rarity_indices.Rmd</code></div>
 
     </div>
 
     
     
-<div id="introduction" class="section level1">
-<h1 class="hasAnchor">
-<a href="#introduction" class="anchor"></a>Introduction</h1>
+<div class="section level2">
+<h2 id="introduction">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a>
+</h2>
 <p>The idea of Functional Rarity is to measure two components of the rarity of a species (or an individual). In community ecology, researchers are generally interested in the rarity of a species as measured in terms of abundances. A species with a low abundance will be considered ‘rare’. From a functional ecology perspective, this omits important information about the “role” that a given species plays in the ecosystem, its particular niche. A framework is being developed of various indices to characterize how functioning can be rare locally or regionally</p>
-<p>In their article, Violle et al. (2017) introduced 4 indices to compute functional rarity indices. <code>funrar</code> package enables ecologists to compute these on any dataset.</p>
+<p>In their article, Violle et al. (2017) introduced 4 indices to compute functional rarity indices. <code>funrar</code> package enables ecologists to compute these on any dataset.</p>
 </div>
-<div id="framework" class="section level1">
-<h1 class="hasAnchor">
-<a href="#framework" class="anchor"></a>Framework</h1>
+<div class="section level2">
+<h2 id="framework">Framework<a class="anchor" aria-label="anchor" href="#framework"></a>
+</h2>
 <p>The following figure show the 4 aspects covered by the metrics. Rarity is thus considered at local and regional scales and also from abundance and functional point of views. The name of the package functions are written underneath metrics’ names.</p>
 <div class="figure">
-<img src="figures/funrar_scheme.png" alt="Rarity indices and corresponding functions."><p class="caption">Rarity indices and corresponding functions.</p>
+<img src="figures/funrar_scheme.png" alt=""><p class="caption">Rarity indices and corresponding functions.</p>
 </div>
 </div>
-<div id="dataset-example" class="section level1">
-<h1 class="hasAnchor">
-<a href="#dataset-example" class="anchor"></a>Dataset example</h1>
+<div class="section level2">
+<h2 id="dataset-example">Dataset example<a class="anchor" aria-label="anchor" href="#dataset-example"></a>
+</h2>
 <p>To illustrate the package, we are using a dataset describing the distribution of 82 species of Alpine plants in 75 sites. This dataset was collected by Choler et al.(2005).</p>
 <p>Species traits and environmental variables are also available.</p>
-<div class="sourceCode" id="cb1"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/utils/data.html">data</a></span>(<span class="st">"aravo"</span>, <span class="kw">package</span> <span class="kw">=</span> <span class="st">"ade4"</span>)
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"aravo"</span>, package <span class="op">=</span> <span class="st">"ade4"</span><span class="op">)</span>
 
-<span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span>(<span class="no">aravo</span>)</pre></body></html></div>
-<pre><code>## List of 4
-##  $ spe      :'data.frame':   75 obs. of  82 variables:
-##   ..$ Agro.rupe: int [1:75] 0 0 3 0 0 0 2 0 0 3 ...
-##   ..$ Alop.alpi: int [1:75] 0 0 0 0 0 0 0 0 0 0 ...
-##   ..$ Anth.nipp: int [1:75] 0 0 1 0 0 0 0 0 0 0 ...
-##   ..$ Heli.sede: int [1:75] 0 0 0 2 0 0 0 0 0 0 ...
-##   ..$ Aven.vers: int [1:75] 0 0 1 0 0 0 2 0 1 2 ...
-##   ..$ Care.rosa: int [1:75] 1 2 2 2 0 3 2 2 3 3 ...
-##   ..$ Care.foet: int [1:75] 0 0 0 0 0 0 0 0 0 0 ...
-##   ..$ Care.parv: int [1:75] 0 1 0 0 0 1 1 1 1 0 ...
-##   ..$ Care.rupe: int [1:75] 3 0 0 0 0 1 0 3 0 0 ...
-##   ..$ Care.semp: int [1:75] 0 0 1 0 0 0 0 1 0 2 ...
-##   ..$ Fest.laev: int [1:75] 0 0 0 0 0 0 0 0 0 0 ...
-##   ..$ Fest.quad: int [1:75] 2 0 3 1 3 0 2 3 0 0 ...
-##   ..$ Fest.viol: int [1:75] 0 0 1 0 1 0 0 0 0 0 ...
-##   ..$ Kobr.myos: int [1:75] 1 3 4 1 1 4 2 2 3 1 ...
-##   ..$ Luzu.lute: int [1:75] 0 0 1 0 0 0 1 1 1 1 ...
-##   ..$ Poa.alpi : int [1:75] 1 2 0 2 0 2 0 0 1 1 ...
-##   ..$ Poa.supi : int [1:75] 0 0 0 0 0 0 0 0 0 0 ...
-##   ..$ Sesl.caer: int [1:75] 0 0 0 1 1 1 0 2 0 0 ...
-##   ..$ Alch.pent: int [1:75] 0 0 0 0 0 0 0 0 0 0 ...
-##   ..$ Alch.glau: int [1:75] 0 0 1 0 0 0 0 0 0 0 ...
-##   ..$ Alch.vulg: int [1:75] 0 0 0 0 0 0 0 0 0 0 ...
-##   ..$ Andr.brig: int [1:75] 0 0 0 0 0 0 0 0 0 1 ...
-##   ..$ Ante.carp: int [1:75] 0 1 1 0 0 1 1 1 1 2 ...
-##   ..$ Ante.dioi: int [1:75] 0 0 0 0 0 0 0 1 0 0 ...
-##   ..$ Arni.mont: int [1:75] 0 0 0 0 0 0 0 0 0 0 ...
-##   ..$ Aste.alpi: int [1:75] 0 0 0 0 0 0 0 0 0 0 ...
-##   ..$ Bart.alpi: int [1:75] 0 1 0 0 0 1 0 0 0 0 ...
-##   ..$ Camp.sche: int [1:75] 0 1 1 1 1 1 1 0 1 1 ...
-##   ..$ Card.alpi: int [1:75] 0 0 0 0 0 0 0 0 0 0 ...
-##   ..$ Cera.stri: int [1:75] 0 0 0 0 0 1 0 0 1 0 ...
-##   ..$ Cera.cera: int [1:75] 0 0 0 0 0 0 0 0 0 0 ...
-##   ..$ Leuc.alpi: int [1:75] 0 0 0 0 0 0 1 0 0 1 ...
-##   ..$ Cirs.acau: int [1:75] 0 0 0 0 0 0 0 0 0 0 ...
-##   ..$ Drab.aizo: int [1:75] 0 0 0 1 0 0 1 0 1 1 ...
-##   ..$ Drya.octo: int [1:75] 0 1 0 0 0 1 0 0 0 0 ...
-##   ..$ Erig.unif: int [1:75] 0 0 1 1 0 0 1 1 0 0 ...
-##   ..$ Gent.camp: int [1:75] 0 0 0 0 0 0 1 0 1 1 ...
-##   ..$ Gent.acau: int [1:75] 0 0 1 0 0 0 0 0 0 0 ...
-##   ..$ Gent.vern: int [1:75] 0 0 1 1 1 0 0 0 0 1 ...
-##   ..$ Geum.mont: int [1:75] 0 0 2 0 0 0 0 0 0 0 ...
-##   ..$ Omal.supi: int [1:75] 0 0 0 0 0 0 0 0 0 0 ...
-##   ..$ Andr.vita: int [1:75] 0 0 0 0 1 0 1 0 1 0 ...
-##   ..$ Hier.pili: int [1:75] 0 0 0 0 0 0 1 0 0 0 ...
-##   ..$ Homo.alpi: int [1:75] 0 0 0 0 0 1 0 0 0 1 ...
-##   ..$ Leon.pyre: int [1:75] 0 0 0 0 0 0 1 0 0 0 ...
-##   ..$ Ligu.muto: int [1:75] 0 1 0 1 0 2 0 1 1 0 ...
-##   ..$ Lloy.sero: int [1:75] 0 1 0 0 0 1 1 0 0 0 ...
-##   ..$ Minu.sedo: int [1:75] 1 0 0 0 0 0 1 1 2 1 ...
-##   ..$ Minu.vern: int [1:75] 1 0 1 1 1 0 1 0 1 1 ...
-##   ..$ Phyt.orbi: int [1:75] 0 0 0 0 0 0 0 0 0 0 ...
-##   ..$ Plan.alpi: int [1:75] 0 0 0 0 0 0 0 0 0 0 ...
-##   ..$ Poly.vivi: int [1:75] 1 1 1 0 1 1 1 1 1 0 ...
-##   ..$ Pote.aure: int [1:75] 0 0 2 0 0 0 1 0 0 0 ...
-##   ..$ Pote.cran: int [1:75] 0 0 1 0 0 0 0 0 1 0 ...
-##   ..$ Pote.gran: int [1:75] 0 0 0 0 0 0 0 0 0 0 ...
-##   ..$ Puls.vern: int [1:75] 0 0 2 0 0 0 1 1 1 1 ...
-##   ..$ Ranu.kuep: int [1:75] 0 0 0 0 0 0 0 0 0 0 ...
-##   ..$ Sagi.glab: int [1:75] 0 0 0 0 0 0 0 0 0 0 ...
-##   ..$ Sali.herb: int [1:75] 0 0 0 0 0 0 1 0 0 0 ...
-##   ..$ Sali.reti: int [1:75] 0 1 0 0 0 2 0 0 0 0 ...
-##   ..$ Sali.retu: int [1:75] 0 2 0 0 0 2 0 0 0 0 ...
-##   ..$ Sali.serp: int [1:75] 0 1 0 0 0 0 0 0 2 0 ...
-##   ..$ Saxi.pani: int [1:75] 1 0 0 2 1 1 0 1 1 1 ...
-##   ..$ Sedu.alpe: int [1:75] 0 0 0 0 0 0 0 0 0 1 ...
-##   ..$ Semp.mont: int [1:75] 0 1 1 1 0 1 1 0 1 1 ...
-##   ..$ Sene.inca: int [1:75] 0 0 0 0 0 0 0 0 0 0 ...
-##   ..$ Sibb.proc: int [1:75] 0 0 0 0 0 0 1 0 0 1 ...
-##   ..$ Sile.acau: int [1:75] 1 1 1 0 0 2 1 0 1 0 ...
-##   ..$ Thym.poly: int [1:75] 0 0 0 2 0 0 0 0 0 0 ...
-##   ..$ Vero.alpi: int [1:75] 0 0 0 0 0 0 0 0 0 0 ...
-##   ..$ Vero.alli: int [1:75] 0 0 0 0 0 0 0 0 0 0 ...
-##   ..$ Vero.bell: int [1:75] 0 0 0 1 0 1 1 0 1 1 ...
-##   ..$ Myos.alpe: int [1:75] 0 0 1 1 0 0 1 0 0 1 ...
-##   ..$ Tara.alpi: int [1:75] 0 0 0 0 0 0 0 0 0 0 ...
-##   ..$ Scab.luci: int [1:75] 0 0 1 0 0 0 0 0 0 0 ...
-##   ..$ Anth.alpe: int [1:75] 0 1 0 0 0 0 0 0 0 0 ...
-##   ..$ Oxyt.camp: int [1:75] 1 0 1 0 0 0 0 0 0 0 ...
-##   ..$ Oxyt.lapp: int [1:75] 1 1 0 1 1 1 0 0 0 0 ...
-##   ..$ Lotu.alpi: int [1:75] 0 0 0 0 0 0 0 0 0 0 ...
-##   ..$ Trif.alpi: int [1:75] 0 0 0 0 0 0 0 0 0 0 ...
-##   ..$ Trif.badi: int [1:75] 0 0 0 0 0 0 0 0 0 0 ...
-##   ..$ Trif.thal: int [1:75] 0 0 0 0 0 0 0 0 0 0 ...
-##  $ env      :'data.frame':   75 obs. of  6 variables:
-##   ..$ Aspect: int [1:75] 7 1 5 9 9 1 5 6 9 1 ...
-##   ..$ Slope : int [1:75] 2 35 0 30 5 30 10 12 2 5 ...
-##   ..$ Form  : Factor w/ 5 levels "1","2","3","4",..: 1 3 3 3 1 3 3 2 1 3 ...
-##   ..$ PhysD : int [1:75] 50 40 20 80 80 40 70 15 65 60 ...
-##   ..$ ZoogD : Factor w/ 3 levels "no","some","high": 1 1 1 1 1 1 1 1 1 1 ...
-##   ..$ Snow  : int [1:75] 140 140 140 140 140 140 160 140 140 150 ...
-##  $ traits   :'data.frame':   82 obs. of  8 variables:
-##   ..$ Height: num [1:82] 6 5 15 0 12 30 12 25 9 20 ...
-##   ..$ Spread: int [1:82] 10 20 5 30 30 20 40 10 5 20 ...
-##   ..$ Angle : int [1:82] 80 20 50 80 60 80 45 80 70 50 ...
-##   ..$ Area  : num [1:82] 60 191 280 600 420 ...
-##   ..$ Thick : num [1:82] 0.12 0.2 0.08 0.2 0.14 0.4 0.14 0.2 0.2 0.2 ...
-##   ..$ SLA   : num [1:82] 8.1 15.1 18 10.6 12.5 6.5 19 13.7 8.8 11.5 ...
-##   ..$ N_mass: num [1:82] 219 204 220 233 156 ...
-##   ..$ Seed  : num [1:82] 0.08 0.21 0.54 1.72 1.17 1.68 0.23 0.61 0.64 0.83 ...
-##  $ spe.names: Named chr [1:82] "Agrostis rupestris All." "Alopecurus alpinus Vill." "Anthoxanthum odoratum L.  subsp. nipponicum (Honda) Tzvelev" "Helictotrichon sedenense (DC.) Holub" ...
-##   ..- attr(*, "names")= chr [1:82] "Agro.rupe" "Alop.alpi" "Anth.nipp" "Heli.sede" ...</code></pre>
+<span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">aravo</span><span class="op">)</span></code></pre></div>
+<pre><code><span class="co">## List of 4</span>
+<span class="co">##  $ spe      :'data.frame':   75 obs. of  82 variables:</span>
+<span class="co">##   ..$ Agro.rupe: int [1:75] 0 0 3 0 0 0 2 0 0 3 ...</span>
+<span class="co">##   ..$ Alop.alpi: int [1:75] 0 0 0 0 0 0 0 0 0 0 ...</span>
+<span class="co">##   ..$ Anth.nipp: int [1:75] 0 0 1 0 0 0 0 0 0 0 ...</span>
+<span class="co">##   ..$ Heli.sede: int [1:75] 0 0 0 2 0 0 0 0 0 0 ...</span>
+<span class="co">##   ..$ Aven.vers: int [1:75] 0 0 1 0 0 0 2 0 1 2 ...</span>
+<span class="co">##   ..$ Care.rosa: int [1:75] 1 2 2 2 0 3 2 2 3 3 ...</span>
+<span class="co">##   ..$ Care.foet: int [1:75] 0 0 0 0 0 0 0 0 0 0 ...</span>
+<span class="co">##   ..$ Care.parv: int [1:75] 0 1 0 0 0 1 1 1 1 0 ...</span>
+<span class="co">##   ..$ Care.rupe: int [1:75] 3 0 0 0 0 1 0 3 0 0 ...</span>
+<span class="co">##   ..$ Care.semp: int [1:75] 0 0 1 0 0 0 0 1 0 2 ...</span>
+<span class="co">##   ..$ Fest.laev: int [1:75] 0 0 0 0 0 0 0 0 0 0 ...</span>
+<span class="co">##   ..$ Fest.quad: int [1:75] 2 0 3 1 3 0 2 3 0 0 ...</span>
+<span class="co">##   ..$ Fest.viol: int [1:75] 0 0 1 0 1 0 0 0 0 0 ...</span>
+<span class="co">##   ..$ Kobr.myos: int [1:75] 1 3 4 1 1 4 2 2 3 1 ...</span>
+<span class="co">##   ..$ Luzu.lute: int [1:75] 0 0 1 0 0 0 1 1 1 1 ...</span>
+<span class="co">##   ..$ Poa.alpi : int [1:75] 1 2 0 2 0 2 0 0 1 1 ...</span>
+<span class="co">##   ..$ Poa.supi : int [1:75] 0 0 0 0 0 0 0 0 0 0 ...</span>
+<span class="co">##   ..$ Sesl.caer: int [1:75] 0 0 0 1 1 1 0 2 0 0 ...</span>
+<span class="co">##   ..$ Alch.pent: int [1:75] 0 0 0 0 0 0 0 0 0 0 ...</span>
+<span class="co">##   ..$ Alch.glau: int [1:75] 0 0 1 0 0 0 0 0 0 0 ...</span>
+<span class="co">##   ..$ Alch.vulg: int [1:75] 0 0 0 0 0 0 0 0 0 0 ...</span>
+<span class="co">##   ..$ Andr.brig: int [1:75] 0 0 0 0 0 0 0 0 0 1 ...</span>
+<span class="co">##   ..$ Ante.carp: int [1:75] 0 1 1 0 0 1 1 1 1 2 ...</span>
+<span class="co">##   ..$ Ante.dioi: int [1:75] 0 0 0 0 0 0 0 1 0 0 ...</span>
+<span class="co">##   ..$ Arni.mont: int [1:75] 0 0 0 0 0 0 0 0 0 0 ...</span>
+<span class="co">##   ..$ Aste.alpi: int [1:75] 0 0 0 0 0 0 0 0 0 0 ...</span>
+<span class="co">##   ..$ Bart.alpi: int [1:75] 0 1 0 0 0 1 0 0 0 0 ...</span>
+<span class="co">##   ..$ Camp.sche: int [1:75] 0 1 1 1 1 1 1 0 1 1 ...</span>
+<span class="co">##   ..$ Card.alpi: int [1:75] 0 0 0 0 0 0 0 0 0 0 ...</span>
+<span class="co">##   ..$ Cera.stri: int [1:75] 0 0 0 0 0 1 0 0 1 0 ...</span>
+<span class="co">##   ..$ Cera.cera: int [1:75] 0 0 0 0 0 0 0 0 0 0 ...</span>
+<span class="co">##   ..$ Leuc.alpi: int [1:75] 0 0 0 0 0 0 1 0 0 1 ...</span>
+<span class="co">##   ..$ Cirs.acau: int [1:75] 0 0 0 0 0 0 0 0 0 0 ...</span>
+<span class="co">##   ..$ Drab.aizo: int [1:75] 0 0 0 1 0 0 1 0 1 1 ...</span>
+<span class="co">##   ..$ Drya.octo: int [1:75] 0 1 0 0 0 1 0 0 0 0 ...</span>
+<span class="co">##   ..$ Erig.unif: int [1:75] 0 0 1 1 0 0 1 1 0 0 ...</span>
+<span class="co">##   ..$ Gent.camp: int [1:75] 0 0 0 0 0 0 1 0 1 1 ...</span>
+<span class="co">##   ..$ Gent.acau: int [1:75] 0 0 1 0 0 0 0 0 0 0 ...</span>
+<span class="co">##   ..$ Gent.vern: int [1:75] 0 0 1 1 1 0 0 0 0 1 ...</span>
+<span class="co">##   ..$ Geum.mont: int [1:75] 0 0 2 0 0 0 0 0 0 0 ...</span>
+<span class="co">##   ..$ Omal.supi: int [1:75] 0 0 0 0 0 0 0 0 0 0 ...</span>
+<span class="co">##   ..$ Andr.vita: int [1:75] 0 0 0 0 1 0 1 0 1 0 ...</span>
+<span class="co">##   ..$ Hier.pili: int [1:75] 0 0 0 0 0 0 1 0 0 0 ...</span>
+<span class="co">##   ..$ Homo.alpi: int [1:75] 0 0 0 0 0 1 0 0 0 1 ...</span>
+<span class="co">##   ..$ Leon.pyre: int [1:75] 0 0 0 0 0 0 1 0 0 0 ...</span>
+<span class="co">##   ..$ Ligu.muto: int [1:75] 0 1 0 1 0 2 0 1 1 0 ...</span>
+<span class="co">##   ..$ Lloy.sero: int [1:75] 0 1 0 0 0 1 1 0 0 0 ...</span>
+<span class="co">##   ..$ Minu.sedo: int [1:75] 1 0 0 0 0 0 1 1 2 1 ...</span>
+<span class="co">##   ..$ Minu.vern: int [1:75] 1 0 1 1 1 0 1 0 1 1 ...</span>
+<span class="co">##   ..$ Phyt.orbi: int [1:75] 0 0 0 0 0 0 0 0 0 0 ...</span>
+<span class="co">##   ..$ Plan.alpi: int [1:75] 0 0 0 0 0 0 0 0 0 0 ...</span>
+<span class="co">##   ..$ Poly.vivi: int [1:75] 1 1 1 0 1 1 1 1 1 0 ...</span>
+<span class="co">##   ..$ Pote.aure: int [1:75] 0 0 2 0 0 0 1 0 0 0 ...</span>
+<span class="co">##   ..$ Pote.cran: int [1:75] 0 0 1 0 0 0 0 0 1 0 ...</span>
+<span class="co">##   ..$ Pote.gran: int [1:75] 0 0 0 0 0 0 0 0 0 0 ...</span>
+<span class="co">##   ..$ Puls.vern: int [1:75] 0 0 2 0 0 0 1 1 1 1 ...</span>
+<span class="co">##   ..$ Ranu.kuep: int [1:75] 0 0 0 0 0 0 0 0 0 0 ...</span>
+<span class="co">##   ..$ Sagi.glab: int [1:75] 0 0 0 0 0 0 0 0 0 0 ...</span>
+<span class="co">##   ..$ Sali.herb: int [1:75] 0 0 0 0 0 0 1 0 0 0 ...</span>
+<span class="co">##   ..$ Sali.reti: int [1:75] 0 1 0 0 0 2 0 0 0 0 ...</span>
+<span class="co">##   ..$ Sali.retu: int [1:75] 0 2 0 0 0 2 0 0 0 0 ...</span>
+<span class="co">##   ..$ Sali.serp: int [1:75] 0 1 0 0 0 0 0 0 2 0 ...</span>
+<span class="co">##   ..$ Saxi.pani: int [1:75] 1 0 0 2 1 1 0 1 1 1 ...</span>
+<span class="co">##   ..$ Sedu.alpe: int [1:75] 0 0 0 0 0 0 0 0 0 1 ...</span>
+<span class="co">##   ..$ Semp.mont: int [1:75] 0 1 1 1 0 1 1 0 1 1 ...</span>
+<span class="co">##   ..$ Sene.inca: int [1:75] 0 0 0 0 0 0 0 0 0 0 ...</span>
+<span class="co">##   ..$ Sibb.proc: int [1:75] 0 0 0 0 0 0 1 0 0 1 ...</span>
+<span class="co">##   ..$ Sile.acau: int [1:75] 1 1 1 0 0 2 1 0 1 0 ...</span>
+<span class="co">##   ..$ Thym.poly: int [1:75] 0 0 0 2 0 0 0 0 0 0 ...</span>
+<span class="co">##   ..$ Vero.alpi: int [1:75] 0 0 0 0 0 0 0 0 0 0 ...</span>
+<span class="co">##   ..$ Vero.alli: int [1:75] 0 0 0 0 0 0 0 0 0 0 ...</span>
+<span class="co">##   ..$ Vero.bell: int [1:75] 0 0 0 1 0 1 1 0 1 1 ...</span>
+<span class="co">##   ..$ Myos.alpe: int [1:75] 0 0 1 1 0 0 1 0 0 1 ...</span>
+<span class="co">##   ..$ Tara.alpi: int [1:75] 0 0 0 0 0 0 0 0 0 0 ...</span>
+<span class="co">##   ..$ Scab.luci: int [1:75] 0 0 1 0 0 0 0 0 0 0 ...</span>
+<span class="co">##   ..$ Anth.alpe: int [1:75] 0 1 0 0 0 0 0 0 0 0 ...</span>
+<span class="co">##   ..$ Oxyt.camp: int [1:75] 1 0 1 0 0 0 0 0 0 0 ...</span>
+<span class="co">##   ..$ Oxyt.lapp: int [1:75] 1 1 0 1 1 1 0 0 0 0 ...</span>
+<span class="co">##   ..$ Lotu.alpi: int [1:75] 0 0 0 0 0 0 0 0 0 0 ...</span>
+<span class="co">##   ..$ Trif.alpi: int [1:75] 0 0 0 0 0 0 0 0 0 0 ...</span>
+<span class="co">##   ..$ Trif.badi: int [1:75] 0 0 0 0 0 0 0 0 0 0 ...</span>
+<span class="co">##   ..$ Trif.thal: int [1:75] 0 0 0 0 0 0 0 0 0 0 ...</span>
+<span class="co">##  $ env      :'data.frame':   75 obs. of  6 variables:</span>
+<span class="co">##   ..$ Aspect: int [1:75] 7 1 5 9 9 1 5 6 9 1 ...</span>
+<span class="co">##   ..$ Slope : int [1:75] 2 35 0 30 5 30 10 12 2 5 ...</span>
+<span class="co">##   ..$ Form  : Factor w/ 5 levels "1","2","3","4",..: 1 3 3 3 1 3 3 2 1 3 ...</span>
+<span class="co">##   ..$ PhysD : int [1:75] 50 40 20 80 80 40 70 15 65 60 ...</span>
+<span class="co">##   ..$ ZoogD : Factor w/ 3 levels "no","some","high": 1 1 1 1 1 1 1 1 1 1 ...</span>
+<span class="co">##   ..$ Snow  : int [1:75] 140 140 140 140 140 140 160 140 140 150 ...</span>
+<span class="co">##  $ traits   :'data.frame':   82 obs. of  8 variables:</span>
+<span class="co">##   ..$ Height: num [1:82] 6 5 15 0 12 30 12 25 9 20 ...</span>
+<span class="co">##   ..$ Spread: int [1:82] 10 20 5 30 30 20 40 10 5 20 ...</span>
+<span class="co">##   ..$ Angle : int [1:82] 80 20 50 80 60 80 45 80 70 50 ...</span>
+<span class="co">##   ..$ Area  : num [1:82] 60 191 280 600 420 ...</span>
+<span class="co">##   ..$ Thick : num [1:82] 0.12 0.2 0.08 0.2 0.14 0.4 0.14 0.2 0.2 0.2 ...</span>
+<span class="co">##   ..$ SLA   : num [1:82] 8.1 15.1 18 10.6 12.5 6.5 19 13.7 8.8 11.5 ...</span>
+<span class="co">##   ..$ N_mass: num [1:82] 219 204 220 233 156 ...</span>
+<span class="co">##   ..$ Seed  : num [1:82] 0.08 0.21 0.54 1.72 1.17 1.68 0.23 0.61 0.64 0.83 ...</span>
+<span class="co">##  $ spe.names: Named chr [1:82] "Agrostis rupestris All." "Alopecurus alpinus Vill." "Anthoxanthum odoratum L.  subsp. nipponicum (Honda) Tzvelev" "Helictotrichon sedenense (DC.) Holub" ...</span>
+<span class="co">##   ..- attr(*, "names")= chr [1:82] "Agro.rupe" "Alop.alpi" "Anth.nipp" "Heli.sede" ...</span></code></pre>
 </div>
-<div id="functional-rarity-indices" class="section level1">
-<h1 class="hasAnchor">
-<a href="#functional-rarity-indices" class="anchor"></a>Functional rarity indices</h1>
-<div id="inputs-of-functions" class="section level2">
-<h2 class="hasAnchor">
-<a href="#inputs-of-functions" class="anchor"></a>Inputs of functions</h2>
+<div class="section level2">
+<h2 id="functional-rarity-indices">Functional rarity indices<a class="anchor" aria-label="anchor" href="#functional-rarity-indices"></a>
+</h2>
+<div class="section level3">
+<h3 id="inputs-of-functions">Inputs of functions<a class="anchor" aria-label="anchor" href="#inputs-of-functions"></a>
+</h3>
 <p>For each metric, the package includes two functions, depending on the input type. Ecologist usually have to deal with site-species matrix, containing sites names as rows, species in columns and either abundances or presence/absence data (see example datasets in <code>vegan</code> or <code>ade4</code> packages for example). Thus, this matrix is needed as an input for each simple function.</p>
-<div class="sourceCode" id="cb3"><html><body><pre class="r"><span class="co"># Site-species matrix stored in aravo$spe</span>
-<span class="no">mat</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html">as.matrix</a></span>(<span class="no">aravo</span>$<span class="no">spe</span>)
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Site-species matrix stored in aravo$spe</span>
+<span class="va">mat</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">as.matrix</a></span><span class="op">(</span><span class="va">aravo</span><span class="op">$</span><span class="va">spe</span><span class="op">)</span>
 
-<span class="no">mat</span>[<span class="fl">1</span>:<span class="fl">5</span>, <span class="fl">1</span>:<span class="fl">5</span>]</pre></body></html></div>
-<pre><code>##      Agro.rupe Alop.alpi Anth.nipp Heli.sede Aven.vers
-## AR07         0         0         0         0         0
-## AR71         0         0         0         0         0
-## AR26         3         0         1         0         1
-## AR54         0         0         0         2         0
-## AR60         0         0         0         0         0</code></pre>
+<span class="va">mat</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">]</span></code></pre></div>
+<pre><code><span class="co">##      Agro.rupe Alop.alpi Anth.nipp Heli.sede Aven.vers</span>
+<span class="co">## AR07         0         0         0         0         0</span>
+<span class="co">## AR71         0         0         0         0         0</span>
+<span class="co">## AR26         3         0         1         0         1</span>
+<span class="co">## AR54         0         0         0         2         0</span>
+<span class="co">## AR60         0         0         0         0         0</span></code></pre>
 <p><code>metricname()</code> functions can be used to compute indices directly on site-species matrices.</p>
 <p>Users can also use a stacked (or tidy) data.frame, containing columns for sites, species and abundances. The package contains for each metric another function called <code>metricname_stack()</code> function that can take these stacked data.frames as inputs.</p>
 <p><code>funrar</code> package includes two functions to go from one format to the other: <code><a href="../reference/matrix_to_stack.html">matrix_to_stack()</a></code> and <code><a href="../reference/stack_to_matrix.html">stack_to_matrix()</a></code></p>
-<div class="sourceCode" id="cb5"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">funrar</span>)
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://rekyt.github.io/funrar/" class="external-link">funrar</a></span><span class="op">)</span>
 
-<span class="no">dat</span> <span class="kw">=</span> <span class="fu"><a href="../reference/matrix_to_stack.html">matrix_to_stack</a></span>(<span class="no">mat</span>, <span class="st">"value"</span>, <span class="st">"site"</span>, <span class="st">"species"</span>)
-<span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(<span class="no">dat</span>)</pre></body></html></div>
-<pre><code>##     species site value
-## 1 Agro.rupe AR07     0
-## 2 Agro.rupe AR71     0
-## 3 Agro.rupe AR26     3
-## 4 Agro.rupe AR54     0
-## 5 Agro.rupe AR60     0
-## 6 Agro.rupe AR70     0</code></pre>
-<div class="sourceCode" id="cb7"><html><body><pre class="r"><span class="co"># The reverse function is provided and gives the same original matrix</span>
-<span class="fu"><a href="https://rdrr.io/r/base/identical.html">identical</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span>(<span class="fu"><a href="../reference/stack_to_matrix.html">stack_to_matrix</a></span>(<span class="no">dat</span>, <span class="st">"site"</span>, <span class="st">"species"</span>, <span class="st">"value"</span>)), <span class="fu"><a href="https://rdrr.io/r/base/numeric.html">as.numeric</a></span>(<span class="no">mat</span>))</pre></body></html></div>
-<pre><code>## [1] FALSE</code></pre>
-<div class="sourceCode" id="cb9"><html><body><pre class="r"><span class="co"># Removal of empty rows</span>
-<span class="no">dat</span> <span class="kw">=</span> <span class="no">dat</span>[<span class="fu"><a href="https://rdrr.io/r/base/which.html">which</a></span>(<span class="no">dat</span>$<span class="no">value</span> <span class="kw">&gt;</span> <span class="fl">0</span>), ]</pre></body></html></div>
+<span class="va">dat</span> <span class="op">=</span> <span class="fu"><a href="../reference/matrix_to_stack.html">matrix_to_stack</a></span><span class="op">(</span><span class="va">mat</span>, <span class="st">"value"</span>, <span class="st">"site"</span>, <span class="st">"species"</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">dat</span><span class="op">)</span></code></pre></div>
+<pre><code><span class="co">##     species site value</span>
+<span class="co">## 1 Agro.rupe AR07     0</span>
+<span class="co">## 2 Agro.rupe AR71     0</span>
+<span class="co">## 3 Agro.rupe AR26     3</span>
+<span class="co">## 4 Agro.rupe AR54     0</span>
+<span class="co">## 5 Agro.rupe AR60     0</span>
+<span class="co">## 6 Agro.rupe AR70     0</span></code></pre>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># The reverse function is provided and gives the same original matrix</span>
+<span class="fu"><a href="https://rdrr.io/r/base/identical.html" class="external-link">identical</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">as.numeric</a></span><span class="op">(</span><span class="fu"><a href="../reference/stack_to_matrix.html">stack_to_matrix</a></span><span class="op">(</span><span class="va">dat</span>, <span class="st">"site"</span>, <span class="st">"species"</span>, <span class="st">"value"</span><span class="op">)</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">as.numeric</a></span><span class="op">(</span><span class="va">mat</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<pre><code><span class="co">## [1] FALSE</span></code></pre>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Removal of empty rows</span>
+<span class="va">dat</span> <span class="op">=</span> <span class="va">dat</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/which.html" class="external-link">which</a></span><span class="op">(</span><span class="va">dat</span><span class="op">$</span><span class="va">value</span> <span class="op">&gt;</span> <span class="fl">0</span><span class="op">)</span>, <span class="op">]</span></code></pre></div>
 <p>The package is also able to deal with large matrices with many zeroes by using sparse matrices. For more details, see <code>sparse_matrices</code> vignette.</p>
 </div>
-<div id="indices" class="section level2">
-<h2 class="hasAnchor">
-<a href="#indices" class="anchor"></a>Indices</h2>
-<div id="distance-matrix-computation" class="section level3">
-<h3 class="hasAnchor">
-<a href="#distance-matrix-computation" class="anchor"></a>Distance matrix computation</h3>
+<div class="section level3">
+<h3 id="indices">Indices<a class="anchor" aria-label="anchor" href="#indices"></a>
+</h3>
+<div class="section level4">
+<h4 id="distance-matrix-computation">Distance matrix computation<a class="anchor" aria-label="anchor" href="#distance-matrix-computation"></a>
+</h4>
 <p>The indices rely on the computation of a distance matrix. It represents the functional distance between two species given a particular set of traits. From a species traits matrix you can easily compute a distance matrix using function <code><a href="../reference/compute_dist_matrix.html">compute_dist_matrix()</a></code>.</p>
 <p>In order to compute distance matrix, species names must be specified as <strong>rownames</strong> in the traits table. Further, species names must match between the traits table and distance matrix. Species names must be characters and not factors.</p>
 <p>The function relies on the <code>daisy()</code> function from package <code>cluster</code> and the default metric is Gower’s distance to take into account ordinal, categorical and binary traits:</p>
-<div class="sourceCode" id="cb10"><html><body><pre class="r"><span class="no">tra</span> <span class="kw">=</span> <span class="no">aravo</span>$<span class="no">traits</span>[, <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"Height"</span>, <span class="st">"SLA"</span>, <span class="st">"N_mass"</span>)]
-<span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(<span class="no">tra</span>)</pre></body></html></div>
-<pre><code>##           Height  SLA N_mass
-## Agro.rupe      6  8.1 218.70
-## Alop.alpi      5 15.1 203.85
-## Anth.nipp     15 18.0 219.60
-## Heli.sede      0 10.6 233.20
-## Aven.vers     12 12.5 156.25
-## Care.rosa     30  6.5 208.65</code></pre>
-<div class="sourceCode" id="cb12"><html><body><pre class="r"><span class="no">dist_mat</span> <span class="kw">=</span> <span class="fu"><a href="../reference/compute_dist_matrix.html">compute_dist_matrix</a></span>(<span class="no">tra</span>)</pre></body></html></div>
-<pre><code>## Warning in compute_dist_matrix(tra): Only numeric traits provided, consider
-## using euclidean distance.</code></pre>
-<div class="sourceCode" id="cb14"><html><body><pre class="r"><span class="no">dist_mat</span>[<span class="fl">1</span>:<span class="fl">5</span>, <span class="fl">1</span>:<span class="fl">5</span>]</pre></body></html></div>
-<pre><code>##           Agro.rupe Alop.alpi Anth.nipp Heli.sede Aven.vers
-## Agro.rupe 0.0000000 0.1004668 0.2083010 0.1068477 0.1705883
-## Alop.alpi 0.1004668 0.0000000 0.1567591 0.1308034 0.1488041
-## Anth.nipp 0.2083010 0.1567591 0.0000000 0.2592416 0.1500077
-## Heli.sede 0.1068477 0.1308034 0.2592416 0.0000000 0.2231472
-## Aven.vers 0.1705883 0.1488041 0.1500077 0.2231472 0.0000000</code></pre>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">tra</span> <span class="op">=</span> <span class="va">aravo</span><span class="op">$</span><span class="va">traits</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Height"</span>, <span class="st">"SLA"</span>, <span class="st">"N_mass"</span><span class="op">)</span><span class="op">]</span>
+<span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">tra</span><span class="op">)</span></code></pre></div>
+<pre><code><span class="co">##           Height  SLA N_mass</span>
+<span class="co">## Agro.rupe      6  8.1 218.70</span>
+<span class="co">## Alop.alpi      5 15.1 203.85</span>
+<span class="co">## Anth.nipp     15 18.0 219.60</span>
+<span class="co">## Heli.sede      0 10.6 233.20</span>
+<span class="co">## Aven.vers     12 12.5 156.25</span>
+<span class="co">## Care.rosa     30  6.5 208.65</span></code></pre>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">dist_mat</span> <span class="op">=</span> <span class="fu"><a href="../reference/compute_dist_matrix.html">compute_dist_matrix</a></span><span class="op">(</span><span class="va">tra</span><span class="op">)</span></code></pre></div>
+<pre><code><span class="co">## Warning in compute_dist_matrix(tra): Only numeric traits provided, consider</span>
+<span class="co">## using euclidean distance.</span></code></pre>
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">dist_mat</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">]</span></code></pre></div>
+<pre><code><span class="co">##           Agro.rupe Alop.alpi Anth.nipp Heli.sede Aven.vers</span>
+<span class="co">## Agro.rupe 0.0000000 0.1004668 0.2083010 0.1068477 0.1705883</span>
+<span class="co">## Alop.alpi 0.1004668 0.0000000 0.1567591 0.1308034 0.1488041</span>
+<span class="co">## Anth.nipp 0.2083010 0.1567591 0.0000000 0.2592416 0.1500077</span>
+<span class="co">## Heli.sede 0.1068477 0.1308034 0.2592416 0.0000000 0.2231472</span>
+<span class="co">## Aven.vers 0.1705883 0.1488041 0.1500077 0.2231472 0.0000000</span></code></pre>
 <p>Using the <code>metric</code> argument in <code><a href="../reference/compute_dist_matrix.html">compute_dist_matrix()</a></code> you can specify other distance metrics (<code>euclidean</code> for Euclidean distances and <code>manhattan</code> for Manhattan distances) for functional distances. You can also compute your own distance matrix with other methods as long as it is a matrix and both row names and column names are species names.</p>
 </div>
-<div id="functional-distinctiveness-computation" class="section level3">
-<h3 class="hasAnchor">
-<a href="#functional-distinctiveness-computation" class="anchor"></a>Functional Distinctiveness computation</h3>
-<div id="formula" class="section level4">
-<h4 class="hasAnchor">
-<a href="#formula" class="anchor"></a>Formula</h4>
+<div class="section level4">
+<h4 id="functional-distinctiveness-computation">Functional Distinctiveness computation<a class="anchor" aria-label="anchor" href="#functional-distinctiveness-computation"></a>
+</h4>
+<div class="section level5">
+<h5 id="formula">Formula<a class="anchor" aria-label="anchor" href="#formula"></a>
+</h5>
 <p>The distinctiveness measures how a species is locally functionally rare, in comparison with the other species of community. Each species (or individual) in each community will get a distinctiveness value. Distinctiveness values range from 0 to 1. A value of 0 indicates that the focal species is not locally functionally distant from the other and conversely.</p>
 <p>From given functional distances, it is computed as such: <span class="math display">\[
 D_i = \frac{\sum_{\substack{j = 1, \\
@@ -313,286 +317,310 @@ D_i = \frac{\sum_{\substack{j = 1, \\
                             }}^{N} A_j},
 \]</span> with the same terms as above, and <span class="math inline">\(A_j\)</span> the relative abundance of species <span class="math inline">\(j\)</span> in percent, in the community.</p>
 </div>
-<div id="computation-with-site-species-matrix" class="section level4">
-<h4 class="hasAnchor">
-<a href="#computation-with-site-species-matrix" class="anchor"></a>Computation with site-species matrix</h4>
+<div class="section level5">
+<h5 id="computation-with-site-species-matrix">Computation with site-species matrix<a class="anchor" aria-label="anchor" href="#computation-with-site-species-matrix"></a>
+</h5>
 <p>Using <code>funrar</code> functional distinctiveness can be computed using function <code><a href="../reference/distinctiveness.html">distinctiveness()</a></code>:</p>
-<div class="sourceCode" id="cb16"><html><body><pre class="r"><span class="co"># Compute distinctiveness for each species on each site</span>
-<span class="no">di</span> <span class="kw">=</span> <span class="fu"><a href="../reference/distinctiveness.html">distinctiveness</a></span>(<span class="kw">pres_matrix</span> <span class="kw">=</span> <span class="no">mat</span>,  <span class="co"># The site x species matrix</span>
-                     <span class="kw">dist_matrix</span> <span class="kw">=</span> <span class="no">dist_mat</span>)  <span class="co"># Functional Distance matrix</span></pre></body></html></div>
-<pre><code>## Warning in distinctiveness(pres_matrix = mat, dist_matrix = dist_mat): Provided object may not contain relative abundances nor presence-absence
-## Have a look at the make_relative() function if it is the case</code></pre>
-<div class="sourceCode" id="cb18"><html><body><pre class="r"><span class="no">di</span>[<span class="fl">1</span>:<span class="fl">5</span>, <span class="fl">1</span>:<span class="fl">5</span>]</pre></body></html></div>
-<pre><code>##      Agro.rupe Alop.alpi Anth.nipp Heli.sede Aven.vers
-## AR07        NA        NA        NA        NA        NA
-## AR71        NA        NA        NA        NA        NA
-## AR26 0.1460428        NA 0.2039929        NA 0.1788624
-## AR54        NA        NA        NA 0.1786867        NA
-## AR60        NA        NA        NA        NA        NA</code></pre>
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Compute distinctiveness for each species on each site</span>
+<span class="va">di</span> <span class="op">=</span> <span class="fu"><a href="../reference/distinctiveness.html">distinctiveness</a></span><span class="op">(</span>pres_matrix <span class="op">=</span> <span class="va">mat</span>,  <span class="co"># The site x species matrix</span>
+                     dist_matrix <span class="op">=</span> <span class="va">dist_mat</span><span class="op">)</span>  <span class="co"># Functional Distance matrix</span></code></pre></div>
+<pre><code><span class="co">## Warning in distinctiveness(pres_matrix = mat, dist_matrix = dist_mat): Provided object may not contain relative abundances nor presence-absence</span>
+<span class="co">## Have a look at the make_relative() function if it is the case</span></code></pre>
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">di</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">]</span></code></pre></div>
+<pre><code><span class="co">##      Agro.rupe Alop.alpi Anth.nipp Heli.sede Aven.vers</span>
+<span class="co">## AR07        NA        NA        NA        NA        NA</span>
+<span class="co">## AR71        NA        NA        NA        NA        NA</span>
+<span class="co">## AR26 0.1460428        NA 0.2039929        NA 0.1788624</span>
+<span class="co">## AR54        NA        NA        NA 0.1786867        NA</span>
+<span class="co">## AR60        NA        NA        NA        NA        NA</span></code></pre>
 <p>The syntax for <code><a href="../reference/distinctiveness.html">distinctiveness()</a></code> is first the matrix and then the functional distance matrix. The function returns a site-species matrix filled with <code>Di</code> values, i.e. the species functional distinctiveness in each species per site combination.</p>
 </div>
-<div id="computation-with-stacked-data-frame" class="section level4">
-<h4 class="hasAnchor">
-<a href="#computation-with-stacked-data-frame" class="anchor"></a>Computation with stacked data.frame</h4>
+<div class="section level5">
+<h5 id="computation-with-stacked-data-frame">Computation with stacked data.frame<a class="anchor" aria-label="anchor" href="#computation-with-stacked-data-frame"></a>
+</h5>
 <p>Using <code>funrar</code> distinctiveness values can be computed using function <code><a href="../reference/distinctiveness_stack.html">distinctiveness_stack()</a></code>:</p>
-<div class="sourceCode" id="cb20"><html><body><pre class="r"><span class="co"># Species should be character</span>
-<span class="no">dat</span>$<span class="no">species</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html">as.character</a></span>(<span class="no">dat</span>$<span class="no">species</span>)
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Species should be character</span>
+<span class="va">dat</span><span class="op">$</span><span class="va">species</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">as.character</a></span><span class="op">(</span><span class="va">dat</span><span class="op">$</span><span class="va">species</span><span class="op">)</span>
 
 <span class="co"># Compute distinctiveness for each species on each site</span>
-<span class="no">di_df</span> <span class="kw">=</span> <span class="fu"><a href="../reference/distinctiveness_stack.html">distinctiveness_stack</a></span>(<span class="kw">com_df</span> <span class="kw">=</span> <span class="no">dat</span>,  <span class="co"># The site x species table</span>
-                              <span class="kw">sp_col</span> <span class="kw">=</span> <span class="st">"species"</span>,  <span class="co"># Name of the species column</span>
-                              <span class="kw">com</span> <span class="kw">=</span> <span class="st">"site"</span>,  <span class="co"># Name of the community column</span>
-                              <span class="kw">abund</span> <span class="kw">=</span> <span class="kw">NULL</span>,  <span class="co"># Relative abundances column (facultative)</span>
-                              <span class="kw">dist_matrix</span> <span class="kw">=</span> <span class="no">dist_mat</span>)  <span class="co"># Functional Distance matrix</span></pre></body></html></div>
-<pre><code>## No relative abundance provided, computing Di without it</code></pre>
-<div class="sourceCode" id="cb22"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(<span class="no">di_df</span>)</pre></body></html></div>
-<pre><code>##     species site value        Di
-## 1 Agro.rupe AR01     1 0.1661127
-## 2 Heli.sede AR01     2 0.1828906
-## 3 Care.parv AR01     1 0.3057277
-## 4 Care.rupe AR01     3 0.1805076
-## 5 Fest.laev AR01     1 0.3093468
-## 6 Fest.viol AR01     1 0.1907347</code></pre>
+<span class="va">di_df</span> <span class="op">=</span> <span class="fu"><a href="../reference/distinctiveness_stack.html">distinctiveness_stack</a></span><span class="op">(</span>com_df <span class="op">=</span> <span class="va">dat</span>,  <span class="co"># The site x species table</span>
+                              sp_col <span class="op">=</span> <span class="st">"species"</span>,  <span class="co"># Name of the species column</span>
+                              com <span class="op">=</span> <span class="st">"site"</span>,  <span class="co"># Name of the community column</span>
+                              abund <span class="op">=</span> <span class="cn">NULL</span>,  <span class="co"># Relative abundances column (facultative)</span>
+                              dist_matrix <span class="op">=</span> <span class="va">dist_mat</span><span class="op">)</span>  <span class="co"># Functional Distance matrix</span></code></pre></div>
+<pre><code><span class="co">## No relative abundance provided, computing Di without it</span></code></pre>
+<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">di_df</span><span class="op">)</span></code></pre></div>
+<pre><code><span class="co">##     species site value        Di</span>
+<span class="co">## 1 Agro.rupe AR01     1 0.1661127</span>
+<span class="co">## 2 Heli.sede AR01     2 0.1828906</span>
+<span class="co">## 3 Care.parv AR01     1 0.3057277</span>
+<span class="co">## 4 Care.rupe AR01     3 0.1805076</span>
+<span class="co">## 5 Fest.laev AR01     1 0.3093468</span>
+<span class="co">## 6 Fest.viol AR01     1 0.1907347</span></code></pre>
 <p>The syntax for <code><a href="../reference/distinctiveness_stack.html">distinctiveness_stack()</a></code> is first the table, then the name of the species column, then the name of the community column, then the name of the relative abundance column and finally the distance matrix. The function add a <code>Di</code> column giving the species distinctiveness in each species per site combination.</p>
 <p>For abundance weighted distinctiveness you need to have a column containing relative abundances in your data frame as such:</p>
-<div class="sourceCode" id="cb24"><html><body><pre class="r"><span class="no">di_df</span> <span class="kw">=</span> <span class="fu"><a href="../reference/distinctiveness_stack.html">distinctiveness_stack</a></span>(<span class="no">dat</span>, <span class="st">"species"</span>, <span class="st">"site"</span>, <span class="st">"value"</span>, <span class="no">dist_mat</span>)</pre></body></html></div>
-<pre><code>## Warning in distinctiveness_stack(dat, "species", "site", "value", dist_mat): Provided object may not contain relative abundances nor presence-absence
-## Have a look at the make_relative() function if it is the case</code></pre>
-<div class="sourceCode" id="cb26"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(<span class="no">di_df</span>)</pre></body></html></div>
-<pre><code>##     species site value        Di
-## 1 Agro.rupe AR01     1 0.1569403
-## 2 Heli.sede AR01     2 0.1924531
-## 3 Care.parv AR01     1 0.2837640
-## 4 Care.rupe AR01     3 0.1761766
-## 5 Fest.laev AR01     1 0.2828495
-## 6 Fest.viol AR01     1 0.1918732</code></pre>
+<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">di_df</span> <span class="op">=</span> <span class="fu"><a href="../reference/distinctiveness_stack.html">distinctiveness_stack</a></span><span class="op">(</span><span class="va">dat</span>, <span class="st">"species"</span>, <span class="st">"site"</span>, <span class="st">"value"</span>, <span class="va">dist_mat</span><span class="op">)</span></code></pre></div>
+<pre><code><span class="co">## Warning in distinctiveness_stack(dat, "species", "site", "value", dist_mat): Provided object may not contain relative abundances nor presence-absence</span>
+<span class="co">## Have a look at the make_relative() function if it is the case</span></code></pre>
+<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">di_df</span><span class="op">)</span></code></pre></div>
+<pre><code><span class="co">##     species site value        Di</span>
+<span class="co">## 1 Agro.rupe AR01     1 0.1569403</span>
+<span class="co">## 2 Heli.sede AR01     2 0.1924531</span>
+<span class="co">## 3 Care.parv AR01     1 0.2837640</span>
+<span class="co">## 4 Care.rupe AR01     3 0.1761766</span>
+<span class="co">## 5 Fest.laev AR01     1 0.2828495</span>
+<span class="co">## 6 Fest.viol AR01     1 0.1918732</span></code></pre>
 </div>
 </div>
-<div id="scarcity" class="section level3">
-<h3 class="hasAnchor">
-<a href="#scarcity" class="anchor"></a>Scarcity</h3>
-<div id="formula-1" class="section level4">
-<h4 class="hasAnchor">
-<a href="#formula-1" class="anchor"></a>Formula</h4>
+<div class="section level4">
+<h4 id="scarcity">Scarcity<a class="anchor" aria-label="anchor" href="#scarcity"></a>
+</h4>
+<div class="section level5">
+<h5 id="formula-1">Formula<a class="anchor" aria-label="anchor" href="#formula-1"></a>
+</h5>
 <p>The scarcity measures how locally abundant a species is, in comparison to the other species of community. Each species (or individual) in each community will get a scarcity value. Scarcity values range from 0 to 1. A 0 value indicates that the focal species is locally abundant and conversely.</p>
 <p><span class="math display">\[
 S_i = \exp(-NA_i\log2),
 \]</span></p>
 <p>with <span class="math inline">\(S_i\)</span> the scarcity of species <span class="math inline">\(i\)</span>, <span class="math inline">\(N\)</span> the number of species in the local community, <span class="math inline">\(A_i\)</span> the relative abundance (in percent) of species <span class="math inline">\(i\)</span> in the community.</p>
 </div>
-<div id="computation" class="section level4">
-<h4 class="hasAnchor">
-<a href="#computation" class="anchor"></a>Computation</h4>
+<div class="section level5">
+<h5 id="computation">Computation<a class="anchor" aria-label="anchor" href="#computation"></a>
+</h5>
 <p>With <code>funrar</code> it can be computed with <code><a href="../reference/scarcity.html">scarcity()</a></code> function with a syntax analog to <code><a href="../reference/distinctiveness.html">distinctiveness()</a></code></p>
-<div class="sourceCode" id="cb28"><html><body><pre class="r"><span class="no">si</span> <span class="kw">=</span> <span class="fu"><a href="../reference/scarcity.html">scarcity</a></span>(<span class="kw">pres_matrix</span> <span class="kw">=</span> <span class="no">mat</span>)</pre></body></html></div>
-<pre><code>## Warning in scarcity(pres_matrix = mat): Provided object may not contain relative abundances nor presence-absence
-## Have a look at the make_relative() function if it is the case</code></pre>
-<div class="sourceCode" id="cb30"><html><body><pre class="r"><span class="no">si</span>[<span class="fl">1</span>:<span class="fl">5</span>, <span class="fl">1</span>:<span class="fl">5</span>]</pre></body></html></div>
-<pre><code>##         Agro.rupe Alop.alpi    Anth.nipp    Heli.sede    Aven.vers
-## AR07           NA        NA           NA           NA           NA
-## AR71           NA        NA           NA           NA           NA
-## AR26 3.308722e-24        NA 1.490116e-08           NA 1.490116e-08
-## AR54           NA        NA           NA 1.455192e-11           NA
-## AR60           NA        NA           NA           NA           NA</code></pre>
-<div class="sourceCode" id="cb32"><html><body><pre class="r"><span class="no">si_df</span> <span class="kw">=</span> <span class="fu"><a href="../reference/scarcity_stack.html">scarcity_stack</a></span>(<span class="no">dat</span>, <span class="st">"species"</span>, <span class="st">"site"</span>, <span class="st">"value"</span>)
+<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">si</span> <span class="op">=</span> <span class="fu"><a href="../reference/scarcity.html">scarcity</a></span><span class="op">(</span>pres_matrix <span class="op">=</span> <span class="va">mat</span><span class="op">)</span></code></pre></div>
+<pre><code><span class="co">## Warning in scarcity(pres_matrix = mat): Provided object may not contain relative abundances nor presence-absence</span>
+<span class="co">## Have a look at the make_relative() function if it is the case</span></code></pre>
+<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">si</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">]</span></code></pre></div>
+<pre><code><span class="co">##         Agro.rupe Alop.alpi    Anth.nipp    Heli.sede    Aven.vers</span>
+<span class="co">## AR07           NA        NA           NA           NA           NA</span>
+<span class="co">## AR71           NA        NA           NA           NA           NA</span>
+<span class="co">## AR26 3.308722e-24        NA 1.490116e-08           NA 1.490116e-08</span>
+<span class="co">## AR54           NA        NA           NA 1.455192e-11           NA</span>
+<span class="co">## AR60           NA        NA           NA           NA           NA</span></code></pre>
+<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">si_df</span> <span class="op">=</span> <span class="fu"><a href="../reference/scarcity_stack.html">scarcity_stack</a></span><span class="op">(</span><span class="va">dat</span>, <span class="st">"species"</span>, <span class="st">"site"</span>, <span class="st">"value"</span><span class="op">)</span>
 
-<span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(<span class="no">si_df</span>)</pre></body></html></div>
-<pre><code>##     species site value           Si
-## 1 Agro.rupe AR01     1 1.192093e-07
-## 2 Heli.sede AR01     2 1.421085e-14
-## 3 Care.parv AR01     1 1.192093e-07
-## 4 Care.rupe AR01     3 1.694066e-21
-## 5 Fest.laev AR01     1 1.192093e-07
-## 6 Fest.viol AR01     1 1.192093e-07</code></pre>
+<span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">si_df</span><span class="op">)</span></code></pre></div>
+<pre><code><span class="co">##     species site value           Si</span>
+<span class="co">## 1 Agro.rupe AR01     1 1.192093e-07</span>
+<span class="co">## 2 Heli.sede AR01     2 1.421085e-14</span>
+<span class="co">## 3 Care.parv AR01     1 1.192093e-07</span>
+<span class="co">## 4 Care.rupe AR01     3 1.694066e-21</span>
+<span class="co">## 5 Fest.laev AR01     1 1.192093e-07</span>
+<span class="co">## 6 Fest.viol AR01     1 1.192093e-07</span></code></pre>
 </div>
 </div>
-<div id="uniqueness" class="section level3">
-<h3 class="hasAnchor">
-<a href="#uniqueness" class="anchor"></a>Uniqueness</h3>
-<div id="formula-2" class="section level4">
-<h4 class="hasAnchor">
-<a href="#formula-2" class="anchor"></a>Formula</h4>
+<div class="section level4">
+<h4 id="uniqueness">Uniqueness<a class="anchor" aria-label="anchor" href="#uniqueness"></a>
+</h4>
+<div class="section level5">
+<h5 id="formula-2">Formula<a class="anchor" aria-label="anchor" href="#formula-2"></a>
+</h5>
 <p>Uniqueness measures how functionally rare a species is at the regional scale. Each species (or individual) in the species pool will get a uniqueness value. Uniqueness values range from 0 to 1. A 0 value indicates that the focal species shares the exact same traits as other species in the pool and conversely.</p>
 <p><span class="math display">\[
 U_i = \text{min}(d_{ij}), \forall j \in [1, N_R], j \neq i,
 \]</span></p>
 <p>with <span class="math inline">\(U_i\)</span> the uniqueness of species <span class="math inline">\(i\)</span>, <span class="math inline">\(d_{ij}\)</span> the functional distance between species <span class="math inline">\(i\)</span> and species <span class="math inline">\(j\)</span>, <span class="math inline">\(N_R\)</span> the number of species in the regional pool.</p>
 </div>
-<div id="computation-1" class="section level4">
-<h4 class="hasAnchor">
-<a href="#computation-1" class="anchor"></a>Computation</h4>
+<div class="section level5">
+<h5 id="computation-1">Computation<a class="anchor" aria-label="anchor" href="#computation-1"></a>
+</h5>
 <p><code><a href="../reference/uniqueness.html">uniqueness()</a></code> follows a similar syntax, but beware that given community table and distance matrix should represent the <strong>regional species pool</strong>. And the syntax is also similar:</p>
-<div class="sourceCode" id="cb34"><html><body><pre class="r"><span class="no">ui</span> <span class="kw">=</span> <span class="fu"><a href="../reference/uniqueness.html">uniqueness</a></span>(<span class="no">mat</span>, <span class="no">dist_mat</span>)
+<div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">ui</span> <span class="op">=</span> <span class="fu"><a href="../reference/uniqueness.html">uniqueness</a></span><span class="op">(</span><span class="va">mat</span>, <span class="va">dist_mat</span><span class="op">)</span>
 
-<span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(<span class="no">ui</span>)</pre></body></html></div>
-<pre><code>##     species         Ui
-## 1 Agro.rupe 0.03635369
-## 2 Alop.alpi 0.03715692
-## 3 Anth.nipp 0.09414051
-## 4 Heli.sede 0.02270997
-## 5 Aven.vers 0.05675178
-## 6 Care.rosa 0.15922932</code></pre>
-<div class="sourceCode" id="cb36"><html><body><pre class="r"><span class="no">ui_df</span> <span class="kw">=</span> <span class="fu"><a href="../reference/uniqueness_stack.html">uniqueness_stack</a></span>(<span class="no">dat</span>, <span class="st">"species"</span>, <span class="no">dist_mat</span>)
+<span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">ui</span><span class="op">)</span></code></pre></div>
+<pre><code><span class="co">##     species         Ui</span>
+<span class="co">## 1 Agro.rupe 0.03635369</span>
+<span class="co">## 2 Alop.alpi 0.03715692</span>
+<span class="co">## 3 Anth.nipp 0.09414051</span>
+<span class="co">## 4 Heli.sede 0.02270997</span>
+<span class="co">## 5 Aven.vers 0.05675178</span>
+<span class="co">## 6 Care.rosa 0.15922932</span></code></pre>
+<div class="sourceCode" id="cb36"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">ui_df</span> <span class="op">=</span> <span class="fu"><a href="../reference/uniqueness_stack.html">uniqueness_stack</a></span><span class="op">(</span><span class="va">dat</span>, <span class="st">"species"</span>, <span class="va">dist_mat</span><span class="op">)</span>
 
-<span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(<span class="no">ui_df</span>)</pre></body></html></div>
-<pre><code>##     species         Ui
-## 1 Agro.rupe 0.03635369
-## 2 Alop.alpi 0.03715692
-## 3 Anth.nipp 0.09414051
-## 4 Heli.sede 0.02270997
-## 5 Aven.vers 0.05675178
-## 6 Care.rosa 0.15922932</code></pre>
-<div class="sourceCode" id="cb38"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/dim.html">dim</a></span>(<span class="no">ui_df</span>[!<span class="fu"><a href="https://rdrr.io/r/base/duplicated.html">duplicated</a></span>(<span class="no">ui_df</span>$<span class="no">species</span>), ])</pre></body></html></div>
-<pre><code>## [1] 82  2</code></pre>
+<span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">ui_df</span><span class="op">)</span></code></pre></div>
+<pre><code><span class="co">##     species         Ui</span>
+<span class="co">## 1 Agro.rupe 0.03635369</span>
+<span class="co">## 2 Alop.alpi 0.03715692</span>
+<span class="co">## 3 Anth.nipp 0.09414051</span>
+<span class="co">## 4 Heli.sede 0.02270997</span>
+<span class="co">## 5 Aven.vers 0.05675178</span>
+<span class="co">## 6 Care.rosa 0.15922932</span></code></pre>
+<div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/dim.html" class="external-link">dim</a></span><span class="op">(</span><span class="va">ui_df</span><span class="op">[</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/duplicated.html" class="external-link">duplicated</a></span><span class="op">(</span><span class="va">ui_df</span><span class="op">$</span><span class="va">species</span><span class="op">)</span>, <span class="op">]</span><span class="op">)</span></code></pre></div>
+<pre><code><span class="co">## [1] 82  2</span></code></pre>
 </div>
 </div>
-<div id="geographical-restrictedness" class="section level3">
-<h3 class="hasAnchor">
-<a href="#geographical-restrictedness" class="anchor"></a>Geographical Restrictedness</h3>
-<div id="formula-3" class="section level4">
-<h4 class="hasAnchor">
-<a href="#formula-3" class="anchor"></a>Formula</h4>
+<div class="section level4">
+<h4 id="geographical-restrictedness">Geographical Restrictedness<a class="anchor" aria-label="anchor" href="#geographical-restrictedness"></a>
+</h4>
+<div class="section level5">
+<h5 id="formula-3">Formula<a class="anchor" aria-label="anchor" href="#formula-3"></a>
+</h5>
 <p>Restrictedness measures how regionally rare a species is. The following function represents a species’ occupancy for a set of communities. Each species (or individual) in the species pool will have a restrictedness value. Restrictedness values range from 0 to 1. A 0 value indicates that the focal species is present in all the sites.</p>
 <p><span class="math display">\[
 R_i = 1 - N_i/N_tot
 \]</span></p>
 <p>with <span class="math inline">\(R_i\)</span> the restrictedness of species <span class="math inline">\(i\)</span>, <span class="math inline">\(N_i\)</span> the number of sites where species <span class="math inline">\(i\)</span> is found and <span class="math inline">\(N_tot\)</span> the total number of sites.</p>
 </div>
-<div id="computation-2" class="section level4">
-<h4 class="hasAnchor">
-<a href="#computation-2" class="anchor"></a>Computation</h4>
-<div class="sourceCode" id="cb40"><html><body><pre class="r"><span class="no">ri</span> <span class="kw">=</span> <span class="fu"><a href="../reference/restrictedness.html">restrictedness</a></span>(<span class="no">mat</span>)
+<div class="section level5">
+<h5 id="computation-2">Computation<a class="anchor" aria-label="anchor" href="#computation-2"></a>
+</h5>
+<div class="sourceCode" id="cb40"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">ri</span> <span class="op">=</span> <span class="fu"><a href="../reference/restrictedness.html">restrictedness</a></span><span class="op">(</span><span class="va">mat</span><span class="op">)</span>
 
-<span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(<span class="no">ri</span>)</pre></body></html></div>
-<pre><code>##     species        Ri
-## 1 Agro.rupe 0.6133333
-## 2 Alop.alpi 0.5066667
-## 3 Anth.nipp 0.7733333
-## 4 Heli.sede 0.9466667
-## 5 Aven.vers 0.8000000
-## 6 Care.rosa 0.6266667</code></pre>
-<div class="sourceCode" id="cb42"><html><body><pre class="r"><span class="co"># Species should be character</span>
-<span class="no">dat</span>$<span class="no">site</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html">as.character</a></span>(<span class="no">dat</span>$<span class="no">site</span>)
+<span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">ri</span><span class="op">)</span></code></pre></div>
+<pre><code><span class="co">##     species        Ri</span>
+<span class="co">## 1 Agro.rupe 0.6133333</span>
+<span class="co">## 2 Alop.alpi 0.5066667</span>
+<span class="co">## 3 Anth.nipp 0.7733333</span>
+<span class="co">## 4 Heli.sede 0.9466667</span>
+<span class="co">## 5 Aven.vers 0.8000000</span>
+<span class="co">## 6 Care.rosa 0.6266667</span></code></pre>
+<div class="sourceCode" id="cb42"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Species should be character</span>
+<span class="va">dat</span><span class="op">$</span><span class="va">site</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">as.character</a></span><span class="op">(</span><span class="va">dat</span><span class="op">$</span><span class="va">site</span><span class="op">)</span>
 
-<span class="no">ri_df</span> <span class="kw">=</span> <span class="fu"><a href="../reference/restrictedness_stack.html">restrictedness_stack</a></span>(<span class="no">dat</span>, <span class="st">"species"</span>, <span class="st">"site"</span>)
+<span class="va">ri_df</span> <span class="op">=</span> <span class="fu"><a href="../reference/restrictedness_stack.html">restrictedness_stack</a></span><span class="op">(</span><span class="va">dat</span>, <span class="st">"species"</span>, <span class="st">"site"</span><span class="op">)</span>
 
-<span class="fu"><a href="https://rdrr.io/r/utils/head.html">head</a></span>(<span class="no">ri_df</span>)</pre></body></html></div>
-<pre><code>##     species        Ri
-## 1 Agro.rupe 0.6133333
-## 2 Alch.glau 0.8133333
-## 3 Alch.pent 0.6533333
-## 4 Alch.vulg 0.9333333
-## 5 Alop.alpi 0.5066667
-## 6 Andr.brig 0.7733333</code></pre>
+<span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">ri_df</span><span class="op">)</span></code></pre></div>
+<pre><code><span class="co">##     species        Ri</span>
+<span class="co">## 1 Agro.rupe 0.6133333</span>
+<span class="co">## 2 Alch.glau 0.8133333</span>
+<span class="co">## 3 Alch.pent 0.6533333</span>
+<span class="co">## 4 Alch.vulg 0.9333333</span>
+<span class="co">## 5 Alop.alpi 0.5066667</span>
+<span class="co">## 6 Andr.brig 0.7733333</span></code></pre>
 </div>
 </div>
-<div id="funrar" class="section level3">
-<h3 class="hasAnchor">
-<a href="#funrar" class="anchor"></a>funrar</h3>
+<div class="section level4">
+<h4 id="funrar">funrar<a class="anchor" aria-label="anchor" href="#funrar"></a>
+</h4>
 <p>This function computes all of the four metrics introduced above.</p>
-<div class="sourceCode" id="cb44"><html><body><pre class="r"><span class="no">all_ind</span> <span class="kw">=</span> <span class="fu"><a href="../reference/funrar.html">funrar</a></span>(<span class="no">mat</span>, <span class="no">dist_mat</span>, <span class="kw">rel_abund</span> <span class="kw">=</span> <span class="fl">TRUE</span>)</pre></body></html></div>
-<pre><code>## Warning in distinctiveness(pres_matrix, dist_matrix): Provided object may not contain relative abundances nor presence-absence
-## Have a look at the make_relative() function if it is the case</code></pre>
-<pre><code>## Warning in scarcity(pres_matrix): Provided object may not contain relative abundances nor presence-absence
-## Have a look at the make_relative() function if it is the case</code></pre>
-<div class="sourceCode" id="cb47"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/utils/str.html">str</a></span>(<span class="no">all_ind</span>)</pre></body></html></div>
-<pre><code>## List of 4
-##  $ Ui:'data.frame':  82 obs. of  2 variables:
-##   ..$ species: chr [1:82] "Agro.rupe" "Alop.alpi" "Anth.nipp" "Heli.sede" ...
-##   ..$ Ui     : num [1:82] 0.0364 0.0372 0.0941 0.0227 0.0568 ...
-##  $ Di: num [1:75, 1:82] NA NA 0.146 NA NA ...
-##   ..- attr(*, "dimnames")=List of 2
-##   .. ..$ : chr [1:75] "AR07" "AR71" "AR26" "AR54" ...
-##   .. ..$ : chr [1:82] "Agro.rupe" "Alop.alpi" "Anth.nipp" "Heli.sede" ...
-##  $ Ri:'data.frame':  82 obs. of  2 variables:
-##   ..$ species: chr [1:82] "Agro.rupe" "Alop.alpi" "Anth.nipp" "Heli.sede" ...
-##   ..$ Ri     : num [1:82] 0.613 0.507 0.773 0.947 0.8 ...
-##  $ Si: num [1:75, 1:82] NA NA 3.31e-24 NA NA ...
-##   ..- attr(*, "dimnames")=List of 2
-##   .. ..$ : chr [1:75] "AR07" "AR71" "AR26" "AR54" ...
-##   .. ..$ : chr [1:82] "Agro.rupe" "Alop.alpi" "Anth.nipp" "Heli.sede" ...</code></pre>
-<div class="sourceCode" id="cb49"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/identical.html">identical</a></span>(<span class="no">all_ind</span>$<span class="no">Ui</span>, <span class="no">ui</span>)</pre></body></html></div>
-<pre><code>## [1] TRUE</code></pre>
-<div class="sourceCode" id="cb51"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/identical.html">identical</a></span>(<span class="no">all_ind</span>$<span class="no">Di</span>, <span class="no">di</span>)</pre></body></html></div>
-<pre><code>## [1] TRUE</code></pre>
-<div class="sourceCode" id="cb53"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/identical.html">identical</a></span>(<span class="no">all_ind</span>$<span class="no">Ri</span>, <span class="no">ri</span>)</pre></body></html></div>
-<pre><code>## [1] TRUE</code></pre>
-<div class="sourceCode" id="cb55"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/identical.html">identical</a></span>(<span class="no">all_ind</span>$<span class="no">Si</span>, <span class="no">si</span>)</pre></body></html></div>
-<pre><code>## [1] TRUE</code></pre>
+<div class="sourceCode" id="cb44"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">all_ind</span> <span class="op">=</span> <span class="fu"><a href="../reference/funrar.html">funrar</a></span><span class="op">(</span><span class="va">mat</span>, <span class="va">dist_mat</span>, rel_abund <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></code></pre></div>
+<pre><code><span class="co">## Warning in distinctiveness(pres_matrix, dist_matrix): Provided object may not contain relative abundances nor presence-absence</span>
+<span class="co">## Have a look at the make_relative() function if it is the case</span></code></pre>
+<pre><code><span class="co">## Warning in scarcity(pres_matrix): Provided object may not contain relative abundances nor presence-absence</span>
+<span class="co">## Have a look at the make_relative() function if it is the case</span></code></pre>
+<div class="sourceCode" id="cb47"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">all_ind</span><span class="op">)</span></code></pre></div>
+<pre><code><span class="co">## List of 4</span>
+<span class="co">##  $ Ui:'data.frame':  82 obs. of  2 variables:</span>
+<span class="co">##   ..$ species: chr [1:82] "Agro.rupe" "Alop.alpi" "Anth.nipp" "Heli.sede" ...</span>
+<span class="co">##   ..$ Ui     : num [1:82] 0.0364 0.0372 0.0941 0.0227 0.0568 ...</span>
+<span class="co">##  $ Di: num [1:75, 1:82] NA NA 0.146 NA NA ...</span>
+<span class="co">##   ..- attr(*, "dimnames")=List of 2</span>
+<span class="co">##   .. ..$ : chr [1:75] "AR07" "AR71" "AR26" "AR54" ...</span>
+<span class="co">##   .. ..$ : chr [1:82] "Agro.rupe" "Alop.alpi" "Anth.nipp" "Heli.sede" ...</span>
+<span class="co">##  $ Ri:'data.frame':  82 obs. of  2 variables:</span>
+<span class="co">##   ..$ species: chr [1:82] "Agro.rupe" "Alop.alpi" "Anth.nipp" "Heli.sede" ...</span>
+<span class="co">##   ..$ Ri     : num [1:82] 0.613 0.507 0.773 0.947 0.8 ...</span>
+<span class="co">##  $ Si: num [1:75, 1:82] NA NA 3.31e-24 NA NA ...</span>
+<span class="co">##   ..- attr(*, "dimnames")=List of 2</span>
+<span class="co">##   .. ..$ : chr [1:75] "AR07" "AR71" "AR26" "AR54" ...</span>
+<span class="co">##   .. ..$ : chr [1:82] "Agro.rupe" "Alop.alpi" "Anth.nipp" "Heli.sede" ...</span></code></pre>
+<div class="sourceCode" id="cb49"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/identical.html" class="external-link">identical</a></span><span class="op">(</span><span class="va">all_ind</span><span class="op">$</span><span class="va">Ui</span>, <span class="va">ui</span><span class="op">)</span></code></pre></div>
+<pre><code><span class="co">## [1] TRUE</span></code></pre>
+<div class="sourceCode" id="cb51"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/identical.html" class="external-link">identical</a></span><span class="op">(</span><span class="va">all_ind</span><span class="op">$</span><span class="va">Di</span>, <span class="va">di</span><span class="op">)</span></code></pre></div>
+<pre><code><span class="co">## [1] TRUE</span></code></pre>
+<div class="sourceCode" id="cb53"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/identical.html" class="external-link">identical</a></span><span class="op">(</span><span class="va">all_ind</span><span class="op">$</span><span class="va">Ri</span>, <span class="va">ri</span><span class="op">)</span></code></pre></div>
+<pre><code><span class="co">## [1] TRUE</span></code></pre>
+<div class="sourceCode" id="cb55"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/identical.html" class="external-link">identical</a></span><span class="op">(</span><span class="va">all_ind</span><span class="op">$</span><span class="va">Si</span>, <span class="va">si</span><span class="op">)</span></code></pre></div>
+<pre><code><span class="co">## [1] TRUE</span></code></pre>
 </div>
 </div>
 </div>
-<div id="plots" class="section level1">
-<h1 class="hasAnchor">
-<a href="#plots" class="anchor"></a>Plots</h1>
+<div class="section level2">
+<h2 id="plots">Plots<a class="anchor" aria-label="anchor" href="#plots"></a>
+</h2>
 <p>In this section, some ideas to plot your results are presented. For example the density of the various indices or a matrix visualization of the values of distinctiveness per species.</p>
-<div class="sourceCode" id="cb57"><html><body><pre class="r"><span class="fu"><a href="https://rdrr.io/r/base/library.html">library</a></span>(<span class="no">ggplot2</span>)
+<div class="sourceCode" id="cb57"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span>
 
 <span class="co"># Heatmap with distinctiveness values</span>
-<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="no">di_df</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="no">species</span>, <span class="no">site</span>)) +
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_tile.html">geom_tile</a></span>(<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="kw">fill</span> <span class="kw">=</span> <span class="no">Di</span>), <span class="kw">colour</span> <span class="kw">=</span> <span class="st">"white"</span>) +
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_gradient.html">scale_fill_gradient</a></span>(<span class="kw">low</span> <span class="kw">=</span> <span class="st">"white"</span>, <span class="kw">high</span> <span class="kw">=</span> <span class="st">"steelblue"</span>)</pre></body></html></div>
+<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">di_df</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span><span class="va">species</span>, <span class="va">site</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_tile.html" class="external-link">geom_tile</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="va">Di</span><span class="op">)</span>, colour <span class="op">=</span> <span class="st">"white"</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_gradient.html" class="external-link">scale_fill_gradient</a></span><span class="op">(</span>low <span class="op">=</span> <span class="st">"white"</span>, high <span class="op">=</span> <span class="st">"steelblue"</span><span class="op">)</span></code></pre></div>
 <p><img src="rarity_indices_files/figure-html/unnamed-chunk-8-1.png" width="700"></p>
-<div class="sourceCode" id="cb58"><html><body><pre class="r"><span class="co"># Density of distinctiveness values</span>
+<div class="sourceCode" id="cb58"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Density of distinctiveness values</span>
 
-<span class="no">quant</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html">quantile</a></span>(<span class="no">di_df</span>$<span class="no">Di</span>, <span class="kw">probs</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span>(<span class="fl">0</span>, <span class="fl">1</span>, <span class="fl">0.10</span>))
-<span class="no">labels_quant</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span>(<span class="no">quant</span>)[-<span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span>(<span class="no">quant</span>)], <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span>(<span class="no">quant</span>)[-<span class="fl">1</span>], <span class="kw">sep</span> <span class="kw">=</span> <span class="st">"-"</span>)
+<span class="va">quant</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html" class="external-link">quantile</a></span><span class="op">(</span><span class="va">di_df</span><span class="op">$</span><span class="va">Di</span>, probs <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1</span>, <span class="fl">0.10</span><span class="op">)</span><span class="op">)</span>
+<span class="va">labels_quant</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">quant</span><span class="op">)</span><span class="op">[</span><span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">quant</span><span class="op">)</span><span class="op">]</span>, <span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">quant</span><span class="op">)</span><span class="op">[</span><span class="op">-</span><span class="fl">1</span><span class="op">]</span>, sep <span class="op">=</span> <span class="st">"-"</span><span class="op">)</span>
+ 
+<span class="va">di_density</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/density.html" class="external-link">density</a></span><span class="op">(</span><span class="va">di_df</span><span class="op">$</span><span class="va">Di</span><span class="op">)</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"x"</span>, <span class="st">"y"</span><span class="op">)</span><span class="op">]</span><span class="op">)</span>
+<span class="va">di_density</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/subset.html" class="external-link">subset</a></span><span class="op">(</span><span class="va">di_density</span>, <span class="va">x</span> <span class="op">&gt;=</span> <span class="va">quant</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span> <span class="op">&amp;</span> <span class="va">x</span> <span class="op">&lt;=</span> <span class="va">quant</span><span class="op">[[</span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">quant</span><span class="op">)</span><span class="op">]</span><span class="op">]</span><span class="op">)</span>
+<span class="va">di_density</span><span class="op">$</span><span class="va">quant</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/cut.html" class="external-link">cut</a></span><span class="op">(</span><span class="va">di_density</span><span class="op">$</span><span class="va">x</span>, breaks <span class="op">=</span> <span class="va">quant</span><span class="op">)</span>   
+<span class="va">quant</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html" class="external-link">quantile</a></span><span class="op">(</span><span class="va">di_df</span><span class="op">$</span><span class="va">Di</span>, probs <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1</span>, <span class="fl">0.10</span><span class="op">)</span><span class="op">)</span>
+<span class="va">labels_quant</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">quant</span><span class="op">)</span><span class="op">[</span><span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">quant</span><span class="op">)</span><span class="op">]</span>, <span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">quant</span><span class="op">)</span><span class="op">[</span><span class="op">-</span><span class="fl">1</span><span class="op">]</span>, sep <span class="op">=</span> <span class="st">"-"</span><span class="op">)</span>
 
-<span class="no">di_density</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(<span class="fu"><a href="https://rdrr.io/r/stats/density.html">density</a></span>(<span class="no">di_df</span>$<span class="no">Di</span>)[<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"x"</span>, <span class="st">"y"</span>)])
-<span class="no">di_density</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/subset.html">subset</a></span>(<span class="no">di_density</span>, <span class="no">x</span> <span class="kw">&gt;=</span> <span class="no">quant</span><span class="kw">[[</span><span class="fl">1</span>]] <span class="kw">&amp;</span> <span class="no">x</span> <span class="kw">&lt;=</span> <span class="no">quant</span><span class="kw">[[</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span>(<span class="no">quant</span>)]])
-<span class="no">di_density</span>$<span class="no">quant</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/cut.html">cut</a></span>(<span class="no">di_density</span>$<span class="no">x</span>, <span class="kw">breaks</span> <span class="kw">=</span> <span class="no">quant</span>)
-<span class="no">quant</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html">quantile</a></span>(<span class="no">di_df</span>$<span class="no">Di</span>, <span class="kw">probs</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span>(<span class="fl">0</span>, <span class="fl">1</span>, <span class="fl">0.10</span>))
-<span class="no">labels_quant</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span>(<span class="no">quant</span>)[-<span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span>(<span class="no">quant</span>)], <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span>(<span class="no">quant</span>)[-<span class="fl">1</span>], <span class="kw">sep</span> <span class="kw">=</span> <span class="st">"-"</span>)
+<span class="va">di_dens</span> <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">di_density</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">x</span>, y <span class="op">=</span> <span class="va">y</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_ribbon.html" class="external-link">geom_area</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="va">quant</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_brewer.html" class="external-link">scale_fill_brewer</a></span><span class="op">(</span>palette <span class="op">=</span> <span class="st">"RdYlBu"</span>, labels <span class="op">=</span> <span class="va">labels_quant</span>,
+                    name <span class="op">=</span> <span class="st">"Quantile"</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html" class="external-link">geom_line</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">xlab</a></span><span class="op">(</span><span class="st">"Distinctiveness values"</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">ylab</a></span><span class="op">(</span><span class="st">"Frequency"</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">ggtitle</a></span><span class="op">(</span><span class="st">"Density of distinctiveness values"</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_classic</a></span><span class="op">(</span><span class="op">)</span>
 
-<span class="no">di_dens</span> <span class="kw">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="kw">data</span> <span class="kw">=</span> <span class="no">di_density</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">x</span>, <span class="kw">y</span> <span class="kw">=</span> <span class="no">y</span>)) +
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_ribbon.html">geom_area</a></span>(<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="kw">fill</span> <span class="kw">=</span> <span class="no">quant</span>)) +
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_brewer.html">scale_fill_brewer</a></span>(<span class="kw">palette</span> <span class="kw">=</span> <span class="st">"RdYlBu"</span>, <span class="kw">labels</span> <span class="kw">=</span> <span class="no">labels_quant</span>,
-                    <span class="kw">name</span> <span class="kw">=</span> <span class="st">"Quantile"</span>) +
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span>(<span class="kw">size</span> <span class="kw">=</span> <span class="fl">1</span>) +
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">xlab</a></span>(<span class="st">"Distinctiveness values"</span>) +
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ylab</a></span>(<span class="st">"Frequency"</span>) +
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ggtitle</a></span>(<span class="st">"Density of distinctiveness values"</span>) +
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_classic</a></span>()
-
-<span class="no">di_dens</span></pre></body></html></div>
+<span class="va">di_dens</span></code></pre></div>
 <p><img src="rarity_indices_files/figure-html/unnamed-chunk-8-2.png" width="700"></p>
-<div class="sourceCode" id="cb59"><html><body><pre class="r"><span class="co"># Density of scarcity values</span>
+<div class="sourceCode" id="cb59"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Density of scarcity values</span>
 
-<span class="no">quant</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html">quantile</a></span>(<span class="no">si_df</span>$<span class="no">Si</span>, <span class="kw">probs</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span>(<span class="fl">0</span>, <span class="fl">1</span>, <span class="fl">0.10</span>))
-<span class="no">labels_quant</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span>(<span class="no">quant</span>)[-<span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span>(<span class="no">quant</span>)], <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span>(<span class="no">quant</span>)[-<span class="fl">1</span>], <span class="kw">sep</span> <span class="kw">=</span> <span class="st">"-"</span>)
+<span class="va">quant</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html" class="external-link">quantile</a></span><span class="op">(</span><span class="va">si_df</span><span class="op">$</span><span class="va">Si</span>, probs <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1</span>, <span class="fl">0.10</span><span class="op">)</span><span class="op">)</span>
+<span class="va">labels_quant</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">quant</span><span class="op">)</span><span class="op">[</span><span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">quant</span><span class="op">)</span><span class="op">]</span>, <span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">quant</span><span class="op">)</span><span class="op">[</span><span class="op">-</span><span class="fl">1</span><span class="op">]</span>, sep <span class="op">=</span> <span class="st">"-"</span><span class="op">)</span>
+ 
+<span class="va">si_density</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/density.html" class="external-link">density</a></span><span class="op">(</span><span class="va">si_df</span><span class="op">$</span><span class="va">Si</span><span class="op">)</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"x"</span>, <span class="st">"y"</span><span class="op">)</span><span class="op">]</span><span class="op">)</span>
+<span class="va">si_density</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/subset.html" class="external-link">subset</a></span><span class="op">(</span><span class="va">si_density</span>, <span class="va">x</span> <span class="op">&gt;=</span> <span class="va">quant</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span> <span class="op">&amp;</span> <span class="va">x</span> <span class="op">&lt;=</span> <span class="va">quant</span><span class="op">[[</span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">quant</span><span class="op">)</span><span class="op">]</span><span class="op">]</span><span class="op">)</span>
+<span class="va">si_density</span><span class="op">$</span><span class="va">quant</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/cut.html" class="external-link">cut</a></span><span class="op">(</span><span class="va">si_density</span><span class="op">$</span><span class="va">x</span>, breaks <span class="op">=</span> <span class="va">quant</span><span class="op">)</span>   
+<span class="va">quant</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html" class="external-link">quantile</a></span><span class="op">(</span><span class="va">si_df</span><span class="op">$</span><span class="va">Si</span>, probs <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1</span>, <span class="fl">0.10</span><span class="op">)</span><span class="op">)</span>
+<span class="va">labels_quant</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">quant</span><span class="op">)</span><span class="op">[</span><span class="op">-</span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">quant</span><span class="op">)</span><span class="op">]</span>, <span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">quant</span><span class="op">)</span><span class="op">[</span><span class="op">-</span><span class="fl">1</span><span class="op">]</span>, sep <span class="op">=</span> <span class="st">"-"</span><span class="op">)</span>
 
-<span class="no">si_density</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span>(<span class="fu"><a href="https://rdrr.io/r/stats/density.html">density</a></span>(<span class="no">si_df</span>$<span class="no">Si</span>)[<span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span>(<span class="st">"x"</span>, <span class="st">"y"</span>)])
-<span class="no">si_density</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/subset.html">subset</a></span>(<span class="no">si_density</span>, <span class="no">x</span> <span class="kw">&gt;=</span> <span class="no">quant</span><span class="kw">[[</span><span class="fl">1</span>]] <span class="kw">&amp;</span> <span class="no">x</span> <span class="kw">&lt;=</span> <span class="no">quant</span><span class="kw">[[</span><span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span>(<span class="no">quant</span>)]])
-<span class="no">si_density</span>$<span class="no">quant</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/cut.html">cut</a></span>(<span class="no">si_density</span>$<span class="no">x</span>, <span class="kw">breaks</span> <span class="kw">=</span> <span class="no">quant</span>)
-<span class="no">quant</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html">quantile</a></span>(<span class="no">si_df</span>$<span class="no">Si</span>, <span class="kw">probs</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html">seq</a></span>(<span class="fl">0</span>, <span class="fl">1</span>, <span class="fl">0.10</span>))
-<span class="no">labels_quant</span> <span class="kw">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html">paste</a></span>(<span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span>(<span class="no">quant</span>)[-<span class="fu"><a href="https://rdrr.io/r/base/length.html">length</a></span>(<span class="no">quant</span>)], <span class="fu"><a href="https://rdrr.io/r/base/names.html">names</a></span>(<span class="no">quant</span>)[-<span class="fl">1</span>], <span class="kw">sep</span> <span class="kw">=</span> <span class="st">"-"</span>)
+<span class="va">si_dens</span> <span class="op">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span>data <span class="op">=</span> <span class="va">si_density</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">x</span>, y <span class="op">=</span> <span class="va">y</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_ribbon.html" class="external-link">geom_area</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="va">quant</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_brewer.html" class="external-link">scale_fill_brewer</a></span><span class="op">(</span>palette <span class="op">=</span> <span class="st">"RdYlBu"</span>, labels <span class="op">=</span> <span class="va">labels_quant</span>,
+                    name <span class="op">=</span> <span class="st">"Quantile"</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html" class="external-link">geom_line</a></span><span class="op">(</span>size <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">xlab</a></span><span class="op">(</span><span class="st">"Scarcity values"</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">ylab</a></span><span class="op">(</span><span class="st">"Frequency"</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html" class="external-link">ggtitle</a></span><span class="op">(</span><span class="st">"Density of scarcity values"</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_classic</a></span><span class="op">(</span><span class="op">)</span>
 
-<span class="no">si_dens</span> <span class="kw">=</span> <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="kw">data</span> <span class="kw">=</span> <span class="no">si_density</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="kw">x</span> <span class="kw">=</span> <span class="no">x</span>, <span class="kw">y</span> <span class="kw">=</span> <span class="no">y</span>)) +
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_ribbon.html">geom_area</a></span>(<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="kw">fill</span> <span class="kw">=</span> <span class="no">quant</span>)) +
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_brewer.html">scale_fill_brewer</a></span>(<span class="kw">palette</span> <span class="kw">=</span> <span class="st">"RdYlBu"</span>, <span class="kw">labels</span> <span class="kw">=</span> <span class="no">labels_quant</span>,
-                    <span class="kw">name</span> <span class="kw">=</span> <span class="st">"Quantile"</span>) +
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html">geom_line</a></span>(<span class="kw">size</span> <span class="kw">=</span> <span class="fl">1</span>) +
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">xlab</a></span>(<span class="st">"Scarcity values"</span>) +
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ylab</a></span>(<span class="st">"Frequency"</span>) +
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/labs.html">ggtitle</a></span>(<span class="st">"Density of scarcity values"</span>) +
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_classic</a></span>()
-
-<span class="no">si_dens</span></pre></body></html></div>
+<span class="va">si_dens</span></code></pre></div>
 <p><img src="rarity_indices_files/figure-html/unnamed-chunk-8-3.png" width="700"></p>
-<div class="sourceCode" id="cb60"><html><body><pre class="r"><span class="co"># Regional rarity: restrictedness versus uniqueness</span>
-<span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span>(<span class="no">ri_df</span>)[<span class="fu"><a href="https://rdrr.io/r/base/colnames.html">colnames</a></span>(<span class="no">ri_df</span>) <span class="kw">==</span> <span class="st">"sp"</span>] <span class="kw">=</span> <span class="st">"species"</span>
-<span class="no">ri_ui</span> <span class="kw">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/merge.html">merge</a></span>(<span class="no">ri_df</span>, <span class="no">ui_df</span>, <span class="kw">by</span> <span class="kw">=</span> <span class="st">"species"</span>)
+<div class="sourceCode" id="cb60"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># Regional rarity: restrictedness versus uniqueness</span>
+<span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">colnames</a></span><span class="op">(</span><span class="va">ri_df</span><span class="op">)</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">colnames</a></span><span class="op">(</span><span class="va">ri_df</span><span class="op">)</span> <span class="op">==</span> <span class="st">"sp"</span><span class="op">]</span> <span class="op">=</span> <span class="st">"species"</span>
+<span class="va">ri_ui</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/merge.html" class="external-link">merge</a></span><span class="op">(</span><span class="va">ri_df</span>, <span class="va">ui_df</span>, by <span class="op">=</span> <span class="st">"species"</span><span class="op">)</span>
 
-<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html">ggplot</a></span>(<span class="no">ri_ui</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html">aes</a></span>(<span class="no">Ri</span>, <span class="no">Ui</span>)) +
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html">geom_point</a></span>() +
-  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html">theme_classic</a></span>()</pre></body></html></div>
+<span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="va">ri_ui</span>, <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span><span class="va">Ri</span>, <span class="va">Ui</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span>
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_point.html" class="external-link">geom_point</a></span><span class="op">(</span><span class="op">)</span> <span class="op">+</span> 
+  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_classic</a></span><span class="op">(</span><span class="op">)</span> </code></pre></div>
 <p><img src="rarity_indices_files/figure-html/unnamed-chunk-8-4.png" width="700"></p>
 </div>
-<div id="references" class="section level1">
-<h1 class="hasAnchor">
-<a href="#references" class="anchor"></a>References</h1>
+<div class="section level2">
+<h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
+</h2>
 <p>Choler, P. (2005) Consistent shifts in Alpine plant traits along a mesotopographical gradient. Arctic, Antarctic, and Alpine Research, 37,444-453.</p>
-<p>Violle C., Thuiller W., Mouquet N., Munoz F., Kraft NJB, Cadotte MW, Livingstone SW, Mouillot D., Functional Rarity: The Ecology of Outliers, <em>Trends in Ecology &amp; Evolution</em>, Volume 32, Issue 5, May 2017, Pages 356-367, ISSN 0169-5347, <a href="https://doi.org/10.1016/j.tree.2017.02.002" class="uri">https://doi.org/10.1016/j.tree.2017.02.002</a>.</p>
+<p>Violle C., Thuiller W., Mouquet N., Munoz F., Kraft NJB, Cadotte MW, Livingstone SW, Mouillot D., Functional Rarity: The Ecology of Outliers, <em>Trends in Ecology &amp; Evolution</em>, Volume 32, Issue 5, May 2017, Pages 356-367, ISSN 0169-5347, <a href="https://doi.org/10.1016/j.tree.2017.02.002" class="external-link uri">https://doi.org/10.1016/j.tree.2017.02.002</a>.</p>
 </div>
   </div>
 
@@ -607,11 +635,13 @@ R_i = 1 - N_i/N_tot
 
 
       <footer><div class="copyright">
-  <p>Developed by Matthias Grenié, Pierre Denelle, Caroline Tucker.</p>
+  <p></p>
+<p>Developed by Matthias Grenié, Pierre Denelle, Caroline Tucker.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.5.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
 </div>
 
       </footer>
@@ -619,6 +649,8 @@ R_i = 1 - N_i/N_tot
 
   
 
+
+  
 
   </body>
 </html>
