@@ -119,8 +119,8 @@ good_di_0.9_ab = matrix(c(1/30, 7/90, NA,   NA,
 
 ## Sparse Matrices -------------------------------------------------------------
 library(Matrix)
-sparse_mat = as(valid_mat, "sparseMatrix")
-sparse_ab_mat = as(abund_mat, "sparseMatrix")
+sparse_mat = as(valid_mat, "dgCMatrix")
+sparse_ab_mat = as(abund_mat, "dgCMatrix")
 
 # Tests for Distinctiveness ----------------------------------------------------
 

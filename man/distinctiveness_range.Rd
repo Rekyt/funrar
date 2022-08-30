@@ -85,7 +85,7 @@ cannot be computed (denominator = 0 in formula), and its value is assigned
 as \code{NaN}.
 
 For speed and memory efficiency sparse matrices can be used as input of
-the function using \code{as(pres_matrix, "sparseMatrix")} from the
+the function using \code{as(pres_matrix, "dgCMatrix")} from the
 \code{Matrix} package.
 (see \code{vignette("sparse_matrices", package = "funrar")})
 }

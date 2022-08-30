@@ -18,15 +18,15 @@ test_that("Messages show up with wrong input", {
 
   expect_silent(check_matrix(pres_mat, "site-species"))
   expect_silent(check_matrix(dist_mat, "distance"))
-  expect_silent(check_matrix(as(pres_mat, "sparseMatrix"), "site-species"))
-  expect_silent(check_matrix(as(dist_mat, "sparseMatrix"), "distance"))
+  expect_silent(check_matrix(as(pres_mat, "dgCMatrix"), "site-species"))
+  expect_silent(check_matrix(as(dist_mat, "dgCMatrix"), "distance"))
 
   expect_silent(check_bigger_dist(pres_mat, dist_mat))
   expect_silent(check_bigger_pres(pres_mat, dist_mat))
 
   expect_silent(full_matrix_checks(pres_mat, dist_mat))
-  expect_silent(full_matrix_checks(as(pres_mat, "sparseMatrix"), dist_mat))
-  expect_silent(full_matrix_checks(pres_mat, as(dist_mat, "sparseMatrix")))
+  expect_silent(full_matrix_checks(as(pres_mat, "dgCMatrix"), dist_mat))
+  expect_silent(full_matrix_checks(pres_mat, as(dist_mat, "dgCMatrix")))
 
   # Provided objects not matrices
   expect_error(

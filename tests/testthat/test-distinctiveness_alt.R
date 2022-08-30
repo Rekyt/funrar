@@ -50,8 +50,8 @@ good_di_1.1_ab[] = c(45/77, 35/99, 40/99)
 
 ## Sparse Matrices -------------------------------------------------------------
 library(Matrix)
-sparse_mat = as(valid_mat, "sparseMatrix")
-sparse_ab_mat = as(abund_mat, "sparseMatrix")
+sparse_mat = as(valid_mat, "dgCMatrix")
+sparse_ab_mat = as(abund_mat, "dgCMatrix")
 
 # Tests for Distinctiveness ----------------------------------------------------
 

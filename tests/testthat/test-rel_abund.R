@@ -12,7 +12,7 @@ abs_abund_mat = matrix(c(4, 1, 1, NA,
                          NA, NA, 1, 1),
                        ncol = 4)
 
-sparse_abs_abund = as(abs_abund_mat, "sparseMatrix")
+sparse_abs_abund = as(abs_abund_mat, "dgCMatrix")
 
 # Corresponding relative abundances matrix
 rel_abund_mat = matrix(c(1,  1/3, 1/4, NA,
@@ -21,7 +21,7 @@ rel_abund_mat = matrix(c(1,  1/3, 1/4, NA,
                          NA, NA,  1/4, 1/2),
                        ncol = 4)
 
-sparse_rel_abund = as(rel_abund_mat, "sparseMatrix")
+sparse_rel_abund = as(rel_abund_mat, "dgCMatrix")
 
 # Corresponding presence-absence matrix
 # With NA
@@ -33,7 +33,7 @@ pres_mat[!is.na(abs_abund_mat)] = 1
 pres_zero_mat = pres_mat
 pres_zero_mat[is.na(pres_zero_mat)] = 0
 
-sparse_pres = as(pres_mat, "sparseMatrix")
+sparse_pres = as(pres_mat, "dgCMatrix")
 
 
 # Corresponding data frames
