@@ -27,7 +27,7 @@ Imports:
     Matrix,
     methods,
     stats
-URL: https://rekyt.github.io/funrar/
+URL: https://rekyt.github.io/funrar/, https://github.com/Rekyt/funrar
 BugReports: https://github.com/Rekyt/funrar/issues
 RoxygenNote: 7.2.1
 Suggests:
