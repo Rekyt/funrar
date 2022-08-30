@@ -27,7 +27,7 @@ make_relative = function(abund_matrix) {
   check_matrix(abund_matrix, "abundance")
 
   # Compute relative abundances matrix
-  if (requireNamespace("Matrix", quietly = TRUE) &
+  if (requireNamespace("Matrix", quietly = TRUE) &&
       is(abund_matrix, "sparseMatrix")) {
 
     sites_abund = Matrix::rowSums(abund_matrix, na.rm = TRUE)
@@ -77,16 +77,18 @@ is_relative = function(given_obj, abund = NULL) {
 
   is_rel = FALSE
 
-  if (is.matrix(given_obj) | is(given_obj, "sparseMatrix")) {
+  if (is.matrix(given_obj) || is(given_obj, "sparseMatrix")) {
     values = na.omit(unique(as.vector(given_obj)))
-  } else if (is.data.frame(given_obj) & !is.null(abund) & is.character(abund)) {
+  } else if (
+    is.data.frame(given_obj) && !is.null(abund) && is.character(abund)
+  ) {
     values = na.omit(unique(given_obj[[abund]]))
   }
 
   max_val = max(values)
   min_val = min(values)
 
-  if (max_val <= 1 & min_val >= 0) {
+  if (max_val <= 1 && min_val >= 0) {
     is_rel = TRUE
   }
 

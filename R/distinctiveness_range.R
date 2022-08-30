@@ -107,12 +107,12 @@ distinctiveness_range = function(
   full_matrix_checks(pres_matrix, dist_matrix)
 
   # Test provided range
-  if (!is.numeric(given_range) | is.na(given_range)) {
+  if (!is.numeric(given_range) || is.na(given_range)) {
     stop("'given_range' argument should be non-null and numeric")
   }
 
   # Test relative argument
-  if (!is.logical(relative) | is.na(relative) | length(relative) != 1) {
+  if (!is.logical(relative) || is.na(relative) || length(relative) != 1) {
     stop("'relative' argument should be either TRUE or FALSE")
   }
 
@@ -156,7 +156,7 @@ distinctiveness_range = function(
 
   # Define right term in the equation of abundance weighted range Di
   right_term = 1
-  if (is_relative(pres_matrix) & !all(unique(as.vector(pres_matrix)) %in%
+  if (is_relative(pres_matrix) && !all(unique(as.vector(pres_matrix)) %in%
                                       c(1, 0))) {
     right_term = 1 - denom_matrix
   }

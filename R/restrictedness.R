@@ -65,7 +65,7 @@ restrictedness_stack = function(com_df, sp_col, com, relative = FALSE) {
   if (!relative) {
     r_one = 1
   } else {
-    r_one = 1 - 1/n_com
+    r_one = 1 - 1 / n_com
   }
 
   occupancy$Ri = occupancy$Ri / r_one
@@ -165,7 +165,7 @@ restrictedness = function(pres_matrix, relative = FALSE) {
   if (!relative) {
     r_one = 1
   } else {
-    r_one = 1 - 1/n_com
+    r_one = 1 - 1 / n_com
   }
 
   # Format occupancy in data.frame

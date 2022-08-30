@@ -36,20 +36,20 @@ uniqueness_dimensions = function(pres_matrix, traits_table, ...) {
   # Compute uniqueness data frame for all computed distance matrices
   functional_uniqueness = lapply(
     names(dist_matrices), function(x, matrices = dist_matrices) {
-      Ui = uniqueness(pres_matrix, matrices[[x]])
+      ui = uniqueness(pres_matrix, matrices[[x]])
 
       # Rename Ui column with trait name
-      Ui_name = paste0("Ui_", x)
-      colnames(Ui)[2] = Ui_name
+      ui_name = paste0("Ui_", x)
+      colnames(ui)[2] = ui_name
 
-      return(Ui)
+      return(ui)
     })
 
   # Join all data.frames for Uniqueness
-  Ui = Reduce(function(x, y) merge(x, y, by = "species"),
+  ui = Reduce(function(x, y) merge(x, y, by = "species"),
               functional_uniqueness)
 
-  return(Ui)
+  return(ui)
 }
 
 #' Distinctiveness across combinations of traits
@@ -85,16 +85,16 @@ uniqueness_dimensions = function(pres_matrix, traits_table, ...) {
 distinctiveness_dimensions = function(pres_matrix, traits_table, ...) {
   dist_matrices = combination_trait_dist(traits_table, ...)
 
-  Di_list = lapply(
+  di_list = lapply(
     names(dist_matrices), function(x, matrices = dist_matrices) {
-      Di = distinctiveness(pres_matrix, matrices[[x]])
+      di = distinctiveness(pres_matrix, matrices[[x]])
 
-      return(Di)
+      return(di)
     })
 
-  names(Di_list) = paste0("Di_", names(dist_matrices))
+  names(di_list) = paste0("di_", names(dist_matrices))
 
-  return(Di_list)
+  return(di_list)
 }
 
 

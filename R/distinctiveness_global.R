@@ -25,7 +25,7 @@
 distinctiveness_global = function(dist_obj, di_name = "global_di") {
 
   # Incorrect input
-  if ((!is(dist_obj, "dist") && !is.matrix(dist_obj)) |
+  if ((!is(dist_obj, "dist") && !is.matrix(dist_obj)) ||
       (is.matrix(dist_obj) && ncol(dist_obj) != nrow(dist_obj))) {
     stop("Input should be a dist() object or a square matrix", call. = FALSE)
   }

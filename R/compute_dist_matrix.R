@@ -66,7 +66,7 @@
 compute_dist_matrix = function(traits_table, metric = "gower", center = FALSE,
                                scale = FALSE) {
 
-  if (is.null(rownames(traits_table)) |
+  if (is.null(rownames(traits_table)) ||
       identical(rownames(traits_table), as.character(seq_len(
         nrow(traits_table))))) {
     warning("No row names provided in trait table\n",
@@ -88,7 +88,7 @@ compute_dist_matrix = function(traits_table, metric = "gower", center = FALSE,
               "distance.")
     }
 
-    if (center | scale) {
+    if (center || scale) {
       stop("'", metric, "' distance cannot be scaled nor centered")
     }
   }

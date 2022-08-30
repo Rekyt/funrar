@@ -14,7 +14,7 @@
 #   nothing, shows an error message
 check_matrix = function(given_matrix, message = NULL) {
 
-  if (!is.matrix(given_matrix) & !is(given_matrix, "Matrix")) {
+  if (!is.matrix(given_matrix) && !is(given_matrix, "Matrix")) {
     stop("Provided ", message, " matrix is not a matrix")
   }
 }
@@ -30,7 +30,7 @@ check_matrix = function(given_matrix, message = NULL) {
 #   nothing, shows a message
 check_bigger_dist = function(pres_matrix, dist_matrix) {
 
-  if ((ncol(dist_matrix) > ncol(pres_matrix)) |
+  if ((ncol(dist_matrix) > ncol(pres_matrix)) ||
       (nrow(dist_matrix) > ncol(pres_matrix))) {
     message("Distance matrix bigger than site-species matrix\n",
             "Taking subset of distance matrix")
@@ -51,7 +51,7 @@ check_bigger_dist = function(pres_matrix, dist_matrix) {
 #   nothing, shows a message
 check_bigger_pres = function(pres_matrix, dist_matrix) {
 
-  if ((ncol(pres_matrix) > nrow(dist_matrix)) |
+  if ((ncol(pres_matrix) > nrow(dist_matrix)) ||
       (ncol(pres_matrix) > ncol(dist_matrix))) {
     message("More species in site-species matrix than in distance matrix\n",
             "Taking subset of site-species matrix")
@@ -148,7 +148,7 @@ check_df = function(com_df) {
 #   nothing, shows an error message if column is not in provided data.frame
 check_col_in_df = function(com_df, given_col) {
   if (!(given_col %in% colnames(com_df))) {
-    stop("'", given_col,"' column not in provided data.frame")
+    stop("'", given_col, "' column not in provided data.frame")
   }
 }
 
@@ -198,7 +198,7 @@ species_in_common_df = function(com_df, sp_col, dist_matrix) {
   common = intersect(com_df[[sp_col]], colnames(dist_matrix))
   common = intersect(common, rownames(dist_matrix))
 
-  if (identical(common, character(0)) | is.null(common)) {
+  if (identical(common, character(0)) || is.null(common)) {
     stop("No species found in common between distance matrix and data.frame")
   } else {
     return(common)

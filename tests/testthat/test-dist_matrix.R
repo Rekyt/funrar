@@ -18,7 +18,7 @@ test_that("Names in distance matrix named after rownames", {
 
 
   # No rownames
-  expect_warning(compute_dist_matrix(trait[,2:3]),
+  expect_warning(compute_dist_matrix(trait[, 2:3]),
                  regexp = paste0(
                    "No row names provided in trait table", "\n",
                    "Distinctiveness and scarcity won't be computable"))
@@ -44,7 +44,7 @@ test_that("Distance matrix contains good values", {
 
   rownames(trait) = trait$sp
 
-  t_dist_mat = compute_dist_matrix(trait[,2:3])
+  t_dist_mat = compute_dist_matrix(trait[, 2:3])
 
   other_mat = as.data.frame(matrix(1:16, nrow = 4))
   rownames(other_mat) = paste0("sp", 1:4)

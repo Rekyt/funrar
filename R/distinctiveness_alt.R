@@ -62,7 +62,7 @@ distinctiveness_alt = function(pres_matrix, dist_matrix, given_range) {
   full_matrix_checks(pres_matrix, dist_matrix)
 
   # Test provided range
-  if (!is.numeric(given_range) | is.na(given_range)) {
+  if (!is.numeric(given_range) || is.na(given_range)) {
     stop("'given_range' argument should be non-null and numeric")
   }
 

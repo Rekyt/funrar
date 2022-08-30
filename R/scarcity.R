@@ -49,9 +49,9 @@
 scarcity_com = function(com_df, sp_col, abund) {
 
   # Computes scarcity by species
-  N_sp = length(com_df[[sp_col]])
+  n_sp = length(com_df[[sp_col]])
 
-  com_df[, "Si"] = exp(-N_sp * log(2) * com_df[[abund]])
+  com_df[, "Si"] = exp(-n_sp * log(2) * com_df[[abund]])
 
   return(com_df)
 }
@@ -104,9 +104,9 @@ scarcity_stack = function(com_df, sp_col, com, abund) {
   # Split table by communities
   com_split = split(com_df, factor(com_df[[com]]))
 
-  com_split = lapply(com_split,
-                      function(one_com)
-                        scarcity_com(one_com, sp_col, abund)
+  com_split = lapply(
+    com_split,
+    function(one_com) scarcity_com(one_com, sp_col, abund)
   )
 
   com_scarcity = do.call(rbind.data.frame, c(com_split, make.row.names = FALSE,

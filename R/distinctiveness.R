@@ -43,7 +43,7 @@ distinctiveness_com = function(com_df, sp_col, abund = NULL, dist_matrix,
 
 
   # Test relative argument
-  if (!is.logical(relative) | is.na(relative) | length(relative) != 1) {
+  if (!is.logical(relative) || is.na(relative) || length(relative) != 1) {
     stop("'relative' argument should be either TRUE or FALSE")
   }
 
@@ -83,7 +83,7 @@ distinctiveness_com = function(com_df, sp_col, abund = NULL, dist_matrix,
   # Computes distinctiveness by species
   if (length(denom) > 1) {
     com_df[, "Di"] = as.numeric(num / denom) / max_dist
-  } else if (length(denom) == 1 & denom != 0) {
+  } else if (length(denom) == 1 && denom != 0) {
     com_df[, "Di"] = as.numeric(num / denom) / max_dist
   } else {
     com_df[, "Di"] = NaN
@@ -167,10 +167,11 @@ distinctiveness_stack = function(com_df, sp_col, com, abund = NULL,
 
   com_split = lapply(
     com_split,
-    function(one_com)
+    function(one_com) {
       distinctiveness_com(
         one_com, sp_col, abund, dist_matrix, relative = relative
       )
+    }
   )
 
   com_distinctiveness = do.call(
@@ -178,8 +179,9 @@ distinctiveness_stack = function(com_df, sp_col, com, abund = NULL,
     c(com_split, make.row.names = FALSE, stringsAsFactors = FALSE)
   )
 
-  if(any(vapply(com_distinctiveness[["Di"]], function(x) is.nan(x),
-                logical(1)))) {
+  if(
+    any(vapply(com_distinctiveness[["Di"]], function(x) is.nan(x), logical(1)))
+  ) {
     warning("Some communities had a single species in them\n",
             "Computed value assigned to 'NaN'")
   }
@@ -275,7 +277,7 @@ distinctiveness = function(pres_matrix, dist_matrix, relative = FALSE) {
   full_matrix_checks(pres_matrix, dist_matrix)
 
   # Test relative argument
-  if (!is.logical(relative) | is.na(relative) | length(relative) != 1) {
+  if (!is.logical(relative) || is.na(relative) || length(relative) != 1) {
     stop("'relative' argument should be either TRUE or FALSE")
   }
 
