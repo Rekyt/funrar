@@ -2,7 +2,7 @@
 % Please edit documentation in R/funrar.R
 \name{funrar_stack}
 \alias{funrar_stack}
-\title{Functional Rarity indices on stacked data.frame}
+\title{Compute all Functional Rarity Indices from stacked data.frames}
 \usage{
 funrar_stack(com_df, sp_col, com, abund = NULL, dist_matrix)
 }

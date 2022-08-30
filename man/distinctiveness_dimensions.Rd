@@ -2,7 +2,7 @@
 % Please edit documentation in R/rarity_dimensions.R
 \name{distinctiveness_dimensions}
 \alias{distinctiveness_dimensions}
-\title{Distinctiveness dimensions}
+\title{Distinctiveness across combinations of traits}
 \usage{
 distinctiveness_dimensions(pres_matrix, traits_table, ...)
 }

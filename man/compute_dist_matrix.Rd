@@ -3,7 +3,7 @@
 \name{compute_dist_matrix}
 \alias{compute_dist_matrix}
 \alias{distance_matrix}
-\title{Functional Distance Matrix}
+\title{Compute a Functional Dissimilarity Matrix}
 \usage{
 compute_dist_matrix(
   traits_table,

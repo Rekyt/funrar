@@ -2,7 +2,7 @@
 % Please edit documentation in R/rarity_dimensions.R
 \name{uniqueness_dimensions}
 \alias{uniqueness_dimensions}
-\title{Uniqueness dimensions}
+\title{Uniqueness across combinations of traits}
 \usage{
 uniqueness_dimensions(pres_matrix, traits_table, ...)
 }

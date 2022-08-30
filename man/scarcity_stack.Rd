@@ -3,7 +3,7 @@
 \name{scarcity_stack}
 \alias{scarcity_stack}
 \alias{scarcity_tidy}
-\title{Scarcity}
+\title{Scarcity on a stacked data.frame}
 \usage{
 scarcity_stack(com_df, sp_col, com, abund)
 

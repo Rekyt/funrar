@@ -1,4 +1,4 @@
-#' Uniqueness dimensions
+#' Uniqueness across combinations of traits
 #'
 #' From a trait table and a site-species matrix compute Uniqueness
 #' (nearest functional distance) for each species and each trait, plus computes
@@ -52,7 +52,7 @@ uniqueness_dimensions = function(pres_matrix, traits_table, ...) {
   return(Ui)
 }
 
-#' Distinctiveness dimensions
+#' Distinctiveness across combinations of traits
 #'
 #' From a trait data.frame and a site-species matrix compute Distinctiveness
 #' (average pairwise functional distance) for each species in each community
@@ -98,7 +98,7 @@ distinctiveness_dimensions = function(pres_matrix, traits_table, ...) {
 }
 
 
-#' Multiple distance matrices
+#' Compute Multiple distance matrices from a single trait table
 #'
 #' Internal function to compute combinations of distance matrices from a
 #' data.frame of traits, using [compute_dist_matrix()].

@@ -2,7 +2,7 @@
 % Please edit documentation in R/rarity_dimensions.R
 \name{combination_trait_dist}
 \alias{combination_trait_dist}
-\title{Multiple distance matrices}
+\title{Compute Multiple distance matrices from a single trait table}
 \usage{
 combination_trait_dist(traits_table, ...)
 }

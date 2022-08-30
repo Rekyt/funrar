@@ -3,7 +3,7 @@
 # Authors: Pierre Denelle & Matthias Grenié
 #
 #
-#' Functional Rarity Indices
+#' Compute all Functional Rarity Indices from Matrices
 #'
 #' From a site-species matrix and functional distance matrix compute all indices
 #' included in the package: functional uniqueness (regional, functional),
@@ -59,7 +59,7 @@ funrar = function(pres_matrix, dist_matrix, rel_abund = FALSE) {
   }
 }
 
-#' Functional Rarity indices on stacked data.frame
+#' Compute all Functional Rarity Indices from stacked data.frames
 #'
 #' From a stacked (= tidy) data.frame and functional distance matrix compute
 #' all indices included in the package: functional uniqueness (regional,

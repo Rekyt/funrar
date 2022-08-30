@@ -56,7 +56,7 @@ scarcity_com = function(com_df, sp_col, abund) {
   return(com_df)
 }
 
-#' Scarcity
+#' Scarcity on a stacked data.frame
 #'
 #' Compute scarcity values for several communities. Scarcity computation
 #' requires relative abundances. Scarcity is close to 1 when a species is rare

@@ -1,4 +1,4 @@
-#' Functional Distance Matrix
+#' Compute a Functional Dissimilarity Matrix
 #'
 #' Wrapper for [cluster::daisy()] function in `cluster` package,
 #' to compute distance matrix of trait between each pair of species present in

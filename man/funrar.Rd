@@ -2,7 +2,7 @@
 % Please edit documentation in R/funrar.R
 \name{funrar}
 \alias{funrar}
-\title{Functional Rarity Indices}
+\title{Compute all Functional Rarity Indices from Matrices}
 \usage{
 funrar(pres_matrix, dist_matrix, rel_abund = FALSE)
 }
