@@ -1,3 +1,17 @@
+# funrar 1.4.1.9000
+
+## INTERNAL CHANGES
+
+* Fix uses of the `Matrix` package for their next version
+* Reorganized documentation to please `goodpractice`
+
+## USER-FACING CHANGES
+
+* Remove warnings regarding relative abundances for the `distinctiveness_*()`
+functions as they can perfectly work with absolute abundances giving the same
+results.
+* Fix typo in name of sparse matrices vignette.
+
 # funrar 1.4.1
 
 ## BUG FIX
