@@ -89,19 +89,11 @@ distinctiveness_alt = function(pres_matrix, dist_matrix, given_range) {
                                                       given_range)))
 
 
-  # Compute sum of relative abundances
-  if (requireNamespace("Matrix", quietly = TRUE) &
-      is(pres_matrix, "sparseMatrix")) {
-    # Replace species not present in communities
-    index_matrix[Matrix::which(pres_matrix == 0)] = NA
-    total_sites = Matrix::rowSums(pres_matrix)
+  ## Compute sum of relative abundances
+  # Replace species not present in communities
+  index_matrix[which(pres_matrix == 0)] = NA
+  total_sites = rowSums(pres_matrix)
 
-  } else {
-
-    # Replace species not present in communities
-    index_matrix[which(pres_matrix == 0)] = NA
-    total_sites = rowSums(pres_matrix)
-  }
 
   # Consider denominator (sum of relative abundance or richness - 1)
   denom_matrix = apply(pres_matrix, 2, function(x) total_sites - x)

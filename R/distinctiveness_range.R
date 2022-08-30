@@ -135,19 +135,11 @@ distinctiveness_range = function(pres_matrix, dist_matrix, given_range, relative
   index_matrix = pres_matrix %*% (dist_matrix * corr_matrix)
 
 
-  # Compute sum of relative abundances
-  if (requireNamespace("Matrix", quietly = TRUE) &
-      is(pres_matrix, "sparseMatrix")) {
-    # Replace species not present in communities
-    index_matrix[Matrix::which(pres_matrix == 0)] = NA
-    total_sites = Matrix::rowSums(pres_matrix)
+  ## Compute sum of relative abundances
+  # Replace species not present in communities
+  index_matrix[which(pres_matrix == 0)] = NA
+  total_sites = rowSums(pres_matrix)
 
-  } else {
-
-    # Replace species not present in communities
-    index_matrix[which(pres_matrix == 0)] = NA
-    total_sites = rowSums(pres_matrix)
-  }
 
   # Count the number of species considered for each species
   denom_matrix = pres_matrix %*% corr_matrix
