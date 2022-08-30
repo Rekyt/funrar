@@ -1,0 +1,28 @@
+reference:
+  - title: Functions to Compute Functional Distinctiveness
+    contents:
+    - starts_with("distinctiveness")
+  - title: Functions Compute Functional Uniqueness
+    contents:
+    - starts_with("uniqueness")
+  - title: Functions to Compute Geographical Restrictedness
+    contents:
+    - starts_with("restrictedness")
+  - title: Functions to Compute Scarcity
+    contents:
+    - starts_with("scarcity")
+  - title: Combined Functions
+    contents:
+    - starts_with("funrar")
+  - title: Distance Matrices Functions
+    contents:
+    - combination_trait_dist
+    - compute_dist_matrix
+  - title: Table Manipulation Functions
+    contents:
+    - matrix_to_stack
+    - stack_to_matrix
+  - title: Other utility functions
+    contents:
+    - is_relative
+    - make_relative
