@@ -109,7 +109,6 @@ distinctiveness_dimensions = function(pres_matrix, traits_table, ...) {
 #' @inheritParams compute_dist_matrix
 #'
 #' @param ... additional arguments supplied to [compute_dist_matrix()]
-#'
 combination_trait_dist = function(traits_table, ...) {
   # Other arguments to compute distance matrix
   dots = list(...)
@@ -120,9 +119,9 @@ combination_trait_dist = function(traits_table, ...) {
     function(x, trait = traits_table, other_args = dots) {
 
       # Call 'compute_dist_matrix()' with supplementary arguments
-      do.call("compute_dist_matrix",
-              c(list(traits_table = traits_table[, x, drop = FALSE]),
-                other_args)
+      do.call(
+        "compute_dist_matrix",
+        c(list(traits_table = traits_table[, x, drop = FALSE]), other_args)
       )
     })
 

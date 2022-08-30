@@ -60,7 +60,7 @@ dist_mat = compute_dist_matrix(trait[, -1])
 
 }
 \references{
-\preformatted{Gower, J.C. (1971) A general coefficient of similarity and some of its
+\if{html}{\out{<div class="sourceCode">}}\preformatted{Gower, J.C. (1971) A general coefficient of similarity and some of its
 properties. Biometrics, 857–871.
 
 Podani, J. (1999) Extending Gower’s general coefficient of similarity
@@ -69,7 +69,7 @@ to ordinal characters. Taxon, 331–340.
 Pavoine, S., Vallet, J., Dufour, A.-B., Gachet, S., & Daniel, H. (2009)
 On the challenge of treating various types of variables: application for
 improving the measurement of functional diversity. Oikos, 118, 391–402.
-}
+}\if{html}{\out{</div>}}
 }
 \seealso{
 \code{\link[cluster:daisy]{cluster::daisy()}} which this function wraps, base \code{\link[stats:dist]{stats::dist()}}

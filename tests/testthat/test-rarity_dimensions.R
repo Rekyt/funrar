@@ -77,10 +77,11 @@ test_that("'distinctiveness_dimensions()' outputs good objects", {
 })
 
 test_that("'uniqueness_dimensions()' works with sparse matrices", {
-  expect_warning(uniqueness_dimensions(sparse_mat, given_traits),
-                 paste0("Only numeric traits provided, consider using ",
-                        "euclidean distance."),
-                 fixed = TRUE)
+  expect_message(
+    uniqueness_dimensions(sparse_mat, given_traits),
+    "Only numeric traits provided, consider using euclidean distance.",
+    fixed = TRUE
+  )
 
   sparse_ui_dim = uniqueness_dimensions(sparse_mat, given_traits,
                                         metric = "euclidean")
