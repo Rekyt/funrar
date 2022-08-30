@@ -13,6 +13,9 @@ species in columns, or tidy community data frame}
 \item{abund}{name of the column of the provided object that contains the
 abundances}
 }
+\value{
+\code{TRUE} if the input has relative abundances \code{FALSE} otherwise
+}
 \description{
 From an abundance/presence-absence matrix or data.frame tells if it contains
 relative abundances or absolute abundances. Checks if all abundances are

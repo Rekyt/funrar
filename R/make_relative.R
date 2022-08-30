@@ -1,11 +1,15 @@
 #' Relative abundance matrix from absolute abundance matrix
 #'
-#' From an abundance matrix (numbers of individuals of a given species at a site)
-#' returns a relative abundance matrix (proportion of individuals of a given species
-#' at a given site). This function works also with sparse matrices.
+#' From an abundance matrix (numbers of individuals of a given species at a
+#' site) returns a relative abundance matrix (proportion of individuals of a
+#' given species at a given site). This function works also
+#' with sparse matrices.
 #'
 #' @param abund_matrix abundance matrix, with sites in rows and species in
 #'                     columns.
+#'
+#' @return Similar shaped matrix as the input but with relative abundances
+#'   instead
 #'
 #' @examples
 #' data("aravo", package = "ade4")
@@ -51,7 +55,7 @@ make_relative = function(abund_matrix) {
 #'
 #' @param abund name of the column of the provided object that contains the
 #'              abundances
-#'
+#' @return `TRUE` if the input has relative abundances `FALSE` otherwise
 #' @seealso [make_relative()] to transform matrix into a relative abundance
 #'          matrix.
 #'

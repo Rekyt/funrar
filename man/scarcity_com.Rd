@@ -34,6 +34,20 @@ tests on inputs and may fail unexpectedly. Please use \code{\link[=scarcity_stac
 avoid input errors.
 }
 
+\examples{
+data("aravo", package = "ade4")
+
+# Site-species matrix converted into data.frame
+mat = as.matrix(aravo$spe)
+mat = make_relative(mat)
+dat = matrix_to_stack(mat, "value", "site", "species")
+dat$site = as.character(dat$site)
+dat$species = as.character(dat$species)
+
+si_df = scarcity_com(subset(dat, site == "AR07"), "species", "value")
+head(si_df)
+
+}
 \seealso{
 \code{\link[=scarcity]{scarcity()}} and \code{vignette("rarity_indices", package = "funrar")}
 for details on the scarcity metric; \code{\link[=distinctiveness_com]{distinctiveness_com()}} to compute

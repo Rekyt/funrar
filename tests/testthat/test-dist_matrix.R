@@ -81,7 +81,9 @@ test_that("Different distances method give consistent results", {
 
 
   # Manhattan
-  man_mat = suppressWarnings(compute_dist_matrix(trait_df, metric = "manhattan"))
+  man_mat = suppressWarnings(
+    compute_dist_matrix(trait_df, metric = "manhattan")
+  )
 
   man_dist = dist(trait_df, method = "manhattan")
 

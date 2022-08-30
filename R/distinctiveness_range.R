@@ -100,7 +100,9 @@
 #' reg_di = distinctiveness(reg_pool, dist_mat)
 #'
 #' @export
-distinctiveness_range = function(pres_matrix, dist_matrix, given_range, relative = FALSE) {
+distinctiveness_range = function(
+  pres_matrix, dist_matrix, given_range, relative = FALSE
+) {
 
   full_matrix_checks(pres_matrix, dist_matrix)
 

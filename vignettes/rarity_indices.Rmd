@@ -69,7 +69,9 @@ dat = matrix_to_stack(mat, "value", "site", "species")
 head(dat)
 
 # The reverse function is provided and gives the same original matrix
-identical(as.numeric(stack_to_matrix(dat, "site", "species", "value")), as.numeric(mat))
+identical(
+  as.numeric(stack_to_matrix(dat, "site", "species", "value")), as.numeric(mat)
+)
 
 # Removal of empty rows
 dat = dat[which(dat$value > 0), ]
@@ -149,11 +151,13 @@ Using `funrar` distinctiveness values can be computed using function `distinctiv
 dat$species = as.character(dat$species)
 
 # Compute distinctiveness for each species on each site
-di_df = distinctiveness_stack(com_df = dat,  # The site x species table
-                              sp_col = "species",  # Name of the species column
-                              com = "site",  # Name of the community column
-                              abund = NULL,  # Relative abundances column (facultative)
-                              dist_matrix = dist_mat)  # Functional Distance matrix
+di_df = distinctiveness_stack(
+  com_df = dat,  # The site x species table
+  sp_col = "species",  # Name of the species column
+  com = "site",  # Name of the community column
+  abund = NULL,  # Relative abundances column (facultative)
+  dist_matrix = dist_mat  # Functional Distance matrix
+)
 
 head(di_df)
 ```
