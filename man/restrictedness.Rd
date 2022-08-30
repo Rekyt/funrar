@@ -62,9 +62,9 @@ restrictedness of a species present in a single site:
 }{
  R_i = (K_tot - K_i)(K_tot - 1)
 }
-Other approaches can be used to measure the geographical extent (convex hulls,
-occupancy models, etc.) but for the sake of simplicity only the counting
-method is implemented in \pkg{funrar}.
+Other approaches can be used to measure the geographical extent
+(convex hulls, occupancy models, etc.) but for the sake of simplicity only
+the counting method is implemented in \pkg{funrar}.
 }
 \examples{
 data("aravo", package = "ade4")

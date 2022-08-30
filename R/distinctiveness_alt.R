@@ -24,7 +24,7 @@
 #'    as `NaN`.
 #'
 #'    For speed and memory efficiency sparse matrices can be used as input of
-#'    the function using `as(pres_matrix, "sparseMatrix")` from the
+#'    the function using `as(pres_matrix, "dgCMatrix")` from the
 #'    `Matrix` package.
 #'    (see `vignette("sparse_matrices", package = "funrar")`)
 #'

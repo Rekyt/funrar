@@ -107,9 +107,9 @@ abund_com$Di = c(4/9, 4/9)
 
 ## Sparse Matrices -------------------------------------------------------------
 library(Matrix)
-sparse_mat = as(valid_mat, "sparseMatrix")
+sparse_mat = as(valid_mat, "dgCMatrix")
 
-dist_sparse_mat = as(as(correct_dist_mat, "sparseMatrix"), "dgeMatrix")
+dist_sparse_mat = as(as(correct_dist_mat, "matrix"), "dgeMatrix")
 
 
 ## Relative distinctiveness ----------------------------------------------------

@@ -16,7 +16,7 @@ pres_mat[3, 3] = 1
 
 dimnames(pres_mat) = list(sites = paste0("s", 1:3), species = letters[1:3])
 
-sparse_mat = as(pres_mat, "sparseMatrix")
+sparse_mat = as(pres_mat, "dgCMatrix")
 
 # Tests ------------------------------------------------------------------------
 test_that("'uniqueness_dimensions()' outputs good objects", {

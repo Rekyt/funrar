@@ -92,10 +92,10 @@ test_that("Conversion from matrix to tidy data.frame works", {
 test_that("Conversion from sparse & dense matrices to tidy data.frame", {
   library(Matrix)
 
-  valid_sparse = as(valid_mat, "sparseMatrix")
+  valid_sparse = as(valid_mat, "dgCMatrix")
   valid_dens   = as(valid_mat, "Matrix")
 
-  abund_sparse = as(abund_mat, "sparseMatrix")
+  abund_sparse = as(abund_mat, "dgCMatrix")
   abund_dens   = as(abund_mat, "Matrix")
 
   # Test for sparse matrices
@@ -132,7 +132,7 @@ test_that("Conversion from tidy data.frame to sparse & dense matrices", {
   valid_zero = valid_mat
   valid_zero[is.na(valid_zero)] = 0
   # Target matrices
-  valid_sparse = as(valid_zero, "sparseMatrix")
+  valid_sparse = as(valid_zero, "dgCMatrix")
   names(dimnames(valid_sparse)) = c("species", "site")
 
   if (!requireNamespace("tidytext", quietly = TRUE)) {
@@ -151,7 +151,7 @@ test_that("Conversion from tidy data.frame to sparse & dense matrices", {
   abund_zero = abund_mat
   abund_zero[is.na(abund_zero)] = 0
   # Target matrices
-  abund_sparse = as(abund_zero, "sparseMatrix")
+  abund_sparse = as(abund_zero, "dgCMatrix")
   names(dimnames(abund_sparse)) = c("species", "site")
 
 

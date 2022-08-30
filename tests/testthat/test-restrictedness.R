@@ -42,7 +42,7 @@ test_that("Restrictedness computations work", {
 
 test_that("Restrictedness works with sparse matrices", {
   library(Matrix)
-  sparse_mat = as(valid_mat, "sparseMatrix")
+  sparse_mat = as(valid_mat, "dgCMatrix")
 
   expect_silent(restrictedness(sparse_mat))
 
