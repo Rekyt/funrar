@@ -71,12 +71,6 @@ distinctiveness_alt = function(pres_matrix, dist_matrix, given_range) {
   pres_matrix = pres_matrix[, common, drop = FALSE]
   dist_matrix = dist_matrix[common, common]
 
-  if (!is_relative(pres_matrix)) {
-    warning("Provided object may not contain relative abundances nor ",
-            "presence-absence\n",
-            "Have a look at the make_relative() function if it is the case")
-  }
-
   # Correspondance matrix (1 if outside given range, 0 otherwise)
   corr_matrix = dist_matrix
   corr_matrix[dist_matrix >= given_range] = 1

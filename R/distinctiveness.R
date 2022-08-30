@@ -151,12 +151,7 @@ distinctiveness_stack = function(com_df, sp_col, com, abund = NULL,
   full_df_checks(com_df, sp_col, com, abund, dist_matrix)
 
   if (is.null(abund)) {
-    message("No relative abundance provided, computing Di without it")
-  } else if (!is.null(abund) & !is_relative(com_df, abund)) {
-    # Test if provided data.frame contains absolute abundances
-    warning("Provided object may not contain relative abundances nor ",
-            "presence-absence\n",
-            "Have a look at the make_relative() function if it is the case")
+    message("No abundance column provided, computing Di without it")
   }
 
 
@@ -288,12 +283,6 @@ distinctiveness = function(pres_matrix, dist_matrix, relative = FALSE) {
 
   pres_matrix = pres_matrix[, common, drop = FALSE]
   dist_matrix = dist_matrix[common, common]
-
-  if (!is_relative(pres_matrix)) {
-    warning("Provided object may not contain relative abundances nor ",
-            "presence-absence\n",
-            "Have a look at the make_relative() function if it is the case")
-  }
 
   # Matrix product of distance matrix and presence absence matrix
   index_matrix = pres_matrix %*% dist_matrix

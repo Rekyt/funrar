@@ -130,14 +130,6 @@ test_that("Bad input generates error", {
 
   expect_error(distinctiveness_range(valid_mat, dist_mat, 0.1, relative = "A"),
                "'relative' argument should be either TRUE or FALSE")
-
-  expect_warning(
-    distinctiveness_range(valid_mat * 4, dist_mat, 0.1),
-    paste0("Provided object may not contain relative abundances nor ",
-           "presence-absence\n",
-           "Have a look at the make_relative() function if it is the case"),
-    fixed = TRUE
-  )
 })
 
 test_that("Correct Di computation without abundance",{

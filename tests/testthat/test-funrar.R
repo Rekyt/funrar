@@ -138,13 +138,6 @@ test_that("funrar functions warns if object does not have relative abundances",
 
             abs_df = matrix_to_stack(abs_mat)
 
-            expect_warning(distinctiveness(abs_mat, dist_mat),
-                           "^Provided object may not contain relative abund.*")
-
-            expect_warning(distinctiveness_stack(abs_df, "species", "site",
-                                                 "value", dist_mat),
-                           "^Provided object may not contain relative abund.*")
-
             expect_warning(scarcity(abs_mat),
                            "^Provided object may not contain relative abund.*")
           })
