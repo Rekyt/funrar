@@ -325,11 +325,9 @@ D_i = \frac{\sum_{\substack{j = 1, \\
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Compute distinctiveness for each species on each site</span></span>
 <span><span class="va">di</span> <span class="op">=</span> <span class="fu"><a href="../reference/distinctiveness.html">distinctiveness</a></span><span class="op">(</span>pres_matrix <span class="op">=</span> <span class="va">mat</span>,  <span class="co"># The site x species matrix</span></span>
-<span>                     dist_matrix <span class="op">=</span> <span class="va">dist_mat</span><span class="op">)</span>  <span class="co"># Functional Distance matrix</span></span></code></pre></div>
-<pre><code><span><span class="co">## Warning in distinctiveness(pres_matrix = mat, dist_matrix = dist_mat): Provided object may not contain relative abundances nor presence-absence</span></span>
-<span><span class="co">## Have a look at the make_relative() function if it is the case</span></span></code></pre>
-<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">di</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">]</span></span></code></pre></div>
+<span>                     dist_matrix <span class="op">=</span> <span class="va">dist_mat</span><span class="op">)</span>  <span class="co"># Functional Distance matrix</span></span>
+<span></span>
+<span><span class="va">di</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">]</span></span></code></pre></div>
 <pre><code><span><span class="co">##      Agro.rupe Alop.alpi Anth.nipp Heli.sede Aven.vers</span></span>
 <span><span class="co">## AR07        NA        NA        NA        NA        NA</span></span>
 <span><span class="co">## AR71        NA        NA        NA        NA        NA</span></span>
@@ -342,7 +340,7 @@ D_i = \frac{\sum_{\substack{j = 1, \\
 <h5 id="computation-with-stacked-data-frame">Computation with stacked data.frame<a class="anchor" aria-label="anchor" href="#computation-with-stacked-data-frame"></a>
 </h5>
 <p>Using <code>funrar</code> distinctiveness values can be computed using function <code><a href="../reference/distinctiveness_stack.html">distinctiveness_stack()</a></code>:</p>
-<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Species should be character</span></span>
 <span><span class="va">dat</span><span class="op">$</span><span class="va">species</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">as.character</a></span><span class="op">(</span><span class="va">dat</span><span class="op">$</span><span class="va">species</span><span class="op">)</span></span>
 <span></span>
@@ -354,8 +352,8 @@ D_i = \frac{\sum_{\substack{j = 1, \\
 <span>  abund <span class="op">=</span> <span class="cn">NULL</span>,  <span class="co"># Relative abundances column (facultative)</span></span>
 <span>  dist_matrix <span class="op">=</span> <span class="va">dist_mat</span>  <span class="co"># Functional Distance matrix</span></span>
 <span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## No relative abundance provided, computing Di without it</span></span></code></pre>
-<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
+<pre><code><span><span class="co">## No abundance column provided, computing Di without it</span></span></code></pre>
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">di_df</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">##     species site value        Di</span></span>
 <span><span class="co">## 1 Agro.rupe AR01     1 0.1661127</span></span>
@@ -366,12 +364,10 @@ D_i = \frac{\sum_{\substack{j = 1, \\
 <span><span class="co">## 6 Fest.viol AR01     1 0.1907347</span></span></code></pre>
 <p>The syntax for <code><a href="../reference/distinctiveness_stack.html">distinctiveness_stack()</a></code> is first the table, then the name of the species column, then the name of the community column, then the name of the relative abundance column and finally the distance matrix. The function add a <code>Di</code> column giving the species distinctiveness in each species per site combination.</p>
 <p>For abundance weighted distinctiveness you need to have a column containing relative abundances in your data frame as such:</p>
-<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">di_df</span> <span class="op">=</span> <span class="fu"><a href="../reference/distinctiveness_stack.html">distinctiveness_stack</a></span><span class="op">(</span><span class="va">dat</span>, <span class="st">"species"</span>, <span class="st">"site"</span>, <span class="st">"value"</span>, <span class="va">dist_mat</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## Warning in distinctiveness_stack(dat, "species", "site", "value", dist_mat): Provided object may not contain relative abundances nor presence-absence</span></span>
-<span><span class="co">## Have a look at the make_relative() function if it is the case</span></span></code></pre>
-<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">di_df</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">di_df</span> <span class="op">=</span> <span class="fu"><a href="../reference/distinctiveness_stack.html">distinctiveness_stack</a></span><span class="op">(</span><span class="va">dat</span>, <span class="st">"species"</span>, <span class="st">"site"</span>, <span class="st">"value"</span>, <span class="va">dist_mat</span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">di_df</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">##     species site value        Di</span></span>
 <span><span class="co">## 1 Agro.rupe AR01     1 0.1569403</span></span>
 <span><span class="co">## 2 Heli.sede AR01     2 0.1924531</span></span>
@@ -397,11 +393,11 @@ S_i = \exp(-NA_i\log2),
 <h5 id="computation">Computation<a class="anchor" aria-label="anchor" href="#computation"></a>
 </h5>
 <p>With <code>funrar</code> it can be computed with <code><a href="../reference/scarcity.html">scarcity()</a></code> function with a syntax analog to <code><a href="../reference/distinctiveness.html">distinctiveness()</a></code></p>
-<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">si</span> <span class="op">=</span> <span class="fu"><a href="../reference/scarcity.html">scarcity</a></span><span class="op">(</span>pres_matrix <span class="op">=</span> <span class="va">mat</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Warning in scarcity(pres_matrix = mat): Provided object may not contain relative abundances nor presence-absence</span></span>
 <span><span class="co">## Have a look at the make_relative() function if it is the case</span></span></code></pre>
-<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">si</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">]</span></span></code></pre></div>
 <pre><code><span><span class="co">##         Agro.rupe Alop.alpi    Anth.nipp    Heli.sede    Aven.vers</span></span>
 <span><span class="co">## AR07           NA        NA           NA           NA           NA</span></span>
@@ -409,7 +405,7 @@ S_i = \exp(-NA_i\log2),
 <span><span class="co">## AR26 3.308722e-24        NA 1.490116e-08           NA 1.490116e-08</span></span>
 <span><span class="co">## AR54           NA        NA           NA 1.455192e-11           NA</span></span>
 <span><span class="co">## AR60           NA        NA           NA           NA           NA</span></span></code></pre>
-<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">si_df</span> <span class="op">=</span> <span class="fu"><a href="../reference/scarcity_stack.html">scarcity_stack</a></span><span class="op">(</span><span class="va">dat</span>, <span class="st">"species"</span>, <span class="st">"site"</span>, <span class="st">"value"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">si_df</span><span class="op">)</span></span></code></pre></div>
@@ -438,7 +434,7 @@ U_i = \text{min}(d_{ij}), \forall j \in [1, N_R], j \neq i,
 <h5 id="computation-1">Computation<a class="anchor" aria-label="anchor" href="#computation-1"></a>
 </h5>
 <p><code><a href="../reference/uniqueness.html">uniqueness()</a></code> follows a similar syntax, but beware that given community table and distance matrix should represent the <strong>regional species pool</strong>. And the syntax is also similar:</p>
-<div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ui</span> <span class="op">=</span> <span class="fu"><a href="../reference/uniqueness.html">uniqueness</a></span><span class="op">(</span><span class="va">mat</span>, <span class="va">dist_mat</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">ui</span><span class="op">)</span></span></code></pre></div>
@@ -449,7 +445,7 @@ U_i = \text{min}(d_{ij}), \forall j \in [1, N_R], j \neq i,
 <span><span class="co">## 4 Heli.sede 0.02270997</span></span>
 <span><span class="co">## 5 Aven.vers 0.05675178</span></span>
 <span><span class="co">## 6 Care.rosa 0.15922932</span></span></code></pre>
-<div class="sourceCode" id="cb36"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ui_df</span> <span class="op">=</span> <span class="fu"><a href="../reference/uniqueness_stack.html">uniqueness_stack</a></span><span class="op">(</span><span class="va">dat</span>, <span class="st">"species"</span>, <span class="va">dist_mat</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">ui_df</span><span class="op">)</span></span></code></pre></div>
@@ -460,7 +456,7 @@ U_i = \text{min}(d_{ij}), \forall j \in [1, N_R], j \neq i,
 <span><span class="co">## 4 Heli.sede 0.02270997</span></span>
 <span><span class="co">## 5 Aven.vers 0.05675178</span></span>
 <span><span class="co">## 6 Care.rosa 0.15922932</span></span></code></pre>
-<div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/dim.html" class="external-link">dim</a></span><span class="op">(</span><span class="va">ui_df</span><span class="op">[</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/duplicated.html" class="external-link">duplicated</a></span><span class="op">(</span><span class="va">ui_df</span><span class="op">$</span><span class="va">species</span><span class="op">)</span>, <span class="op">]</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## [1] 82  2</span></span></code></pre>
 </div>
@@ -480,7 +476,7 @@ R_i = 1 - N_i/N_tot
 <div class="section level5">
 <h5 id="computation-2">Computation<a class="anchor" aria-label="anchor" href="#computation-2"></a>
 </h5>
-<div class="sourceCode" id="cb40"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb36"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">ri</span> <span class="op">=</span> <span class="fu"><a href="../reference/restrictedness.html">restrictedness</a></span><span class="op">(</span><span class="va">mat</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">ri</span><span class="op">)</span></span></code></pre></div>
@@ -491,7 +487,7 @@ R_i = 1 - N_i/N_tot
 <span><span class="co">## 4 Heli.sede 0.9466667</span></span>
 <span><span class="co">## 5 Aven.vers 0.8000000</span></span>
 <span><span class="co">## 6 Care.rosa 0.6266667</span></span></code></pre>
-<div class="sourceCode" id="cb42"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Species should be character</span></span>
 <span><span class="va">dat</span><span class="op">$</span><span class="va">site</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">as.character</a></span><span class="op">(</span><span class="va">dat</span><span class="op">$</span><span class="va">site</span><span class="op">)</span></span>
 <span></span>
@@ -511,13 +507,11 @@ R_i = 1 - N_i/N_tot
 <h4 id="funrar">funrar<a class="anchor" aria-label="anchor" href="#funrar"></a>
 </h4>
 <p>This function computes all of the four metrics introduced above.</p>
-<div class="sourceCode" id="cb44"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb40"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">all_ind</span> <span class="op">=</span> <span class="fu"><a href="../reference/funrar.html">funrar</a></span><span class="op">(</span><span class="va">mat</span>, <span class="va">dist_mat</span>, rel_abund <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## Warning in distinctiveness(pres_matrix, dist_matrix): Provided object may not contain relative abundances nor presence-absence</span></span>
-<span><span class="co">## Have a look at the make_relative() function if it is the case</span></span></code></pre>
 <pre><code><span><span class="co">## Warning in scarcity(pres_matrix): Provided object may not contain relative abundances nor presence-absence</span></span>
 <span><span class="co">## Have a look at the make_relative() function if it is the case</span></span></code></pre>
-<div class="sourceCode" id="cb47"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb42"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">all_ind</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## List of 4</span></span>
 <span><span class="co">##  $ Ui:'data.frame':  82 obs. of  2 variables:</span></span>
@@ -534,16 +528,16 @@ R_i = 1 - N_i/N_tot
 <span><span class="co">##   ..- attr(*, "dimnames")=List of 2</span></span>
 <span><span class="co">##   .. ..$ : chr [1:75] "AR07" "AR71" "AR26" "AR54" ...</span></span>
 <span><span class="co">##   .. ..$ : chr [1:82] "Agro.rupe" "Alop.alpi" "Anth.nipp" "Heli.sede" ...</span></span></code></pre>
-<div class="sourceCode" id="cb49"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb44"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/identical.html" class="external-link">identical</a></span><span class="op">(</span><span class="va">all_ind</span><span class="op">$</span><span class="va">Ui</span>, <span class="va">ui</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## [1] TRUE</span></span></code></pre>
-<div class="sourceCode" id="cb51"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb46"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/identical.html" class="external-link">identical</a></span><span class="op">(</span><span class="va">all_ind</span><span class="op">$</span><span class="va">Di</span>, <span class="va">di</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## [1] TRUE</span></span></code></pre>
-<div class="sourceCode" id="cb53"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb48"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/identical.html" class="external-link">identical</a></span><span class="op">(</span><span class="va">all_ind</span><span class="op">$</span><span class="va">Ri</span>, <span class="va">ri</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## [1] TRUE</span></span></code></pre>
-<div class="sourceCode" id="cb55"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb50"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/identical.html" class="external-link">identical</a></span><span class="op">(</span><span class="va">all_ind</span><span class="op">$</span><span class="va">Si</span>, <span class="va">si</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## [1] TRUE</span></span></code></pre>
 </div>
@@ -553,7 +547,7 @@ R_i = 1 - N_i/N_tot
 <h2 id="plots">Plots<a class="anchor" aria-label="anchor" href="#plots"></a>
 </h2>
 <p>In this section, some ideas to plot your results are presented. For example the density of the various indices or a matrix visualization of the values of distinctiveness per species.</p>
-<div class="sourceCode" id="cb57"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb52"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Heatmap with distinctiveness values</span></span>
@@ -561,7 +555,7 @@ R_i = 1 - N_i/N_tot
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_tile.html" class="external-link">geom_tile</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>fill <span class="op">=</span> <span class="va">Di</span><span class="op">)</span>, colour <span class="op">=</span> <span class="st">"white"</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/scale_gradient.html" class="external-link">scale_fill_gradient</a></span><span class="op">(</span>low <span class="op">=</span> <span class="st">"white"</span>, high <span class="op">=</span> <span class="st">"steelblue"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="rarity_indices_files/figure-html/unnamed-chunk-8-1.png" width="700"></p>
-<div class="sourceCode" id="cb58"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb53"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Density of distinctiveness values</span></span>
 <span></span>
 <span><span class="va">quant</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html" class="external-link">quantile</a></span><span class="op">(</span><span class="va">di_df</span><span class="op">$</span><span class="va">Di</span>, probs <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1</span>, <span class="fl">0.10</span><span class="op">)</span><span class="op">)</span></span>
@@ -585,7 +579,7 @@ R_i = 1 - N_i/N_tot
 <span></span>
 <span><span class="va">di_dens</span></span></code></pre></div>
 <p><img src="rarity_indices_files/figure-html/unnamed-chunk-8-2.png" width="700"></p>
-<div class="sourceCode" id="cb59"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb54"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Density of scarcity values</span></span>
 <span></span>
 <span><span class="va">quant</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/quantile.html" class="external-link">quantile</a></span><span class="op">(</span><span class="va">si_df</span><span class="op">$</span><span class="va">Si</span>, probs <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">1</span>, <span class="fl">0.10</span><span class="op">)</span><span class="op">)</span></span>
@@ -609,7 +603,7 @@ R_i = 1 - N_i/N_tot
 <span></span>
 <span><span class="va">si_dens</span></span></code></pre></div>
 <p><img src="rarity_indices_files/figure-html/unnamed-chunk-8-3.png" width="700"></p>
-<div class="sourceCode" id="cb60"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb55"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Regional rarity: restrictedness versus uniqueness</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">colnames</a></span><span class="op">(</span><span class="va">ri_df</span><span class="op">)</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">colnames</a></span><span class="op">(</span><span class="va">ri_df</span><span class="op">)</span> <span class="op">==</span> <span class="st">"sp"</span><span class="op">]</span> <span class="op">=</span> <span class="st">"species"</span></span>
 <span><span class="va">ri_ui</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/merge.html" class="external-link">merge</a></span><span class="op">(</span><span class="va">ri_df</span>, <span class="va">ui_df</span>, by <span class="op">=</span> <span class="st">"species"</span><span class="op">)</span></span>
