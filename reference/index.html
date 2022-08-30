@@ -63,18 +63,10 @@
     </div>
 
     <table class="ref-index"><colgroup><col class="alias"><col class="title"></colgroup><tbody><tr><th colspan="2">
-          <h2 id="all-functions">All functions <a href="#all-functions" class="anchor" aria-hidden="true"></a></h2>
+          <h2 id="functions-to-compute-functional-distinctiveness">Functions to Compute Functional Distinctiveness <a href="#functions-to-compute-functional-distinctiveness" class="anchor" aria-hidden="true"></a></h2>
           <p class="section-desc"></p>
         </th>
       </tr></tbody><tbody><tr><td>
-          <p><code><a href="combination_trait_dist.html">combination_trait_dist()</a></code> </p>
-        </td>
-        <td><p>Multiple distance matrices</p></td>
-      </tr><tr><td>
-          <p><code><a href="compute_dist_matrix.html">compute_dist_matrix()</a></code> </p>
-        </td>
-        <td><p>Functional Distance Matrix</p></td>
-      </tr><tr><td>
           <p><code><a href="distinctiveness.html">distinctiveness()</a></code> </p>
         </td>
         <td><p>Functional Distinctiveness on site-species matrix</p></td>
@@ -89,7 +81,7 @@
       </tr><tr><td>
           <p><code><a href="distinctiveness_dimensions.html">distinctiveness_dimensions()</a></code> </p>
         </td>
-        <td><p>Distinctiveness dimensions</p></td>
+        <td><p>Distinctiveness across combinations of traits</p></td>
       </tr><tr><td>
           <p><code><a href="distinctiveness_global.html">distinctiveness_global()</a></code> </p>
         </td>
@@ -102,27 +94,27 @@
           <p><code><a href="distinctiveness_stack.html">distinctiveness_stack()</a></code> <code><a href="distinctiveness_stack.html">distinctiveness_tidy()</a></code> </p>
         </td>
         <td><p>Functional Distinctiveness on a stacked data.frame</p></td>
-      </tr><tr><td>
-          <p><code><a href="funrar.html">funrar()</a></code> </p>
+      </tr></tbody><tbody><tr><th colspan="2">
+          <h2 id="functions-compute-functional-uniqueness">Functions Compute Functional Uniqueness <a href="#functions-compute-functional-uniqueness" class="anchor" aria-hidden="true"></a></h2>
+          <p class="section-desc"></p>
+        </th>
+      </tr></tbody><tbody><tr><td>
+          <p><code><a href="uniqueness.html">uniqueness()</a></code> </p>
         </td>
-        <td><p>Functional Rarity Indices</p></td>
+        <td><p>Functional Uniqueness for site-species matrix matrix</p></td>
       </tr><tr><td>
-          <p><code><a href="funrar_stack.html">funrar_stack()</a></code> </p>
+          <p><code><a href="uniqueness_dimensions.html">uniqueness_dimensions()</a></code> </p>
         </td>
-        <td><p>Functional Rarity indices on stacked data.frame</p></td>
+        <td><p>Uniqueness across combinations of traits</p></td>
       </tr><tr><td>
-          <p><code><a href="is_relative.html">is_relative()</a></code> </p>
+          <p><code><a href="uniqueness_stack.html">uniqueness_stack()</a></code> <code><a href="uniqueness_stack.html">uniqueness_tidy()</a></code> </p>
         </td>
-        <td><p>Tell if matrix or data.frame has relative abundances</p></td>
-      </tr><tr><td>
-          <p><code><a href="make_relative.html">make_relative()</a></code> </p>
-        </td>
-        <td><p>Relative abundance matrix from absolute abundance matrix</p></td>
-      </tr><tr><td>
-          <p><code><a href="matrix_to_stack.html">matrix_to_stack()</a></code> </p>
-        </td>
-        <td><p>Matrix to stacked (= tidy) data.frame</p></td>
-      </tr><tr><td>
+        <td><p>Functional Uniqueness on stacked data.frame</p></td>
+      </tr></tbody><tbody><tr><th colspan="2">
+          <h2 id="functions-to-compute-geographical-restrictedness">Functions to Compute Geographical Restrictedness <a href="#functions-to-compute-geographical-restrictedness" class="anchor" aria-hidden="true"></a></h2>
+          <p class="section-desc"></p>
+        </th>
+      </tr></tbody><tbody><tr><td>
           <p><code><a href="restrictedness.html">restrictedness()</a></code> </p>
         </td>
         <td><p>Geographical Restrictedness on site-species matrix</p></td>
@@ -130,7 +122,11 @@
           <p><code><a href="restrictedness_stack.html">restrictedness_stack()</a></code> <code><a href="restrictedness_stack.html">restrictedness_tidy()</a></code> </p>
         </td>
         <td><p>Geographical Restrictedness for stacked data.frame</p></td>
-      </tr><tr><td>
+      </tr></tbody><tbody><tr><th colspan="2">
+          <h2 id="functions-to-compute-scarcity">Functions to Compute Scarcity <a href="#functions-to-compute-scarcity" class="anchor" aria-hidden="true"></a></h2>
+          <p class="section-desc"></p>
+        </th>
+      </tr></tbody><tbody><tr><td>
           <p><code><a href="scarcity.html">scarcity()</a></code> </p>
         </td>
         <td><p>Scarcity on site-species matrix</p></td>
@@ -141,23 +137,55 @@
       </tr><tr><td>
           <p><code><a href="scarcity_stack.html">scarcity_stack()</a></code> <code><a href="scarcity_stack.html">scarcity_tidy()</a></code> </p>
         </td>
-        <td><p>Scarcity</p></td>
+        <td><p>Scarcity on a stacked data.frame</p></td>
+      </tr></tbody><tbody><tr><th colspan="2">
+          <h2 id="combined-functions">Combined Functions <a href="#combined-functions" class="anchor" aria-hidden="true"></a></h2>
+          <p class="section-desc"></p>
+        </th>
+      </tr></tbody><tbody><tr><td>
+          <p><code><a href="funrar.html">funrar()</a></code> </p>
+        </td>
+        <td><p>Compute all Functional Rarity Indices from Matrices</p></td>
+      </tr><tr><td>
+          <p><code><a href="funrar_stack.html">funrar_stack()</a></code> </p>
+        </td>
+        <td><p>Compute all Functional Rarity Indices from stacked data.frames</p></td>
+      </tr></tbody><tbody><tr><th colspan="2">
+          <h2 id="distance-matrices-functions">Distance Matrices Functions <a href="#distance-matrices-functions" class="anchor" aria-hidden="true"></a></h2>
+          <p class="section-desc"></p>
+        </th>
+      </tr></tbody><tbody><tr><td>
+          <p><code><a href="combination_trait_dist.html">combination_trait_dist()</a></code> </p>
+        </td>
+        <td><p>Compute Multiple distance matrices from a single trait table</p></td>
+      </tr><tr><td>
+          <p><code><a href="compute_dist_matrix.html">compute_dist_matrix()</a></code> </p>
+        </td>
+        <td><p>Compute a Functional Dissimilarity Matrix</p></td>
+      </tr></tbody><tbody><tr><th colspan="2">
+          <h2 id="table-manipulation-functions">Table Manipulation Functions <a href="#table-manipulation-functions" class="anchor" aria-hidden="true"></a></h2>
+          <p class="section-desc"></p>
+        </th>
+      </tr></tbody><tbody><tr><td>
+          <p><code><a href="matrix_to_stack.html">matrix_to_stack()</a></code> </p>
+        </td>
+        <td><p>Matrix to stacked (= tidy) data.frame</p></td>
       </tr><tr><td>
           <p><code><a href="stack_to_matrix.html">stack_to_matrix()</a></code> </p>
         </td>
         <td><p>Stacked (= tidy) data.frame to matrix</p></td>
-      </tr><tr><td>
-          <p><code><a href="uniqueness.html">uniqueness()</a></code> </p>
+      </tr></tbody><tbody><tr><th colspan="2">
+          <h2 id="other-utility-functions">Other utility functions <a href="#other-utility-functions" class="anchor" aria-hidden="true"></a></h2>
+          <p class="section-desc"></p>
+        </th>
+      </tr></tbody><tbody><tr><td>
+          <p><code><a href="is_relative.html">is_relative()</a></code> </p>
         </td>
-        <td><p>Functional Uniqueness for site-species matrix matrix</p></td>
+        <td><p>Tell if matrix or data.frame has relative abundances</p></td>
       </tr><tr><td>
-          <p><code><a href="uniqueness_dimensions.html">uniqueness_dimensions()</a></code> </p>
+          <p><code><a href="make_relative.html">make_relative()</a></code> </p>
         </td>
-        <td><p>Uniqueness dimensions</p></td>
-      </tr><tr><td>
-          <p><code><a href="uniqueness_stack.html">uniqueness_stack()</a></code> <code><a href="uniqueness_stack.html">uniqueness_tidy()</a></code> </p>
-        </td>
-        <td><p>Functional Uniqueness on stacked data.frame</p></td>
+        <td><p>Relative abundance matrix from absolute abundance matrix</p></td>
       </tr></tbody></table></div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
