@@ -73,7 +73,7 @@ same community.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">distinctiveness_global</span><span class="op">(</span><span class="va">dist_obj</span>, di_name <span class="op">=</span> <span class="st">"global_di"</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">distinctiveness_global</span><span class="op">(</span><span class="va">dist_obj</span>, di_name <span class="op">=</span> <span class="st">"global_di"</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -82,15 +82,26 @@ same community.</p>
 <dd><p>a functional distance matrix as given by
 <code><a href="compute_dist_matrix.html">compute_dist_matrix()</a></code>, with species name as row and column names <strong>or</strong>
 a <code><a href="https://rdrr.io/r/stats/dist.html" class="external-link">dist()</a></code> object with species names as <code><a href="https://rdrr.io/r/base/labels.html" class="external-link">labels()</a></code></p></dd>
+
+
 <dt>di_name</dt>
 <dd><p>a character vector giving the name of the distinctiveness
 column in the final data.frame (<strong>default</strong>: <code>global_di</code>)</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>a data.frame with two columns: by default <code>species</code> that contains the
+    
+
+<p>a data.frame with two columns: by default <code>species</code> that contains the
 species names and <code>global_di</code> that contains the distinctiveness values.
-The first column that contains species names can renamed based on <code>dist_obj</code><code>dimnames</code>, while the second column is renamed through the <code>di_name</code>argument.`</p>
+The first column that contains species names can renamed based on <code>dist_obj</code></p>
+
+
+<p><code>dimnames</code>, while the second column is renamed through the <code>di_name</code></p>
+
+
+<p>argument.`</p>
     </div>
     <div id="see-also">
     <h2>See also</h2>
@@ -110,7 +121,7 @@ The first column that contains species names can renamed based on <code>dist_obj
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

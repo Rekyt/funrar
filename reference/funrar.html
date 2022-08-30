@@ -79,7 +79,7 @@ matrix.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">funrar</span><span class="op">(</span><span class="va">pres_matrix</span>, <span class="va">dist_matrix</span>, rel_abund <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">funrar</span><span class="op">(</span><span class="va">pres_matrix</span>, <span class="va">dist_matrix</span>, rel_abund <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -87,16 +87,23 @@ matrix.</p>
     <dl><dt>pres_matrix</dt>
 <dd><p>a site-species matrix (presence-absence or relative
 abundances), with sites in rows and species in columns</p></dd>
+
+
 <dt>dist_matrix</dt>
 <dd><p>a species functional distance matrix</p></dd>
+
+
 <dt>rel_abund</dt>
 <dd><p>logical (<code>TRUE</code> or <code>FALSE</code>) indicating if
 site-species matrix contain relative abundances values or only
 presence-absence data (default = <code>FALSE</code>)</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>A list of 3 objects (or 4 if <code>rel_abund = TRUE</code>):</p><dl><dt><strong>Ui</strong></dt>
+    
+
+<p>A list of 3 objects (or 4 if <code>rel_abund = TRUE</code>):</p><dl><dt><strong>Ui</strong></dt>
 <dd><p>a vector containing uniqueness values per species,</p></dd>
 
 <dt><strong>Di</strong></dt>
@@ -132,7 +139,7 @@ per site.</p></dd>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

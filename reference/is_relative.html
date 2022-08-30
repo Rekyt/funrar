@@ -73,7 +73,7 @@ between 1 and 0 but <strong>never checks sum of abundances per community</strong
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">is_relative</span><span class="op">(</span><span class="va">given_obj</span>, abund <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">is_relative</span><span class="op">(</span><span class="va">given_obj</span>, abund <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -81,10 +81,19 @@ between 1 and 0 but <strong>never checks sum of abundances per community</strong
     <dl><dt>given_obj</dt>
 <dd><p>abundance or presence-absence matrix, with sites in rows and
 species in columns, or tidy community data frame</p></dd>
+
+
 <dt>abund</dt>
 <dd><p>name of the column of the provided object that contains the
 abundances</p></dd>
+
 </dl></div>
+    <div id="value">
+    <h2>Value</h2>
+    
+
+<p><code>TRUE</code> if the input has relative abundances <code>FALSE</code> otherwise</p>
+    </div>
     <div id="see-also">
     <h2>See also</h2>
     <div class="dont-index"><p><code><a href="make_relative.html">make_relative()</a></code> to transform matrix into a relative abundance
@@ -93,11 +102,11 @@ matrix.</p></div>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"aravo"</span>, package <span class="op">=</span> <span class="st">"ade4"</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Site-species matrix</span></span>
-<span class="r-in"><span class="va">mat</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">as.matrix</a></span><span class="op">(</span><span class="va">aravo</span><span class="op">$</span><span class="va">spe</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">mat</span><span class="op">)</span><span class="op">[</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">]</span>  <span class="co"># Has absolute abundances</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"aravo"</span>, package <span class="op">=</span> <span class="st">"ade4"</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Site-species matrix</span></span></span>
+<span class="r-in"><span><span class="va">mat</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">as.matrix</a></span><span class="op">(</span><span class="va">aravo</span><span class="op">$</span><span class="va">spe</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">mat</span><span class="op">)</span><span class="op">[</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">]</span>  <span class="co"># Has absolute abundances</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>      Agro.rupe Alop.alpi Anth.nipp Heli.sede Aven.vers</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> AR07         0         0         0         0         0</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> AR71         0         0         0         0         0</span>
@@ -105,8 +114,8 @@ matrix.</p></div>
 <span class="r-out co"><span class="r-pr">#&gt;</span> AR54         0         0         0         2         0</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> AR60         0         0         0         0         0</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> AR70         0         0         0         0         0</span>
-<span class="r-in"><span class="va">rel_mat</span> <span class="op">=</span> <span class="fu"><a href="make_relative.html">make_relative</a></span><span class="op">(</span><span class="va">mat</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">rel_mat</span><span class="op">)</span>  <span class="co"># Relative abundances</span></span>
+<span class="r-in"><span><span class="va">rel_mat</span> <span class="op">=</span> <span class="fu"><a href="make_relative.html">make_relative</a></span><span class="op">(</span><span class="va">mat</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">rel_mat</span><span class="op">)</span>  <span class="co"># Relative abundances</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>       Agro.rupe Alop.alpi  Anth.nipp  Heli.sede  Aven.vers  Care.rosa Care.foet</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> AR07 0.00000000         0 0.00000000 0.00000000 0.00000000 0.06666667         0</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> AR71 0.00000000         0 0.00000000 0.00000000 0.00000000 0.08695652         0</span>
@@ -191,13 +200,13 @@ matrix.</p></div>
 <span class="r-out co"><span class="r-pr">#&gt;</span> AR54 0.04347826         0         0         0         0</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> AR60 0.07692308         0         0         0         0</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> AR70 0.03125000         0         0         0         0</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Forced to use ':::' becasue function is not exported</span></span>
-<span class="r-in"><span class="fu">funrar</span><span class="fu">:::</span><span class="fu">is_relative</span><span class="op">(</span><span class="va">mat</span><span class="op">)</span>      <span class="co"># FALSE</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Forced to use ':::' becasue function is not exported</span></span></span>
+<span class="r-in"><span><span class="fu">funrar</span><span class="fu">:::</span><span class="fu">is_relative</span><span class="op">(</span><span class="va">mat</span><span class="op">)</span>      <span class="co"># FALSE</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] FALSE</span>
-<span class="r-in"><span class="fu">funrar</span><span class="fu">:::</span><span class="fu">is_relative</span><span class="op">(</span><span class="va">rel_mat</span><span class="op">)</span>  <span class="co"># TRUE</span></span>
+<span class="r-in"><span><span class="fu">funrar</span><span class="fu">:::</span><span class="fu">is_relative</span><span class="op">(</span><span class="va">rel_mat</span><span class="op">)</span>  <span class="co"># TRUE</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] TRUE</span>
-<span class="r-in"></span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -212,7 +221,7 @@ matrix.</p></div>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

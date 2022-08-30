@@ -77,7 +77,7 @@ distance matrix. The sites-species matrix should have <strong>sites</strong> in
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">distinctiveness</span><span class="op">(</span><span class="va">pres_matrix</span>, <span class="va">dist_matrix</span>, relative <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">distinctiveness</span><span class="op">(</span><span class="va">pres_matrix</span>, <span class="va">dist_matrix</span>, relative <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -85,16 +85,23 @@ distance matrix. The sites-species matrix should have <strong>sites</strong> in
     <dl><dt>pres_matrix</dt>
 <dd><p>a site-species matrix (presence-absence or relative
 abundances), with sites in rows and species in columns</p></dd>
+
+
 <dt>dist_matrix</dt>
 <dd><p>a species functional distance matrix</p></dd>
+
+
 <dt>relative</dt>
 <dd><p>a logical indicating if distinctiveness should be scaled
 relatively to the community (scaled by max functional
 distance among the species of the targeted community)</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>a similar matrix from provided <code>pres_matrix</code> with Distinctiveness
+    
+
+<p>a similar matrix from provided <code>pres_matrix</code> with Distinctiveness
 values in lieu of presences or relative abundances, species absent from
 communities will have an <code>NA</code> value (see <code>Note</code> section)</p>
     </div>
@@ -121,44 +128,44 @@ and 1, the distance metric has to be scaled between 0 and 1.</p>
 cannot be computed (denominator = 0 in formula), and its value is assigned
 as <code>NaN</code>.</p>
 <p>For speed and memory efficiency sparse matrices can be used as input of
-the function using <code>as(pres_matrix, "sparseMatrix")</code> from the
+the function using <code>as(pres_matrix, "dgCMatrix")</code> from the
 <code>Matrix</code> package.
 (see <code><a href="../articles/sparse_matrices.html">vignette("sparse_matrices", package = "funrar")</a></code>)</p>
     </div>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"aravo"</span>, package <span class="op">=</span> <span class="st">"ade4"</span><span class="op">)</span></span>
-<span class="r-in"><span class="co"># Site-species matrix</span></span>
-<span class="r-in"><span class="va">mat</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">as.matrix</a></span><span class="op">(</span><span class="va">aravo</span><span class="op">$</span><span class="va">spe</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Compute relative abundances</span></span>
-<span class="r-in"><span class="va">mat</span> <span class="op">=</span> <span class="fu"><a href="make_relative.html">make_relative</a></span><span class="op">(</span><span class="va">mat</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Example of trait table</span></span>
-<span class="r-in"><span class="va">tra</span> <span class="op">=</span> <span class="va">aravo</span><span class="op">$</span><span class="va">traits</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Height"</span>, <span class="st">"SLA"</span>, <span class="st">"N_mass"</span><span class="op">)</span><span class="op">]</span></span>
-<span class="r-in"><span class="co"># Distance matrix</span></span>
-<span class="r-in"><span class="va">dist_mat</span> <span class="op">=</span> <span class="fu"><a href="compute_dist_matrix.html">compute_dist_matrix</a></span><span class="op">(</span><span class="va">tra</span><span class="op">)</span></span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Only numeric traits provided, consider using euclidean distance.</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="va">di</span> <span class="op">=</span> <span class="fu">distinctiveness</span><span class="op">(</span>pres_matrix <span class="op">=</span> <span class="va">mat</span>, dist_matrix <span class="op">=</span> <span class="va">dist_mat</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">di</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">]</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"aravo"</span>, package <span class="op">=</span> <span class="st">"ade4"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co"># Site-species matrix</span></span></span>
+<span class="r-in"><span><span class="va">mat</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">as.matrix</a></span><span class="op">(</span><span class="va">aravo</span><span class="op">$</span><span class="va">spe</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Compute relative abundances</span></span></span>
+<span class="r-in"><span><span class="va">mat</span> <span class="op">=</span> <span class="fu"><a href="make_relative.html">make_relative</a></span><span class="op">(</span><span class="va">mat</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Example of trait table</span></span></span>
+<span class="r-in"><span><span class="va">tra</span> <span class="op">=</span> <span class="va">aravo</span><span class="op">$</span><span class="va">traits</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Height"</span>, <span class="st">"SLA"</span>, <span class="st">"N_mass"</span><span class="op">)</span><span class="op">]</span></span></span>
+<span class="r-in"><span><span class="co"># Distance matrix</span></span></span>
+<span class="r-in"><span><span class="va">dist_mat</span> <span class="op">=</span> <span class="fu"><a href="compute_dist_matrix.html">compute_dist_matrix</a></span><span class="op">(</span><span class="va">tra</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Only numeric traits provided, consider using euclidean distance.</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">di</span> <span class="op">=</span> <span class="fu">distinctiveness</span><span class="op">(</span>pres_matrix <span class="op">=</span> <span class="va">mat</span>, dist_matrix <span class="op">=</span> <span class="va">dist_mat</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">di</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">]</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>      Agro.rupe Alop.alpi Anth.nipp Heli.sede Aven.vers</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> AR07        NA        NA        NA        NA        NA</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> AR71        NA        NA        NA        NA        NA</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> AR26 0.1460428        NA 0.2039929        NA 0.1788624</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> AR54        NA        NA        NA 0.1786867        NA</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> AR60        NA        NA        NA        NA        NA</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Compute distinctiveness for all species in the regional pool</span></span>
-<span class="r-in"><span class="co"># i.e., with all the species in all the communities</span></span>
-<span class="r-in"><span class="co"># Here considering each species present evenly in the regional pool</span></span>
-<span class="r-in"><span class="va">reg_pool</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fl">1</span>, ncol <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">ncol</a></span><span class="op">(</span><span class="va">mat</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">colnames</a></span><span class="op">(</span><span class="va">reg_pool</span><span class="op">)</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">colnames</a></span><span class="op">(</span><span class="va">mat</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/base/row.names.html" class="external-link">row.names</a></span><span class="op">(</span><span class="va">reg_pool</span><span class="op">)</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Regional_pool"</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="va">reg_di</span> <span class="op">=</span> <span class="fu">distinctiveness</span><span class="op">(</span><span class="va">reg_pool</span>, <span class="va">dist_mat</span><span class="op">)</span></span>
-<span class="r-in"></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Compute distinctiveness for all species in the regional pool</span></span></span>
+<span class="r-in"><span><span class="co"># i.e., with all the species in all the communities</span></span></span>
+<span class="r-in"><span><span class="co"># Here considering each species present evenly in the regional pool</span></span></span>
+<span class="r-in"><span><span class="va">reg_pool</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fl">1</span>, ncol <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">ncol</a></span><span class="op">(</span><span class="va">mat</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">colnames</a></span><span class="op">(</span><span class="va">reg_pool</span><span class="op">)</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/colnames.html" class="external-link">colnames</a></span><span class="op">(</span><span class="va">mat</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/row.names.html" class="external-link">row.names</a></span><span class="op">(</span><span class="va">reg_pool</span><span class="op">)</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Regional_pool"</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">reg_di</span> <span class="op">=</span> <span class="fu">distinctiveness</span><span class="op">(</span><span class="va">reg_pool</span>, <span class="va">dist_mat</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -173,7 +180,7 @@ the function using <code>as(pres_matrix, "sparseMatrix")</code> from the
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

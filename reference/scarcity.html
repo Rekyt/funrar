@@ -79,7 +79,7 @@ package defaults.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">scarcity</span><span class="op">(</span><span class="va">pres_matrix</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">scarcity</span><span class="op">(</span><span class="va">pres_matrix</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -87,10 +87,16 @@ package defaults.</p>
     <dl><dt>pres_matrix</dt>
 <dd><p>a site-species matrix, with species in rows and sites
 in columns, containing <strong>relative abundances</strong> values</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>a similar matrix to <code>pres_matrix</code> with scarcity values in <em>lieu</em>of relative abundances.</p>
+    
+
+<p>a similar matrix to <code>pres_matrix</code> with scarcity values in <em>lieu</em></p>
+
+
+<p>of relative abundances.</p>
     </div>
     <div id="details">
     <h2>Details</h2>
@@ -112,20 +118,20 @@ scarcity metric; <code><a href="distinctiveness.html">distinctiveness()</a></cod
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"aravo"</span>, package <span class="op">=</span> <span class="st">"ade4"</span><span class="op">)</span></span>
-<span class="r-in"><span class="co"># Site-species matrix</span></span>
-<span class="r-in"><span class="va">mat</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">as.matrix</a></span><span class="op">(</span><span class="va">aravo</span><span class="op">$</span><span class="va">spe</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">mat</span> <span class="op">=</span> <span class="fu"><a href="make_relative.html">make_relative</a></span><span class="op">(</span><span class="va">mat</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="va">si</span> <span class="op">=</span> <span class="fu">scarcity</span><span class="op">(</span>pres_matrix <span class="op">=</span> <span class="va">mat</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">si</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">]</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"aravo"</span>, package <span class="op">=</span> <span class="st">"ade4"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co"># Site-species matrix</span></span></span>
+<span class="r-in"><span><span class="va">mat</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">as.matrix</a></span><span class="op">(</span><span class="va">aravo</span><span class="op">$</span><span class="va">spe</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">mat</span> <span class="op">=</span> <span class="fu"><a href="make_relative.html">make_relative</a></span><span class="op">(</span><span class="va">mat</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">si</span> <span class="op">=</span> <span class="fu">scarcity</span><span class="op">(</span>pres_matrix <span class="op">=</span> <span class="va">mat</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">si</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">]</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>      Agro.rupe Alop.alpi Anth.nipp Heli.sede Aven.vers</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> AR07        NA        NA        NA        NA        NA</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> AR71        NA        NA        NA        NA        NA</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> AR26  0.231951        NA 0.6144201        NA 0.6144201</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> AR54        NA        NA        NA 0.3379268        NA</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> AR60        NA        NA        NA        NA        NA</span>
-<span class="r-in"></span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -140,7 +146,7 @@ scarcity metric; <code><a href="distinctiveness.html">distinctiveness()</a></cod
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

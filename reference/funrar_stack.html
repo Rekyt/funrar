@@ -79,7 +79,7 @@ provided in the data.frame.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">funrar_stack</span><span class="op">(</span><span class="va">com_df</span>, <span class="va">sp_col</span>, <span class="va">com</span>, abund <span class="op">=</span> <span class="cn">NULL</span>, <span class="va">dist_matrix</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">funrar_stack</span><span class="op">(</span><span class="va">com_df</span>, <span class="va">sp_col</span>, <span class="va">com</span>, abund <span class="op">=</span> <span class="cn">NULL</span>, <span class="va">dist_matrix</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -87,20 +87,31 @@ provided in the data.frame.</p>
     <dl><dt>com_df</dt>
 <dd><p>a stacked (= tidy) data.frame from a single community with each
 row representing a species in a community</p></dd>
+
+
 <dt>sp_col</dt>
 <dd><p>a character vector, the name of the species column in <code>com_df</code></p></dd>
+
+
 <dt>com</dt>
 <dd><p>a character vector, the column name for communities names</p></dd>
+
+
 <dt>abund</dt>
 <dd><p>a character vector, the name of the column containing relative
 abundances values</p></dd>
+
+
 <dt>dist_matrix</dt>
 <dd><p>a functional distance matrix as given by
 <code><a href="compute_dist_matrix.html">compute_dist_matrix()</a></code>, with species name as row and column names</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>A list of 3 objects (or 4 if <code>abund</code> is not <code>NULL</code>):</p><dl><dt><strong>Ui</strong></dt>
+    
+
+<p>A list of 3 objects (or 4 if <code>abund</code> is not <code>NULL</code>):</p><dl><dt><strong>Ui</strong></dt>
 <dd><p>a vector containing uniqueness values per species,</p></dd>
 
 <dt><strong>Di</strong></dt>
@@ -136,7 +147,7 @@ species per site.</p></dd>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

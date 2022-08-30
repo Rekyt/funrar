@@ -85,13 +85,13 @@ between 0 and 1, the distance metric has to be scaled between 0 and 1.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">distinctiveness_com</span><span class="op">(</span>
-  <span class="va">com_df</span>,
-  <span class="va">sp_col</span>,
-  abund <span class="op">=</span> <span class="cn">NULL</span>,
-  <span class="va">dist_matrix</span>,
-  relative <span class="op">=</span> <span class="cn">FALSE</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">distinctiveness_com</span><span class="op">(</span></span>
+<span>  <span class="va">com_df</span>,</span>
+<span>  <span class="va">sp_col</span>,</span>
+<span>  abund <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  <span class="va">dist_matrix</span>,</span>
+<span>  relative <span class="op">=</span> <span class="cn">FALSE</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -99,22 +99,33 @@ between 0 and 1, the distance metric has to be scaled between 0 and 1.</p>
     <dl><dt>com_df</dt>
 <dd><p>a stacked (= tidy) data.frame from a single community with each
 row representing a species in a community</p></dd>
+
+
 <dt>sp_col</dt>
 <dd><p>a character vector, the name of the species column in <code>com_df</code></p></dd>
+
+
 <dt>abund</dt>
 <dd><p>a character vector, the name of the column containing relative
 abundances values</p></dd>
+
+
 <dt>dist_matrix</dt>
 <dd><p>a functional distance matrix as given by
 <code><a href="compute_dist_matrix.html">compute_dist_matrix()</a></code>, with species name as row and column names</p></dd>
+
+
 <dt>relative</dt>
 <dd><p>a logical indicating if distinctiveness should be scaled
 relatively to the community (scaled by max functional
 distance among the species of the targeted community)</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>the same data.frame with the additional <strong>Di</strong> column giving
+    
+
+<p>the same data.frame with the additional <strong>Di</strong> column giving
 functional distinctiveness values for each species</p>
     </div>
     <div id="caution">
@@ -144,7 +155,7 @@ tests on inputs and may fail unexpectedly. Please use
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

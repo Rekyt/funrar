@@ -79,7 +79,7 @@ index.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">scarcity_com</span><span class="op">(</span><span class="va">com_df</span>, <span class="va">sp_col</span>, <span class="va">abund</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">scarcity_com</span><span class="op">(</span><span class="va">com_df</span>, <span class="va">sp_col</span>, <span class="va">abund</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
@@ -87,15 +87,22 @@ index.</p>
     <dl><dt>com_df</dt>
 <dd><p>a stacked (= tidy) data.frame from a single community with each
 row representing a species in a community</p></dd>
+
+
 <dt>sp_col</dt>
 <dd><p>a character vector, the name of the species column in <code>com_df</code></p></dd>
+
+
 <dt>abund</dt>
 <dd><p>a character vector, the name of the column containing relative
 abundances values</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>the same data.frame with the additional <strong>Si</strong> column giving scarcity
+    
+
+<p>the same data.frame with the additional <strong>Si</strong> column giving scarcity
 values for each species</p>
     </div>
     <div id="caution">
@@ -113,6 +120,29 @@ for details on the scarcity metric; <code><a href="distinctiveness_com.html">dis
 distinctiveness on a single community</p></div>
     </div>
 
+    <div id="ref-examples">
+    <h2>Examples</h2>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"aravo"</span>, package <span class="op">=</span> <span class="st">"ade4"</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Site-species matrix converted into data.frame</span></span></span>
+<span class="r-in"><span><span class="va">mat</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">as.matrix</a></span><span class="op">(</span><span class="va">aravo</span><span class="op">$</span><span class="va">spe</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">mat</span> <span class="op">=</span> <span class="fu"><a href="make_relative.html">make_relative</a></span><span class="op">(</span><span class="va">mat</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">dat</span> <span class="op">=</span> <span class="fu"><a href="matrix_to_stack.html">matrix_to_stack</a></span><span class="op">(</span><span class="va">mat</span>, <span class="st">"value"</span>, <span class="st">"site"</span>, <span class="st">"species"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">dat</span><span class="op">$</span><span class="va">site</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">as.character</a></span><span class="op">(</span><span class="va">dat</span><span class="op">$</span><span class="va">site</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">dat</span><span class="op">$</span><span class="va">species</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">as.character</a></span><span class="op">(</span><span class="va">dat</span><span class="op">$</span><span class="va">species</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">si_df</span> <span class="op">=</span> <span class="fu">scarcity_com</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/subset.html" class="external-link">subset</a></span><span class="op">(</span><span class="va">dat</span>, <span class="va">site</span> <span class="op">==</span> <span class="st">"AR07"</span><span class="op">)</span>, <span class="st">"species"</span>, <span class="st">"value"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">si_df</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       species site      value         Si</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1   Agro.rupe AR07 0.00000000 1.00000000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 76  Alop.alpi AR07 0.00000000 1.00000000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 151 Anth.nipp AR07 0.00000000 1.00000000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 226 Heli.sede AR07 0.00000000 1.00000000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 301 Aven.vers AR07 0.00000000 1.00000000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 376 Care.rosa AR07 0.06666667 0.02261358</span>
+<span class="r-in"><span></span></span>
+</code></pre></div>
+    </div>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top"><h2 data-toc-skip>Contents</h2>
@@ -125,7 +155,7 @@ distinctiveness on a single community</p></div>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>

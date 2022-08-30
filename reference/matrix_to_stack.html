@@ -73,33 +73,42 @@ to matrix first. <code>matrix_to_tidy()</code> is an alias of this function.</p>
     </div>
 
     <div id="ref-usage">
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">matrix_to_stack</span><span class="op">(</span>
-  <span class="va">my_mat</span>,
-  value_col <span class="op">=</span> <span class="st">"value"</span>,
-  row_to_col <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/dimnames.html" class="external-link">dimnames</a></span><span class="op">(</span><span class="va">my_mat</span><span class="op">)</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>,
-  col_to_col <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/dimnames.html" class="external-link">dimnames</a></span><span class="op">(</span><span class="va">my_mat</span><span class="op">)</span><span class="op">)</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">matrix_to_stack</span><span class="op">(</span></span>
+<span>  <span class="va">my_mat</span>,</span>
+<span>  value_col <span class="op">=</span> <span class="st">"value"</span>,</span>
+<span>  row_to_col <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/dimnames.html" class="external-link">dimnames</a></span><span class="op">(</span><span class="va">my_mat</span><span class="op">)</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>,</span>
+<span>  col_to_col <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/dimnames.html" class="external-link">dimnames</a></span><span class="op">(</span><span class="va">my_mat</span><span class="op">)</span><span class="op">)</span><span class="op">[</span><span class="fl">2</span><span class="op">]</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div id="arguments">
     <h2>Arguments</h2>
     <dl><dt>my_mat</dt>
 <dd><p>matrix you want to transform in stacked (= tidy) data.frame</p></dd>
+
+
 <dt>value_col</dt>
 <dd><p>(optional) character vector to use for value column
 (default: 'value')</p></dd>
+
+
 <dt>row_to_col</dt>
 <dd><p>(optional) character vector used for name of column in
 data.frame corresponding to rows in matrix (default:
 corresponding dimension name)</p></dd>
+
+
 <dt>col_to_col</dt>
 <dd><p>(optional) character vector used for name of column in
 data.frame corresponding to columns in matrix (default:
 corresponding dimension name)</p></dd>
+
 </dl></div>
     <div id="value">
     <h2>Value</h2>
-    <p>a stacked (= tidy) data.frame with, a column for row names, one for
+    
+
+<p>a stacked (= tidy) data.frame with, a column for row names, one for
 column names and a third one for the values.</p>
     </div>
     <div id="see-also">
@@ -109,17 +118,17 @@ column names and a third one for the values.</p>
 
     <div id="ref-examples">
     <h2>Examples</h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"aravo"</span>, package <span class="op">=</span> <span class="st">"ade4"</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Site-species matrix converted into data.frame</span></span>
-<span class="r-in"><span class="va">mat</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">as.matrix</a></span><span class="op">(</span><span class="va">aravo</span><span class="op">$</span><span class="va">spe</span><span class="op">)</span></span>
-<span class="r-in"><span class="va">dat</span> <span class="op">=</span> <span class="fu">matrix_to_stack</span><span class="op">(</span><span class="va">mat</span>, <span class="st">"value"</span>, <span class="st">"site"</span>, <span class="st">"species"</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">dat</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/data.html" class="external-link">data</a></span><span class="op">(</span><span class="st">"aravo"</span>, package <span class="op">=</span> <span class="st">"ade4"</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Site-species matrix converted into data.frame</span></span></span>
+<span class="r-in"><span><span class="va">mat</span> <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">as.matrix</a></span><span class="op">(</span><span class="va">aravo</span><span class="op">$</span><span class="va">spe</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">dat</span> <span class="op">=</span> <span class="fu">matrix_to_stack</span><span class="op">(</span><span class="va">mat</span>, <span class="st">"value"</span>, <span class="st">"site"</span>, <span class="st">"species"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">dat</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 'data.frame':	6150 obs. of  3 variables:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  $ species: chr  "Agro.rupe" "Agro.rupe" "Agro.rupe" "Agro.rupe" ...</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  $ site   : chr  "AR07" "AR71" "AR26" "AR54" ...</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  $ value  : int  0 0 3 0 0 0 2 0 0 3 ...</span>
-<span class="r-in"></span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </div>
@@ -134,7 +143,7 @@ column names and a third one for the values.</p>
 </div>
 
 <div class="pkgdown">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.</p>
 </div>
 
       </footer></div>
