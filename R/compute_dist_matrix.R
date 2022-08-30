@@ -84,7 +84,7 @@ compute_dist_matrix = function(traits_table, metric = "gower", center = FALSE,
   } else if (metric != "euclidean") {
 
     if (all(vapply(traits_table, is.numeric, TRUE))) {
-      warning("Only numeric traits provided, consider using euclidean ",
+      message("Only numeric traits provided, consider using euclidean ",
               "distance.")
     }
 
