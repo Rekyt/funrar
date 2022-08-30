@@ -24,6 +24,7 @@ License: GPL (>= 2)
 LazyData: true
 Imports:
     cluster,
+    Matrix,
     methods,
     stats
 URL: https://rekyt.github.io/funrar/
@@ -33,7 +34,6 @@ Suggests:
     ade4,
     ggplot2,
     knitr,
-    Matrix,
     rmarkdown,
     testthat (>= 2.99.0),
     tidytext

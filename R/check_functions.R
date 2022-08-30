@@ -14,7 +14,7 @@
 #   nothing, shows an error message
 check_matrix = function(given_matrix, message = NULL) {
 
-  if (!is.matrix(given_matrix) & !is(given_matrix, "sparseMatrix")) {
+  if (!is.matrix(given_matrix) & !is(given_matrix, "Matrix")) {
     stop("Provided ", message, " matrix is not a matrix")
   }
 }

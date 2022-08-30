@@ -267,6 +267,7 @@ distinctiveness_tidy = distinctiveness_stack
 #' reg_di = distinctiveness(reg_pool, dist_mat)
 #'
 #' @export
+#' @import Matrix
 distinctiveness = function(pres_matrix, dist_matrix, relative = FALSE) {
 
   full_matrix_checks(pres_matrix, dist_matrix)
@@ -290,20 +291,9 @@ distinctiveness = function(pres_matrix, dist_matrix, relative = FALSE) {
   # Matrix product of distance matrix and presence absence matrix
   index_matrix = pres_matrix %*% dist_matrix
 
-
-  # Compute sum of relative abundances
-  if (requireNamespace("Matrix", quietly = TRUE) &
-      is(pres_matrix, "sparseMatrix")) {
-    # Replace species not present in communities
-    index_matrix[Matrix::which(pres_matrix == 0)] = NA
-    total_sites = Matrix::rowSums(pres_matrix)
-
-  } else {
-
-    # Replace species not present in communities
-    index_matrix[which(pres_matrix == 0)] = NA
-    total_sites = rowSums(pres_matrix)
-  }
+  # Replace species not present in communities
+  index_matrix[which(pres_matrix == 0)] = NA
+  total_sites = rowSums(pres_matrix)
 
   # Subtract focal species value to site total
   # /!\ need to Transpose because applying function to row tranposes matrix
