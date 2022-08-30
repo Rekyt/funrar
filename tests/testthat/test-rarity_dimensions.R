@@ -115,7 +115,7 @@ test_that("'distinctiveness_dimensions()' works with sparse matrices", {
   )
 
   # Check that all elements are well named
-  sp_all_colnames = lapply(sparse_di_dim, colnames) # Get dimensions of each element
+  sp_all_colnames = lapply(sparse_di_dim, colnames) # Get dimensions of elements
   expect_true(# Is it the same as input matrix?
     all(
       as.logical(

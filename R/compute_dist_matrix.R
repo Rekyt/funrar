@@ -26,13 +26,13 @@
 #'
 #'
 #' @details The functional distance matrix can be computed using any type of
-#'     distance metric. When traits are both quantitative and qualitative Gower's
-#'     (Gower, 1971; Podani, 1999) distance can be used. Otherwise, any other
-#'     distance metric (Euclidean, Manhattan, Minkowski) can be used - as long
-#'     as the rows and the columns are named following the species. When using
-#'     mixed data consider also Gower's distance extension by Pavoine et al.
-#'     (2009). **IMPORTANT NOTE**: in order to get functional rarity indices
-#'     between 0 and 1, the distance metric has to be scaled between 0 and 1.
+#'   distance metric. When traits are both quantitative and qualitative Gower's
+#'   (Gower, 1971; Podani, 1999) distance can be used. Otherwise, any other
+#'   distance metric (Euclidean, Manhattan, Minkowski) can be used - as long
+#'   as the rows and the columns are named following the species. When using
+#'   mixed data consider also Gower's distance extension by Pavoine et al.
+#'   (2009). **IMPORTANT NOTE**: in order to get functional rarity indices
+#'   between 0 and 1, the distance metric has to be scaled between 0 and 1.
 #'
 #' @references
 #'     Gower, J.C. (1971) A general coefficient of similarity and some of its

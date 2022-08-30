@@ -60,7 +60,9 @@ na_mat["d", "s4"] = NA
 
 test_that("Conversion from tidy data.frame to matrix works", {
 
-  expect_equal(unname(stack_to_matrix(com_df, "species", "site")), unname(valid_mat))
+  expect_equal(
+    unname(stack_to_matrix(com_df, "species", "site")), unname(valid_mat)
+  )
   expect_equal(stack_to_matrix(abund_df, "species", "site", "val"),
                abund_mat)
 
@@ -134,8 +136,10 @@ test_that("Conversion from tidy data.frame to sparse & dense matrices", {
   names(dimnames(valid_sparse)) = c("species", "site")
 
   if (!requireNamespace("tidytext", quietly = TRUE)) {
-    expect_error(stack_to_matrix(com_df, "species", "site", sparse = TRUE),
-                 "The tidytext package need to be installed to get a sparse matrix")
+    expect_error(
+      stack_to_matrix(com_df, "species", "site", sparse = TRUE),
+      "The tidytext package need to be installed to get a sparse matrix"
+    )
   }
 
   expect_equal(stack_to_matrix(com_df, "species", "site", sparse = TRUE),

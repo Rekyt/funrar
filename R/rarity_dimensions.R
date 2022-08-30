@@ -103,12 +103,12 @@ distinctiveness_dimensions = function(pres_matrix, traits_table, ...) {
 #' Internal function to compute combinations of distance matrices from a
 #' data.frame of traits, using [compute_dist_matrix()].
 #'
-#' @return A list of functional distance matrices, one for each provided trait
-#'         plus an additional matrix for all traits taken altogether
-#'
 #' @inheritParams compute_dist_matrix
 #'
 #' @param ... additional arguments supplied to [compute_dist_matrix()]
+#'
+#' @return A list of functional distance matrices, one for each provided trait
+#'         plus an additional matrix for all traits taken altogether
 combination_trait_dist = function(traits_table, ...) {
   # Other arguments to compute distance matrix
   dots = list(...)

@@ -10,10 +10,15 @@ make_relative(abund_matrix)
 \item{abund_matrix}{abundance matrix, with sites in rows and species in
 columns.}
 }
+\value{
+Similar shaped matrix as the input but with relative abundances
+instead
+}
 \description{
-From an abundance matrix (numbers of individuals of a given species at a site)
-returns a relative abundance matrix (proportion of individuals of a given species
-at a given site). This function works also with sparse matrices.
+From an abundance matrix (numbers of individuals of a given species at a
+site) returns a relative abundance matrix (proportion of individuals of a
+given species at a given site). This function works also
+with sparse matrices.
 }
 \examples{
 data("aravo", package = "ade4")
