@@ -43,7 +43,7 @@ remotes::install_github("Rekyt/funrar", build_vignettes = TRUE)
 ## Example vignettes
 
 In addition to code example included in help of functions, two vignettes explain how to use the package. The 
-[functional rarity indices](https://rekyt.github.io/funrar/articles/rarity_indices.html) vignette explains 
+[functional rarity indices](https://rekyt.github.io/funrar/articles/funrar.html) vignette explains 
 in details the different indices and function provided; while the 
 [sparse matrices](https://rekyt.github.io/funrar/articles/sparse_matrices.html) vignette shows how to use 
 sparse matrices to gain speed in memory when computing functional rarity indices.
