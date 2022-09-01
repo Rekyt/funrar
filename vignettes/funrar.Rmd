@@ -196,12 +196,29 @@ si = scarcity(pres_matrix = mat)
 si[1:5, 1:5]
 ```
 
+Scarcity requires relative abundances to be computed. We thus have to convert
+our dataset with abundances to relative abundances. To do that we first compute
+total abundances per site.
+
+```{r rel-abund-comp}
+# Compute relative abundances
+site_abundances = aggregate(value ~ site, data = dat, FUN = sum)
+colnames(site_abundances)[2] = "total_abundance"
+
+dat = merge(dat, site_abundances, by = "site")
+
+dat$rel_abund = dat[["value"]] / dat[["total_abundance"]]
+
+head(dat)
+```
+
+Then we can compute Scarcity using relative abundances:
+
 ```{r siComp}
-si_df = scarcity_stack(dat, "species", "site", "value")
+si_df = scarcity_stack(dat, "species", "site", "rel_abund")
 
 head(si_df)
 ```
-
 
 ### Uniqueness
 
