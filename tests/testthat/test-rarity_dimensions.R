@@ -34,7 +34,7 @@ test_that("'distinctiveness_dimensions()' outputs good objects", {
 
   # General check
   expect_type(di_dim, "list")
-  expect_named(di_dim, c(paste0("Di_", trait_names), "Di_all"))
+  expect_named(di_dim, c(paste0("di_", trait_names), "di_all"))
 
   # Check that all elements are matrices
   lapply(di_dim, function(x) {
@@ -98,7 +98,7 @@ test_that("'distinctiveness_dimensions()' works with sparse matrices", {
 
   # General checks
   expect_type(sparse_di_dim, "list")
-  expect_named(sparse_di_dim, c(paste0("Di_", trait_names), "Di_all"))
+  expect_named(sparse_di_dim, c(paste0("di_", trait_names), "di_all"))
 
   # Check that all elements are matrices
   expect_true(all(vapply(sparse_di_dim, class, "char") == "dgeMatrix"))
@@ -154,7 +154,7 @@ test_that("'*_dimensions()' functions outputs the right computations", {
 
   expected_single_di = matrix(1, ncol = 2, nrow = 2)
   dimnames(expected_single_di) = dimnames(simple_mat)
-  expected_di = list(Di_tr1 = expected_single_di, Di_all = expected_single_di)
+  expected_di = list(di_tr1 = expected_single_di, di_all = expected_single_di)
 
   expect_identical(simple_ui_dim, expected_ui)
   expect_identical(simple_di_dim, expected_di)
