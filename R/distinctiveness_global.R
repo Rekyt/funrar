@@ -40,6 +40,13 @@ distinctiveness_global = function(dist_obj, di_name = "global_di") {
     dist_obj = as.matrix(dist_obj)
   }
 
+  if (any(is.na(dist_obj))) {
+    stop(
+      "The input distance object contains NA(s), ",
+      "cannot compute distinctiveness", call. = FALSE
+    )
+  }
+
   # Define global pool of species based on distance matrix
   global_pool = matrix(1, nrow = 1, ncol = ncol(dist_obj),
                        dimnames = list(site = "global",

@@ -25,6 +25,28 @@ testthat::test_that("fails gracefully with bad input", {
                       " character"),
                fixed = TRUE)
 
+  # NA in the distance matrix
+  trait_table= matrix(
+    c(NA, 1, 2, NA, 2, 2), nrow = 3, ncol = 2,
+    dimnames = list(species = paste0("species", 1:3),
+                    traits = paste0("trait", 1:2))
+  )
+
+  dist_trait = dist(trait_table)
+
+  expect_error(
+    distinctiveness_global(dist_trait),
+    "The input distance object contains NA(s), cannot compute distinctiveness",
+    fixed = TRUE
+  )
+
+  expect_error(
+    distinctiveness_global(as.matrix(dist_trait)),
+    "The input distance object contains NA(s), cannot compute distinctiveness",
+    fixed = TRUE
+  )
+
+
 })
 
 # Should work with dist or matrix objects
