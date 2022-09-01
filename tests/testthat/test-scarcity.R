@@ -81,9 +81,10 @@ suppressWarnings({
 
 
 # Scarcity data ----------------------------------------------------------------
-com_df_ex = cbind(com_df, data.frame(abund = c(0.3, 0.7, 0.2, 0.6,
-                                                   0.2, 0.5, 0.5, 0.2,
-                                                   0.8)))
+com_df_ex = cbind(
+  com_df,
+  data.frame(abund = c(0.3, 0.7, 0.2, 0.6, 0.2, 0.5, 0.5, 0.2, 0.8))
+)
 abund_mat = valid_mat
 abund_mat[abund_mat == 1] = com_df_ex[order(com_df_ex$species), "abund"]
 
@@ -149,4 +150,12 @@ test_that("Scarcity errors with bad input", {
 
   expect_error(scarcity_stack(com_df_ab, "species", "site", "abund"),
                regexp = "Provided abundances are not numeric")
+
+  com_df_ab = com_df_ex
+  com_df_ab[["abund"]] = as.numeric(com_df_ab[["abund"]]) * 10
+
+  expect_error(
+    scarcity_stack(com_df_ab, "species", "site", "abund"),
+    "Abundance are not relative, Scarcity can't be computed", fixed = TRUE
+  )
 })

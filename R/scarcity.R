@@ -99,6 +99,9 @@ scarcity_stack = function(com_df, sp_col, com, abund) {
   if (is.null(abund)) {
     stop("No relative abundance provided")
   }
+  if (!all(com_df[[abund]] >= 0 & com_df[[abund]] <= 1)) {
+    stop("Abundance are not relative, Scarcity can't be computed")
+  }
 
   # Compute Scarcity
   # Split table by communities
