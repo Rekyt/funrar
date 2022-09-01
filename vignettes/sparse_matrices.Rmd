@@ -1,10 +1,10 @@
 ---
-title: "Sparse Matrices with `funrar`"
+title: "Sparse Matrices within funrar"
 author: "Matthias Greni\u00e9"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Sparse Matrices with 'funrar'}
+  %\VignetteIndexEntry{Sparse Matrices within funrar}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
