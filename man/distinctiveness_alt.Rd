@@ -2,7 +2,7 @@
 % Please edit documentation in R/distinctiveness_alt.R
 \name{distinctiveness_alt}
 \alias{distinctiveness_alt}
-\title{Other Functional Distinctiveness within range}
+\title{Truncated Functional Distinctiveness}
 \usage{
 distinctiveness_alt(pres_matrix, dist_matrix, given_range)
 }
@@ -23,8 +23,9 @@ communities will have an \code{NA} value (see \code{Note} section)
 \description{
 Computes functional distinctiveness from a site-species matrix (containing
 presence-absence or relative abundances) of species with provided functional
-distance matrix \strong{considering only species within a given range in the
-functional space}. The sites-species matrix should have \strong{sites} in
+distance matrix considering only species \strong{within a given range} in the
+functional space. Basically species are cutoff when their dissimilarity is
+above the input threshold. The sites-species matrix should have \strong{sites} in
 \strong{rows} and \strong{species} in \strong{columns}, similar to
 \pkg{vegan} package defaults.
 }

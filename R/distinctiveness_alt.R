@@ -1,9 +1,10 @@
-#' Other Functional Distinctiveness within range
+#' Truncated Functional Distinctiveness
 #'
 #' Computes functional distinctiveness from a site-species matrix (containing
 #' presence-absence or relative abundances) of species with provided functional
-#' distance matrix **considering only species within a given range in the
-#' functional space**. The sites-species matrix should have **sites** in
+#' distance matrix considering only species **within a given range** in the
+#' functional space. Basically species are cutoff when their dissimilarity is
+#' above the input threshold. The sites-species matrix should have **sites** in
 #' **rows** and **species** in **columns**, similar to
 #' \pkg{vegan} package defaults.
 #'
@@ -71,7 +72,7 @@ distinctiveness_alt = function(pres_matrix, dist_matrix, given_range) {
   pres_matrix = pres_matrix[, common, drop = FALSE]
   dist_matrix = dist_matrix[common, common]
 
-  # Correspondance matrix (1 if outside given range, 0 otherwise)
+  # Correspondence matrix (1 if outside given range, 0 otherwise)
   corr_matrix = dist_matrix
   corr_matrix[dist_matrix >= given_range] = 1
   corr_matrix[dist_matrix < given_range] = 0

@@ -1,11 +1,10 @@
-#' Functional Distinctiveness within range
+#' Alternative Truncated Functional Distinctiveness
 #'
 #' Computes functional distinctiveness from a site-species matrix (containing
 #' presence-absence or relative abundances) of species with provided functional
-#' distance matrix **considering only species within a given range in the
-#' functional space**. The sites-species matrix should have **sites** in
-#' **rows** and **species** in **columns**, similar to
-#' \pkg{vegan} package defaults.
+#' distance matrix considering only species **within a given range** in the
+#' functional space. The sites-species matrix should have **sites** in **rows**
+#' and **species** in **columns**, similar to \pkg{vegan} package defaults.
 #'
 #' @inheritParams distinctiveness
 #'
@@ -87,17 +86,8 @@
 #' # Distance matrix
 #' dist_mat = compute_dist_matrix(tra)
 #'
-#' di = distinctiveness(pres_matrix = mat, dist_matrix = dist_mat)
+#' di = distinctiveness_range(pres_matrix = mat, dist_matrix = dist_mat)
 #' di[1:5, 1:5]
-#'
-#' # Compute distinctiveness for all species in the regional pool
-#' # i.e., with all the species in all the communities
-#' # Here considering each species present evenly in the regional pool
-#' reg_pool = matrix(1, ncol = ncol(mat))
-#' colnames(reg_pool) = colnames(mat)
-#' row.names(reg_pool) = c("Regional_pool")
-#'
-#' reg_di = distinctiveness(reg_pool, dist_mat)
 #'
 #' @export
 distinctiveness_range = function(
@@ -121,7 +111,7 @@ distinctiveness_range = function(
   pres_matrix = pres_matrix[, common, drop = FALSE]
   dist_matrix = dist_matrix[common, common]
 
-  # Correspondance matrix
+  # Correspondence matrix
   corr_matrix = dist_matrix
   corr_matrix[dist_matrix > given_range] = 0
   corr_matrix[dist_matrix <= given_range] = 1

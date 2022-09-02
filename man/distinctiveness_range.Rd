@@ -2,7 +2,7 @@
 % Please edit documentation in R/distinctiveness_range.R
 \name{distinctiveness_range}
 \alias{distinctiveness_range}
-\title{Functional Distinctiveness within range}
+\title{Alternative Truncated Functional Distinctiveness}
 \usage{
 distinctiveness_range(pres_matrix, dist_matrix, given_range, relative = FALSE)
 }
@@ -27,10 +27,9 @@ communities will have an \code{NA} value (see \code{Note} section)
 \description{
 Computes functional distinctiveness from a site-species matrix (containing
 presence-absence or relative abundances) of species with provided functional
-distance matrix \strong{considering only species within a given range in the
-functional space}. The sites-species matrix should have \strong{sites} in
-\strong{rows} and \strong{species} in \strong{columns}, similar to
-\pkg{vegan} package defaults.
+distance matrix considering only species \strong{within a given range} in the
+functional space. The sites-species matrix should have \strong{sites} in \strong{rows}
+and \strong{species} in \strong{columns}, similar to \pkg{vegan} package defaults.
 }
 \details{
 The Functional Distinctiveness of a species is the average functional
@@ -103,16 +102,7 @@ tra = aravo$traits[, c("Height", "SLA", "N_mass")]
 # Distance matrix
 dist_mat = compute_dist_matrix(tra)
 
-di = distinctiveness(pres_matrix = mat, dist_matrix = dist_mat)
+di = distinctiveness_range(pres_matrix = mat, dist_matrix = dist_mat)
 di[1:5, 1:5]
-
-# Compute distinctiveness for all species in the regional pool
-# i.e., with all the species in all the communities
-# Here considering each species present evenly in the regional pool
-reg_pool = matrix(1, ncol = ncol(mat))
-colnames(reg_pool) = colnames(mat)
-row.names(reg_pool) = c("Regional_pool")
-
-reg_di = distinctiveness(reg_pool, dist_mat)
 
 }
