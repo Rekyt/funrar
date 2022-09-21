@@ -1,0 +1,42 @@
+---
+title: "Other functions of interest"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Other functions of interest}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(funrar)
+```
+
+In addition to single index functions `funrar` proposes several functions to help you compute functional rarity indices. The aim of this vignette is to provide detailed examples of how to use each of them.
+
+
+## Compute Distinctiveness from Global Pool - `distinctiveness_global()`
+
+While functional distinctiveness has been envisioned initially at local scale, that's what the `distinctiveness()` function computes, it can be useful to compute it at regional scales.
+This functions provides exactly that based on a provided functional dissimilarity matrix.
+
+
+## Get rarity across combinations of traits - `rarity_dimensions()`
+
+Distinctiveness is generally computed through a dissimilarity matrix that itself comes from aggregating differences across multiple traits.
+
+### Different Distinctiveness - `distinctiveness_dimensions()`
+
+### Different Uniqueness - `uniqueness_dimensions()`
+
+
+## Compute Relative Abundances - `make_relative()`
+
+Function to transform matrix of absolute abundances to relative abundances.
+Takes an abundance matrix and returns the same matrix with relative abundances.
