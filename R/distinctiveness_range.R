@@ -86,7 +86,7 @@
 #' # Distance matrix
 #' dist_mat = compute_dist_matrix(tra)
 #'
-#' di = distinctiveness_range(pres_matrix = mat, dist_matrix = dist_mat)
+#' di = distinctiveness_range(pres_matrix = mat, dist_matrix = dist_mat, 0.2)
 #' di[1:5, 1:5]
 #'
 #' @export
