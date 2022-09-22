@@ -22,11 +22,17 @@ In addition to single index functions `funrar` proposes several functions to
 help you compute functional rarity indices. The aim of this vignette is to
 provide detailed examples of how to use each of them.
 
-In this vignette we will use the dataset `aravo` from the `ade4` package as for
-the "Getting Started" vignette:
+In this vignette we will use the dataset `aravo` (you can learn more about it
+through `help("aravo", package = "ade4")`) from the `ade4` package as for the
+"Getting Started" vignette:
 
 ```{r load-data}
 data("aravo", package = "ade4")
+
+# Extract the traits of all species of `aravo`
+traits = aravo$traits
+
+head(traits)
 ```
 
 
@@ -37,16 +43,10 @@ that's what the `distinctiveness()` function computes, it can be useful to
 compute it at regional scales. This functions provides exactly that based on a
 provided functional dissimilarity matrix.
 
-Using the `aravo` dataset (you can learn more about it through `help("aravo",
-package = "ade4")`) we can compute the global distinctiveness of all species
+Using the `aravo` dataset we can compute the global distinctiveness of all species
 across the dataset in the following way:
 
 ```{r global-di}
-# Extract the traits of all species of `aravo`
-traits = aravo$traits
-
-head(traits)
-
 # Compute a Euclidean distance matrix (because all traits are quantitative)
 dist_matrix = compute_dist_matrix(traits, metric = "euclidean")
 
@@ -88,6 +88,17 @@ distinctiveness values from a site-species matrix and a trait data.frame.
 It will return a data frame with distinctiveness computed from all traits taken
 together and each trait taken separately.
 
+Let's do this with the traits from the `aravo` dataset. The first argument of `distinctiveness_dimensions()` is supposed to be site-species matrix while the second should be a traits table:
+
+```{r di-dimensions}
+di_dim = distinctiveness_dimensions(as.matrix(aravo$spe), traits, metric = "euclidean")
+
+str(di_dim, max.level = 1)
+```
+
+We see that it returns a list of 9 local distinctiveness matrices: one for each
+trait and one for all traits taken together (named `di_all`). 
+
 
 ### Compare Uniqueness computed on all traits and each trait - `uniqueness_dimensions()`
 
@@ -95,6 +106,18 @@ The function `uniqueness_dimensions()` computes species regional uniqueness
 values from a site-species matrix and a trait data.frame. It will return a data
 frame with uniqueness computed from all traits taken together and each trait
 taken separately.
+
+Let's do this with the traits from the `aravo` dataset. The first argument of `uniqueness_dimensions()` is supposed to be site-species matrix while the second should be a traits table:
+
+```{r di-dimensions}
+ui_dim = uniqueness_dimensions(as.matrix(aravo$spe), traits, metric = "euclidean")
+
+str(ui_dim, max.level = 1)
+```
+
+We see that it returns a data frame with 10 columns: one for species names,
+one for each trait separately, and one for all traits taken together
+(named `Ui_all`).
 
 
 ## Compute Relative Abundances - `make_relative()`
