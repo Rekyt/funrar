@@ -122,6 +122,34 @@ one for each trait separately, and one for all traits taken together
 
 ## Compute Relative Abundances - `make_relative()`
 
+This function, probably largest source of citations of `funrar`, transforms a
+matrix of absolute abundances to relative abundances. It takes an abundance
+matrix and returns the same matrix with relative abundances.
 
-Function to transform matrix of absolute abundances to relative abundances.
-Takes an abundance matrix and returns the same matrix with relative abundances.
+We can check that with `aravo` site-species matrix:
+
+```{r relative}
+aravo_site_sp = as.matrix(aravo$spe)
+
+# There are clearly abundances and not only presence-absence in this table
+aravo_site_sp[1:5, 1:5]
+
+# Compute total abundance per site
+site_abundance = rowSums(aravo_site_sp)
+
+head(site_abundance)
+
+# Compute a relative abundance matrix
+relative_site_sp = make_relative(aravo_site_sp)
+
+relative_site_sp[1:5, 1:5]
+
+rel_site_abundance = rowSums(relative_site_sp)
+
+head(rel_site_abundance)
+
+```
+
+We see, through `rel_site_abundance`, that `make_relative()` transformed the
+abundances in each site so that they all sum to one. It divides the abundance of
+each species by the total abundance of the site.
