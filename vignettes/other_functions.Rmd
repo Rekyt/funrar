@@ -18,25 +18,87 @@ knitr::opts_chunk$set(
 library(funrar)
 ```
 
-In addition to single index functions `funrar` proposes several functions to help you compute functional rarity indices. The aim of this vignette is to provide detailed examples of how to use each of them.
+In addition to single index functions `funrar` proposes several functions to
+help you compute functional rarity indices. The aim of this vignette is to
+provide detailed examples of how to use each of them.
+
+In this vignette we will use the dataset `aravo` from the `ade4` package as for
+the "Getting Started" vignette:
+
+```{r load-data}
+data("aravo", package = "ade4")
+```
 
 
 ## Compute Distinctiveness from Global Pool - `distinctiveness_global()`
 
-While functional distinctiveness has been envisioned initially at local scale, that's what the `distinctiveness()` function computes, it can be useful to compute it at regional scales.
-This functions provides exactly that based on a provided functional dissimilarity matrix.
+While functional distinctiveness has been envisioned initially at local scale,
+that's what the `distinctiveness()` function computes, it can be useful to
+compute it at regional scales. This functions provides exactly that based on a
+provided functional dissimilarity matrix.
+
+Using the `aravo` dataset (you can learn more about it through `help("aravo",
+package = "ade4")`) we can compute the global distinctiveness of all species
+across the dataset in the following way:
+
+```{r global-di}
+# Extract the traits of all species of `aravo`
+traits = aravo$traits
+
+head(traits)
+
+# Compute a Euclidean distance matrix (because all traits are quantitative)
+dist_matrix = compute_dist_matrix(traits, metric = "euclidean")
+
+# Compute global distinctiveness
+global_di = distinctiveness_global(dist_matrix)
+
+head(global_di)
+```
+
+The global distinctiveness is available in column `global_di`.
+You can rename this column using the second argument of
+`distinctiveness_global()`:
+
+```{r global-di-2}
+aravo_di = distinctiveness_global(dist_matrix, di_name = "aravo_di")
+
+head(aravo_di)
+```
+
+**NB**: `distinctiveness_global()` assumes that all species in the provided
+trait dataset are present at global/regional scale. It also assumes only a
+presence-absence matrix.
 
 
-## Get rarity across combinations of traits - `rarity_dimensions()`
+## Compute functional rarity indices across combinations of traits
 
-Distinctiveness is generally computed through a dissimilarity matrix that itself comes from aggregating differences across multiple traits.
+Distinctiveness is generally computed through a dissimilarity matrix that itself
+comes from aggregating differences across multiple traits. Sometimes it can be
+useful to compare it to distinctiveness computed on each trait separately. This
+way, it is possible that some species appear distinct on certain traits and not
+others. The two functions below let you do exactly that for distinctiveness and
+uniqueness.
 
-### Different Distinctiveness - `distinctiveness_dimensions()`
 
-### Different Uniqueness - `uniqueness_dimensions()`
+### Compare Distinctiveness computed on all traits and each trait - `distinctiveness_dimensions()`
+
+The function `distinctiveness_dimensions()` computes species local
+distinctiveness values from a site-species matrix and a trait data.frame.
+It will return a data frame with distinctiveness computed from all traits taken
+together and each trait taken separately.
+
+
+### Compare Uniqueness computed on all traits and each trait - `uniqueness_dimensions()`
+
+The function `uniqueness_dimensions()` computes species regional uniqueness
+values from a site-species matrix and a trait data.frame. It will return a data
+frame with uniqueness computed from all traits taken together and each trait
+taken separately.
 
 
 ## Compute Relative Abundances - `make_relative()`
+
 
 Function to transform matrix of absolute abundances to relative abundances.
 Takes an abundance matrix and returns the same matrix with relative abundances.
