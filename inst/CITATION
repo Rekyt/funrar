@@ -8,7 +8,7 @@ bibentry(
               person("Caroline M. Tucker"), person("François Munoz"),
               person("Cyrille Violle")),
   year    = "2017",
-  url     = "https://onlinelibrary.wiley.com/doi/10.1111/ddi.12629/abstract",
+  url     = "https://onlinelibrary.wiley.com/doi/10.1111/ddi.12629",
   doi     = "10.1111/ddi.12629")
 
 bibentry(
