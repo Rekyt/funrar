@@ -1,4 +1,4 @@
-# funrar 1.4.1.9000
+# funrar 1.5.0
 
 ## NEW FEATURES
 
