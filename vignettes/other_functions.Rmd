@@ -109,7 +109,7 @@ taken separately.
 
 Let's do this with the traits from the `aravo` dataset. The first argument of `uniqueness_dimensions()` is supposed to be site-species matrix while the second should be a traits table:
 
-```{r di-dimensions}
+```{r ui-dimensions}
 ui_dim = uniqueness_dimensions(as.matrix(aravo$spe), traits, metric = "euclidean")
 
 str(ui_dim, max.level = 1)
