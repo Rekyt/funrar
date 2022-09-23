@@ -42,6 +42,9 @@ and species in columns, similar to vegan package defaults."><!-- mathjax --><scr
       <a href="../articles/new_distinctiveness.html">Alternative Distinctiveness definition</a>
     </li>
     <li>
+      <a href="../articles/other_functions.html">Other functions of interest</a>
+    </li>
+    <li>
       <a href="../articles/sparse_matrices.html">Sparse Matrices within funrar</a>
     </li>
   </ul></li>
@@ -180,10 +183,14 @@ the function using <code>as(pres_matrix, "dgCMatrix")</code> from the
 <span class="r-in"><span><span class="va">dist_mat</span> <span class="op">=</span> <span class="fu"><a href="compute_dist_matrix.html">compute_dist_matrix</a></span><span class="op">(</span><span class="va">tra</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Only numeric traits provided, consider using euclidean distance.</span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="va">di</span> <span class="op">=</span> <span class="fu">distinctiveness_range</span><span class="op">(</span>pres_matrix <span class="op">=</span> <span class="va">mat</span>, dist_matrix <span class="op">=</span> <span class="va">dist_mat</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in distinctiveness_range(pres_matrix = mat, dist_matrix = dist_mat):</span> argument "given_range" is missing, with no default</span>
+<span class="r-in"><span><span class="va">di</span> <span class="op">=</span> <span class="fu">distinctiveness_range</span><span class="op">(</span>pres_matrix <span class="op">=</span> <span class="va">mat</span>, dist_matrix <span class="op">=</span> <span class="va">dist_mat</span>, <span class="fl">0.2</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">di</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">]</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in eval(expr, envir, enclos):</span> object 'di' not found</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       Agro.rupe Alop.alpi  Anth.nipp  Heli.sede  Aven.vers</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> AR07         NA        NA         NA         NA         NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> AR71         NA        NA         NA         NA         NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> AR26 0.03154571        NA 0.06630241         NA 0.05027471</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> AR54         NA        NA         NA 0.04490106         NA</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> AR60         NA        NA         NA         NA         NA</span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
