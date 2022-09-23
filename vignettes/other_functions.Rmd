@@ -1,0 +1,155 @@
+---
+title: "Other functions of interest"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Other functions of interest}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(funrar)
+```
+
+In addition to single index functions `funrar` proposes several functions to
+help you compute functional rarity indices. The aim of this vignette is to
+provide detailed examples of how to use each of them.
+
+In this vignette we will use the dataset `aravo` (you can learn more about it
+through `help("aravo", package = "ade4")`) from the `ade4` package as for the
+"Getting Started" vignette:
+
+```{r load-data}
+data("aravo", package = "ade4")
+
+# Extract the traits of all species of `aravo`
+traits = aravo$traits
+
+head(traits)
+```
+
+
+## Compute Distinctiveness from Global Pool - `distinctiveness_global()`
+
+While functional distinctiveness has been envisioned initially at local scale,
+that's what the `distinctiveness()` function computes, it can be useful to
+compute it at regional scales. This functions provides exactly that based on a
+provided functional dissimilarity matrix.
+
+Using the `aravo` dataset we can compute the global distinctiveness of all species
+across the dataset in the following way:
+
+```{r global-di}
+# Compute a Euclidean distance matrix (because all traits are quantitative)
+dist_matrix = compute_dist_matrix(traits, metric = "euclidean")
+
+# Compute global distinctiveness
+global_di = distinctiveness_global(dist_matrix)
+
+head(global_di)
+```
+
+The global distinctiveness is available in column `global_di`.
+You can rename this column using the second argument of
+`distinctiveness_global()`:
+
+```{r global-di-2}
+aravo_di = distinctiveness_global(dist_matrix, di_name = "aravo_di")
+
+head(aravo_di)
+```
+
+**NB**: `distinctiveness_global()` assumes that all species in the provided
+trait dataset are present at global/regional scale. It also assumes only a
+presence-absence matrix.
+
+
+## Compute functional rarity indices across combinations of traits
+
+Distinctiveness is generally computed through a dissimilarity matrix that itself
+comes from aggregating differences across multiple traits. Sometimes it can be
+useful to compare it to distinctiveness computed on each trait separately. This
+way, it is possible that some species appear distinct on certain traits and not
+others. The two functions below let you do exactly that for distinctiveness and
+uniqueness.
+
+
+### Compare Distinctiveness computed on all traits and each trait - `distinctiveness_dimensions()`
+
+The function `distinctiveness_dimensions()` computes species local
+distinctiveness values from a site-species matrix and a trait data.frame.
+It will return a data frame with distinctiveness computed from all traits taken
+together and each trait taken separately.
+
+Let's do this with the traits from the `aravo` dataset. The first argument of `distinctiveness_dimensions()` is supposed to be site-species matrix while the second should be a traits table:
+
+```{r di-dimensions}
+di_dim = distinctiveness_dimensions(as.matrix(aravo$spe), traits, metric = "euclidean")
+
+str(di_dim, max.level = 1)
+```
+
+We see that it returns a list of 9 local distinctiveness matrices: one for each
+trait and one for all traits taken together (named `di_all`). 
+
+
+### Compare Uniqueness computed on all traits and each trait - `uniqueness_dimensions()`
+
+The function `uniqueness_dimensions()` computes species regional uniqueness
+values from a site-species matrix and a trait data.frame. It will return a data
+frame with uniqueness computed from all traits taken together and each trait
+taken separately.
+
+Let's do this with the traits from the `aravo` dataset. The first argument of `uniqueness_dimensions()` is supposed to be site-species matrix while the second should be a traits table:
+
+```{r ui-dimensions}
+ui_dim = uniqueness_dimensions(as.matrix(aravo$spe), traits, metric = "euclidean")
+
+str(ui_dim, max.level = 1)
+```
+
+We see that it returns a data frame with 10 columns: one for species names,
+one for each trait separately, and one for all traits taken together
+(named `Ui_all`).
+
+
+## Compute Relative Abundances - `make_relative()`
+
+This function, probably largest source of citations of `funrar`, transforms a
+matrix of absolute abundances to relative abundances. It takes an abundance
+matrix and returns the same matrix with relative abundances.
+
+We can check that with `aravo` site-species matrix:
+
+```{r relative}
+aravo_site_sp = as.matrix(aravo$spe)
+
+# There are clearly abundances and not only presence-absence in this table
+aravo_site_sp[1:5, 1:5]
+
+# Compute total abundance per site
+site_abundance = rowSums(aravo_site_sp)
+
+head(site_abundance)
+
+# Compute a relative abundance matrix
+relative_site_sp = make_relative(aravo_site_sp)
+
+relative_site_sp[1:5, 1:5]
+
+rel_site_abundance = rowSums(relative_site_sp)
+
+head(rel_site_abundance)
+
+```
+
+We see, through `rel_site_abundance`, that `make_relative()` transformed the
+abundances in each site so that they all sum to one. It divides the abundance of
+each species by the total abundance of the site.
