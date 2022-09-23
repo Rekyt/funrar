@@ -1,5 +1,11 @@
 # funrar 1.4.1.9000
 
+## NEW FEATURES
+
+* Added a new vignette named "other_functions" to document recently added
+functions. You can access it through
+`vignette("other_functions", package = "funrar")`
+
 ## INTERNAL CHANGES
 
 * Fix uses of the `Matrix` package for their next version
