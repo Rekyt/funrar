@@ -132,17 +132,17 @@
 <span></span>
 <span><span class="va">my_mat</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">]</span></span></code></pre></div>
 <pre><code><span><span class="co">##       sp1 sp2 sp3 sp4 sp5</span></span>
-<span><span class="co">## site1   0   0   0   1   1</span></span>
-<span><span class="co">## site2   0   0   0   0   0</span></span>
-<span><span class="co">## site3   0   1   1   0   0</span></span>
-<span><span class="co">## site4   0   0   0   0   0</span></span>
-<span><span class="co">## site5   1   0   0   0   1</span></span></code></pre>
+<span><span class="co">## site1   0   0   0   0   1</span></span>
+<span><span class="co">## site2   0   0   0   0   1</span></span>
+<span><span class="co">## site3   1   1   0   0   0</span></span>
+<span><span class="co">## site4   0   0   0   1   1</span></span>
+<span><span class="co">## site5   0   0   0   0   0</span></span></code></pre>
 <p><code>funrar</code> lets you use sparse matrices directly using a function implemented in the <code>Matrix</code> package. When your matrix is filled with 0s it can be quicker to use sparse matrices. To know if you should use sparse matrices you can compute the filling of your matrix, i.e. the percentage of non-zero cells in your matrix:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">filling</span> <span class="op">=</span> <span class="fl">1</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">my_mat</span> <span class="op">==</span> <span class="fl">0</span><span class="op">)</span><span class="op">/</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">ncol</a></span><span class="op">(</span><span class="va">my_mat</span><span class="op">)</span><span class="op">*</span><span class="fu"><a href="https://rdrr.io/r/base/nrow.html" class="external-link">nrow</a></span><span class="op">(</span><span class="va">my_mat</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">filling</span></span></code></pre></div>
-<pre><code><span><span class="co">## [1] 0.14355</span></span></code></pre>
+<pre><code><span><span class="co">## [1] 0.14378</span></span></code></pre>
 <p>To convert from a normal matrix to a sparse matrix you can use <code>as(my_mat, "dgCMatrix")</code>:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://Matrix.R-forge.R-project.org/" class="external-link">Matrix</a></span><span class="op">)</span></span>
@@ -158,7 +158,7 @@
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># Regular Matrix</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">my_mat</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">##  num [1:200, 1:1000] 0 0 0 0 1 0 0 0 1 0 ...</span></span>
+<pre><code><span><span class="co">##  num [1:200, 1:1000] 0 0 1 0 0 0 0 1 0 0 ...</span></span>
 <span><span class="co">##  - attr(*, "dimnames")=List of 2</span></span>
 <span><span class="co">##   ..$ : chr [1:200] "site1" "site2" "site3" "site4" ...</span></span>
 <span><span class="co">##   ..$ : chr [1:1000] "sp1" "sp2" "sp3" "sp4" ...</span></span></code></pre>
@@ -169,17 +169,17 @@
 <code class="sourceCode R"><span><span class="co"># Sparse Matrix from 'Matrix' package</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">sparse_mat</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Formal class 'dgCMatrix' [package "Matrix"] with 6 slots</span></span>
-<span><span class="co">##   ..@ i       : int [1:28710] 4 8 10 14 21 26 38 46 54 66 ...</span></span>
-<span><span class="co">##   ..@ p       : int [1:1001] 0 24 56 88 120 153 191 219 258 287 ...</span></span>
+<span><span class="co">##   ..@ i       : int [1:28756] 2 7 17 20 23 25 27 31 35 42 ...</span></span>
+<span><span class="co">##   ..@ p       : int [1:1001] 0 33 56 84 110 137 166 198 231 256 ...</span></span>
 <span><span class="co">##   ..@ Dim     : int [1:2] 200 1000</span></span>
 <span><span class="co">##   ..@ Dimnames:List of 2</span></span>
 <span><span class="co">##   .. ..$ : chr [1:200] "site1" "site2" "site3" "site4" ...</span></span>
 <span><span class="co">##   .. ..$ : chr [1:1000] "sp1" "sp2" "sp3" "sp4" ...</span></span>
-<span><span class="co">##   ..@ x       : num [1:28710] 1 1 1 1 1 1 1 1 1 1 ...</span></span>
+<span><span class="co">##   ..@ x       : num [1:28756] 1 1 1 1 1 1 1 1 1 1 ...</span></span>
 <span><span class="co">##   ..@ factors : list()</span></span></code></pre>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/utils/object.size.html" class="external-link">object.size</a></span><span class="op">(</span><span class="va">sparse_mat</span><span class="op">)</span>, units <span class="op">=</span> <span class="st">"Kb"</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## 416.9 Kb</span></span></code></pre>
+<pre><code><span><span class="co">## 417.5 Kb</span></span></code></pre>
 <p>sparse matrices reduce the amount of RAM necessary to store them. The more zeros there are in a given matrix the more RAM will be spared when turning it into a sparse matrix.</p>
 <div class="section level3">
 <h3 id="benchmark">Benchmark<a class="anchor" aria-label="anchor" href="#benchmark"></a>
@@ -233,7 +233,7 @@
 <pre><code><span><span class="co">## [1] 1</span></span></code></pre>
 <div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">mat_filling</span><span class="op">(</span><span class="va">all_mats</span><span class="op">$</span><span class="va">`99`</span><span class="op">$</span><span class="va">mat</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## [1] 0.010115</span></span></code></pre>
+<pre><code><span><span class="co">## [1] 0.00984</span></span></code></pre>
 <p>Now we can compare the speed of the algorithms:</p>
 <div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw">if</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace</a></span><span class="op">(</span><span class="st">"microbenchmark"</span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
